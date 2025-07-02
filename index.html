@@ -6,8 +6,8 @@
     <title>Mark R. - Strategic Project Manager</title>
     <!-- Load Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Inter and Dancing Script fonts from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Custom CSS for specific elements not easily achievable with single Tailwind classes */
         body {
@@ -140,6 +140,32 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
+        /* Cursive Name Styling */
+        .cursive-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem; /* Adjust size as needed */
+            line-height: 1;
+            margin-bottom: 1rem; /* Space below name */
+            color: white; /* Ensure it's white for readability on video */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Subtle shadow for readability */
+            opacity: 0; /* Start hidden for fade-in */
+            animation: fadeInText 1.5s forwards; /* Simple fade-in animation */
+            animation-delay: 1s; /* Delay after video loads */
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .cursive-name {
+                font-size: 3.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -169,7 +195,7 @@
         <div class="hero-video-container">
             <!-- Video source from your GitHub repository -->
             <video autoplay loop muted playsinline>
-                <source src="lets.build.something.great.mp4.mp4" type="video/mp4">
+                <source src="lets.build.something.great.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -178,7 +204,10 @@
         <div class="container relative z-10"> <!-- z-index to bring content above overlay -->
             <!-- Profile Image from your GitHub repository -->
             <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg ring-4 ring-blue-600 mx-auto mb-8">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark Rickey</h1>
+            
+            <!-- Cursive Name (using Google Font) -->
+            <h1 class="cursive-name font-normal mb-5 leading-tight">Mark Rickey</h1>
+            
             <p class="text-2xl mb-12 max-w-4xl mx-auto">Strategic Project Manager</p>
             <a href="#contact" class="bg-blue-600 text-white px-9 py-3.5 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Let's get started!</a>
         </div>
@@ -190,7 +219,8 @@
             <h2 class="section-heading fade-in-element">About Me</h2>
             <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6 fade-in-element">
                 <p>A resilient professional with 10+ years managing data systems, teams, and projects, combined with a military background that emphasizes discipline and process optimization. Committed to delivering impactful, data-driven results.</p>
-                </div>
+                <p>My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
+            </div>
         </div>
     </section>
 
@@ -200,26 +230,31 @@
             <h2 class="section-heading fade-in-element">Experience</h2>
         </div>
         <div id="experience-carousel" class="flex overflow-x-auto scroll-smooth space-x-8 pb-4 scrollbar-hide w-full px-4 md:px-8 lg:px-16">
-            <!-- Experience Item 1: Congressional Staffer -->
+            <!-- Experience Item 1: Congressional Staffer Fellow -->
             <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                 <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building text-blue-600"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9.5 9.5h5"/><path d="M9.5 14.5h5"/></svg>
                     <span>Congressional Staffer</span>
                 </h3>
-                <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | Office of Marlin Stutzman</p>
+                <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | On-site</p>
                 <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Managed federal accounts for the DoD and Veterans Affairs, ensuring equitable outcomes for District Constituents. Designed/implemented advanced data management systems. Authored briefing memos on critical policy areas, legislative strategy, and comprehensive research results.</li>
+                        <li>Served as primary federal liaison for complex constituent inquiries, ensuring equitable outcomes.</li>
+                        <li>Designed/implemented Google Forms/Sheets system for job fair data, boosting engagement.</li>
+                        <li>Authored briefing memos on critical policy areas, informing legislative strategy.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 2: Active Duty Army -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span>Army, Project Manager/Noncommissioned Officer</span>
+                        <span>Active Duty, Noncommissioned Officer</span>
                     </h3>
                     <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Directed intricate logistical international operations, guaranteeing maximum efficiency in dynamic environments. I led a multinational team across the Pacific theatre and briefed allied members during advanced interdisciplenary training. Monitored, managed, and reported on the deployment of assets, adding up to more than ten billion dollars.</li>
+                        <li>Directed intricate logistical operations, guaranteeing maximum efficiency in dynamic environments.</li>
+                        <li>Led/mentored multidisciplinary teams in high-pressure operations, achieving mission objectives.</li>
+                        <li>Developed/implemented rigorous training programs, enhancing team readiness/effectiveness.</li>
+                        <li>Demonstrated unwavering discipline, adaptability, and problem-solving in evolving scenarios.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 3: Digital Optimization Supervisor -->
@@ -230,8 +265,10 @@
                     </h3>
                     <p class="text-gray-600 mb-5 text-sm">McDonald's | Chicago, Illinois</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency. Partnered with stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%. Developed reporting tools/KPIs, achieving a 25% sales increase within six months.</li>
-                     </ul>
+                        <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency.</li>
+                        <li>Partnered with stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%.</li>
+                        <li>Developed reporting tools/KPIs, achieving 25% sales increase within six months.</li>
+                    </ul>
                 </div>
                 <!-- Experience Item 4: Digital Marketing Manager -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
@@ -241,8 +278,10 @@
                     </h3>
                     <p class="text-gray-600 mb-5 text-sm">Association Forum | Chicago, Illinois</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Created/promoted marketing campaigns, developing targeted keywords for SEO/social media. Coordinated branding initiatives, enhancing visibility by 25% and membership engagement by 20%.Managed/optimized websites, achieving 30% content visibility improvement in search results. Coordinated one of the most significant Illinois Association networking events, boosting B2B engagement by 30% and attendance by 20%.</li>
-                       
+                        <li>Created/promoted marketing campaigns, developing targeted keywords for SEO/social media.</li>
+                        <li>Coordinated branding initiatives, enhancing visibility by 25% and membership engagement by 20%.</li>
+                        <li>Managed/optimized websites, achieving 30% content visibility improvement in search results.</li>
+                        <li>Coordinated one of the most significant Illinois Association networking events, boosting B2B engagement by 30% and attendance by 20%.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 5: Intern, Digital Content Strategist -->
@@ -253,8 +292,9 @@
                     </h3>
                     <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Chicago, Illinois</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Developed/executed content strategy for digital channels, creating engaging content for gym membership/fitness services. Managed social media accounts, collaborating with cross-functional teams to align with center goals. Coordinated marketing campaigns for fitness initiatives, developing website/email content.</li>
-                        
+                        <li>Developed/executed content strategy for digital channels, creating engaging content for gym membership/fitness services.</li>
+                        <li>Managed social media accounts, collaborating with cross-functional teams to align with center goals.</li>
+                        <li>Coordinated marketing campaigns for fitness initiatives, developing website/email content.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 6: Undergraduate Creative Director Intern -->
@@ -263,10 +303,11 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette text-blue-600"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.83 0 1.64-.07 2.4-.21 1.05-1.4 1.6-3.08 1.6-4.79 0-4.4-3.6-8-8-8Z"/><path d="M18 13c.83 0 1.64.07 2.4.21 1.05 1.4 1.6 3.08 1.6 4.79 0 4.4-3.6 8-8 8H12c-5.5 0-10-4.5-10-10S6.5 2 12 2Z"/></svg>
                         <span>Undergraduate Creative Director Intern</span>
                     </h3>
-                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Indiana</p>
+                    <p class="text-gray-600 mb-5 text-sm">Purdue University | West Lafayette, Indiana</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Developed/designed visual content for student success initiatives, managing branding/visual identity. Collaborated with cross-functional teams, conducting market research to inform design decisions. Mentored junior designers, contributing to impactful visual content.</li>
-                       
+                        <li>Developed/design visual content for student success initiatives, managing branding/visual identity.</li>
+                        <li>Collaborated with cross-functional teams, conducting market research to inform design decisions.</li>
+                        <li>Mentored junior designers, contributing to impactful visual content.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 7: Student Orientation Supervisor -->
@@ -275,10 +316,11 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-blue-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         <span>Student Orientation Supervisor</span>
                     </h3>
-                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success and Transitions Dept.</p>
+                    <p class="text-gray-600 mb-5 text-sm">Purdue University | West Lafayette, Indiana</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Provided tailored guidance and instruction for transitioning students and adult learners. Managed office systems for student course registrations, leveraging curriculum knowledge, and career pathway goals for their future success.</li>
-                       
+                        <li>Offered new students a welcoming/inclusive environment, fostering belonging/community.</li>
+                        <li>Proactively introduced new students to staff/faculty, providing tailored guidance for transition.</li>
+                        <li>Assisted students with class registration, leveraging curriculum knowledge for success.</li>
                     </ul>
                 </div>
             </div>
@@ -290,29 +332,30 @@
             <h2 class="section-heading fade-in-element">Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
-                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
+                    <img src="https://placehold.co/400x220/E0F2F7/3B82F6" alt="Job Fair System Project" class="rounded-xl object-cover w-full h-56 mb-5">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database text-blue-600"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><path d="M3 19A9 3 0 0 0 21 19"/></svg>
                         <span class="sr-only">Data Management Systems</span>
                     </h3>
-                    <p class="text-gray-700 text-sm mb-4">Designed and implemented advanced data management programs streamlining data collection and creating targeted outreach.</p>
-                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
+                    <p class="text-gray-700 text-sm mb-4">Designed/implemented Google Forms/Sheets for Congressional office, streamlining data capture/outreach.</p>
+                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Details &rarr;</a>
                 </div>
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
                 
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase text-blue-600"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        <span class="sr-only">Account Management</span>
+                        <span class="sr-only">Account Management Portfolio Website</span>
                     </h3>
-                    <p class="text-gray-700 text-sm mb-4">Developed strategic communication, improving business models and capabilities, resulting in increased ROI's.</p>
-                    <a href="https://github.com/yourusername/your-portfolio-repo" target="_blank" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
+                    <p class="text-gray-700 text-sm mb-4">Developed responsive personal portfolio site using modern web technologies, showcasing front-end development/strategic communication.</p>
+                    <a href="https://github.com/yourusername/your-portfolio-repo" target="_blank" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View on GitHub &rarr;</a>
                 </div>
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:hover:shadow-2xl swipe-in-right-element">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone text-blue-600"><path d="m3 11 18-2L13 3 7 21z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
                         <span class="sr-only">Digital Marketing</span>
                     </h3>
-                    <p class="text-gray-700 text-sm mb-4">Here are a few of my upcoming projects. Stay tuned, subscribe, and lets build something great!</p>
-                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
+                    <p class="text-gray-700 text-sm mb-4">Description of a potential future project that aligns with your goals (e.g., policy analysis, community initiative, data visualization, marketing).</p>
+                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Learn More &rarr;</a>
                 </div>
             </div>
         </div>
@@ -429,98 +472,72 @@
                 window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
 
-            <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // --- Seamless Auto-Scrolling Carousel ---
-    const carousel = document.getElementById('experience-carousel');
-    if (carousel) {
-        // Duplicate all cards for seamless wrap
-        const cards = Array.from(carousel.children);
-        cards.forEach(card => carousel.appendChild(card.cloneNode(true)));
-        const SPEED = 0.7;
-        let animationFrame;
-        function scrollLoop() {
-            if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
-                carousel.scrollLeft -= carousel.scrollWidth / 2;
-            }
-            carousel.scrollLeft += SPEED;
-            animationFrame = requestAnimationFrame(scrollLoop);
-        }
-        function startScroll() {
-            if (!animationFrame) animationFrame = requestAnimationFrame(scrollLoop);
-        }
-        function stopScroll() {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = null;
-        }
-        startScroll();
-        carousel.addEventListener('mouseenter', stopScroll);
-        carousel.addEventListener('mouseleave', startScroll);
-        carousel.addEventListener('touchstart', stopScroll, {passive:true});
-        carousel.addEventListener('touchend', startScroll, {passive:true});
-    }
+            // Auto-scrolling for Experience Carousel
+            const experienceCarousel = document.getElementById('experience-carousel');
+            if (experienceCarousel) {
+                let scrollAnimationFrame;
+                const scrollSpeed = 0.7; // Pixels per frame for smooth scroll
+                const intervalDelay = 3000; // Time in ms before next scroll starts after a pause
 
-    // --- Modal Magnify with Pinch/Zoom ---
-    const overlay = document.getElementById('card-overlay');
-    const overlayContent = document.getElementById('card-overlay-content');
-    if (carousel && overlay && overlayContent) {
-        // Only original cards are clickable
-        const cardCount = carousel.children.length / 2;
-        const cards = Array.from(carousel.children).slice(0, cardCount);
-        cards.forEach(card => {
-            card.style.cursor = 'pointer';
-            card.addEventListener('click', function (e) {
-                e.stopPropagation();
-                const clone = card.cloneNode(true);
-                // Overlay card style
-                clone.style.transform = 'scale(1.10)';
-                clone.style.boxShadow = '0 12px 50px rgba(59,130,246,0.25)';
-                clone.style.padding = '2.5rem';
-                clone.style.zIndex = '10000';
-                clone.style.maxWidth = '90vw';
-                clone.style.maxHeight = '80vh';
-                clone.style.overflow = 'auto';
-                clone.style.touchAction = 'auto';
-                overlayContent.innerHTML = '';
-                overlayContent.appendChild(clone);
-                overlay.style.display = 'flex';
-                setTimeout(() => {
-                    overlayContent.style.transform = 'scale(1)';
-                }, 10);
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        overlay.addEventListener('mousedown', function (e) {
-            if (e.target === overlay) {
-                overlay.style.display = 'none';
-                overlayContent.innerHTML = '';
-                document.body.style.overflow = '';
+                // Clone all original items to create a seamless loop
+                const originalItems = Array.from(experienceCarousel.children);
+                originalItems.forEach(item => {
+                    experienceCarousel.appendChild(item.cloneNode(true));
+                });
+                
+                const totalOriginalWidth = originalItems.reduce((acc, item) => acc + item.offsetWidth + parseInt(window.getComputedStyle(item).marginRight), 0);
+                
+                let lastScrollTime = 0;
+
+                function scrollLoop(currentTime) {
+                    if (!lastScrollTime) lastScrollTime = currentTime;
+                    const deltaTime = currentTime - lastScrollTime;
+
+                    // Calculate how much to scroll based on time elapsed
+                    const scrollAmount = (scrollSpeed * deltaTime) / (1000 / 60); // Adjust for frame rate
+
+                    experienceCarousel.scrollLeft += scrollAmount;
+
+                    // If scrolled past the original set, instantly jump back
+                    if (experienceCarousel.scrollLeft >= totalOriginalWidth) {
+                        experienceCarousel.scrollLeft -= totalOriginalWidth; // Jump back by exactly the original content's width
+                    }
+                    
+                    lastScrollTime = currentTime;
+                    scrollAnimationFrame = requestAnimationFrame(scrollLoop);
+                }
+
+                const startAutoScroll = () => {
+                    if (!scrollAnimationFrame) {
+                        lastScrollTime = 0; // Reset time for smooth start
+                        scrollAnimationFrame = requestAnimationFrame(scrollLoop);
+                    }
+                };
+
+                const stopAutoScroll = () => {
+                    cancelAnimationFrame(scrollAnimationFrame);
+                    scrollAnimationFrame = null;
+                };
+
+                // Start auto-scroll when the element is visible
+                const carouselObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startAutoScroll();
+                        } else {
+                            stopAutoScroll();
+                        }
+                    });
+                }, { threshold: 0.5 }); // Start/stop when 50% visible
+
+                carouselObserver.observe(experienceCarousel);
+
+                // Optional: Pause on hover
+                experienceCarousel.addEventListener('mouseenter', stopAutoScroll);
+                experienceCarousel.addEventListener('mouseleave', startAutoScroll);
             }
         });
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && overlay.style.display === 'flex') {
-                overlay.style.display = 'none';
-                overlayContent.innerHTML = '';
-                document.body.style.overflow = '';
-            }
-        });
-        // Pinch/zoom support
-        overlay.style.touchAction = 'auto';
-        overlayContent.style.touchAction = 'auto';
-        overlayContent.style.overflow = 'auto';
-    }
-});
-</script>
-    <!-- Card Modal Overlay -->
-<div id="card-overlay"
-     style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh;
-     background:rgba(31,41,55,0.7); align-items:center; justify-content:center; touch-action:auto; overflow:auto;">
-  <div id="card-overlay-content"
-       style="background:white; border-radius:1.5rem; max-width:90vw; max-height:90vh;
-       box-shadow:0 10px 40px rgba(0,0,0,0.2); transform:scale(1.1); transition:transform 0.2s;
-       touch-action:auto; overflow:auto;">
-    <!-- Cloned card will go here -->
-  </div>
-</div>
+    </script>
+
 </body>
 </html>
