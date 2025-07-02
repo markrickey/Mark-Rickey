@@ -48,8 +48,8 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Only behind main content */
-        .main-parallax-wrapper {
+        /* Parallax background ONLY behind main content */
+        .main-content-wrapper {
             position: relative;
             overflow: hidden;
         }
@@ -71,7 +71,9 @@
             min-height: 100vh;
             position: relative;
             z-index: 1;
-            padding-top: 48px; /* default, will be overridden by media queries or inline */
+            /* The top margin here must match or exceed the HERO section's height. Adjust as needed! */
+            margin-top: 0;
+            padding-top: 2rem;
         }
         @media (min-width: 768px) {
             .chart-container {
@@ -80,7 +82,7 @@
                 max-width: 550px;
             }
             .parallax-overlay {
-                padding-top: 120px; /* adjust this if your hero is taller */
+                padding-top: 3rem;
             }
         }
     </style>
@@ -117,20 +119,18 @@
     </section>
 
     <!-- Main Content with Parallax Background -->
-    <main class="main-parallax-wrapper">
+    <main class="main-content-wrapper">
         <div class="parallax-bg"></div>
         <div class="parallax-overlay p-4 md:p-8">
             <div class="max-w-7xl mx-auto">
-
-                <!-- (all your sections: Contributions, Capabilities, Approach, CTA) -->
-                <!-- ... Copy your existing main content here, unchanged ... -->
-
+                <!-- All your main content sections go here (contributions, capabilities, approach, etc.) -->
+                <!-- ...PASTE ALL YOUR SECTIONS HERE, UNCHANGED... -->
             </div>
         </div>
     </main>
 
     <script>
-    // ... your existing JS, unchanged ...
+    // ... your full JavaScript here (unchanged) ...
     </script>
 </body>
 </html>
