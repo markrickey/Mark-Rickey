@@ -178,7 +178,8 @@
         <div class="container relative z-10"> <!-- z-index to bring content above overlay -->
             <!-- Profile Image from your GitHub repository -->
             <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg ring-4 ring-blue-600 mx-auto mb-8">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark</h1>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark Rickey</h1>
+            <p class="text-2xl mb-12 max-w-4xl mx-auto">Strategic Project Manager</p>
             <a href="#contact" class="bg-blue-600 text-white px-9 py-3.5 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Let's get started!</a>
         </div>
     </section>
@@ -318,7 +319,7 @@
                     <p class="text-gray-700 text-sm mb-4">Developed responsive personal portfolio site using modern web technologies, showcasing front-end development/strategic communication.</p>
                     <a href="https://github.com/yourusername/your-portfolio-repo" target="_blank" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View on GitHub &rarr;</a>
                 </div>
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:hover:shadow-2xl swipe-in-right-element">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone text-blue-600"><path d="m3 11 18-2L13 3 7 21z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
                         <span class="sr-only">Digital Marketing</span>
@@ -446,49 +447,36 @@
             if (experienceCarousel) {
                 let scrollInterval;
                 const scrollSpeed = 3000; // Time in ms between scrolls
-                const scrollDuration = 800; // Duration of each individual scroll animation in ms (for smooth effect)
-
-                // Clone all original items to create a seamless loop
+                
+                // Get all original items
                 const originalItems = Array.from(experienceCarousel.children);
-                // Append clones to create a seamless loop buffer
-                // Clone enough items to fill the visible area at least twice for a seamless loop
+                // Calculate the total width of the original items including their margins
+                let totalOriginalWidth = 0;
+                originalItems.forEach(item => {
+                    totalOriginalWidth += item.offsetWidth + parseInt(window.getComputedStyle(item).marginRight);
+                });
+
+                // Clone items to create a seamless loop buffer
+                // Clone enough to ensure that there's always a full set of original items plus a few extra
+                // visible at the start of the cloned section before the jump back.
                 const numVisibleItems = Math.ceil(experienceCarousel.offsetWidth / (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight)));
                 for (let i = 0; i < originalItems.length; i++) {
-                     experienceCarousel.appendChild(originalItems[i].cloneNode(true));
+                    experienceCarousel.appendChild(originalItems[i].cloneNode(true));
                 }
                 // Add extra clones to ensure continuous scrolling without a gap
                 for (let i = 0; i < numVisibleItems + 1 && i < originalItems.length; i++) {
-                     experienceCarousel.appendChild(originalItems[i].cloneNode(true));
+                    experienceCarousel.appendChild(originalItems[i].cloneNode(true));
                 }
                 
-                let currentItemIndex = 0;
-
                 const startAutoScroll = () => {
                     scrollInterval = setInterval(() => {
-                        currentItemIndex++;
-                        const nextItem = experienceCarousel.children[currentItemIndex];
+                        // Scroll by one item width
+                        experienceCarousel.scrollLeft += (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight));
 
-                        if (nextItem) {
-                            nextItem.scrollIntoView({ behavior: 'smooth', inline: 'start' });
-                        }
-
-                        // Check if we've scrolled past the original set of items and need to jump back
-                        // The jump should happen when the *first* original item is no longer visible,
-                        // and the *first cloned item* is now in view.
-                        if (currentItemIndex >= originalItems.length) {
-                             // Calculate the exact position of the start of the cloned set
-                            const jumpBackPosition = currentItemIndex * (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight));
-                            
-                            // If we are at or past the start of the clones, reset to the beginning of the original set
-                            if (experienceCarousel.scrollLeft >= originalItems.length * (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight))) {
-                                experienceCarousel.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
-                                experienceCarousel.scrollLeft = 0; // Jump back to the beginning of the original set
-                                currentItemIndex = 0; // Reset index
-                                // Re-enable smooth scroll after a tiny delay to ensure the jump is instant before next scroll
-                                setTimeout(() => {
-                                    experienceCarousel.style.scrollBehavior = 'smooth';
-                                }, 50); 
-                            }
+                        // Check if we've scrolled past the original set of items (now visually the first clone)
+                        // If so, instantly jump back to the beginning of the original set
+                        if (experienceCarousel.scrollLeft >= totalOriginalWidth) {
+                            experienceCarousel.scrollLeft = 0; // Jump back to the beginning of the original set
                         }
                         
                     }, scrollSpeed);
