@@ -481,16 +481,49 @@
     </script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Select all Experience carousel cards
+  // ... your existing code ...
+
+  // SEAMLESS AUTO-SCROLL CAROUSEL
+  const experienceCarousel = document.getElementById('experience-carousel');
+  if (experienceCarousel) {
+    // Duplicate all carousel items for seamless looping
+    const items = Array.from(experienceCarousel.children);
+    items.forEach(item => {
+      experienceCarousel.appendChild(item.cloneNode(true));
+    });
+
+    // Scroll speed (pixels per frame)
+    const SPEED = 0.5;
+    let animationFrame;
+
+    function scrollLoop() {
+      if (experienceCarousel.scrollLeft >= experienceCarousel.scrollWidth / 2) {
+        experienceCarousel.scrollLeft -= experienceCarousel.scrollWidth / 2;
+      }
+      experienceCarousel.scrollLeft += SPEED;
+      animationFrame = requestAnimationFrame(scrollLoop);
+    }
+
+    // Start auto scroll
+    animationFrame = requestAnimationFrame(scrollLoop);
+
+    // Pause on hover
+    experienceCarousel.addEventListener('mouseenter', () => cancelAnimationFrame(animationFrame));
+    experienceCarousel.addEventListener('mouseleave', () => {
+      animationFrame = requestAnimationFrame(scrollLoop);
+    });
+  }
+
+  // ... (see below for magnify code) ...
+});
+</script>
+      // MAGNIFY CARD ON CLICK
   const carousel = document.getElementById('experience-carousel');
-  if (!carousel) return;
   const cards = carousel.querySelectorAll('div.bg-white.rounded-2xl');
 
-  // Overlay elements
   const overlay = document.getElementById('card-overlay');
   const overlayContent = document.getElementById('card-overlay-content');
 
-  // Show overlay with cloned card
   cards.forEach(card => {
     card.style.cursor = 'pointer';
     card.addEventListener('click', function (e) {
@@ -499,7 +532,6 @@ document.addEventListener('DOMContentLoaded', function () {
       clone.style.transform = 'scale(1.12)';
       clone.style.boxShadow = '0 12px 50px rgba(59,130,246,0.25)';
       clone.style.padding = '2.5rem';
-      clone.style.zIndex = '10000';
       overlayContent.innerHTML = '';
       overlayContent.appendChild(clone);
       overlay.style.display = 'flex';
@@ -509,7 +541,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Hide overlay on click outside card
   overlay.addEventListener('mousedown', function (e) {
     if (e.target === overlay) {
       overlay.style.display = 'none';
@@ -517,14 +548,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Hide overlay on Esc
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.style.display === 'flex') {
       overlay.style.display = 'none';
       overlayContent.innerHTML = '';
     }
   });
-});
-</script>
+    <!-- Card Modal Overlay -->
+<div id="card-overlay" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(31,41,55,0.7); align-items:center; justify-content:center;">
+  <div id="card-overlay-content" style="background:white; border-radius:1.5rem; max-width:90vw; max-height:90vh; box-shadow:0 10px 40px rgba(0,0,0,0.2); transform:scale(1.1); transition:transform 0.25s;">
+    <!-- Cloned card will go here -->
+  </div>
+</div>
 </body>
 </html>
