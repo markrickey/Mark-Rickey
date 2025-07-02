@@ -429,128 +429,23 @@
                 window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
 
-            document.addEventListener('DOMContentLoaded', () => {
-    // ... keep your fade-in code, etc.
-
-    const experienceCarousel = document.getElementById('experience-carousel');
-    if (experienceCarousel) {
-        // Duplicate all carousel items for seamless wrap
-        const items = Array.from(experienceCarousel.children);
-        items.forEach(item => {
-            experienceCarousel.appendChild(item.cloneNode(true));
-        });
-
-        // Set speed: pixels per frame
-        const SPEED = 0.7; // Adjust for faster/slower scroll
-
-        // Animation loop
+            <script>
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Seamless Auto-Scrolling Carousel ---
+    const carousel = document.getElementById('experience-carousel');
+    if (carousel) {
+        // Duplicate all cards for seamless wrap
+        const cards = Array.from(carousel.children);
+        cards.forEach(card => carousel.appendChild(card.cloneNode(true)));
+        const SPEED = 0.7;
         let animationFrame;
-
         function scrollLoop() {
-            // If we've scrolled past the original set, reset to the start
-            if (experienceCarousel.scrollLeft >= experienceCarousel.scrollWidth / 2) {
-                experienceCarousel.scrollLeft -= experienceCarousel.scrollWidth / 2;
+            if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+                carousel.scrollLeft -= carousel.scrollWidth / 2;
             }
-            experienceCarousel.scrollLeft += SPEED;
+            carousel.scrollLeft += SPEED;
             animationFrame = requestAnimationFrame(scrollLoop);
         }
-
-        // Pause on hover
-        experienceCarousel.addEventListener('mouseenter', () => cancelAnimationFrame(animationFrame));
-        experienceCarousel.addEventListener('mouseleave', () => {
-            animationFrame = requestAnimationFrame(scrollLoop);
-        });
-
-        // Start animation when visible
-        const carouselObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animationFrame = requestAnimationFrame(scrollLoop);
-                } else {
-                    cancelAnimationFrame(animationFrame);
-                }
-            });
-        }, { threshold: 0.5 });
-        carouselObserver.observe(experienceCarousel);
-
-        // Snap to start at page load
-        experienceCarousel.scrollLeft = 0;
-    }
-});
-        });
-    </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // ==== Fade-in and swipe-in animations ====
-    const fadeInElements = document.querySelectorAll('.fade-in-element');
-    const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    fadeInElements.forEach(element => observer.observe(element));
-    swipeInRightElements.forEach(element => observer.observe(element));
-
-    // ==== Dynamic color background for Experience section ====
-    const experienceSection = document.getElementById('experience');
-    if (experienceSection) {
-        const startH = 220, startS = 15, startL = 95;
-        const endH = 210, endS = 30, endL = 85;
-        function interpolateColor(color1, color2, factor) {
-            const result = color1.slice();
-            for (let i = 0; i < 3; i++) {
-                result[i] = color1[i] + factor * (color2[i] - color1[i]);
-            }
-            return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
-        }
-        const handleScroll = () => {
-            const rect = experienceSection.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const elementHeight = rect.height;
-            let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
-            scrollFactor = Math.max(0, Math.min(1, scrollFactor));
-            experienceSection.style.backgroundColor = interpolateColor(
-                [startH, startS, startL], [endH, endS, endL], scrollFactor
-            );
-        };
-        handleScroll();
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
-    }
-
-    // ==== SEAMLESS AUTO-SCROLL EXPERIENCE CAROUSEL ====
-    const experienceCarousel = document.getElementById('experience-carousel');
-    if (experienceCarousel) {
-        // Duplicate all carousel items for seamless looping
-        const items = Array.from(experienceCarousel.children);
-        items.forEach(item => {
-            experienceCarousel.appendChild(item.cloneNode(true));
-        });
-
-        const SPEED = 0.5; // pixels per frame
-        let animationFrame;
-
-        function scrollLoop() {
-            if (experienceCarousel.scrollLeft >= experienceCarousel.scrollWidth / 2) {
-                experienceCarousel.scrollLeft -= experienceCarousel.scrollWidth / 2;
-            }
-            experienceCarousel.scrollLeft += SPEED;
-            animationFrame = requestAnimationFrame(scrollLoop);
-        }
-
-        // Start/stop auto scroll
         function startScroll() {
             if (!animationFrame) animationFrame = requestAnimationFrame(scrollLoop);
         }
@@ -559,50 +454,42 @@ document.addEventListener('DOMContentLoaded', () => {
             animationFrame = null;
         }
         startScroll();
-
-        // Pause on hover (desktop)
-        experienceCarousel.addEventListener('mouseenter', stopScroll);
-        experienceCarousel.addEventListener('mouseleave', startScroll);
-        // Optional: Pause on touch (mobile)
-        experienceCarousel.addEventListener('touchstart', stopScroll, {passive: true});
-        experienceCarousel.addEventListener('touchend', startScroll, {passive: true});
+        carousel.addEventListener('mouseenter', stopScroll);
+        carousel.addEventListener('mouseleave', startScroll);
+        carousel.addEventListener('touchstart', stopScroll, {passive:true});
+        carousel.addEventListener('touchend', startScroll, {passive:true});
     }
 
-    // ==== MAGNIFY CARD ON CLICK (with pinch/zoom support) ====
-    // Overlay elements (must exist in HTML!)
+    // --- Modal Magnify with Pinch/Zoom ---
     const overlay = document.getElementById('card-overlay');
     const overlayContent = document.getElementById('card-overlay-content');
-    if (experienceCarousel && overlay && overlayContent) {
-        // Only select cards from original set (first half)
-        const cardCount = experienceCarousel.children.length / 2;
-        const cards = Array.from(experienceCarousel.children).slice(0, cardCount);
-
+    if (carousel && overlay && overlayContent) {
+        // Only original cards are clickable
+        const cardCount = carousel.children.length / 2;
+        const cards = Array.from(carousel.children).slice(0, cardCount);
         cards.forEach(card => {
             card.style.cursor = 'pointer';
             card.addEventListener('click', function (e) {
                 e.stopPropagation();
-                // Clone the card for overlay
                 const clone = card.cloneNode(true);
-                // Style for magnification
-                clone.style.transform = 'scale(1.12)';
+                // Overlay card style
+                clone.style.transform = 'scale(1.10)';
                 clone.style.boxShadow = '0 12px 50px rgba(59,130,246,0.25)';
                 clone.style.padding = '2.5rem';
                 clone.style.zIndex = '10000';
                 clone.style.maxWidth = '90vw';
                 clone.style.maxHeight = '80vh';
                 clone.style.overflow = 'auto';
+                clone.style.touchAction = 'auto';
                 overlayContent.innerHTML = '';
                 overlayContent.appendChild(clone);
                 overlay.style.display = 'flex';
                 setTimeout(() => {
                     overlayContent.style.transform = 'scale(1)';
                 }, 10);
-                // Prevent background scroll when modal is open
                 document.body.style.overflow = 'hidden';
             });
         });
-
-        // Hide overlay on clicking outside card
         overlay.addEventListener('mousedown', function (e) {
             if (e.target === overlay) {
                 overlay.style.display = 'none';
@@ -610,8 +497,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             }
         });
-
-        // Hide overlay on Esc
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && overlay.style.display === 'flex') {
                 overlay.style.display = 'none';
@@ -619,13 +504,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             }
         });
-
-        // Mobile: allow pinch/zoom on overlay
+        // Pinch/zoom support
         overlay.style.touchAction = 'auto';
         overlayContent.style.touchAction = 'auto';
         overlayContent.style.overflow = 'auto';
     }
 });
+</script>
     <!-- Card Modal Overlay -->
 <div id="card-overlay"
      style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh;
