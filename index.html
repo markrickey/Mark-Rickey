@@ -303,7 +303,7 @@
             <h2 class="section-heading fade-in-element">Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
+                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database text-blue-600"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><path d="M3 19A9 3 0 0 0 21 19"/></svg>
                         <span class="sr-only">Data Management Systems</span>
                     </h3>
@@ -447,40 +447,51 @@
             if (experienceCarousel) {
                 let scrollInterval;
                 const scrollSpeed = 3000; // Time in ms between scrolls
+                const scrollDuration = 800; // Duration of each individual scroll animation in ms (for smooth effect)
 
                 // Clone all original items to create a seamless loop
                 const originalItems = Array.from(experienceCarousel.children);
                 // Append clones to create a seamless loop buffer
-                originalItems.forEach(item => {
-                    experienceCarousel.appendChild(item.cloneNode(true));
-                });
-                // Append another set of clones to ensure enough buffer for continuous scrolling
-                originalItems.forEach(item => {
-                    experienceCarousel.appendChild(item.cloneNode(true));
-                });
+                // Clone enough items to fill the visible area at least twice for a seamless loop
+                const numVisibleItems = Math.ceil(experienceCarousel.offsetWidth / (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight)));
+                for (let i = 0; i < originalItems.length; i++) {
+                     experienceCarousel.appendChild(originalItems[i].cloneNode(true));
+                }
+                // Add extra clones to ensure continuous scrolling without a gap
+                for (let i = 0; i < numVisibleItems + 1 && i < originalItems.length; i++) {
+                     experienceCarousel.appendChild(originalItems[i].cloneNode(true));
+                }
                 
+                let currentItemIndex = 0;
+
                 const startAutoScroll = () => {
                     scrollInterval = setInterval(() => {
-                        const firstItem = experienceCarousel.children[0];
-                        if (!firstItem) return;
+                        currentItemIndex++;
+                        const nextItem = experienceCarousel.children[currentItemIndex];
 
-                        const itemWidth = firstItem.offsetWidth;
-                        const itemMarginRight = parseInt(window.getComputedStyle(firstItem).marginRight);
-                        const scrollAmount = itemWidth + itemMarginRight;
+                        if (nextItem) {
+                            nextItem.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+                        }
 
-                        // Check if we've scrolled past the first set of original items (now visually the first clone)
-                        // If so, instantly jump back to the beginning of the *second* set of original items (which are now clones)
-                        // This makes the loop appear continuous
-                        if (experienceCarousel.scrollLeft >= originalItems.length * scrollAmount) {
-                            experienceCarousel.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
-                            experienceCarousel.scrollLeft = 0; // Jump back to the beginning of the original set
-                            // Re-enable smooth scroll after a tiny delay to ensure the jump is instant before next scroll
-                            setTimeout(() => {
-                                experienceCarousel.style.scrollBehavior = 'smooth';
-                            }, 50); 
+                        // Check if we've scrolled past the original set of items and need to jump back
+                        // The jump should happen when the *first* original item is no longer visible,
+                        // and the *first cloned item* is now in view.
+                        if (currentItemIndex >= originalItems.length) {
+                             // Calculate the exact position of the start of the cloned set
+                            const jumpBackPosition = currentItemIndex * (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight));
+                            
+                            // If we are at or past the start of the clones, reset to the beginning of the original set
+                            if (experienceCarousel.scrollLeft >= originalItems.length * (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight))) {
+                                experienceCarousel.style.scrollBehavior = 'auto'; // Disable smooth scroll for instant jump
+                                experienceCarousel.scrollLeft = 0; // Jump back to the beginning of the original set
+                                currentItemIndex = 0; // Reset index
+                                // Re-enable smooth scroll after a tiny delay to ensure the jump is instant before next scroll
+                                setTimeout(() => {
+                                    experienceCarousel.style.scrollBehavior = 'smooth';
+                                }, 50); 
+                            }
                         }
                         
-                        experienceCarousel.scrollLeft += scrollAmount; // Perform the scroll
                     }, scrollSpeed);
                 };
 
