@@ -48,7 +48,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Parallax Background Styling -- only in main section, not fixed */
+        /* Parallax background ONLY behind main content */
         .main-parallax-wrapper {
             position: relative;
             overflow: hidden;
@@ -168,5 +168,144 @@
                         </div>
                         <!-- Quantifying Constituent Impact -->
                         <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col h-full transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
-                            <div class="icon*
-
+                            <div class="icon-box">💰</div>
+                            <h3 class="font-bold text-2xl text-[#6B5B4C] mb-4">Quantifying Constituent Impact: Monetary Outcomes</h3>
+                            <p class="text-gray-700 text-base mb-6 flex-grow font-light">
+                                Developed a robust system to rigorously track and analyze the financial impact of casework, transforming raw data into quantifiable insights. This involved extracting detailed case outcomes, primarily from Veterans Affairs (VA) benefits and Department of Defense (DoD) claims, and translating them into tangible monetary values recovered or saved for constituents. This comprehensive analysis provides a clear picture of direct economic benefits delivered.
+                            </p>
+                            <div class="w-full mt-auto">
+                                <div class="chart-container" style="height:250px; max-height:250px;">
+                                    <canvas id="monetaryOutcomesChart"></canvas>
+                                </div>
+                                <a href="YOUR_GITHUB_IMAGE_URL_HERE" target="_blank" class="block text-center mt-4 text-[#6B5B4C] hover:text-[#E67E22] font-semibold transition-colors duration-200">View Detailed Financial Impact Report ➜</a>
+                            </div>
+                        </div>
+                        <!-- Operational Efficiency & Strategic Impact Study -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col h-full transform transition-transform duration-300 hover:scale-[1.02] lg:col-span-2 animate-on-scroll">
+                            <div class="icon-box">📈</div>
+                            <h3 class="font-bold text-2xl text-[#6B5B4C] mb-4">Operational Efficiency & Strategic Impact Study</h3>
+                            <p class="text-base mb-6 flex-grow font-light opacity-90">
+                                Undertook an internal study to meticulously analyze current operational workflows, identify systemic inefficiencies, and pinpoint opportunities for enhanced impact. This diagnostic work reveals key areas where strategic interventions can yield substantial improvements in productivity and constituent service.
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto text-center">
+                                <div class="flex flex-col items-center justify-center p-3 bg-white bg-opacity-10 rounded-lg animate-on-scroll" style="transition-delay: 0.1s;">
+                                    <p class="text-4xl font-extrabold text-[#E67E22]">18<span class="text-xl font-normal opacity-90">hrs/wk</span></p>
+                                    <p class="text-sm font-light opacity-80">Manual Data Loss</p>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-3 bg-white bg-opacity-10 rounded-lg animate-on-scroll" style="transition-delay: 0.2s;">
+                                    <p class="text-4xl font-extrabold text-[#E67E22]">48<span class="text-xl font-normal opacity-90">hrs</span></p>
+                                    <p class="text-sm font-light opacity-80">Avg. Response Time</p>
+                                </div>
+                                <div class="flex flex-col items-center justify-center p-3 bg-white bg-opacity-10 rounded-lg animate-on-scroll" style="transition-delay: 0.3s;">
+                                    <p class="text-4xl font-extrabold text-[#E67E22]">8<span class="text-xl font-normal opacity-90">%</span></p>
+                                    <p class="text-sm font-light opacity-80">Case Error Rate</p>
+                                </div>
+                            </div>
+                            <a href="https://markrickey.github.io/Office-Efficiency-Strategic-Impact-Infographic/" target="_blank" class="block text-center mt-6 text-white hover:text-[#E67E22] font-semibold transition-colors duration-200">View Full Infographic Summary ➜</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Capabilities Section -->
+                <section id="capabilities" class="section-anchor mb-16">
+                    <h2 class="text-4xl font-bold text-center text-[#4A3A2D] mb-10 animate-on-scroll">My Analytical Capabilities & Efficiency Models</h2>
+                    <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto font-light animate-on-scroll">
+                        My approach is rooted in data-driven decision-making and the creation of robust models that provide clear, actionable insights. This allows for continuous monitoring and strategic adjustments, ensuring optimal performance and resource utilization.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Process Optimization Models -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col h-full transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <div class="icon-box">⚙️</div>
+                            <h3 class="font-bold text-2xl text-[#6B5B4C] mb-4">Process Optimization Models</h3>
+                            <p class="text-gray-700 text-base mb-6 flex-grow font-light">
+                                Developed models to identify bottlenecks and streamline workflows, translating complex processes into clear, efficient pathways. This involves mapping current states, designing optimized future states, and projecting tangible gains in productivity and resource allocation.
+                            </p>
+                            <div class="w-full mt-auto">
+                                <div class="chart-container" style="height:250px; max-height:250px;">
+                                    <canvas id="processOptimizationChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Performance Tracking & Analytics Integration -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <div class="icon-box">📊</div>
+                            <h3 class="font-bold text-2xl text-[#6B5B4C] mb-4">Performance Tracking & Analytics Integration</h3>
+                            <p class="text-gray-700 text-base mb-6 flex-grow font-light">
+                                Skilled in integrating data sources and leveraging analytics tools to create comprehensive performance dashboards. This enables continuous monitoring of key metrics, identifies trends, and supports data-informed strategic adjustments for ongoing operational excellence.
+                            </p>
+                            <div class="w-full mt-auto">
+                                <div class="chart-container" style="height:250px; max-height:250px;">
+                                    <canvas id="performanceTrackingChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- AI-Powered Policy Briefing Summary -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col transform transition-transform duration-300 hover:scale-[1.02] md:col-span-2 animate-on-scroll">
+                            <div class="icon-box">✨</div>
+                            <h3 class="font-bold text-2xl text-[#6B5B4C] mb-4">AI-Powered Policy Briefing Summary</h3>
+                            <p class="text-gray-700 text-base mb-6 font-light">
+                                Demonstrates the application of advanced AI tools for rapid information synthesis. Paste a policy document, article, or complex text below, and the system will generate a concise summary, highlighting key points and implications. This capability significantly streamlines policy analysis and briefing preparation.
+                            </p>
+                            <textarea id="policyInput" class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-[#E67E22]" rows="8" placeholder="Paste your policy text or document snippet here..."></textarea>
+                            <button id="summarizeBtn" class="bg-[#E67E22] text-white font-bold py-3 px-6 rounded-full hover:bg-orange-400 transition-colors duration-300 shadow-md transform hover:scale-105">
+                                Generate Summary ✨
+                            </button>
+                            <div id="summaryOutput" class="mt-6 p-4 bg-[#F0EDE5] border border-gray-200 rounded-md text-gray-700 min-h-[100px] flex items-center justify-center">
+                                <p class="text-center text-gray-500">Your AI-generated summary will appear here.</p>
+                            </div>
+                            <div id="loadingIndicator" class="hidden mt-4 text-center text-[#6B5B4C] font-semibold">
+                                Generating summary...
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">
+                                *Note: This feature uses the Gemini API (gemini-2.0-flash) for text generation. Results are for demonstration purposes.*
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Approach Section -->
+                <section id="approach" class="section-anchor mb-16">
+                    <h2 class="text-4xl font-bold text-center text-[#4A3A2D] mb-10 animate-on-scroll">My Strategic Approach: Drive & Collaboration</h2>
+                    <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto font-light animate-on-scroll">My professional philosophy is grounded in a commitment to impactful results, continuous improvement, and fostering collaborative environments. I believe in leveraging data to inform strategy and in empowering teams to achieve shared objectives.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Data-Driven Problem Solving -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col h-full transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <h3 class="font-bold text-2xl text-[#1C3144] mb-4">Data-Driven Problem Solving</h3>
+                            <p class="text-gray-700 text-base font-light">
+                                My military background instilled a rigorous approach to problem-solving, emphasizing thorough analysis, root cause identification, and the development of actionable solutions. I translate complex challenges into clear, data-informed strategies that drive measurable improvements. This ensures that decisions are based on evidence, leading to more effective and sustainable outcomes.
+                            </p>
+                        </div>
+                        <!-- Collaborative Leadership & Empowerment -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <h3 class="font-bold text-2xl text-[#1C3144] mb-4">Collaborative Leadership & Empowerment</h3>
+                            <p class="text-gray-700 text-base font-light">
+                                I thrive in team environments, valuing open communication and mutual respect. My focus is on empowering colleagues by providing the tools and insights they need to succeed, often working behind the scenes to build foundational systems that enable collective achievement. I believe in fostering a culture where every team member can contribute to their fullest potential.
+                            </p>
+                        </div>
+                        <!-- Commitment to Continuous Optimization -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 md:col-span-2 transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <h3 class="font-bold text-2xl text-[#1C3144] mb-4">Commitment to Continuous Optimization</h3>
+                            <p class="text-gray-700 text-base font-light">
+                                The pursuit of excellence is a continuous journey. I am dedicated to identifying ongoing opportunities for process refinement, technology integration, and strategic adaptation. My goal is to ensure that operations remain agile, efficient, and responsive to evolving needs, consistently seeking ways to enhance overall organizational impact and effectiveness.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Call to Action Section -->
+                <section class="text-center bg-[#0A1128] text-white rounded-lg shadow-md p-8 animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-2">Ready to Drive Impact?</h2>
+                    <p class="text-lg opacity-90 max-w-3xl mx-auto font-light">I am eager to apply my strategic capabilities and data-driven approach to contribute to the continued success and operational excellence of [Office Name].</p>
+                    <p class="text-lg opacity-90 max-w-3xl mx-auto mt-4 font-light">Let's connect to discuss how my skills can further enhance our mission.</p>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Your JS code goes here, unchanged from your original file -->
+    <script>
+        // ... (All your JavaScript code from original file, unchanged) ...
+    </script>
+</body>
+</html>
