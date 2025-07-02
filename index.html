@@ -95,6 +95,36 @@
         .nav-link:hover {
             color: #3B82F6; /* Accent blue on hover */
         }
+        /* Hero Video Background Styles */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Place behind content */
+        }
+        .hero-video-container video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Cover the container */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 0; /* Above video, below text content */
+        }
     </style>
 </head>
 <body>
@@ -116,12 +146,26 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20 md:py-32 text-center">
-        <div class="container">
+    <section id="hero" class="relative py-20 md:py-32 text-center text-white overflow-hidden">
+        <div class="hero-video-container">
+            <video autoplay loop muted playsinline>
+                <source src="your-background-video.mp4" type="video/mp4">
+                <!-- Add other video formats for broader browser support (e.g., .webm) -->
+                <!-- <source src="your-background-video.webm" type="video/webm"> -->
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
+
+        <div class="container relative z-10"> <!-- z-index to bring content above overlay -->
             <img src="profile.png" alt="Mark Rickey Headshot" class="profile-img mx-auto mb-8">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-5 leading-tight">Mark R.</h1>
-            <p class="text-2xl text-gray-700 mb-10 max-w-3xl mx-auto">Strategic Project Manager</p>
-            <p class="text-lg text-gray-600 mb-12 max-w-4xl mx-auto">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark R.</h1>
+            <p class="text-2xl mb-4 max-w-3xl mx-auto">Strategic Project Manager</p>
+            <!-- Original dynamic text banner removed as video is now the dynamic element -->
+            <!-- <div id="dynamic-banner" class="dynamic-banner text-xl md:text-2xl font-light text-gray-800 mb-10 max-w-4xl mx-auto">
+                <span>Military Discipline | Process Optimization | Data-Driven Solutions</span>
+            </div> -->
+            <p class="text-lg mb-12 max-w-4xl mx-auto">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
             <a href="#contact" class="btn-primary inline-block">Connect with Me</a>
         </div>
     </section>
@@ -148,7 +192,7 @@
                     <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | May 2025 – Present</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
                         <li>Federal & Constituent Liaison | Strategic Stakeholder Management:** Served as primary federal liaison for complex constituent inquiries, strategically engaging with federal agencies including the Department of Defense and Veterans Affairs to resolve critical issues and ensure equitable outcomes.</li>
-                        <li>Process Optimization & Data-Driven Engagement: Designed and implemented an innovative Google Forms and Sheets system to streamline employer and employee data capture for a major job fair, directly leading to a demonstrable uptick in engagement and expanded outreach opportunities.</li>
+                        <li>Process Optimization & Data-Driven Engagement: Designed and implemented an innovative Google Forms and Sheets system to streamline employer/employee data capture for a major job fair, directly leading to a demonstrable uptick in engagement and expanded outreach opportunities.</li>
                         <li>Policy Analysis & Community Outreach:** Authored briefing memos for congressional staff on critical policy areas, providing data-backed insights that directly informed legislative strategy and public messaging.</li>
                     </ul>
                 </div>
