@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark R. - Strategic Project Manager</title>
-    <!-- Load Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom CSS for specific elements not easily achievable with single Tailwind classes */
@@ -107,7 +105,8 @@
         .card {
             background-color: white;
             border-radius: 1rem; /* More rounded corners */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+            /* Adjusted shadow for a more "floating" effect, less bottom-heavy */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); 
             padding: 2rem;
             transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
             border: 1px solid #E5E7EB; /* Subtle border */
@@ -143,12 +142,10 @@
 </head>
 <body>
 
-    <!-- Header/Navigation -->
     <header class="bg-white shadow-md py-4 sticky top-0 z-50">
         <div class="container flex justify-between items-center">
             <a href="#" class="text-3xl font-extrabold text-gray-900 tracking-tight rounded-md flex items-center space-x-2">
                 <span>Mark R.</span>
-                <!-- SALUTE honors graphic -->
                 <img src="SALUTE.png" alt="SALUTE Honors Society" class="h-10 w-auto inline-block align-middle">
             </a>
             <nav>
@@ -163,27 +160,20 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="hero" class="relative py-28 md:py-48 text-center text-white overflow-hidden">
         <div class="hero-video-container">
-            <!-- Video source from your GitHub repository -->
             <video autoplay loop muted playsinline>
                 <source src="lets.build.something.great.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
-
-        <div class="container relative z-10"> <!-- z-index to bring content above overlay -->
-            <!-- Profile Image from your GitHub repository -->
-            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg ring-4 ring-blue-600 mx-auto mb-8">
+        <div class="hero-overlay"></div> <div class="container relative z-10"> <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg ring-4 ring-blue-600 mx-auto mb-8">
             <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark R.</h1>
             <p class="text-2xl mb-12 max-w-4xl mx-auto">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
             <a href="#contact" class="bg-blue-600 text-white px-9 py-3.5 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Let's get started!</a>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-20 bg-white">
         <div class="container">
             <h2 class="section-heading fade-in-element">About Me</h2>
@@ -194,12 +184,10 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience" class="py-20"> 
         <div class="container">
             <h2 class="section-heading fade-in-element">Experience</h2>
             <div id="experience-carousel" class="flex overflow-x-auto scroll-smooth space-x-8 pb-4 scrollbar-hide">
-                <!-- Experience Item 1: Congressional Staffer Fellow -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building text-blue-600"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9.5 9.5h5"/><path d="M9.5 14.5h5"/></svg>
@@ -212,7 +200,6 @@
                         <li>Authored briefing memos on critical policy areas, informing legislative strategy.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 2: Active Duty Army -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -226,7 +213,6 @@
                         <li>Demonstrated unwavering discipline, adaptability, and problem-solving in evolving scenarios.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 3: Digital Optimization Supervisor -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up text-blue-600"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
@@ -239,7 +225,6 @@
                         <li>Developed reporting tools/KPIs, achieving 25% sales increase within six months.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 4: Digital Marketing Manager -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target text-blue-600"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
@@ -249,11 +234,10 @@
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
                         <li>Created/promoted marketing campaigns, developing targeted keywords for SEO/social media.</li>
                         <li>Coordinated branding initiatives, enhancing visibility by 25% and membership engagement by 20%.</li>
-                        <li>Managed/optimized websites, achieving 30% content visibility improvement in search results.</li>
+                        <li>Managed/optimized company websites, achieving 30% content visibility improvement in search results.</li>
                         <li>Coordinated one of the most significant Illinois Association networking events, boosting B2B engagement by 30% and attendance by 20%.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 5: Intern, Digital Content Strategist -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb text-blue-600"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 6c0 1.3.5 2.6 1.5 3.5.8.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 22v-4"/></svg>
@@ -266,7 +250,6 @@
                         <li>Coordinated marketing campaigns for fitness initiatives, developing website/email content.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 6: Undergraduate Creative Director Intern -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette text-blue-600"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.83 0 1.64-.07 2.4-.21 1.05-1.4 1.6-3.08 1.6-4.79 0-4.4-3.6-8-8-8Z"/><path d="M18 13c.83 0 1.64.07 2.4.21 1.05 1.4 1.6 3.08 1.6 4.79 0 4.4-3.6 8-8 8H12c-5.5 0-10-4.5-10-10S6.5 2 12 2Z"/></svg>
@@ -279,7 +262,6 @@
                         <li>Mentored junior designers, contributing to impactful visual content.</li>
                     </ul>
                 </div>
-                <!-- Experience Item 7: Student Orientation Supervisor -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element min-w-[320px] md:min-w-[400px]">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-blue-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -296,22 +278,19 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-20 bg-white">
         <div class="container">
             <h2 class="section-heading fade-in-element">Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Project 1: Data Management Systems -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
                     <img src="https://placehold.co/400x220/E0F2F7/3B82F6?text=Job+Fair+System" alt="Job Fair System Project" class="rounded-xl object-cover w-full h-56 mb-5">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database text-blue-600"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><path d="M3 19A9 3 0 0 0 21 19"/></svg>
-                        <span class="sr-only">Data Management Systems</span>
+                        <span>Data Management Systems</span>
                     </h3>
                     <p class="text-gray-700 text-sm mb-4">Designed/implemented Google Forms/Sheets for Congressional office, streamlining data capture/outreach.</p>
                     <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Details &rarr;</a>
                 </div>
-                <!-- Project 2: Account Management -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase text-blue-600"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -320,7 +299,6 @@
                     <p class="text-gray-700 text-sm mb-4">Developed responsive personal portfolio site using modern web technologies, showcasing front-end development/strategic communication.</p>
                     <a href="https://github.com/yourusername/your-portfolio-repo" target="_blank" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View on GitHub &rarr;</a>
                 </div>
-                <!-- Project 3: Digital Marketing -->
                 <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl swipe-in-right-element">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone text-blue-600"><path d="m3 11 18-2L13 3 7 21z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
@@ -333,7 +311,6 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="py-20 bg-gray-50">
         <div class="container">
             <h2 class="section-heading fade-in-element">Skills</h2>
@@ -356,7 +333,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
         <div class="container">
             <h2 class="section-heading fade-in-element">Contact Me</h2>
@@ -450,24 +426,30 @@
             const experienceCarousel = document.getElementById('experience-carousel');
             if (experienceCarousel) {
                 let scrollInterval;
-                const scrollAmount = 320; // Corresponds to min-w-[320px] for a card
                 const scrollSpeed = 3000; // Time in ms between scrolls
 
                 // Clone all original items to create a seamless loop
                 const originalItems = Array.from(experienceCarousel.children);
-                originalItems.forEach(item => {
-                    experienceCarousel.appendChild(item.cloneNode(true));
-                });
-
+                // Ensure enough clones to fill the visible area plus one extra for smooth transition
+                const numClonesNeeded = Math.ceil(experienceCarousel.offsetWidth / originalItems[0].offsetWidth) + 1;
+                for (let i = 0; i < numClonesNeeded && i < originalItems.length; i++) {
+                     experienceCarousel.appendChild(originalItems[i].cloneNode(true));
+                }
+               
                 const startAutoScroll = () => {
                     scrollInterval = setInterval(() => {
+                        // Calculate the width to scroll by (first item's width + its right margin)
+                        const firstItem = experienceCarousel.children[0];
+                        const itemWidth = firstItem.offsetWidth;
+                        const itemMarginRight = parseInt(window.getComputedStyle(firstItem).marginRight);
+                        const scrollAmount = itemWidth + itemMarginRight;
+
                         experienceCarousel.scrollLeft += scrollAmount;
 
-                        // Check if we've scrolled past the original set of items
-                        // (originalItems.length * scrollAmount) is the total width of the original set
+                        // If scrolled past the original set, instantly jump back
+                        // The 'originalItems.length' represents the number of real items
                         if (experienceCarousel.scrollLeft >= originalItems.length * scrollAmount) {
-                            // Instantly jump back to the beginning of the cloned set
-                            experienceCarousel.scrollLeft = 0; // Or a more precise calculation if needed
+                            experienceCarousel.scrollLeft = 0; // Jump back to the beginning to restart the loop
                         }
                     }, scrollSpeed);
                 };
