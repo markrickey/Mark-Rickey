@@ -140,7 +140,7 @@
             <a href="#" class="text-3xl font-extrabold text-gray-900 tracking-tight rounded-md flex items-center space-x-2">
                 <span>Mark R.</span>
                 <!-- SALUTE honors graphic -->
-                <img src="SALUTE.png" alt="SALUTE Honors Society" class="h-8 w-auto inline-block align-middle">
+                <img src="SALUTE.png" alt="SALUTE Honors Society" class="h-10 w-auto inline-block align-middle">
             </a>
             <nav>
                 <ul class="flex space-x-8">
@@ -386,7 +386,7 @@
                 function interpolateColor(color1, color2, factor) {
                     const result = color1.slice(); // Clone array to avoid modifying original
                     for (let i = 0; i < 3; i++) {
-                        result[i] = color1[i] + factor * (color2[i] - color1[i]);
+                        result[i] = color1[i] + factor * (color2[i] - color1[1]);
                     }
                     return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
                 }
