@@ -48,7 +48,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Parallax Background Styling -- now only in main section, not fixed */
+        /* Parallax Background Styling -- only in main section, not fixed */
         .main-parallax-wrapper {
             position: relative;
             overflow: hidden;
@@ -67,7 +67,7 @@
             z-index: 0;
         }
         .parallax-overlay {
-            background-color: rgba(240, 237, 229, 0.85); /* Light background with opacity for content readability */
+            background-color: rgba(240, 237, 229, 0.85);
             min-height: 100vh;
             position: relative;
             z-index: 1;
@@ -144,16 +144,29 @@
         <div class="parallax-bg"></div>
         <div class="parallax-overlay p-4 md:p-8">
             <div class="max-w-7xl mx-auto">
-                <!-- ... ALL MAIN CONTENT SECTIONS as in your original code ... -->
-                <!-- Contributions, Capabilities, Approach, Final Call-to-Action sections go here, unchanged -->
-                <!-- (Paste your main content sections here, unchanged) -->
-            </div>
-        </div>
-    </main>
 
-    <!-- (Your JS unchanged) -->
-    <script>
-        // ... your JavaScript, unchanged ...
-    </script>
-</body>
-</html>
+                <!-- Contributions Section -->
+                <section id="contributions" class="section-anchor mb-16">
+                    <h2 class="text-4xl font-bold text-center text-[#4A3A2D] mb-10 animate-on-scroll">Key Contributions & Initiatives</h2>
+                    <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto font-light animate-on-scroll">
+                        During my CSP Fellowship, I focused on delivering tangible results and building systems that enhance efficiency and strategic insight. Below are direct contributions showcasing my commitment to operational excellence.
+                    </p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <!-- Job Fair Data Management System -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col h-full transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <div class="icon-box">📊</div>
+                            <h3 class="font-bold text-2xl text-[#6B5B4C] mb-4">Job Fair Data Management System</h3>
+                            <p class="text-gray-700 text-base mb-6 flex-grow font-light">
+                                Identified a critical need for streamlined data capture for the annual Job Fair. I designed and implemented a comprehensive Google Forms and Sheets system that automated employer/employee registration, improving data accuracy and accessibility. This led to measurable uptick in employer engagement and actionable insights for future events.
+                            </p>
+                            <div class="w-full mt-auto">
+                                <div class="chart-container" style="height:250px; max-height:250px;">
+                                    <canvas id="jobFairEngagementChart"></canvas>
+                                </div>
+                                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR-a3bUNngau5ee0axu-jjI_Zt-1fU4XET627aFvtFV2s10fBt6Ak-U76BQSHPzPIMk27nX-CalQPtD/pubhtml?gid=1619668413&single=true" target="_blank" class="block text-center mt-4 text-[#6B5B4C] hover:text-[#E67E22] font-semibold transition-colors duration-200">Explore Full Job Fair Analytics ➜</a>
+                            </div>
+                        </div>
+                        <!-- Quantifying Constituent Impact -->
+                        <div class="bg-white rounded-lg shadow-xl p-8 flex flex-col h-full transform transition-transform duration-300 hover:scale-[1.02] animate-on-scroll">
+                            <div class="icon*
+
