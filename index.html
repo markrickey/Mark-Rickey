@@ -58,7 +58,12 @@
     background-size: cover;
     height: 400px; /* or your preferred height */
     width: 100%;
-    position: relative;
+    position: absolute; /* or relative */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
 }
         .parallax-overlay {
             background-color: rgba(240, 237, 229, 0.85); /* Light background with opacity for content readability */
