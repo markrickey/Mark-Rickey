@@ -134,6 +134,10 @@
 </head>
 <body>
 
+    <!-- Firebase Status Message (for debugging) -->
+    <p id="firebase-status-message" class="text-sm text-center mt-4"></p>
+    <p id="userIdDisplay" class="text-xs text-center text-gray-500"></p>
+
     <!-- Header/Navigation -->
     <header class="bg-white shadow-md py-4 sticky top-0 z-50">
         <div class="container flex justify-between items-center">
@@ -351,84 +355,6 @@
     </section>
 
     <script type="module">
-        // Firebase SDK imports
-        // Removed Firebase SDK imports as per user's request to remove Firebase
-        // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        // import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        // import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Removed Firebase related variables and initialization
-        // const appId = 'YOUR_FIREBASE_PROJECT_ID';
-        // const firebaseConfig = { /* YOUR FIREBASE CONFIG OBJECT HERE */ };
-        // const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        // let app, db, auth, currentUserId = null;
-
-        // Removed Firebase initialization and authentication logic
-        /*
-        try {
-            if (!firebaseConfig || !firebaseConfig.projectId || firebaseConfig.projectId === "YOUR_FIREBASE_PROJECT_ID") {
-                const msg = "Firebase not fully configured. Insights posting will not work on live site until 'YOUR_FIREBASE_PROJECT_ID' and other config values are replaced in the HTML script.";
-                console.warn(msg);
-                const statusMessage = document.createElement('p');
-                statusMessage.id = 'firebase-status-message';
-                statusMessage.className = 'text-red-500 text-center mt-4';
-                statusMessage.textContent = msg;
-                document.body.prepend(statusMessage);
-            } else {
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                console.log("Firebase initialized successfully.");
-                const statusMessage = document.createElement('p');
-                statusMessage.id = 'firebase-status-message';
-                statusMessage.className = 'text-green-500 text-center mt-4';
-                statusMessage.textContent = 'Firebase initialized. Attempting authentication...';
-                document.body.prepend(statusMessage);
-            }
-        } catch (error) {
-            console.error("Firebase initialization failed:", error);
-            const statusMessage = document.createElement('p');
-            statusMessage.id = 'firebase-status-message';
-            statusMessage.className = 'text-red-500 text-center mt-4';
-            statusMessage.textContent = `Error: Firebase initialization failed. ${error.message}. Check console for details.`;
-            document.body.prepend(statusMessage);
-        }
-
-        if (auth) {
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    currentUserId = user.uid;
-                    console.log("Authenticated as:", currentUserId);
-                    const userIdDisplay = document.getElementById('userIdDisplay');
-                    if (userIdDisplay) {
-                        userIdDisplay.textContent = `User ID: ${currentUserId}`;
-                    }
-                    setupInsightsListener();
-                } else {
-                    try {
-                        if (initialAuthToken) {
-                            await signInWithCustomToken(auth, initialAuthToken);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
-                    } catch (error) {
-                        console.error("Authentication error:", error);
-                        const statusMessage = document.getElementById('firebase-status-message');
-                        if (statusMessage) statusMessage.textContent = `Error: Authentication failed. ${error.message}. Check console for details.`;
-                        statusMessage.classList.remove('text-green-500');
-                        statusMessage.classList.add('text-red-500');
-                    }
-                }
-            });
-        }
-        */
-
-        // Removed Firestore listener and new post submission functions
-        /*
-        function setupInsightsListener() { ... }
-        async function addNewInsight(event) { ... }
-        */
-
         // --- General Fade-in/Swipe-in Animations ---
         // Define observer globally so it can be reused for dynamically added content
         let observer; 
