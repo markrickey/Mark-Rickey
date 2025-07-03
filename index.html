@@ -6,12 +6,14 @@
     <title>Mark R. - Strategic Project Manager</title>
     <!-- Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Custom CSS for specific elements not easily achievable with single Tailwind classes */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB;
-            color: #1F2937;
+            background-color: #F9FAFB; /* Very light gray background */
+            color: #1F2937; /* Dark gray text */
         }
         .container {
             max-width: 1200px;
@@ -21,10 +23,10 @@
             padding-right: 1rem;
         }
         .section-heading {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2.5rem; /* md:text-4xl */
+            font-weight: 700; /* font-bold */
             color: #1F2937;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.5rem; /* mb-10 */
             text-align: center;
             position: relative;
             padding-bottom: 0.5rem;
@@ -35,72 +37,99 @@
             left: 50%;
             bottom: 0;
             transform: translateX(-50%);
-            width: 80px;
+            width: 80px; /* Short underline */
             height: 4px;
-            background-color: #3B82F6;
+            background-color: #3B82F6; /* Accent blue */
             border-radius: 2px;
         }
+        /* Hero Video Background Styles */
         .hero-video-container {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Place behind content */
         }
         .hero-video-container video {
-            min-width: 100%; min-height: 100%; width: auto; height: auto;
-            position: absolute; top: 50%; left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            object-fit: cover;
+            object-fit: cover; /* Cover the container */
         }
         .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.4); z-index: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 0; /* Above video, below text content */
         }
+        /* Custom background pattern for Experience section */
         #experience {
-            background-color: #F3F4F6;
+            background-color: #F3F4F6; /* Slightly darker gray to contrast with pattern */
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 20v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM12 34v-4h-2v4H6v2h4v4h2v-4h4v-2h-4zm0 20v-4h-2v4H6v2h4v4h2v-4h4v-2h-4zM36 10v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM12 10v-4h-2v4H6v2h4v4h2v-4h4v-2h-4z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 60px 60px;
+            background-size: 60px 60px; /* Size of the pattern */
         }
+
+        /* Fade-in animation styles (for general elements) */
         .fade-in-element {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+
         .fade-in-element.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Swipe-in-from-right animation styles (for project cards) */
         .swipe-in-right-element {
             opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.6s, transform 0.6s;
+            transform: translateX(50px); /* Start off to the right */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+
         .swipe-in-right-element.is-visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0); /* Slide to original position */
         }
+
+        /* Enhanced card hover effect */
         .card {
             background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            transition: transform 0.4s, box-shadow 0.4s;
-            border: 1px solid #E5E7EB;
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+            padding: 2rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
+            border: 1px solid #E5E7EB; /* Subtle border */
         }
         .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px) scale(1.01); /* Slightly more lift and tiny scale */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
         }
+
+        /* Navigation link button-like hover effect */
         .nav-link {
             font-weight: 500;
-            color: #4B5563;
-            transition: color 0.3s, background-color 0.3s;
-            border-radius: 0.5rem;
-            display: inline-block;
+            color: #4B5563; /* Medium gray for nav links */
+            transition: color 0.3s ease, background-color 0.3s ease; /* Add background-color to transition */
+            padding: 0.5rem 0.75rem; /* Add padding for button shape */
+            border-radius: 0.5rem; /* Rounded corners for button */
+            display: inline-block; /* Essential for padding to work correctly */
         }
         .nav-link:hover {
-            color: #3B82F6;
-            background-color: rgba(59,130,246,0.1);
+            color: #3B82F6; /* Accent blue on hover */
+            background-color: rgba(59, 130, 246, 0.1); /* Light blue background on hover */
         }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
@@ -108,15 +137,13 @@
     <!-- Header/Navigation -->
     <header class="bg-white shadow-md py-4 sticky top-0 z-50">
         <div class="container flex justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-gray-900 tracking-tight rounded-md flex items-center space-x-2">
-                <span>Mark R.</span>
-                <img src="SALUTE.png" alt="SALUTE Honors Society" class="h-10 w-auto inline-block align-middle">
-            </a>
+            <a href="#" class="text-3xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
             <nav>
                 <ul class="flex space-x-8">
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#insights" class="nav-link">Insights</a></li> <!-- New nav link -->
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -127,16 +154,19 @@
     <!-- Hero Section -->
     <section id="hero" class="relative py-28 md:py-48 text-center text-white overflow-hidden">
         <div class="hero-video-container">
+            <!-- Video source from your GitHub repository -->
             <video autoplay loop muted playsinline>
-                <source src="lets.build.something.great.mp4.mp4" type="video/mp4">
+                <source src="lets.build.something.great.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="hero-overlay"></div>
-        <div class="container relative z-10">
+        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
+
+        <div class="container relative z-10"> <!-- z-index to bring content above overlay -->
+            <!-- Profile Image from your GitHub repository -->
             <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg ring-4 ring-blue-600 mx-auto mb-8">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark Rickey</h1>
-            <p class="text-2xl mb-12 max-w-4xl mx-auto">Strategic Project Manager</p>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark R.</h1>
+            <p class="text-2xl mb-12 max-w-4xl mx-auto">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
             <a href="#contact" class="bg-blue-600 text-white px-9 py-3.5 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Let's get started!</a>
         </div>
     </section>
@@ -153,87 +183,69 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20">
+    <section id="experience" class="py-20"> 
         <div class="container">
             <h2 class="section-heading fade-in-element">Experience</h2>
-        </div>
-        <div id="experience-carousel" class="flex overflow-x-auto scroll-smooth space-x-8 pb-4 scrollbar-hide w-full px-4 md:px-8 lg:px-16">
-            <!-- Congressional Staffer -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-building text-blue-600"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9.5 9.5h5"/><path d="M9.5 14.5h5"/></svg>
-                    <span>Congressional Staffer</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | Office of Marlin Stutzman IN-03</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>Served as primary account manager for the Department of Defense, Veterans Affairs, and the Military Academies. Refined and executed advanced data management systems. Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
-                </ul>
-            </div>
-            <!-- Army -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-shield text-blue-600"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span>U.S. Army, Project Manager/Noncommissioned Officer</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>Directed complex logistical operations, ensuring maximum efficiency in the South Pacific Theater. Led multinational teams during high-pressure operations to achieve mission objectives. Developed comprehensive training programs, presentations, and seminars, enhancing team engagement and effectiveness.</li>
-                </ul>
-            </div>
-            <!-- Digital Optimization Supervisor -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-trending-up text-blue-600"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-                    <span>Digital Optimization Supervisor</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">McDonald's | Chicago, Illinois</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency. Partnered with stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%. Developed reporting tools/KPIs, achieving a 25% sales increase within six months.</li>
-                </ul>
-            </div>
-            <!-- Digital Marketing Manager -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-target text-blue-600"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                    <span>Digital Marketing Manager</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">Association Forum | Chicago, Illinois</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>Increased visibility by 25% and member engagement by 20% through targeted marketing and branding efforts. Enhanced website SEO visibility by 30% and fostered B2B engagement through an annual Association convention.</li>
-                </ul>
-            </div>
-            <!-- Digital Content Strategist Intern -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-lightbulb text-blue-600"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 6c0 1.3.5 2.6 1.5 3.5.8.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 22v-4"/></svg>
-                    <span>Intern, Digital Content Strategist</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Chicago, Illinois</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>I created and executed a content strategy for digital channels, producing engaging content for gym memberships and staff services. I managed social media accounts to align with company goals and coordinated marketing campaigns for fitness initiatives.</li>
-                </ul>
-            </div>
-            <!-- Creative Director Intern -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-palette text-blue-600"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.83 0 1.64-.07 2.4-.21 1.05-1.4 1.6-3.08 1.6-4.79 0-4.4-3.6-8-8-8Z"/><path d="M18 13c.83 0 1.64.07 2.4.21 1.05 1.4 1.6 3.08 1.6 4.79 0 4.4-3.6 8-8 8H12c-5.5 0-10-4.5-10-10S6.5 2 12 2Z"/></svg>
-                    <span>Undergraduate Creative Director Intern</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success & Transitions Dept.</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>Designed visual and digital content for student orientation initiatives, solidifying branding identity. Managed cross-functional teams, conducted market research to inform design decisions. Mentored junior designers, interns, and students contributing to impactful visual content.</li>
-                </ul>
-            </div>
-            <!-- Orientation Supervisor -->
-            <div class="card fade-in-element min-w-[320px] md:min-w-[400px] p-8">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-users text-blue-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <span>Student Orientation Supervisor</span>
-                </h3>
-                <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success & Transitions Dept.</p>
-                <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                    <li>Supervised the implementation of tailored software solutions to enhance course enrollment processes and improve new student management systems, confirming that all students and faculty were engaged and supported throughout the project lifecycle.</li>
-                </ul>
+            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <!-- Experience Item 1: Congressional Staffer Fellow -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Congressional Staffer</h3>
+                    <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | May 2025 – Present</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>Served as primary account manager for the Department of Defense, Veterans Affairs, and the Military Academies. Refined and executed advanced data management systems. Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 2: Active Duty Army -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Active Duty, Noncommissioned Officer</h3>
+                    <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>Directed intricate logistical operations involving diverse personnel and vital equipment, guaranteeing maximum efficiency in dynamic and fast-paced environments.</li>
+                        <li>Successfully led and mentored multidisciplinary teams in high-pressure operational environments, cultivating unity and achieving mission objectives.</li>
+                        <li>Developed and implemented rigorous training programs, significantly enhancing team readiness and operational effectiveness.</li>
+                        <li>Demonstrated unwavering discipline, adaptability, and problem-solving capabilities in challenging and rapidly evolving scenarios.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 3: Digital Optimization Supervisor -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Digital Optimization Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm">McDonald's | Chicago, Illinois</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency. Partnered with stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%. Developed reporting tools/KPIs, achieving a 25% sales increase within six months.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 4: Digital Marketing Manager -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Digital Marketing Manager</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Association Forum | Chicago, Illinois</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>Increased visibility by 25% and member engagement by 20% through targeted marketing and branding efforts. Enhanced website SEO visibility by 30% and fostered B2B engagement through an annual Association convention.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 5: Intern, Digital Content Strategist -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Intern, Digital Content Strategist</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Chicago, Illinois</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>I created and executed a content strategy for digital channels, producing engaging content for gym memberships and staff services. I managed social media accounts to align with company goals and coordinated marketing campaigns for fitness initiatives.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 6: Undergraduate Creative Director Intern -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Undergraduate Creative Director Intern</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success & Transitions Dept.</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>Designed visual and digital content for student orientation initiatives, solidifying branding identity. Managed cross-functional teams, conducted market research to inform design decisions. Mentored junior designers, interns, and students contributing to impactful visual content.</li>
+                    </ul>
+                </div>
+                <!-- Experience Item 7: Student Orientation Supervisor -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Student Orientation Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success & Transitions Dept.</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                        <li>Supervised the implementation of tailored software solutions to enhance course enrollment processes and improve new student management systems, confirming that all students and faculty were engaged and supported throughout the project lifecycle.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -243,25 +255,28 @@
         <div class="container">
             <h2 class="section-heading fade-in-element">Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Project 1: Data Management Systems -->
                 <div class="card swipe-in-right-element p-8">
                    <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-database text-blue-600"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><path d="M3 19A9 3 0 0 0 21 19"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database text-blue-600"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><path d="M3 19A9 3 0 0 0 21 19"/></svg>
                         <span class="sr-only">Data Management Systems</span>
                     </h3>
                     <p class="text-gray-700 text-sm mb-4">Designed and implemented advanced data management systems that greatly improved data collection efficiency, targeted outreach marketing, and research reporting.</p>
                     <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
                 </div>
+                <!-- Project 2: Account Management -->
                 <div class="card swipe-in-right-element p-8">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-briefcase text-blue-600"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase text-blue-600"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                         <span class="sr-only">Account Management</span>
                     </h3>
                     <p class="text-gray-700 text-sm mb-4">Designed strategic marketing campaigns, anticipated consumer trends, and analysed data to influence project budgets.</p>
                     <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
                 </div>
+                <!-- Project 3: Digital Marketing -->
                 <div class="card swipe-in-right-element p-8">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-megaphone text-blue-600"><path d="m3 11 18-2L13 3 7 21z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone text-blue-600"><path d="m3 11 18-2L13 3 7 21z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
                         <span class="sr-only">Project Management</span>
                     </h3>
                     <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs. Oversaw ticket workflows, customized data fields, and leveraged analytics to optimize service delivery and reporting.</p>
@@ -301,8 +316,8 @@
             <div class="max-w-3xl mx-auto text-center text-lg text-gray-700 fade-in-element">
                 <p class="mb-8">Let's make something great!</p>
                 <div class="flex justify-center space-x-16 mb-10">
-                    <a href="mailto:markrickey01@gmail.com" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    <a href="mailto:markrickey01@gmail.com" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
                 </div>
                 <p class="text-sm text-gray-500">&copy; 2025 Mark R. All rights reserved.</p>
             </div>
@@ -313,105 +328,80 @@
         document.addEventListener('DOMContentLoaded', () => {
             const fadeInElements = document.querySelectorAll('.fade-in-element');
             const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+
+            const observerOptions = {
+                root: null, // viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the element must be visible to trigger
+            };
+
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
+                        observer.unobserve(entry.target); // Stop observing once visible
                     }
                 });
             }, observerOptions);
-            fadeInElements.forEach(el => observer.observe(el));
-            swipeInRightElements.forEach(el => observer.observe(el));
+
+            fadeInElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Adjust swipe-in-right elements to have staggered delays
+            swipeInRightElements.forEach((element, index) => {
+                element.style.transitionDelay = `${index * 0.1}s`; // Stagger by 100ms
+                observer.observe(element);
+            });
+
 
             // Dynamic background color for Experience section
             const experienceSection = document.getElementById('experience');
             if (experienceSection) {
-                const startH = 220, startS = 15, startL = 95;
-                const endH = 210, endS = 30, endL = 85;
+                // Define start and end HSL colors (Hue, Saturation, Lightness)
+                // These values are chosen to complement the existing blue accent and light grays
+                const startH = 220; // Light blue-gray hue
+                const startS = 15;  // Saturation
+                const startL = 95;  // Lightness
+
+                const endH = 210; // Slightly cooler blue hue
+                const endS = 30;  // Slightly more saturated
+                const endL = 85;  // Slightly darker
+
+                // Function to interpolate between two colors
                 function interpolateColor(color1, color2, factor) {
-                    return `hsl(${color1[0]+factor*(color2[0]-color1[0])}, ${color1[1]+factor*(color2[1]-color1[1])}%, ${color1[2]+factor*(color2[2]-color1[2])}%)`;
+                    const result = color1.slice(); // Clone array to avoid modifying original
+                    for (let i = 0; i < 3; i++) {
+                        result[i] = color1[i] + factor * (color2[i] - color1[i]);
+                    }
+                    return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
                 }
+
                 const handleScroll = () => {
                     const rect = experienceSection.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight, elementHeight = rect.height;
-                    let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
-                    scrollFactor = Math.max(0, Math.min(1, scrollFactor));
-                    experienceSection.style.backgroundColor = interpolateColor(
-                        [startH, startS, startL], [endH, endS, endL], scrollFactor
-                    );
-                };
-                handleScroll();
-                window.addEventListener('scroll', handleScroll);
-                window.addEventListener('resize', handleScroll);
-            }
+                    const viewportHeight = window.innerHeight;
+                    const elementHeight = rect.height;
 
-            // Carousel logic
-            const experienceCarousel = document.getElementById('experience-carousel');
-            if (experienceCarousel) {
-                let scrollAnimationFrame;
-                let lastScrollTime = null;
-                const scrollSpeed = 0.7;
-                function getItemFullWidth(item) {
-                    const style = window.getComputedStyle(item);
-                    return item.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-                }
-                function setupCarouselClones() {
-                    while (experienceCarousel.children.length > 7) {
-                        experienceCarousel.removeChild(experienceCarousel.lastChild);
-                    }
-                    const originalItems = Array.from(experienceCarousel.children);
-                    originalItems.forEach(item => {
-                        experienceCarousel.appendChild(item.cloneNode(true));
-                    });
-                }
-                function getScrollResetPoint() {
-                    let total = 0;
-                    for (let i = 0; i < 7; i++) {
-                        total += getItemFullWidth(experienceCarousel.children[i]);
-                    }
-                    return total;
-                }
-                function scrollLoop(currentTime) {
-                    if (!lastScrollTime) lastScrollTime = currentTime;
-                    const deltaTime = currentTime - lastScrollTime;
-                    lastScrollTime = currentTime;
-                    experienceCarousel.scrollLeft += scrollSpeed * deltaTime;
-                    if (experienceCarousel.scrollLeft >= getScrollResetPoint()) {
-                        experienceCarousel.scrollLeft = 0;
-                    }
-                    scrollAnimationFrame = requestAnimationFrame(scrollLoop);
-                }
-                function startAutoScroll() {
-                    if (!scrollAnimationFrame) {
-                        lastScrollTime = null;
-                        scrollAnimationFrame = requestAnimationFrame(scrollLoop);
-                    }
-                }
-                function stopAutoScroll() {
-                    cancelAnimationFrame(scrollAnimationFrame);
-                    scrollAnimationFrame = null;
-                }
-                function resetCarousel() {
-                    setupCarouselClones();
-                    experienceCarousel.scrollLeft = 0;
-                }
-                window.addEventListener('resize', resetCarousel);
-                resetCarousel();
-                const carouselObserver = new IntersectionObserver(
-                    entries => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) startAutoScroll();
-                            else stopAutoScroll();
-                        });
-                    }, { threshold: 0.5 }
-                );
-                carouselObserver.observe(experienceCarousel);
-                experienceCarousel.addEventListener('mouseenter', stopAutoScroll);
-                experienceCarousel.addEventListener('mouseleave', startAutoScroll);
+                    // Calculate scroll factor: 0 when section bottom is at viewport bottom, 1 when section top is at viewport top
+                    // This makes the color transition as the user scrolls *through* the section
+                    let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
+                    scrollFactor = Math.max(0, Math.min(1, scrollFactor)); // Clamp between 0 and 1
+
+                    const interpolatedColor = interpolateColor(
+                        [startH, startS, startL],
+                        [endH, endS, endL],
+                        scrollFactor
+                    );
+                    experienceSection.style.backgroundColor = interpolatedColor;
+                };
+
+                // Initial call and attach event listener
+                handleScroll(); // Set initial color on load
+                window.addEventListener('scroll', handleScroll);
+                window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
         });
     </script>
+
 </body>
 </html>
