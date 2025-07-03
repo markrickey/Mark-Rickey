@@ -156,7 +156,7 @@
         <div class="hero-video-container">
             <!-- Video source from your GitHub repository -->
             <video autoplay loop muted playsinline>
-                <source src="lets.build.something.great.mp4" type="video/mp4">
+                <source src="lets.build.something.great.mp4.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -286,6 +286,16 @@
         </div>
     </section>
 
+    <!-- Insights Section -->
+    <section id="insights" class="py-20 bg-gray-50">
+        <div class="container">
+            <h2 class="section-heading fade-in-element">Insights</h2>
+            <div id="insights-posts" class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Posts will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
     <section id="skills" class="py-20 bg-gray-50">
         <div class="container">
@@ -325,6 +335,7 @@
     </section>
 
     <script>
+        // JavaScript for scroll-triggered fade-in animation
         document.addEventListener('DOMContentLoaded', () => {
             const fadeInElements = document.querySelectorAll('.fade-in-element');
             const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
@@ -400,6 +411,50 @@
                 window.addEventListener('scroll', handleScroll);
                 window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
+
+            // --- Insights Section JavaScript ---
+            const insightsPostsContainer = document.getElementById('insights-posts');
+
+            // Define your posts here. You can add new posts by adding new objects to this array.
+            const posts = [
+                {
+                    date: "July 3, 2025",
+                    title: "Leveraging GitHub for Personal Projects",
+                    content: "Spent the day building a portfolio website on GitHub. Found it incredibly fun and challenging. It's amazing how much you can learn by just diving in and building something from scratch. This hands-on experience really solidifies theoretical knowledge."
+                },
+                {
+                    date: "July 2, 2025",
+                    title: "Navigating Office Dynamics: A Lesson in Boundaries",
+                    content: "Encountered some familiar office dynamics today. Realized the importance of strategic non-compliance and conserving energy for what truly matters. It's liberating to distinguish between actual work and 'performative busyness'."
+                },
+                {
+                    date: "June 28, 2025",
+                    title: "The Power of Solitude and Self-Care",
+                    content: "Found immense peace in a quiet Saturday, just listening to music and enjoying simple comforts. Realizing how vital these moments of stillness are for recharging, especially after intense periods. It's a new kind of strength."
+                }
+            ];
+
+            // Function to render posts
+            function renderPosts() {
+                insightsPostsContainer.innerHTML = ''; // Clear existing posts
+                posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
+                    postElement.innerHTML = `
+                        <p class="text-gray-600 text-sm mb-2">${post.date}</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">${post.title}</h3>
+                        <p class="text-gray-700 text-base leading-relaxed">${post.content}</p>
+                    `;
+                    insightsPostsContainer.appendChild(postElement);
+                });
+            }
+
+            // Initial render of posts
+            renderPosts();
+            // Re-observe fade-in elements after posts are rendered
+            insightsPostsContainer.querySelectorAll('.fade-in-element').forEach(element => {
+                observer.observe(element);
+            });
         });
     </script>
 
