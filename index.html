@@ -200,10 +200,7 @@
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3">Active Duty, Noncommissioned Officer</h3>
                     <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Directed intricate logistical operations involving diverse personnel and vital equipment, guaranteeing maximum efficiency in dynamic and fast-paced environments.</li>
-                        <li>Successfully led and mentored multidisciplinary teams in high-pressure operational environments, cultivating unity and achieving mission objectives.</li>
-                        <li>Developed and implemented rigorous training programs, significantly enhancing team readiness and operational effectiveness.</li>
-                        <li>Demonstrated unwavering discipline, adaptability, and problem-solving capabilities in challenging and rapidly evolving scenarios.</li>
+                        <li>Managed logistical operations with multinational teams and essential equipment in the Pacific Theater, ensuring efficiency. Created training programs, seminars, presentations, and workshops that enhanced organizational readiness and operational effectiveness for U.S. allies in the region.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 3: Digital Optimization Supervisor -->
@@ -334,8 +331,134 @@
         </div>
     </section>
 
-    <script>
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentUserId = null; // To store the current user's ID
+
+        // Authenticate user and set up Firestore listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                console.log("Authenticated as:", currentUserId);
+                // Optionally display user ID on the page
+                const userIdDisplay = document.getElementById('userIdDisplay');
+                if (userIdDisplay) {
+                    userIdDisplay.textContent = `User ID: ${currentUserId}`;
+                }
+                setupInsightsListener(); // Start listening to Firestore once authenticated
+            } else {
+                // Sign in anonymously if no custom token provided (for Canvas environment)
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Authentication error:", error);
+                }
+            }
+        });
+
+        // Function to set up real-time listener for insights posts
+        function setupInsightsListener() {
+            const insightsPostsContainer = document.getElementById('insights-posts');
+            const insightsCollectionRef = collection(db, `artifacts/${appId}/public/data/insights_posts`);
+            
+            // Query for the 3 most recent posts, ordered by timestamp
+            const q = query(insightsCollectionRef, orderBy('timestamp', 'desc'), limit(3));
+
+            onSnapshot(q, (snapshot) => {
+                insightsPostsContainer.innerHTML = ''; // Clear existing posts
+                snapshot.forEach(doc => {
+                    const post = doc.data();
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
+                    // Format date
+                    const date = post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A';
+                    
+                    postElement.innerHTML = `
+                        <p class="text-gray-600 text-sm mb-2">${date}</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">${post.title}</h3>
+                        <p class="text-gray-700 text-base leading-relaxed">${post.content}</p>
+                    `;
+                    insightsPostsContainer.appendChild(postElement);
+                    // Re-observe fade-in elements after posts are rendered
+                    observer.observe(postElement); // Observer defined globally
+                });
+            }, (error) => {
+                console.error("Error fetching insights posts:", error);
+                insightsPostsContainer.innerHTML = '<p class="text-red-500">Error loading insights. Please try again later.</p>';
+            });
+        }
+
+        // Function to handle new post submission
+        async function addNewInsight(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const postTitleInput = document.getElementById('new-insight-title');
+            const postContentInput = document.getElementById('new-insight-content');
+            const postMessage = document.getElementById('post-message');
+
+            const title = postTitleInput.value.trim();
+            const content = postContentInput.value.trim();
+
+            if (!title || !content) {
+                postMessage.textContent = 'Please enter both a title and content.';
+                postMessage.classList.remove('text-green-500');
+                postMessage.classList.add('text-red-500');
+                return;
+            }
+
+            if (!currentUserId) {
+                postMessage.textContent = 'Authentication not ready. Please wait a moment and try again.';
+                postMessage.classList.remove('text-green-500');
+                postMessage.classList.add('text-red-500');
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, `artifacts/${appId}/public/data/insights_posts`), {
+                    title: title,
+                    content: content,
+                    timestamp: serverTimestamp(), // Firestore server timestamp
+                    userId: currentUserId // Store the user ID of the poster
+                });
+                postMessage.textContent = 'Insight posted successfully!';
+                postMessage.classList.remove('text-red-500');
+                postMessage.classList.add('text-green-500');
+                postTitleInput.value = ''; // Clear form
+                postContentInput.value = ''; // Clear form
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                postMessage.textContent = 'Error posting insight. Please try again.';
+                postMessage.classList.remove('text-green-500');
+                postMessage.classList.add('text-red-500');
+            }
+        }
+
+        // Attach event listener to the form
         document.addEventListener('DOMContentLoaded', () => {
+            const newInsightForm = document.getElementById('new-insight-form');
+            if (newInsightForm) {
+                newInsightForm.addEventListener('submit', addNewInsight);
+            }
+
+            // --- General Fade-in/Swipe-in Animations ---
             const fadeInElements = document.querySelectorAll('.fade-in-element');
             const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
 
@@ -345,6 +468,7 @@
                 threshold: 0.1 // 10% of the element must be visible to trigger
             };
 
+            // Global observer instance (re-used for dynamic content)
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -410,51 +534,6 @@
                 window.addEventListener('scroll', handleScroll);
                 window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
-
-            // --- Insights Section JavaScript ---
-            const insightsPostsContainer = document.getElementById('insights-posts');
-
-            // Define your posts here. You can add new posts by adding new objects to this array.
-            const posts = [
-                {
-                    date: "July 3, 2025",
-                    title: "Leveraging GitHub for Personal Projects",
-                    content: "Spent the day building a portfolio website on GitHub. Found it incredibly fun and challenging. It's amazing how much you can learn by just diving in and building something from scratch. This hands-on experience really solidifies theoretical knowledge."
-                },
-                {
-                    date: "July 2, 2025",
-                    title: "Navigating Office Dynamics: A Lesson in Boundaries",
-                    content: "Encountered some familiar office dynamics today. Realized the importance of strategic non-compliance and conserving energy for what truly matters. It's liberating to distinguish between actual work and 'performative busyness'."
-                },
-                {
-                    date: "June 28, 2025",
-                    title: "The Power of Solitude and Self-Care",
-                    content: "Found immense peace in a quiet Saturday, just listening to music and enjoying simple comforts. Realizing how vital these moments of stillness are for recharging, especially after intense periods. It's a new kind of strength."
-                }
-            ];
-
-            // Function to render posts
-            function renderPosts() {
-                insightsPostsContainer.innerHTML = ''; // Clear existing posts
-                // Limit to 3 most recent posts
-                posts.slice(0, 3).forEach(post => { // Changed to slice(0, 3)
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
-                    postElement.innerHTML = `
-                        <p class="text-gray-600 text-sm mb-2">${post.date}</p>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">${post.title}</h3>
-                        <p class="text-gray-700 text-base leading-relaxed">${post.content}</p>
-                    `;
-                    insightsPostsContainer.appendChild(postElement);
-                });
-            }
-
-            // Initial render of posts
-            renderPosts();
-            // Re-observe fade-in elements after posts are rendered
-            insightsPostsContainer.querySelectorAll('.fade-in-element').forEach(element => {
-                observer.observe(element);
-            });
         });
     </script>
 
