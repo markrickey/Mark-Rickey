@@ -437,82 +437,87 @@
                 window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
 
-            // Auto-scrolling for Experience Carousel
-            const experienceCarousel = document.getElementById('experience-carousel');
-            if (experienceCarousel) {
-                let scrollAnimationFrame;
-                const scrollSpeed = 0.7; // Pixels per frame for smooth scroll
-                
-                // Get all original items
-                const originalItems = Array.from(experienceCarousel.children);
-                // Calculate the total width of the original items including their margins
-                let totalOriginalWidth = 0;
-                originalItems.forEach(item => {
-                    totalOriginalWidth += item.offsetWidth + parseInt(window.getComputedStyle(item).marginRight);
-                });
+            // --- Carousel Continuous Loop Logic ---
+const experienceCarousel = document.getElementById('experience-carousel');
+if (experienceCarousel) {
+    let scrollAnimationFrame;
+    let lastScrollTime = null;
+    const scrollSpeed = 0.7; // Pixels per ms
 
-                // Clone items to create a seamless loop buffer
-                // Clone enough to ensure that there's always a full set of original items plus a few extra
-                // visible at the start of the cloned section before the jump back.
-                const numVisibleItems = Math.ceil(experienceCarousel.offsetWidth / (originalItems[0].offsetWidth + parseInt(window.getComputedStyle(originalItems[0]).marginRight)));
-                for (let i = 0; i < originalItems.length; i++) {
-                    experienceCarousel.appendChild(originalItems[i].cloneNode(true));
-                }
-                // Add extra clones to ensure continuous scrolling without a gap
-                for (let i = 0; i < numVisibleItems + 1 && i < originalItems.length; i++) {
-                    experienceCarousel.appendChild(originalItems[i].cloneNode(true));
-                }
-                
-                let currentScrollPosition = 0; // Track the current logical scroll position
+    // Helper to get carousel item width incl. margin
+    function getItemFullWidth(item) {
+        const style = window.getComputedStyle(item);
+        return item.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    }
 
-                const scrollLoop = (currentTime) => {
-                    if (!lastScrollTime) lastScrollTime = currentTime;
-                    const deltaTime = currentTime - lastScrollTime;
+    // Setup carousel clones
+    function setupCarouselClones() {
+        // Remove previous clones if any
+        while (experienceCarousel.children.length > 7) { // 7 is the number of unique items
+            experienceCarousel.removeChild(experienceCarousel.lastChild);
+        }
+        // Clone original items to allow seamless scroll
+        const originalItems = Array.from(experienceCarousel.children);
+        originalItems.forEach(item => {
+            experienceCarousel.appendChild(item.cloneNode(true));
+        });
+    }
 
-                    const scrollAmount = (scrollSpeed * deltaTime); // Calculate scroll based on time
+    // Calculate the scroll reset point
+    function getScrollResetPoint() {
+        let total = 0;
+        for (let i = 0; i < 7; i++) { // 7 = original items
+            total += getItemFullWidth(experienceCarousel.children[i]);
+        }
+        return total;
+    }
 
-                    currentScrollPosition += scrollAmount; // Update logical position
-                    experienceCarousel.scrollLeft = currentScrollPosition; // Apply scroll
+    // Main scroll loop
+    function scrollLoop(currentTime) {
+        if (!lastScrollTime) lastScrollTime = currentTime;
+        const deltaTime = currentTime - lastScrollTime;
+        lastScrollTime = currentTime;
+        experienceCarousel.scrollLeft += scrollSpeed * deltaTime;
+        if (experienceCarousel.scrollLeft >= getScrollResetPoint()) {
+            experienceCarousel.scrollLeft = 0;
+        }
+        scrollAnimationFrame = requestAnimationFrame(scrollLoop);
+    }
 
-                    // If scrolled past the original set, instantly jump back
-                    if (currentScrollPosition >= totalOriginalWidth) {
-                        currentScrollPosition -= totalOriginalWidth; // Reset logical position
-                        experienceCarousel.scrollLeft = currentScrollPosition; // Apply instant jump
-                    }
-                    
-                    lastScrollTime = currentTime;
-                    scrollAnimationFrame = requestAnimationFrame(scrollLoop);
-                };
+    function startAutoScroll() {
+        if (!scrollAnimationFrame) {
+            lastScrollTime = null;
+            scrollAnimationFrame = requestAnimationFrame(scrollLoop);
+        }
+    }
+    function stopAutoScroll() {
+        cancelAnimationFrame(scrollAnimationFrame);
+        scrollAnimationFrame = null;
+    }
 
-                const startAutoScroll = () => {
-                    if (!scrollAnimationFrame) {
-                        lastScrollTime = 0; // Reset time for smooth start
-                        scrollAnimationFrame = requestAnimationFrame(scrollLoop);
-                    }
-                };
+    // Set up and watch for resize
+    function resetCarousel() {
+        setupCarouselClones();
+        experienceCarousel.scrollLeft = 0;
+    }
+    window.addEventListener('resize', resetCarousel);
+    resetCarousel();
 
-                const stopAutoScroll = () => {
-                    cancelAnimationFrame(scrollAnimationFrame);
-                    scrollAnimationFrame = null;
-                };
+    // Start/stop on visibility
+    const carouselObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) startAutoScroll();
+                else stopAutoScroll();
+            });
+        }, { threshold: 0.5 }
+    );
+    carouselObserver.observe(experienceCarousel);
 
-                // Start auto-scroll when the element is visible
-                const carouselObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            startAutoScroll();
-                        } else {
-                            stopAutoScroll();
-                        }
-                    });
-                }, { threshold: 0.5 }); // Start/stop when 50% visible
-
-                carouselObserver.observe(experienceCarousel);
-
-                // Optional: Pause on hover
-                experienceCarousel.addEventListener('mouseenter', stopAutoScroll);
-                experienceCarousel.addEventListener('mouseleave', startAutoScroll);
-            }
+    // Pause on hover
+    experienceCarousel.addEventListener('mouseenter', stopAutoScroll);
+    experienceCarousel.addEventListener('mouseleave', startAutoScroll);
+}
         });
     </script>
 
