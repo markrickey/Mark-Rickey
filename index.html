@@ -287,6 +287,25 @@
     <section id="insights" class="py-20 bg-gray-50">
         <div class="container">
             <h2 class="section-heading fade-in-element">Insights</h2>
+            <!-- Form to add new insights -->
+            <form id="new-insight-form" class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg mb-10 fade-in-element">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-5 text-center">Post a New Insight</h3>
+                <div class="mb-4">
+                    <label for="new-insight-title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
+                    <input type="text" id="new-insight-title" name="title" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" placeholder="Your insight title" required>
+                </div>
+                <div class="mb-6">
+                    <label for="new-insight-content" class="block text-gray-700 text-sm font-bold mb-2">Content</label>
+                    <textarea id="new-insight-content" name="content" rows="5" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" placeholder="Share your thoughts here..." required></textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300">
+                        Post Insight
+                    </button>
+                    <p id="post-message" class="text-sm ml-4"></p>
+                </div>
+            </form>
+
             <div id="insights-posts" class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <!-- Posts will be dynamically inserted here by JavaScript -->
             </div>
@@ -338,8 +357,19 @@
         import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Global variables provided by Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id'; // Replace 'default-app-id' with your Firebase Project ID
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { /* YOUR FIREBASE CONFIG HERE */ };
+        // Example firebaseConfig structure (replace with your actual values from Firebase Console):
+        /*
+        const firebaseConfig = {
+          apiKey: "AIzaSyC...",
+          authDomain: "your-project-id.firebaseapp.com",
+          projectId: "your-project-id",
+          storageBucket: "your-project-id.appspot.com",
+          messagingSenderId: "...",
+          appId: "1:..."
+        };
+        */
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         // Initialize Firebase
@@ -377,6 +407,7 @@
         // Function to set up real-time listener for insights posts
         function setupInsightsListener() {
             const insightsPostsContainer = document.getElementById('insights-posts');
+            // Using a public collection path for insights
             const insightsCollectionRef = collection(db, `artifacts/${appId}/public/data/insights_posts`);
             
             // Query for the 3 most recent posts, ordered by timestamp
