@@ -143,7 +143,7 @@
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#insights" class="nav-link">Insights</a></li> <!-- New nav link -->
+                    <!-- Removed Insights nav link -->
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -156,7 +156,7 @@
         <div class="hero-video-container">
             <!-- Video source from your GitHub repository -->
             <video autoplay loop muted playsinline>
-                <source src="lets.build.something.great.mp4.mp4" type="video/mp4">
+                <source src="lets.build.something.great.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -357,56 +357,97 @@
         import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Global variables provided by Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id'; // Replace 'default-app-id' with your Firebase Project ID
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { /* YOUR FIREBASE CONFIG HERE */ };
-        // Example firebaseConfig structure (replace with your actual values from Firebase Console):
-        /*
+        // Replace 'YOUR_FIREBASE_PROJECT_ID' with your actual Firebase Project ID from your Firebase Console
         const firebaseConfig = {
-          apiKey: "AIzaSyC...",
-          authDomain: "your-project-id.firebaseapp.com",
-          projectId: "your-project-id",
-          storageBucket: "your-project-id.appspot.com",
-          messagingSenderId: "...",
-          appId: "1:..."
+            apiKey: "YOUR_API_KEY", // Replace with your actual apiKey
+            authDomain: "YOUR_AUTH_DOMAIN", // Replace with your actual authDomain
+            projectId: "YOUR_FIREBASE_PROJECT_ID", // Replace with your actual projectId
+            storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your actual storageBucket
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Replace with your actual messagingSenderId
+            appId: "YOUR_APP_ID" // Replace with your actual appId
         };
-        */
+        const appId = firebaseConfig.projectId; // Ensure appId uses the projectId from firebaseConfig
+
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
+        let app;
+        let db;
+        let auth;
         let currentUserId = null; // To store the current user's ID
 
-        // Authenticate user and set up Firestore listener
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUserId = user.uid;
-                console.log("Authenticated as:", currentUserId);
-                // Optionally display user ID on the page
-                const userIdDisplay = document.getElementById('userIdDisplay');
-                if (userIdDisplay) {
-                    userIdDisplay.textContent = `User ID: ${currentUserId}`;
-                }
-                setupInsightsListener(); // Start listening to Firestore once authenticated
+        try {
+            // Check if firebaseConfig has valid projectId before initializing
+            if (!firebaseConfig || !firebaseConfig.projectId || firebaseConfig.projectId === "YOUR_FIREBASE_PROJECT_ID") {
+                const msg = "Firebase not fully configured. Insights posting will not work on live site until 'YOUR_FIREBASE_PROJECT_ID' and other config values are replaced in the HTML script.";
+                console.warn(msg);
+                const statusMessage = document.createElement('p');
+                statusMessage.id = 'firebase-status-message';
+                statusMessage.className = 'text-red-500 text-center mt-4';
+                statusMessage.textContent = msg;
+                document.body.prepend(statusMessage);
+                // Return to prevent further Firebase operations if config is clearly invalid placeholder
+                // This means db and auth will remain undefined, and subsequent calls will be guarded by if(db) / if(auth)
             } else {
-                // Sign in anonymously if no custom token provided (for Canvas environment)
-                try {
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (error) {
-                    console.error("Authentication error:", error);
-                }
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                console.log("Firebase initialized successfully.");
+                const statusMessage = document.createElement('p');
+                statusMessage.id = 'firebase-status-message';
+                statusMessage.className = 'text-green-500 text-center mt-4';
+                statusMessage.textContent = 'Firebase initialized. Attempting authentication...';
+                document.body.prepend(statusMessage);
             }
-        });
+        } catch (error) {
+            console.error("Firebase initialization failed:", error);
+            const statusMessage = document.createElement('p');
+            statusMessage.id = 'firebase-status-message';
+            statusMessage.className = 'text-red-500 text-center mt-4';
+            statusMessage.textContent = `Error: Firebase initialization failed. ${error.message}. Check console for details.`;
+            document.body.prepend(statusMessage);
+        }
+
+        // Authenticate user and set up Firestore listener
+        // This block now only runs if 'auth' object was successfully initialized
+        if (auth) {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUserId = user.uid;
+                    console.log("Authenticated as:", currentUserId);
+                    const userIdDisplay = document.getElementById('userIdDisplay');
+                    if (userIdDisplay) {
+                        userIdDisplay.textContent = `User ID: ${currentUserId}`;
+                    }
+                    setupInsightsListener(); // Start listening to Firestore once authenticated
+                } else {
+                    try {
+                        if (initialAuthToken) {
+                            await signInWithCustomToken(auth, initialAuthToken);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (error) {
+                        console.error("Authentication error:", error);
+                        const statusMessage = document.getElementById('firebase-status-message');
+                        if (statusMessage) statusMessage.textContent = `Error: Authentication failed. ${error.message}. Check console for details.`;
+                        statusMessage.classList.remove('text-green-500'); // Ensure color is red on auth error
+                        statusMessage.classList.add('text-red-500');
+                    }
+                }
+            });
+        }
 
         // Function to set up real-time listener for insights posts
         function setupInsightsListener() {
             const insightsPostsContainer = document.getElementById('insights-posts');
+            // Guard against db not being initialized
+            if (!db) {
+                console.error("Firestore database not initialized. Cannot fetch insights.");
+                insightsPostsContainer.innerHTML = '<p class="text-red-500">Error: Database not connected. Please check Firebase configuration.</p>';
+                return;
+            }
+
             // Using a public collection path for insights
             const insightsCollectionRef = collection(db, `artifacts/${appId}/public/data/insights_posts`);
             
@@ -429,7 +470,9 @@
                     `;
                     insightsPostsContainer.appendChild(postElement);
                     // Re-observe fade-in elements after posts are rendered
-                    observer.observe(postElement); // Observer defined globally
+                    if (typeof observer !== 'undefined') { // Check if observer is defined
+                        observer.observe(postElement);
+                    }
                 });
             }, (error) => {
                 console.error("Error fetching insights posts:", error);
@@ -461,6 +504,12 @@
                 postMessage.classList.add('text-red-500');
                 return;
             }
+            if (!db) { // Guard against db not being initialized
+                postMessage.textContent = 'Error: Database not connected. Cannot post insight.';
+                postMessage.classList.remove('text-green-500');
+                postMessage.classList.add('text-red-500');
+                return;
+            }
 
             try {
                 await addDoc(collection(db, `artifacts/${appId}/public/data/insights_posts`), {
@@ -482,14 +531,10 @@
             }
         }
 
-        // Attach event listener to the form
+        // --- General Fade-in/Swipe-in Animations ---
+        // Define observer globally so it can be reused for dynamically added content
+        let observer; 
         document.addEventListener('DOMContentLoaded', () => {
-            const newInsightForm = document.getElementById('new-insight-form');
-            if (newInsightForm) {
-                newInsightForm.addEventListener('submit', addNewInsight);
-            }
-
-            // --- General Fade-in/Swipe-in Animations ---
             const fadeInElements = document.querySelectorAll('.fade-in-element');
             const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
 
@@ -499,12 +544,11 @@
                 threshold: 0.1 // 10% of the element must be visible to trigger
             };
 
-            // Global observer instance (re-used for dynamic content)
-            const observer = new IntersectionObserver((entries, observer) => {
+            observer = new IntersectionObserver((entries, observerInstance) => { // Renamed observer to observerInstance to avoid conflict
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
+                        observerInstance.unobserve(entry.target); // Stop observing once visible
                     }
                 });
             }, observerOptions);
