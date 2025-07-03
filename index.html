@@ -143,7 +143,7 @@
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <!-- Removed Insights nav link -->
+                    <li><a href="#insights" class="nav-link">Insights</a></li> <!-- New nav link -->
                     <li><a href="#skills" class="nav-link">Skills</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -352,32 +352,20 @@
 
     <script type="module">
         // Firebase SDK imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // Removed Firebase SDK imports as per user's request to remove Firebase
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        // import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        // import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Global variables provided by Canvas environment
-        // Replace 'YOUR_FIREBASE_PROJECT_ID' with your actual Firebase Project ID from your Firebase Console
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", // Replace with your actual apiKey
-            authDomain: "YOUR_AUTH_DOMAIN", // Replace with your actual authDomain
-            projectId: "YOUR_FIREBASE_PROJECT_ID", // Replace with your actual projectId
-            storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your actual storageBucket
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Replace with your actual messagingSenderId
-            appId: "YOUR_APP_ID" // Replace with your actual appId
-        };
-        const appId = firebaseConfig.projectId; // Ensure appId uses the projectId from firebaseConfig
+        // Removed Firebase related variables and initialization
+        // const appId = 'YOUR_FIREBASE_PROJECT_ID';
+        // const firebaseConfig = { /* YOUR FIREBASE CONFIG OBJECT HERE */ };
+        // const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // let app, db, auth, currentUserId = null;
 
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        // Initialize Firebase
-        let app;
-        let db;
-        let auth;
-        let currentUserId = null; // To store the current user's ID
-
+        // Removed Firebase initialization and authentication logic
+        /*
         try {
-            // Check if firebaseConfig has valid projectId before initializing
             if (!firebaseConfig || !firebaseConfig.projectId || firebaseConfig.projectId === "YOUR_FIREBASE_PROJECT_ID") {
                 const msg = "Firebase not fully configured. Insights posting will not work on live site until 'YOUR_FIREBASE_PROJECT_ID' and other config values are replaced in the HTML script.";
                 console.warn(msg);
@@ -386,8 +374,6 @@
                 statusMessage.className = 'text-red-500 text-center mt-4';
                 statusMessage.textContent = msg;
                 document.body.prepend(statusMessage);
-                // Return to prevent further Firebase operations if config is clearly invalid placeholder
-                // This means db and auth will remain undefined, and subsequent calls will be guarded by if(db) / if(auth)
             } else {
                 app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
@@ -408,8 +394,6 @@
             document.body.prepend(statusMessage);
         }
 
-        // Authenticate user and set up Firestore listener
-        // This block now only runs if 'auth' object was successfully initialized
         if (auth) {
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
@@ -419,7 +403,7 @@
                     if (userIdDisplay) {
                         userIdDisplay.textContent = `User ID: ${currentUserId}`;
                     }
-                    setupInsightsListener(); // Start listening to Firestore once authenticated
+                    setupInsightsListener();
                 } else {
                     try {
                         if (initialAuthToken) {
@@ -431,105 +415,19 @@
                         console.error("Authentication error:", error);
                         const statusMessage = document.getElementById('firebase-status-message');
                         if (statusMessage) statusMessage.textContent = `Error: Authentication failed. ${error.message}. Check console for details.`;
-                        statusMessage.classList.remove('text-green-500'); // Ensure color is red on auth error
+                        statusMessage.classList.remove('text-green-500');
                         statusMessage.classList.add('text-red-500');
                     }
                 }
             });
         }
+        */
 
-        // Function to set up real-time listener for insights posts
-        function setupInsightsListener() {
-            const insightsPostsContainer = document.getElementById('insights-posts');
-            // Guard against db not being initialized
-            if (!db) {
-                console.error("Firestore database not initialized. Cannot fetch insights.");
-                insightsPostsContainer.innerHTML = '<p class="text-red-500">Error: Database not connected. Please check Firebase configuration.</p>';
-                return;
-            }
-
-            // Using a public collection path for insights
-            const insightsCollectionRef = collection(db, `artifacts/${appId}/public/data/insights_posts`);
-            
-            // Query for the 3 most recent posts, ordered by timestamp
-            const q = query(insightsCollectionRef, orderBy('timestamp', 'desc'), limit(3));
-
-            onSnapshot(q, (snapshot) => {
-                insightsPostsContainer.innerHTML = ''; // Clear existing posts
-                snapshot.forEach(doc => {
-                    const post = doc.data();
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
-                    // Format date
-                    const date = post.timestamp ? new Date(post.timestamp.toDate()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A';
-                    
-                    postElement.innerHTML = `
-                        <p class="text-gray-600 text-sm mb-2">${date}</p>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">${post.title}</h3>
-                        <p class="text-gray-700 text-base leading-relaxed">${post.content}</p>
-                    `;
-                    insightsPostsContainer.appendChild(postElement);
-                    // Re-observe fade-in elements after posts are rendered
-                    if (typeof observer !== 'undefined') { // Check if observer is defined
-                        observer.observe(postElement);
-                    }
-                });
-            }, (error) => {
-                console.error("Error fetching insights posts:", error);
-                insightsPostsContainer.innerHTML = '<p class="text-red-500">Error loading insights. Please try again later.</p>';
-            });
-        }
-
-        // Function to handle new post submission
-        async function addNewInsight(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const postTitleInput = document.getElementById('new-insight-title');
-            const postContentInput = document.getElementById('new-insight-content');
-            const postMessage = document.getElementById('post-message');
-
-            const title = postTitleInput.value.trim();
-            const content = postContentInput.value.trim();
-
-            if (!title || !content) {
-                postMessage.textContent = 'Please enter both a title and content.';
-                postMessage.classList.remove('text-green-500');
-                postMessage.classList.add('text-red-500');
-                return;
-            }
-
-            if (!currentUserId) {
-                postMessage.textContent = 'Authentication not ready. Please wait a moment and try again.';
-                postMessage.classList.remove('text-green-500');
-                postMessage.classList.add('text-red-500');
-                return;
-            }
-            if (!db) { // Guard against db not being initialized
-                postMessage.textContent = 'Error: Database not connected. Cannot post insight.';
-                postMessage.classList.remove('text-green-500');
-                postMessage.classList.add('text-red-500');
-                return;
-            }
-
-            try {
-                await addDoc(collection(db, `artifacts/${appId}/public/data/insights_posts`), {
-                    title: title,
-                    content: content,
-                    timestamp: serverTimestamp(), // Firestore server timestamp
-                    userId: currentUserId // Store the user ID of the poster
-                });
-                postMessage.textContent = 'Insight posted successfully!';
-                postMessage.classList.remove('text-red-500');
-                postMessage.classList.add('text-green-500');
-                postTitleInput.value = ''; // Clear form
-                postContentInput.value = ''; // Clear form
-            } catch (e) {
-                console.error("Error adding document: ", e);
-                postMessage.textContent = 'Error posting insight. Please try again.';
-                postMessage.classList.remove('text-green-500');
-                postMessage.classList.add('text-red-500');
-            }
-        }
+        // Removed Firestore listener and new post submission functions
+        /*
+        function setupInsightsListener() { ... }
+        async function addNewInsight(event) { ... }
+        */
 
         // --- General Fade-in/Swipe-in Animations ---
         // Define observer globally so it can be reused for dynamically added content
@@ -609,6 +507,51 @@
                 window.addEventListener('scroll', handleScroll);
                 window.addEventListener('resize', handleScroll); // Recalculate on resize
             }
+
+            // --- Insights Section JavaScript (Static Content) ---
+            const insightsPostsContainer = document.getElementById('insights-posts');
+
+            // Define your posts here. Add new posts by adding new objects to this array.
+            const posts = [
+                {
+                    date: "July 4, 2025",
+                    title: "Reflecting on Independence and Purpose",
+                    content: "Enjoyed a quiet July 4th, reflecting on the meaning of independence, both for the nation and personally. The peace of solitude continues to be a powerful source of recharge."
+                },
+                {
+                    date: "July 3, 2025",
+                    title: "Leveraging GitHub for Personal Projects",
+                    content: "Spent the day building a portfolio website on GitHub. Found it incredibly fun and challenging. It's amazing how much you can learn by just diving in and building something from scratch. This hands-on experience really solidifies theoretical knowledge."
+                },
+                {
+                    date: "July 2, 2025",
+                    title: "Navigating Office Dynamics: A Lesson in Boundaries",
+                    content: "Encountered some familiar office dynamics today. Realized the importance of strategic non-compliance and conserving energy for what truly matters. It's liberating to distinguish between actual work and 'performative busyness'."
+                }
+            ];
+
+            // Function to render posts
+            function renderPosts() {
+                insightsPostsContainer.innerHTML = ''; // Clear existing posts
+                // Limit to 3 most recent posts
+                posts.slice(0, 3).forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
+                    postElement.innerHTML = `
+                        <p class="text-gray-600 text-sm mb-2">${post.date}</p>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">${post.title}</h3>
+                        <p class="text-gray-700 text-base leading-relaxed">${post.content}</p>
+                    `;
+                    insightsPostsContainer.appendChild(postElement);
+                    // Re-observe fade-in elements after posts are rendered
+                    if (typeof observer !== 'undefined') { // Check if observer is defined
+                        observer.observe(postElement);
+                    }
+                });
+            }
+
+            // Initial render of posts
+            renderPosts();
         });
     </script>
 
