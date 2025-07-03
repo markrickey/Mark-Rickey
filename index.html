@@ -211,7 +211,7 @@
                     <h3 class="text-2xl font-semibold text-gray-900 mb-3">Digital Optimization Supervisor</h3>
                     <p class="text-gray-600 mb-5 text-sm">McDonald's | Chicago, Illinois</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency. Partnered with stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%. Developed reporting tools/KPIs, achieving a 25% sales increase within six months.</li>
+                        <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency. Partnered with diverse stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%. Developed reporting tools/KPIs, achieving a 25% sales increase within six months.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 4: Digital Marketing Manager -->
@@ -335,7 +335,6 @@
     </section>
 
     <script>
-        // JavaScript for scroll-triggered fade-in animation
         document.addEventListener('DOMContentLoaded', () => {
             const fadeInElements = document.querySelectorAll('.fade-in-element');
             const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
@@ -437,7 +436,8 @@
             // Function to render posts
             function renderPosts() {
                 insightsPostsContainer.innerHTML = ''; // Clear existing posts
-                posts.forEach(post => {
+                // Limit to 3 most recent posts
+                posts.slice(0, 3).forEach(post => { // Changed to slice(0, 3)
                     const postElement = document.createElement('div');
                     postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
                     postElement.innerHTML = `
