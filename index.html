@@ -9,242 +9,289 @@
     <!-- Load Inter font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for specific elements not easily achievable with single Tailwind classes */
+        /* Base styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB; /* Very light gray background */
-            color: #1F2937; /* Dark gray text */
+            background-color: #F8F8F8; /* Very light, soft gray background */
+            color: #333333; /* Darker gray for primary text */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
         }
         .container {
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
-        .section-heading {
-            font-size: 2.5rem; /* md:text-4xl */
-            font-weight: 700; /* font-bold */
-            color: #1F2937;
-            margin-bottom: 2.5rem; /* mb-10 */
+
+        /* Hero Section - Full height, bold typography */
+        #hero {
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             position: relative;
+            overflow: hidden;
+            background-color: #E0E0E0; /* Fallback background for video */
+        }
+        .hero-video-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;
+        }
+        .hero-video-container video {
+            min-width: 100%; min-height: 100%; width: auto; height: auto;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Lighter overlay for brighter video */
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative; z-index: 10;
+            color: #FFFFFF; /* White text for readability over video */
+            padding: 2rem 1rem;
+        }
+        .hero-title {
+            font-size: 4.5rem; /* Large, bold title */
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+        .hero-subtitle {
+            font-size: 2.25rem; /* Subtitle */
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+        }
+        .profile-img {
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+            border: 4px solid #FFFFFF; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Accent blue outer ring */
+            margin: 0 auto 2rem;
+        }
+
+        /* Section Headings - More artistic and integrated */
+        .section-heading {
+            font-size: 3.5rem; /* Larger, more impactful */
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 3rem;
+            text-align: left; /* Aligned left for modern feel */
+            position: relative;
             padding-bottom: 0.5rem;
+            line-height: 1.2;
         }
         .section-heading::after {
             content: '';
             position: absolute;
-            left: 50%;
+            left: 0; /* Aligned left */
             bottom: 0;
-            transform: translateX(-50%);
-            width: 80px; /* Short underline */
-            height: 4px;
+            width: 100px; /* Longer underline */
+            height: 5px;
             background-color: #3B82F6; /* Accent blue */
-            border-radius: 2px;
-        }
-        /* Hero Video Background Styles */
-        .hero-video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1; /* Place behind content */
-        }
-        .hero-video-container video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover; /* Cover the container */
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
-            z-index: 0; /* Above video, below text content */
-        }
-        /* Custom background pattern for Experience section */
-        #experience {
-            background-color: #F3F4F6; /* Slightly darker gray to contrast with pattern */
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 20v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM12 34v-4h-2v4H6v2h4v4h2v-4h4v-2h-4zm0 20v-4h-2v4H6v2h4v4h2v-4h4v-2h-4zM36 10v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM12 10v-4h-2v4H6v2h4v4h2v-4h4v-2h-4z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 60px 60px; /* Size of the pattern */
+            border-radius: 3px;
         }
 
-        /* Fade-in animation styles (for general elements) */
-        .fade-in-element {
+        /* Card styles - More subtle, focus on content */
+        .content-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
+            padding: 2.5rem;
+            border: 1px solid #EFEFEF; /* Very subtle border */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .project-card-image {
+            border-radius: 0.75rem;
+            object-fit: cover;
+            width: 100%;
+            height: 280px; /* Taller images for visual impact */
+        }
+        .skill-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem;
+            color: #4B5563;
+            padding: 0.5rem 0;
+        }
+        .skill-item svg {
+            color: #3B82F6; /* Accent blue checkmark */
+            margin-right: 0.75rem;
+        }
+
+        /* Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-card {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
-
-        .fade-in-element.is-visible {
+        .fade-in-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-skill {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in-skill.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Swipe-in-from-right animation styles (for project cards) */
-        .swipe-in-right-element {
-            opacity: 0;
-            transform: translateX(50px); /* Start off to the right */
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        /* Project Dynamic Visual Background */
+        .project-dynamic-visual {
+            width: 100%;
+            height: 280px; /* Matches project-card-image height */
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #E0F2F7 0%, #B3E0F2 50%, #E0F2F7 100%);
+            background-size: 200% 200%; /* Make gradient larger than container */
+            animation: gradientShift 4s ease infinite alternate; /* Animate the background position */
+            display: flex; /* For centering content if you add any inside */
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Ensure gradient stays within bounds */
+            margin-bottom: 1.25rem; /* mb-5 from original img */
         }
 
-        .swipe-in-right-element.is-visible {
-            opacity: 1;
-            transform: translateX(0); /* Slide to original position */
-        }
-
-        /* Enhanced card hover effect */
-        .card {
-            background-color: white;
-            border-radius: 1rem; /* More rounded corners */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
-            padding: 2rem;
-            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
-            border: 1px solid #E5E7EB; /* Subtle border */
-        }
-        .card:hover {
-            transform: translateY(-8px) scale(1.01); /* Slightly more lift and tiny scale */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
-        }
-
-        /* Navigation link button-like hover effect */
-        .nav-link {
-            font-weight: 500;
-            color: #4B5563; /* Medium gray for nav links */
-            transition: color 0.3s ease, background-color 0.3s ease; /* Add background-color to transition */
-            padding: 0.5rem 0.75rem; /* Add padding for button shape */
-            border-radius: 0.5rem; /* Rounded corners for button */
-            display: inline-block; /* Essential for padding to work correctly */
-        }
-        .nav-link:hover {
-            color: #3B82F6; /* Accent blue on hover */
-            background-color: rgba(59, 130, 246, 0.1); /* Light blue background on hover */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Firebase Status Message (for debugging) -->
-    <p id="firebase-status-message" class="text-sm text-center mt-4"></p>
-    <p id="userIdDisplay" class="text-xs text-center text-gray-500"></p>
-
     <!-- Header/Navigation -->
-    <header class="bg-white shadow-md py-4 sticky top-0 z-50">
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
         <div class="container flex justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
+            <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
             <nav>
-                <ul class="flex space-x-8">
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#experience" class="nav-link">Experience</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#insights" class="nav-link">Insights</a></li> <!-- New nav link -->
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">About</a></li>
+                    <li><a href="#experience" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Experience</a></li>
+                    <li><a href="#projects" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Projects</a></li>
+                    <li><a href="#skills" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Skills</a></li>
+                    <li><a href="#contact" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative py-28 md:py-48 text-center text-white overflow-hidden">
+    <section id="hero" class="relative">
         <div class="hero-video-container">
-            <!-- Video source from your GitHub repository -->
             <video autoplay loop muted playsinline>
-                <source src="lets.build.something.great.mp4.mp4" type="video/mp4">
+                <source src="lets.build.something.great.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="hero-overlay"></div> <!-- Overlay for text readability -->
-
-        <div class="container relative z-10"> <!-- z-index to bring content above overlay -->
-            <!-- Profile Image from your GitHub repository -->
-            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg ring-4 ring-blue-600 mx-auto mb-8">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-5 leading-tight">Mark R.</h1>
-            <p class="text-2xl mb-12 max-w-4xl mx-auto">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
-            <a href="#contact" class="bg-blue-600 text-white px-9 py-3.5 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Let's get started!</a>
+        <div class="hero-overlay"></div>
+        <div class="hero-content container">
+            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img">
+            <h1 class="hero-title">Mark R.</h1>
+            <p class="hero-subtitle">Strategic Project & Data Management Leader</p>
+            <p class="text-lg mb-8 max-w-3xl mx-auto text-white">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
+            <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Connect with Me</a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-white">
-        <div class="container">
-            <h2 class="section-heading fade-in-element">About Me</h2>
-            <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6 fade-in-element">
-                <p>A resilient professional with 10+ years managing data systems, teams, and projects, combined with a military background that emphasizes discipline and process optimization. Committed to delivering impactful, data-driven results.</p>
-                <p>My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
+        <div class="container fade-in-section">
+            <h2 class="section-heading">About Me</h2>
+            <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6">
+                <p>A resilient professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and international stakeholder engagement, consistently delivering quantifiable results in complex, high-stakes environments.</p>
+                <p>My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning, positioning me as a sought-after expert in driving operational excellence and impactful solutions. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20"> 
-        <div class="container">
-            <h2 class="section-heading fade-in-element">Experience</h2>
-            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+    <section id="experience" class="py-20">
+        <div class="container fade-in-section">
+            <h2 class="section-heading">Experience</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Experience Item 1: Congressional Staffer Fellow -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Congressional Staffer</h3>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Congressional Staffer</h3>
                     <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | May 2025 – Present</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
                         <li>Served as primary account manager for the Department of Defense, Veterans Affairs, and the Military Academies. Refined and executed advanced data management systems. Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 2: Active Duty Army -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Active Duty, Noncommissioned Officer</h3>
-                    <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Managed logistical operations with multinational teams and essential equipment in the Pacific Theater, ensuring efficiency. Created training programs, seminars, presentations, and workshops that enhanced organizational readiness and operational effectiveness for U.S. allies in the region.</li>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">U.S. Army, Project Manager/NCO</h3>
+                    <p class="text-gray-600 mb-5 text-sm">United States Army | Oct 2019 – Oct 2025</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                        <li>Directed complex logistical operations, ensuring maximum efficiency in South Pacific Theater.</li>
+                        <li>Led/mentored multinational teams in high-pressure operations, cultivating unity & achieving objectives.</li>
+                        <li>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 3: Digital Optimization Supervisor -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Digital Optimization Supervisor</h3>
-                    <p class="text-gray-600 mb-5 text-sm">McDonald's | Chicago, Illinois</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Spearheaded content management, achieving 20% enhancement in accuracy/efficiency. Partnered with diverse stakeholders to drive consumer engagement, increasing interaction by 15% and retention by 10%. Developed reporting tools/KPIs, achieving a 25% sales increase within six months.</li>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Optimization Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm">McDonald's | Jun 2018 - Nov 2018</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                        <li>Spearheaded content management (20% accuracy/efficiency gain).</li>
+                        <li>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
+                        <li>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 4: Digital Marketing Manager -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Digital Marketing Manager</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Association Forum | Chicago, Illinois</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Increased visibility by 25% and member engagement by 20% through targeted marketing and branding efforts. Enhanced website SEO visibility by 30% and fostered B2B engagement through an annual Association convention.</li>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Marketing Manager</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Association Forum | Nov 2017 - Jun 2018</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                        <li>Increased visibility by 25% & member engagement by 20% via marketing/branding.</li>
+                        <li>Optimized websites (30% content visibility improvement), delivered detailed analytics.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 5: Intern, Digital Content Strategist -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Intern, Digital Content Strategist</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Chicago, Illinois</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>I created and executed a content strategy for digital channels, producing engaging content for gym memberships and staff services. I managed social media accounts to align with company goals and coordinated marketing campaigns for fitness initiatives.</li>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Intern, Digital Content Strategist</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Jun 2017 - Oct 2017</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                        <li>Executed content strategy for digital channels (social media, website, email).</li>
+                        <li>Managed social media, coordinated marketing campaigns for fitness initiatives.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 6: Undergraduate Creative Director Intern -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Undergraduate Creative Director Intern</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success & Transitions Dept.</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Designed visual and digital content for student orientation initiatives, solidifying branding identity. Managed cross-functional teams, conducted market research to inform design decisions. Mentored junior designers, interns, and students contributing to impactful visual content.</li>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Undergraduate Creative Director Intern</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Apr 2016 - Dec 2016</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                        <li>Designed visual/digital content for student success, solidifying branding identity.</li>
+                        <li>Managed cross-functional teams, conducted market research.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 7: Student Orientation Supervisor -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 ease-in-out border border-gray-200 hover:translate-y-[-5px] hover:shadow-2xl fade-in-element">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Student Orientation Supervisor</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Student Success & Transitions Dept.</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-3 text-base">
-                        <li>Supervised the implementation of tailored software solutions to enhance course enrollment processes and improve new student management systems, confirming that all students and faculty were engaged and supported throughout the project lifecycle.</li>
+                <div class="content-card fade-in-card">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Student Orientation Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Apr 2016 - Aug 2016</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
+                        <li>Supervised software solutions for course enrollment & new student management.</li>
+                        <li>Provided guidance/support to new students, fostering welcoming environment.</li>
                     </ul>
                 </div>
             </div>
@@ -253,33 +300,27 @@
 
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-white">
-        <div class="container">
-            <h2 class="section-heading fade-in-element">Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="container fade-in-section">
+            <h2 class="section-heading">Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1: Data Management Systems -->
-                <div class="card swipe-in-right-element p-8">
-                   <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database text-blue-600"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><path d="M3 19A9 3 0 0 0 21 19"/></svg>
-                        <span class="sr-only">Data Management Systems</span>
-                    </h3>
+                <div class="content-card fade-in-card">
+                    <div class="project-dynamic-visual mb-5"></div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Data Management Systems</h3>
                     <p class="text-gray-700 text-sm mb-4">Designed and implemented advanced data management systems that greatly improved data collection efficiency, targeted outreach marketing, and research reporting.</p>
                     <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
                 </div>
                 <!-- Project 2: Account Management -->
-                <div class="card swipe-in-right-element p-8">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase text-blue-600"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        <span class="sr-only">Account Management</span>
-                    </h3>
-                    <p class="text-gray-700 text-sm mb-4">Designed strategic marketing campaigns, anticipated consumer trends, and analysed data to influence project budgets.</p>
+                <div class="content-card fade-in-card">
+                    <div class="project-dynamic-visual mb-5"></div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Account Management</h3>
+                    <p class="text-gray-700 text-sm mb-4">Designed strategic marketing campaigns, anticipated consumer trends, and analyzed data to influence project budgets.</p>
                     <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
                 </div>
                 <!-- Project 3: Digital Marketing -->
-                <div class="card swipe-in-right-element p-8">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center justify-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone text-blue-600"><path d="m3 11 18-2L13 3 7 21z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-                        <span class="sr-only">Project Management</span>
-                    </h3>
+                <div class="content-card fade-in-card">
+                    <div class="project-dynamic-visual mb-5"></div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Digital Marketing</h3>
                     <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs. Oversaw ticket workflows, customized data fields, and leveraged analytics to optimize service delivery and reporting.</p>
                     <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
                 </div>
@@ -287,63 +328,38 @@
         </div>
     </section>
 
-    <!-- Insights Section -->
-    <section id="insights" class="py-20 bg-gray-50">
-        <div class="container">
-            <h2 class="section-heading fade-in-element">Insights</h2>
-            <!-- Form to add new insights -->
-            <form id="new-insight-form" class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg mb-10 fade-in-element">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-5 text-center">Post a New Insight</h3>
-                <div class="mb-4">
-                    <label for="new-insight-title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
-                    <input type="text" id="new-insight-title" name="title" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" placeholder="Your insight title" required>
-                </div>
-                <div class="mb-6">
-                    <label for="new-insight-content" class="block text-gray-700 text-sm font-bold mb-2">Content</label>
-                    <textarea id="new-insight-content" name="content" rows="5" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" placeholder="Share your thoughts here..." required></textarea>
-                </div>
-                <div class="flex items-center justify-between">
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300">
-                        Post Insight
-                    </button>
-                    <p id="post-message" class="text-sm ml-4"></p>
-                </div>
-            </form>
-
-            <div id="insights-posts" class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Posts will be dynamically inserted here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
     <!-- Skills Section -->
     <section id="skills" class="py-20 bg-gray-50">
-        <div class="container">
-            <h2 class="section-heading fade-in-element">Skills</h2>
+        <div class="container fade-in-section">
+            <h2 class="section-heading">Skills</h2>
             <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-6 text-lg text-gray-700">
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Strategic Planning</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Process Optimization</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Data Analysis</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Constituent Relations</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Stakeholder Management</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Project Management</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Policy Research</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Google Workspace (Sheets, Forms)</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Microsoft Office Suite</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Public Speaking</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Cross-functional Collaboration</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Adaptability & Resilience</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Leadership & Mentorship</span></div>
-                <div class="flex items-center space-x-3 fade-in-element"><span class="text-blue-600 font-bold">&#10003;</span><span>Strategic Communication</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Strategic Planning</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Process Optimization</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Data Analysis</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Constituent Relations</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Stakeholder Management</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Project Management</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Policy Research</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Google Workspace (Sheets, Forms)</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Microsoft Office Suite</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Public Speaking</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Cross-functional Collaboration</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Adaptability & Resilience</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Leadership & Mentorship</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Strategic Communication</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Python</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>SQL</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>AI/Machine Learning Concepts</span></div>
+                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Cybersecurity Concepts</span></div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
-        <div class="container">
-            <h2 class="section-heading fade-in-element">Contact Me</h2>
-            <div class="max-w-3xl mx-auto text-center text-lg text-gray-700 fade-in-element">
+        <div class="container fade-in-section">
+            <h2 class="section-heading">Contact Me</h2>
+            <div class="max-w-3xl mx-auto text-center text-lg text-gray-700">
                 <p class="mb-8">Let's make something great!</p>
                 <div class="flex justify-center space-x-16 mb-10">
                     <a href="mailto:markrickey01@gmail.com" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
@@ -354,56 +370,45 @@
         </div>
     </section>
 
-    <script type="module">
-        // --- General Fade-in/Swipe-in Animations ---
-        // Define observer globally so it can be reused for dynamically added content
-        let observer; 
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const fadeInElements = document.querySelectorAll('.fade-in-element');
-            const swipeInRightElements = document.querySelectorAll('.swipe-in-right-element');
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const fadeInCards = document.querySelectorAll('.fade-in-card');
+            const fadeInSkills = document.querySelectorAll('.fade-in-skill');
 
             const observerOptions = {
-                root: null, // viewport as the root
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 // 10% of the element must be visible to trigger
+                threshold: 0.1
             };
 
-            observer = new IntersectionObserver((entries, observerInstance) => { // Renamed observer to observerInstance to avoid conflict
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observerInstance.unobserve(entry.target); // Stop observing once visible
-                    }
-                });
-            }, observerOptions);
+            const createObserver = (elements, delayMultiplier = 0) => {
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                                observerInstance.unobserve(entry.target);
+                            }, index * delayMultiplier); // Staggered delay
+                        }
+                    });
+                }, observerOptions);
+                elements.forEach(element => observer.observe(element));
+            };
 
-            fadeInElements.forEach(element => {
-                observer.observe(element);
-            });
-
-            // Adjust swipe-in-right elements to have staggered delays
-            swipeInRightElements.forEach((element, index) => {
-                element.style.transitionDelay = `${index * 0.1}s`; // Stagger by 100ms
-                observer.observe(element);
-            });
+            createObserver(fadeInSections);
+            createObserver(fadeInCards, 100); // Stagger cards by 100ms
+            createObserver(fadeInSkills, 50); // Stagger skills by 50ms
 
 
             // Dynamic background color for Experience section
             const experienceSection = document.getElementById('experience');
             if (experienceSection) {
-                // Define start and end HSL colors (Hue, Saturation, Lightness)
-                // These values are chosen to complement the existing blue accent and light grays
-                const startH = 220; // Light blue-gray hue
-                const startS = 15;  // Saturation
-                const startL = 95;  // Lightness
+                const startH = 220; const startS = 15; const startL = 95;
+                const endH = 210; const endS = 30; const endL = 85;
 
-                const endH = 210; // Slightly cooler blue hue
-                const endS = 30;  // Slightly more saturated
-                const endL = 85;  // Slightly darker
-
-                // Function to interpolate between two colors
                 function interpolateColor(color1, color2, factor) {
-                    const result = color1.slice(); // Clone array to avoid modifying original
+                    const result = color1.slice();
                     for (let i = 0; i < 3; i++) {
                         result[i] = color1[i] + factor * (color2[i] - color1[i]);
                     }
@@ -415,10 +420,8 @@
                     const viewportHeight = window.innerHeight;
                     const elementHeight = rect.height;
 
-                    // Calculate scroll factor: 0 when section bottom is at viewport bottom, 1 when section top is at viewport top
-                    // This makes the color transition as the user scrolls *through* the section
                     let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
-                    scrollFactor = Math.max(0, Math.min(1, scrollFactor)); // Clamp between 0 and 1
+                    scrollFactor = Math.max(0, Math.min(1, scrollFactor));
 
                     const interpolatedColor = interpolateColor(
                         [startH, startS, startL],
@@ -428,56 +431,10 @@
                     experienceSection.style.backgroundColor = interpolatedColor;
                 };
 
-                // Initial call and attach event listener
-                handleScroll(); // Set initial color on load
+                handleScroll();
                 window.addEventListener('scroll', handleScroll);
-                window.addEventListener('resize', handleScroll); // Recalculate on resize
+                window.addEventListener('resize', handleScroll);
             }
-
-            // --- Insights Section JavaScript (Static Content) ---
-            const insightsPostsContainer = document.getElementById('insights-posts');
-
-            // Define your posts here. Add new posts by adding new objects to this array.
-            const posts = [
-                {
-                    date: "July 4, 2025",
-                    title: "Reflecting on Independence and Purpose",
-                    content: "Enjoyed a quiet July 4th, reflecting on the meaning of independence, both for the nation and personally. The peace of solitude continues to be a powerful source of recharge."
-                },
-                {
-                    date: "July 3, 2025",
-                    title: "Leveraging GitHub for Personal Projects",
-                    content: "Spent the day building a portfolio website on GitHub. Found it incredibly fun and challenging. It's amazing how much you can learn by just diving in and building something from scratch. This hands-on experience solidifies theoretical knowledge."
-                },
-                {
-                    date: "July 2, 2025",
-                    title: "Navigating Office Dynamics: A Lesson in Boundaries",
-                    content: "Encountered some familiar office dynamics today. Realized the importance of strategic non-compliance and conserving energy for what truly matters."
-                }
-            ];
-
-            // Function to render posts
-            function renderPosts() {
-                insightsPostsContainer.innerHTML = ''; // Clear existing posts
-                // Limit to 3 most recent posts
-                posts.slice(0, 3).forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('card', 'fade-in-element', 'p-8'); // Reuse card styling
-                    postElement.innerHTML = `
-                        <p class="text-gray-600 text-sm mb-2">${post.date}</p>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">${post.title}</h3>
-                        <p class="text-gray-700 text-base leading-relaxed">${post.content}</p>
-                    `;
-                    insightsPostsContainer.appendChild(postElement);
-                    // Re-observe fade-in elements after posts are rendered
-                    if (typeof observer !== 'undefined') { // Check if observer is defined
-                        observer.observe(postElement);
-                    }
-                });
-            }
-
-            // Initial render of posts
-            renderPosts();
         });
     </script>
 
