@@ -12,8 +12,8 @@
         /* Base styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F8F8; /* Very light, soft gray background */
-            color: #333333; /* Darker gray for primary text */
+            background-color: #fef5da; /* Updated: Very light cream/yellow background */
+            color: #333333; /* Darker gray for primary text (retained for readability) */
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal scroll from animations */
         }
@@ -34,7 +34,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background-color: #E0E0E0; /* Fallback background for video */
+            background-color: #fef5da; /* Fallback background for video */
         }
         .hero-video-container {
             position: absolute;
@@ -62,29 +62,65 @@
             line-height: 1.1;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .hero-title.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .hero-subtitle {
             font-size: 2.25rem; /* Subtitle */
             font-weight: 400;
             margin-bottom: 2.5rem;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.2s, transform 1s ease-out 0.2s; /* Staggered */
         }
-        .profile-img {
-            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 4px solid #FFFFFF; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Accent blue outer ring */
-            margin: 0 auto 2rem;
+        .hero-subtitle.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
+        .hero-text { /* For the descriptive paragraph */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.4s, transform 1s ease-out 0.4s; /* Staggered */
+        }
+        .hero-text.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-button {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s; /* Staggered */
+        }
+        .hero-button.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Removed profile-img custom CSS as it's now Tailwind-driven */
+
 
         /* Section Headings - More artistic and integrated */
         .section-heading {
             font-size: 3.5rem; /* Larger, more impactful */
             font-weight: 700;
-            color: #1F2937;
+            color: #1F2937; /* Dark text for headings */
             margin-bottom: 3rem;
             text-align: left; /* Aligned left for modern feel */
             position: relative;
             padding-bottom: 0.5rem;
             line-height: 1.2;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section-heading.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .section-heading::after {
             content: '';
@@ -93,7 +129,7 @@
             bottom: 0;
             width: 100px; /* Longer underline */
             height: 5px;
-            background-color: #3B82F6; /* Accent blue */
+            background-color: #3a668c; /* Updated: Accent blue-gray */
             border-radius: 3px;
         }
 
@@ -105,6 +141,12 @@
             padding: 2.5rem;
             border: 1px solid #EFEFEF; /* Very subtle border */
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px);
+        }
+        .content-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .content-card:hover {
             transform: translateY(-5px);
@@ -115,46 +157,39 @@
             object-fit: cover;
             width: 100%;
             height: 280px; /* Taller images for visual impact */
+            opacity: 0; /* Initial state for animation */
+            transform: translateX(-50px); /* Start off to the left */
+        }
+        .project-card-image.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         .skill-item {
             display: flex;
             align-items: center;
             font-size: 1.125rem;
-            color: #4B5563;
+            color: #4B5563; /* Medium gray for skill text */
             padding: 0.5rem 0;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(10px);
         }
-        .skill-item svg {
-            color: #3B82F6; /* Accent blue checkmark */
-            margin-right: 0.75rem;
+        .skill-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Animations */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        /* Navigation link button-like hover effect */
+        .nav-link {
+            font-weight: 500;
+            color: #4B5563; /* Medium gray for nav links */
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            display: inline-block;
         }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .fade-in-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        .fade-in-card.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .fade-in-skill {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .fade-in-skill.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .nav-link:hover {
+            color: #3a668c; /* Updated: Accent blue-gray on hover */
+            background-color: rgba(58, 102, 140, 0.1); /* Updated: Light blue-gray background on hover */
         }
 
         /* Project Dynamic Visual Background */
@@ -162,19 +197,24 @@
             width: 100%;
             height: 280px; /* Matches project-card-image height */
             border-radius: 0.75rem;
-            background: linear-gradient(135deg, #E0F2F7 0%, #B3E0F2 50%, #E0F2F7 100%);
+            background: linear-gradient(135deg, #ff724f 0%, #fdb92e 50%, #ff724f 100%); /* Updated: Warm gradient using new palette */
             background-size: 200% 200%; /* Make gradient larger than container */
             animation: gradientShift 4s ease infinite alternate; /* Animate the background position */
-            display: flex; /* For centering content if you add any inside */
+            display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Ensure gradient stays within bounds */
+            overflow: hidden;
             margin-bottom: 1.25rem; /* mb-5 from original img */
         }
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
+        }
+
+        /* Dynamic background color for Experience section */
+        #experience {
+            background-color: hsl(210, 10%, 95%); /* Updated: Light blue-gray for contrast */
         }
     </style>
 </head>
@@ -183,14 +223,17 @@
     <!-- Header/Navigation -->
     <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
         <div class="container flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
+            <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md flex items-center space-x-3">
+                <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"> <!-- Moved and styled -->
+                <span>Mark R.</span>
+            </a>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="#about" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">About</a></li>
-                    <li><a href="#experience" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Experience</a></li>
-                    <li><a href="#projects" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Projects</a></li>
-                    <li><a href="#skills" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Skills</a></li>
-                    <li><a href="#contact" class="font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200 rounded-md px-2 py-1">Contact</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#projects" class="nav-link">Work Studies</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -200,18 +243,11 @@
     <section id="hero" class="relative">
         <div class="hero-video-container">
             <video autoplay loop muted playsinline>
-                <source src="lets.build.something.great.mp4" type="video/mp4">
+                <source src="Mark.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content container">
-            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img">
-            <h1 class="hero-title">Mark R.</h1>
-            <p class="hero-subtitle">Strategic Project & Data Management Leader</p>
-            <p class="text-lg mb-8 max-w-3xl mx-auto text-white">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
-            <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block">Connect with Me</a>
-        </div>
+        <!-- Removed hero-overlay and hero-content as per request -->
     </section>
 
     <!-- About Section -->
@@ -219,8 +255,8 @@
         <div class="container fade-in-section">
             <h2 class="section-heading">About Me</h2>
             <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6">
-                <p>A resilient professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and international stakeholder engagement, consistently delivering quantifiable results in complex, high-stakes environments.</p>
-                <p>My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning, positioning me as a sought-after expert in driving operational excellence and impactful solutions. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
+                <p class="fade-in-card">A resilient professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and international stakeholder engagement, consistently delivering quantifiable results in complex, high-stakes environments.</p>
+                <p class="fade-in-card">My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning, positioning me as a sought-after expert in driving operational excellence and impactful solutions. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
             </div>
         </div>
     </section>
@@ -231,7 +267,7 @@
             <h2 class="section-heading">Experience</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Experience Item 1: Congressional Staffer Fellow -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Congressional Staffer</h3>
                     <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | May 2025 – Present</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
@@ -239,17 +275,15 @@
                     </ul>
                 </div>
                 <!-- Experience Item 2: Active Duty Army -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">U.S. Army, Project Manager/NCO</h3>
-                    <p class="text-gray-600 mb-5 text-sm">United States Army | Oct 2019 – Oct 2025</p>
+                    <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Directed complex logistical operations, ensuring maximum efficiency in South Pacific Theater.</li>
-                        <li>Led/mentored multinational teams in high-pressure operations, cultivating unity & achieving objectives.</li>
-                        <li>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
+                        <li>Managed logistical operations with multinational teams and essential equipment in the Pacific Theater, ensuring efficiency. Created training programs, seminars, presentations, and workshops that enhanced organizational readiness and operational effectiveness for U.S. allies in the region.</li>
                     </ul>
                 </div>
                 <!-- Experience Item 3: Digital Optimization Supervisor -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Optimization Supervisor</h3>
                     <p class="text-gray-600 mb-5 text-sm">McDonald's | Jun 2018 - Nov 2018</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
@@ -259,7 +293,7 @@
                     </ul>
                 </div>
                 <!-- Experience Item 4: Digital Marketing Manager -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Marketing Manager</h3>
                     <p class="text-gray-600 mb-5 text-sm">Association Forum | Nov 2017 - Jun 2018</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
@@ -268,7 +302,7 @@
                     </ul>
                 </div>
                 <!-- Experience Item 5: Intern, Digital Content Strategist -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Intern, Digital Content Strategist</h3>
                     <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Jun 2017 - Oct 2017</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
@@ -277,7 +311,7 @@
                     </ul>
                 </div>
                 <!-- Experience Item 6: Undergraduate Creative Director Intern -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Undergraduate Creative Director Intern</h3>
                     <p class="text-gray-600 mb-5 text-sm">Purdue University | Apr 2016 - Dec 2016</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
@@ -286,7 +320,7 @@
                     </ul>
                 </div>
                 <!-- Experience Item 7: Student Orientation Supervisor -->
-                <div class="content-card fade-in-card">
+                <div class="content-card slide-right-fade">
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Student Orientation Supervisor</h3>
                     <p class="text-gray-600 mb-5 text-sm">Purdue University | Apr 2016 - Aug 2016</p>
                     <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
@@ -298,31 +332,31 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects Section (Now Work Studies) -->
     <section id="projects" class="py-20 bg-white">
         <div class="container fade-in-section">
-            <h2 class="section-heading">Projects</h2>
+            <h2 class="section-heading">Work Studies</h2> <!-- Changed heading -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1: Data Management Systems -->
-                <div class="content-card fade-in-card">
+                <!-- Work Study 1: Data Management Systems -->
+                <div class="content-card slide-left-fade"> <!-- Changed to slide-left-fade -->
                     <div class="project-dynamic-visual mb-5"></div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Data Management Systems</h3>
                     <p class="text-gray-700 text-sm mb-4">Designed and implemented advanced data management systems that greatly improved data collection efficiency, targeted outreach marketing, and research reporting.</p>
-                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
+                    <a href="work-studies/data-management-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a> <!-- Link to dedicated page -->
                 </div>
-                <!-- Project 2: Account Management -->
-                <div class="content-card fade-in-card">
+                <!-- Work Study 2: Account Management -->
+                <div class="content-card slide-left-fade"> <!-- Changed to slide-left-fade -->
                     <div class="project-dynamic-visual mb-5"></div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Account Management</h3>
                     <p class="text-gray-700 text-sm mb-4">Designed strategic marketing campaigns, anticipated consumer trends, and analyzed data to influence project budgets.</p>
-                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
+                    <a href="work-studies/account-management-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a> <!-- Link to dedicated page -->
                 </div>
-                <!-- Project 3: Digital Marketing -->
-                <div class="content-card fade-in-card">
+                <!-- Work Study 3: Digital Marketing -->
+                <div class="content-card slide-left-fade"> <!-- Changed to slide-left-fade -->
                     <div class="project-dynamic-visual mb-5"></div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Digital Marketing</h3>
                     <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs. Oversaw ticket workflows, customized data fields, and leveraged analytics to optimize service delivery and reporting.</p>
-                    <a href="#" class="text-blue-600 hover:underline text-sm font-medium rounded-md">Coming Soon &rarr;</a>
+                    <a href="work-studies/digital-marketing-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a> <!-- Link to dedicated page -->
                 </div>
             </div>
         </div>
@@ -372,18 +406,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Select all elements that need fade-in or slide animations
             const fadeInSections = document.querySelectorAll('.fade-in-section');
-            const fadeInCards = document.querySelectorAll('.fade-in-card');
-            const fadeInSkills = document.querySelectorAll('.fade-in-skill');
+            const fadeInCards = document.querySelectorAll('.content-card'); // Use content-card for experience/project cards
+            const fadeInSkills = document.querySelectorAll('.skill-item');
+            const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-text, .hero-button'); // Removed profile-img from here
+
 
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.1
+                threshold: 0.1 // 10% of the element must be visible to trigger
             };
 
+            // Function to create and apply observer for elements with staggered delays
             const createObserver = (elements, delayMultiplier = 0) => {
-                const observer = new IntersectionObserver((entries, observerInstance) => {
+                const observerInstance = new IntersectionObserver((entries) => {
                     entries.forEach((entry, index) => {
                         if (entry.isIntersecting) {
                             setTimeout(() => {
@@ -393,12 +431,14 @@
                         }
                     });
                 }, observerOptions);
-                elements.forEach(element => observer.observe(element));
+                elements.forEach(element => observerInstance.observe(element));
             };
 
+            // Apply observers to different element groups
             createObserver(fadeInSections);
             createObserver(fadeInCards, 100); // Stagger cards by 100ms
             createObserver(fadeInSkills, 50); // Stagger skills by 50ms
+            createObserver(heroElements, 100); // Hero elements stagger on load
 
 
             // Dynamic background color for Experience section
