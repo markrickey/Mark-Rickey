@@ -303,313 +303,6 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative">
-        <div class="hero-video-container"> ""
-            <video autoplay loop muted playsinline>
-                <source src=C:\Users\MRickey\OneDrive - US House of Representatives\Desktop\herobanner.mp4><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark R. - Strategic Project Manager</title>
-    <!-- Tailwind CSS from CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Base styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #333333; /* Darker gray for primary text */
-            line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
-            
-            /* Dynamic Gradient Background */
-            background: linear-gradient(180deg, #245365 0%, #DB7A4D 50%, #FFD9CC 100%); /* Start with 3 colors */
-            background-size: 100% 200vh; /* Make gradient taller than viewport */
-            background-attachment: fixed; /* Fixes gradient relative to viewport */
-            transition: background-position 0.5s ease-out; /* Smooth transition for scroll effect */
-        }
-        .container {
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
-        /* NEW COLOR PALETTE VARIABLES */
-        :root {
-            --color-deep-teal: #245365;
-            --color-warm-coral: #DB7A4D;
-            --color-soft-peach: #FFD9CC;
-            --color-dark-text: #1F2937;
-            --color-light-text: #4B5563;
-            --color-light-bg: #F9FAFB;
-        }
-
-        /* Hero Section - Full height, bold typography */
-        #hero {
-            min-height: 100vh; /* Full viewport height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background-color: var(--color-deep-teal); /* Fallback background for video */
-        }
-        .hero-video-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;
-        }
-        .hero-video-container video {
-            min-width: 100%; min-height: 100%; width: auto; height: auto;
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for text contrast */
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative; z-index: 10;
-            color: #FFFFFF; /* White text for readability over video */
-            padding: 2rem 1rem;
-        }
-        .hero-title {
-            font-size: 4.5rem; /* Large, bold title */
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(20px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .hero-title.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-subtitle {
-            font-size: 2.25rem; /* Subtitle */
-            font-weight: 400;
-            margin-bottom: 2.5rem;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(20px);
-            transition: opacity 1s ease-out 0.2s, transform 1s ease-out 0.2s; /* Staggered */
-        }
-        .hero-subtitle.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-text { /* For the descriptive paragraph */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-out 0.4s, transform 1s ease-out 0.4s; /* Staggered */
-        }
-        .hero-text.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-button {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-out 0.6s, transform 1s ease-out 0.6s; /* Staggered */
-        }
-        .hero-button.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .profile-img {
-            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 4px solid #FFFFFF; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Accent blue outer ring */
-            margin: 0 auto 2rem;
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(20px);
-            transition: opacity 1s ease-out 0.8s, transform 1s ease-out 0.8s; /* Staggered */
-        }
-        .profile-img.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        /* Section Headings - More artistic and integrated */
-        .section-heading {
-            font-size: 3.5rem; /* Larger, more impactful */
-            font-weight: 700;
-            color: var(--color-dark-text);
-            margin-bottom: 3rem;
-            text-align: left; /* Aligned left for modern feel */
-            position: relative;
-            padding-bottom: 0.5rem;
-            line-height: 1.2;
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .section-heading.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            left: 0; /* Aligned left */
-            bottom: 0;
-            width: 100px; /* Longer underline */
-            height: 5px;
-            background-color: var(--color-warm-coral); /* Accent color */
-            border-radius: 3px;
-        }
-
-        /* Card styles - More subtle, focus on content */
-        .content-card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
-            padding: 2.5rem;
-            border: 1px solid #EFEFEF; /* Very subtle border */
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(20px);
-        }
-        .content-card.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        .project-card-image {
-            border-radius: 0.75rem;
-            object-fit: cover;
-            width: 100%;
-            height: 280px; /* Taller images for visual impact */
-            opacity: 0; /* Initial state for animation */
-            transform: translateX(-50px); /* Start off to the left */
-        }
-        .project-card-image.is-visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .skill-item {
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center content in skill item */
-            font-size: 1.125rem;
-            color: var(--color-light-text);
-            padding: 0.75rem 1rem; /* More padding for button feel */
-            border-radius: 0.5rem; /* Rounded corners */
-            background-color: #FFFFFF; /* White background for skills */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
-            border: 1px solid #E0E0E0; /* Light border */
-            cursor: pointer;
-            transition: all 0.4s ease-in-out; /* Smooth transitions for scatter */
-
-            /* Initial hidden state */
-            opacity: 0;
-            transform: scale(0.2);
-            pointer-events: none; /* Prevent clicks when hidden */
-        }
-        .skill-item.scattered { /* Class to apply random scatter */
-            /* Transform will be set dynamically by JS */
-            opacity: 0;
-            pointer-events: none;
-        }
-        .skill-item.collected { /* Class to bring skills back to grid */
-            opacity: 1;
-            transform: scale(1) rotate(0deg) translate(0, 0);
-            pointer-events: auto;
-        }
-        .skill-item:hover {
-            background-color: #F3F4F6; /* Light gray on hover */
-            color: var(--color-warm-coral); /* Accent text on hover */
-            border-color: var(--color-warm-coral); /* Accent border on hover */
-        }
-        .skill-item-icon { /* For the checkmark/bullet */
-            color: var(--color-deep-teal); /* Accent color checkmark */
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* Filter button styling - ENHANCED */
-        .skill-filter-btn {
-            background-color: var(--color-light-bg); /* Light background */
-            color: var(--color-light-text);
-            transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid #D1D5DB; /* Subtle border */
-        }
-        .skill-filter-btn:hover {
-            background-color: var(--color-soft-peach); /* Light peach on hover */
-            color: var(--color-dark-text); /* Darker text on hover */
-            transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
-            border-color: var(--color-warm-coral); /* Accent border on hover */
-        }
-        .skill-filter-btn.active {
-            background-color: var(--color-deep-teal); /* Primary color when active */
-            color: white;
-            box-shadow: 0 4px 10px rgba(36, 83, 101, 0.4); /* Stronger shadow when active */
-            transform: translateY(-2px) scale(1.01); /* Slight lift when active */
-            border-color: var(--color-deep-teal); /* Solid border when active */
-        }
-        .skill-filter-btn.active:hover {
-            background-color: var(--color-primary-dark); /* Darker primary on active hover */
-            transform: translateY(-4px) scale(1.03); /* More pronounced lift on active hover */
-            box-shadow: 0 6px 15px rgba(36, 83, 101, 0.5); /* Even stronger shadow */
-        }
-
-        /* Navigation link button-like hover effect */
-        .nav-link {
-            font-weight: 500;
-            color: var(--color-light-text);
-            transition: color 0.3s ease, background-color 0.3s ease;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.5rem;
-            display: inline-block;
-        }
-        .nav-link:hover {
-            color: var(--color-deep-teal);
-            background-color: rgba(36, 83, 101, 0.1);
-        }
-        /* Specific styles for experience cards to make them more dynamic */
-        .experience-card-title {
-            color: var(--color-deep-teal); /* Use primary color for titles */
-        }
-        .experience-card-dates {
-            color: var(--color-warm-coral); /* Use secondary color for dates */
-        }
-        .experience-bullet-icon {
-            color: var(--color-warm-coral); /* Use secondary color for list icons */
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Header/Navigation -->
-    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
-        <div class="container flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#experience" class="nav-link">Experience</a></li>
-                    <li><a href="#projects" class="nav-link">Work Studies</a></li>
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="hero" class="relative">
         <div class="hero-video-container">
             <video autoplay loop muted playsinline>
                 <source src="herobanner.mp4" type="video/mp4">
@@ -742,533 +435,202 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">Skills</h2>
-            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="all">All Skills</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="technical">Technical</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="professional">Professional</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="leadership">Leadership</button>
-            </div>
-            <div id="skills-grid" class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Technical Skills -->
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>HTML/CSS</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>JavaScript</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Tailwind CSS</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Python</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>SQL</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Sheets</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Forms</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Analysis</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Viz</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>UI/UX Design</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Canva</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>AI/ML Concepts</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Cybersecurity Concepts</span></div>
-                
-                <!-- Professional Skills -->
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Planning</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Process Opt.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Constituent Relations</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Stakeholder Mgmt.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Project Mgmt.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Policy Research</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Public Speaking</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Cross-functional Collab.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Comm.</span></div>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="container fade-in-section">
+            <h2 class="section-heading">Skills</h2>
+            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="all">All Skills</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="technical">Technical</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="professional">Professional</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="leadership">Leadership</button>
+            </div>
+            <div id="skills-grid" class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Technical Skills -->
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>HTML/CSS</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>JavaScript</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Tailwind CSS</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Python</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>SQL</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Sheets</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Forms</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Analysis</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Viz</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>UI/UX Design</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Canva</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>AI/ML Concepts</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Cybersecurity Concepts</span></div>
+                
+                <!-- Professional Skills -->
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Planning</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Process Opt.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Constituent Relations</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Stakeholder Mgmt.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Project Mgmt.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Policy Research</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Public Speaking</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Cross-functional Collab.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Comm.</span></div>
 
-                <!-- Leadership Skills -->
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Leadership</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Adaptability</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Resilience</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Mentorship</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Problem-Solving</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Innovation</span></div>
-            </div>
-        </div>
-    </section>
+                <!-- Leadership Skills -->
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Leadership</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Adaptability</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Resilience</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Mentorship</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Problem-Solving</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Innovation</span></div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">Contact Me</h2>
-            <div class="max-w-3xl mx-auto text-center text-lg text-gray-700">
-                <p class="mb-8">Let's make something great!</p>
-                <div class="flex justify-center space-x-16 mb-10">
-                    <a href="mailto:markrickey01@gmail.com" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                </div>
-                <p class="text-sm text-gray-500">&copy; 2025 Mark R. All rights reserved.</p>
-            </div>
-        </div>
-    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container fade-in-section">
+            <h2 class="section-heading">Contact Me</h2>
+            <div class="max-w-3xl mx-auto text-center text-lg text-gray-700">
+                <p class="mb-8">Let's make something great!</p>
+                <div class="flex justify-center space-x-16 mb-10">
+                    <a href="mailto:markrickey01@gmail.com" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                </div>
+                <p class="text-sm text-gray-500">&copy; 2025 Mark R. All rights reserved.</p>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Select all elements that need fade-in or slide animations
-            const fadeInSections = document.querySelectorAll('.fade-in-section');
-            const fadeInCards = document.querySelectorAll('.content-card'); // Use content-card for experience/project cards
-            const skillItems = document.querySelectorAll('.skill-item'); // Get all skill items for individual fade-in
-            const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-text, .hero-button, .profile-img');
-
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of the element must be visible to trigger
-            };
-
-            // Function to create and apply observer for elements with staggered delays
-            const createObserver = (elements, delayMultiplier = 0) => {
-                const observerInstance = new IntersectionObserver((entries) => {
-                    entries.forEach((entry, index) => {
-                        if (entry.isIntersecting) {
-                            setTimeout(() => {
-                                entry.target.classList.add('is-visible');
-                                observerInstance.unobserve(entry.target);
-                            }, index * delayMultiplier); // Staggered delay
-                        }
-                    });
-                }, observerOptions);
-                elements.forEach(element => observerInstance.observe(element));
-            };
-
-            createObserver(fadeInSections);
-            createObserver(fadeInCards, 100); // Stagger cards by 100ms
-            createObserver(skillItems, 50); // Stagger skill items by 50ms
-            createObserver(heroElements, 100); // Hero elements stagger on load
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select all elements that need fade-in or slide animations
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            const fadeInCards = document.querySelectorAll('.content-card'); // Use content-card for experience/project cards
+            const skillItems = document.querySelectorAll('.skill-item'); // Get all skill items for individual fade-in
+            const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-text, .hero-button, .profile-img');
 
 
-            // Dynamic background color for Experience section
-            const experienceSection = document.getElementById('experience');
-            if (experienceSection) {
-                const startH = 220; const startS = 15; const startL = 95;
-                const endH = 210; const endS = 30; const endL = 85;
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the element must be visible to trigger
+            };
 
-                function interpolateColor(color1, color2, factor) {
-                    const result = color1.slice();
-                    for (let i = 0; i < 3; i++) {
-                        result[i] = color1[i] + factor * (color2[i] - color1[i]);
-                    }
-                    return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
-                }
+            // Function to create and apply observer for elements with staggered delays
+            const createObserver = (elements, delayMultiplier = 0) => {
+                const observerInstance = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                                observerInstance.unobserve(entry.target);
+                            }, index * delayMultiplier); // Staggered delay
+                        }
+                    });
+                }, observerOptions);
+                elements.forEach(element => observerInstance.observe(element));
+            };
 
-                const handleScroll = () => {
-                    const rect = experienceSection.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight;
-                    const elementHeight = rect.height;
-
-                    let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
-                    scrollFactor = Math.max(0, Math.min(1, scrollFactor));
-
-                    const interpolatedColor = interpolateColor(
-                        [startH, startS, startL],
-                        [endH, endS, endL],
-                        scrollFactor
-                    );
-                    experienceSection.style.backgroundColor = interpolatedColor;
-                };
-
-                handleScroll();
-                window.addEventListener('scroll', handleScroll);
-                window.addEventListener('resize', handleScroll);
-            }
-
-            // Skills filtering logic
-            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
-            const skillsGrid = document.getElementById('skills-grid');
-            const allSkillItems = skillsGrid.querySelectorAll('.skill-item'); // Get all skill items once
-
-            function filterSkills(filterCategory) {
-                const transitionDuration = 400; // Match CSS transition duration for scatter
-                const scatterDistance = 300; // Pixels to scatter randomly
-                const scatterRotateMax = 180; // Max degrees to rotate randomly
-
-                allSkillItems.forEach((item, index) => {
-                    const itemCategory = item.dataset.category;
-                    const isVisible = (filterCategory === 'all' || itemCategory === filterCategory);
-
-                    if (isVisible) {
-                        // Collect back into place
-                        item.style.display = 'flex'; // Ensure it's rendered for animation
-                        setTimeout(() => {
-                            item.classList.remove('scattered');
-                            item.classList.add('collected');
-                            item.style.transform = 'scale(1) rotate(0deg) translate(0px, 0px)';
-                            item.style.opacity = '1';
-                            item.style.pointerEvents = 'auto';
-                        }, 10); // Small delay to ensure display change registers
-                    } else {
-                        // Scatter outwards and hide
-                        const randomX = (Math.random() - 0.5) * 2 * scatterDistance;
-                        const randomY = (Math.random() - 0.5) * 2 * scatterDistance;
-                        const randomRotate = (Math.random() - 0.5) * 2 * scatterRotateMax;
-
-                        item.classList.remove('collected');
-                        item.classList.add('scattered');
-                        item.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.2) rotate(${randomRotate}deg)`;
-                        item.style.opacity = '0';
-                        item.style.pointerEvents = 'none';
-
-                        // Hide completely after animation
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, transitionDuration);
-                    }
-                });
-            }
-
-            skillFilterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Update active button style
-                    skillFilterButtons.forEach(btn => {
-                        btn.classList.remove('bg-blue-600', 'text-white');
-                        btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
-                    });
-                    button.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
-                    button.classList.add('bg-blue-600', 'text-white');
-
-                    // Apply filter
-                    filterSkills(button.dataset.filter);
-                });
-            });
-
-            // Initial filter for "All" on load
-            filterSkills('all');
-        });
-    </script>
-
-</body>
-</html>
-
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content container">
-            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img">
-            <h1 class="hero-title">Mark R.</h1>
-            <p class="hero-subtitle">Strategic Project & Data Management Leader</p>
-            <p class="text-lg mb-8 max-w-3xl mx-auto text-white hero-text">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
-            <a href="#contact" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 ease-in-out shadow-lg hover:bg-blue-700 hover:scale-105 inline-block hero-button">Connect with Me</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">About Me</h2>
-            <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6">
-                <p class="fade-in-card">A resilient professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and international stakeholder engagement, consistently delivering quantifiable results in complex, high-stakes environments.</p>
-                <p class="fade-in-card">My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning, positioning me as a sought-after expert in driving operational excellence and impactful solutions. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-20">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">Experience</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Experience Item 1: Congressional Staffer Fellow -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Primary account manager for DoD, VA, Military Academies.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Refined & executed advanced data management systems.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</span></li>
-                    </ul>
-                </div>
-                <!-- Experience Item 2: Active Duty Army -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Directed complex logistical operations, ensuring maximum efficiency in South Pacific.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Led & mentored multinational teams in high-pressure operations.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</span></li>
-                    </ul>
-                </div>
-                <!-- Experience Item 3: Digital Optimization Supervisor -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Spearheaded content management (20% accuracy/efficiency gain).</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Drove consumer engagement (15% interaction, 10% retention uplift).</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Developed reporting tools/KPIs, achieving 25% sales increase.</span></li>
-                    </ul>
-                </div>
-                <!-- Experience Item 4: Digital Marketing Manager -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Increased visibility by 25% & member engagement by 20% via marketing/branding.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Optimized websites (30% content visibility improvement), delivered detailed analytics.</span></li>
-                    </ul>
-                </div>
-                <!-- Experience Item 5: Intern, Digital Content Strategist -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Executed content strategy for digital channels (social media, website, email).</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed social media, coordinated marketing campaigns for fitness initiatives.</span></li>
-                    </ul>
-                </div>
-                <!-- Experience Item 6: Undergraduate Creative Director Intern -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Designed visual/digital content for student success, solidifying branding identity.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed cross-functional teams, conducted market research.</span></li>
-                    </ul>
-                </div>
-                <!-- Experience Item 7: Student Orientation Supervisor -->
-                <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Supervised software solutions for course enrollment & new student management.</span></li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Provided guidance/support to new students, fostering welcoming environment.</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section (Now Work Studies) -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">Work Studies</h2> <!-- Changed heading -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Work Study 1: Job Fair Data Management & Strategic Outreach -->
-                <div class="content-card fade-in-card">
-                    <div class="project-dynamic-visual mb-5"></div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Job Fair Data Management & Strategic Outreach</h3>
-                    <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
-                    <a href="work-studies/job-fair-data-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-                <!-- Work Study 2: Public Correspondence & Strategic Communication -->
-                <div class="content-card fade-in-card">
-                    <div class="project-dynamic-visual mb-5"></div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Public Correspondence & Strategic Communication</h3>
-                    <p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p>
-                    <a href="work-studies/public-correspondence-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-                <!-- Work Study 3: Constituent Engagement Data Optimization -->
-                <div class="content-card fade-in-card">
-                    <div class="project-dynamic-visual mb-5"></div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Constituent Engagement Data Optimization</h3>
-                    <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p>
-                    <a href="work-studies/constituent-data-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">Skills</h2>
-            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="all">All Skills</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="technical">Technical</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="professional">Professional</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="leadership">Leadership</button>
-            </div>
-            <div id="skills-grid" class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Technical Skills -->
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>HTML/CSS</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>JavaScript</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Tailwind CSS</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Python</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>SQL</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Sheets</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Forms</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Analysis</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Viz</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>UI/UX Design</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Canva</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>AI/ML Concepts</span></div>
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Cybersecurity Concepts</span></div>
-                
-                <!-- Professional Skills -->
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Planning</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Process Opt.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Constituent Relations</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Stakeholder Mgmt.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Project Mgmt.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Policy Research</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Public Speaking</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Cross-functional Collab.</span></div>
-                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Comm.</span></div>
-
-                <!-- Leadership Skills -->
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Leadership</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Adaptability</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Resilience</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Mentorship</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Problem-Solving</span></div>
-                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Innovation</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="container fade-in-section">
-            <h2 class="section-heading">Contact Me</h2>
-            <div class="max-w-3xl mx-auto text-center text-lg text-gray-700">
-                <p class="mb-8">Let's make something great!</p>
-                <div class="flex justify-center space-x-16 mb-10">
-                    <a href="mailto:markrickey01@gmail.com" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" class="text-blue-600 text-5xl transition-all duration-300 ease-in-out hover:text-blue-700 hover:scale-110 rounded-md" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                </div>
-                <p class="text-sm text-gray-500">&copy; 2025 Mark R. All rights reserved.</p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Select all elements that need fade-in or slide animations
-            const fadeInSections = document.querySelectorAll('.fade-in-section');
-            const fadeInCards = document.querySelectorAll('.content-card'); // Use content-card for experience/project cards
-            const skillItems = document.querySelectorAll('.skill-item'); // Get all skill items for individual fade-in
-            const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-text, .hero-button, .profile-img');
+            createObserver(fadeInSections);
+            createObserver(fadeInCards, 100); // Stagger cards by 100ms
+            createObserver(skillItems, 50); // Stagger skill items by 50ms
+            createObserver(heroElements, 100); // Hero elements stagger on load
 
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of the element must be visible to trigger
-            };
+            // Dynamic background color for Experience section
+            const experienceSection = document.getElementById('experience');
+            if (experienceSection) {
+                const startH = 220; const startS = 15; const startL = 95;
+                const endH = 210; const endS = 30; const endL = 85;
 
-            // Function to create and apply observer for elements with staggered delays
-            const createObserver = (elements, delayMultiplier = 0) => {
-                const observerInstance = new IntersectionObserver((entries) => {
-                    entries.forEach((entry, index) => {
-                        if (entry.isIntersecting) {
-                            setTimeout(() => {
-                                entry.target.classList.add('is-visible');
-                                observerInstance.unobserve(entry.target);
-                            }, index * delayMultiplier); // Staggered delay
-                        }
-                    });
-                }, observerOptions);
-                elements.forEach(element => observerInstance.observe(element));
-            };
+                function interpolateColor(color1, color2, factor) {
+                    const result = color1.slice();
+                    for (let i = 0; i < 3; i++) {
+                        result[i] = color1[i] + factor * (color2[i] - color1[i]);
+                    }
+                    return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
+                }
 
-            createObserver(fadeInSections);
-            createObserver(fadeInCards, 100); // Stagger cards by 100ms
-            createObserver(skillItems, 50); // Stagger skill items by 50ms
-            createObserver(heroElements, 100); // Hero elements stagger on load
+                const handleScroll = () => {
+                    const rect = experienceSection.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    const elementHeight = rect.height;
 
+                    let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
+                    scrollFactor = Math.max(0, Math.min(1, scrollFactor));
 
-            // Dynamic background color for Experience section
-            const experienceSection = document.getElementById('experience');
-            if (experienceSection) {
-                const startH = 220; const startS = 15; const startL = 95;
-                const endH = 210; const endS = 30; const endL = 85;
+                    const interpolatedColor = interpolateColor(
+                        [startH, startS, startL],
+                        [endH, endS, endL],
+                    );
+                    experienceSection.style.backgroundColor = interpolatedColor;
+                };
 
-                function interpolateColor(color1, color2, factor) {
-                    const result = color1.slice();
-                    for (let i = 0; i < 3; i++) {
-                        result[i] = color1[i] + factor * (color2[i] - color1[i]);
-                    }
-                    return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
-                }
+                handleScroll();
+                window.addEventListener('scroll', handleScroll);
+                window.addEventListener('resize', handleScroll);
+            }
 
-                const handleScroll = () => {
-                    const rect = experienceSection.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight;
-                    const elementHeight = rect.height;
+            // Skills filtering logic
+            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
+            const skillsGrid = document.getElementById('skills-grid');
+            const allSkillItems = skillsGrid.querySelectorAll('.skill-item'); // Get all skill items once
 
-                    let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
-                    scrollFactor = Math.max(0, Math.min(1, scrollFactor));
+            function filterSkills(filterCategory) {
+                const transitionDuration = 400; // Match CSS transition duration for scatter
+                const scatterDistance = 300; // Pixels to scatter randomly
+                const scatterRotateMax = 180; // Max degrees to rotate randomly
 
-                    const interpolatedColor = interpolateColor(
-                        [startH, startS, startL],
-                        [endH, endS, endL],
-                        scrollFactor
-                    );
-                    experienceSection.style.backgroundColor = interpolatedColor;
-                };
+                allSkillItems.forEach((item, index) => {
+                    const itemCategory = item.dataset.category;
+                    const isVisible = (filterCategory === 'all' || itemCategory === filterCategory);
 
-                handleScroll();
-                window.addEventListener('scroll', handleScroll);
-                window.addEventListener('resize', handleScroll);
-            }
+                    if (isVisible) {
+                        // Collect back into place
+                        item.style.display = 'flex'; // Ensure it's rendered for animation
+                        setTimeout(() => {
+                            item.classList.remove('scattered');
+                            item.classList.add('collected');
+                            item.style.transform = 'scale(1) rotate(0deg) translate(0px, 0px)';
+                            item.style.opacity = '1';
+                            item.style.pointerEvents = 'auto';
+                        }, 10); // Small delay to ensure display change registers
+                    } else {
+                        // Scatter outwards and hide
+                        const randomX = (Math.random() - 0.5) * 2 * scatterDistance;
+                        const randomY = (Math.random() - 0.5) * 2 * scatterDistance;
+                        const randomRotate = (Math.random() - 0.5) * 2 * scatterRotateMax;
 
-            // Skills filtering logic
-            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
-            const skillsGrid = document.getElementById('skills-grid');
-            const allSkillItems = skillsGrid.querySelectorAll('.skill-item'); // Get all skill items once
+                        item.classList.remove('collected');
+                        item.classList.add('scattered');
+                        item.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.2) rotate(${randomRotate}deg)`;
+                        item.style.opacity = '0';
+                        item.style.pointerEvents = 'none';
 
-            function filterSkills(filterCategory) {
-                const transitionDuration = 400; // Match CSS transition duration for scatter
-                const scatterDistance = 300; // Pixels to scatter randomly
-                const scatterRotateMax = 180; // Max degrees to rotate randomly
+                        // Hide completely after animation
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, transitionDuration);
+                    }
+                });
+            }
 
-                allSkillItems.forEach((item, index) => {
-                    const itemCategory = item.dataset.category;
-                    const isVisible = (filterCategory === 'all' || itemCategory === filterCategory);
+            skillFilterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button style
+                    skillFilterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
+                    });
+                    button.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
+                    button.classList.add('bg-blue-600', 'text-white');
 
-                    if (isVisible) {
-                        // Collect back into place
-                        item.style.display = 'flex'; // Ensure it's rendered for animation
-                        setTimeout(() => {
-                            item.classList.remove('scattered');
-                            item.classList.add('collected');
-                            item.style.transform = 'scale(1) rotate(0deg) translate(0px, 0px)';
-                            item.style.opacity = '1';
-                            item.style.pointerEvents = 'auto';
-                        }, 10); // Small delay to ensure display change registers
-                    } else {
-                        // Scatter outwards and hide
-                        const randomX = (Math.random() - 0.5) * 2 * scatterDistance;
-                        const randomY = (Math.random() - 0.5) * 2 * scatterDistance;
-                        const randomRotate = (Math.random() - 0.5) * 2 * scatterRotateMax;
+                    // Apply filter
+                    filterSkills(button.dataset.filter);
+                });
+            });
 
-                        item.classList.remove('collected');
-                        item.classList.add('scattered');
-                        item.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.2) rotate(${randomRotate}deg)`;
-                        item.style.opacity = '0';
-                        item.style.pointerEvents = 'none';
-
-                        // Hide completely after animation
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, transitionDuration);
-                    }
-                });
-            }
-
-            skillFilterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Update active button style
-                    skillFilterButtons.forEach(btn => {
-                        btn.classList.remove('bg-blue-600', 'text-white');
-                        btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
-                    });
-                    button.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
-                    button.classList.add('bg-blue-600', 'text-white');
-
-                    // Apply filter
-                    filterSkills(button.dataset.filter);
-                });
-            });
-
-            // Initial filter for "All" on load
-            filterSkills('all');
-        });
-    </script>
+            // Initial filter for "All" on load
+            filterSkills('all');
+        });
+    </script>
 
 </body>
 </html>
