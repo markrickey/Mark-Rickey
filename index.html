@@ -12,10 +12,15 @@
         /* Base styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F8F8; /* Very light, soft gray background */
             color: #333333; /* Darker gray for primary text */
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            
+            /* Dynamic Gradient Background */
+            background: linear-gradient(180deg, #245365 0%, #DB7A4D 50%, #FFD9CC 100%); /* Start with 3 colors */
+            background-size: 100% 200vh; /* Make gradient taller than viewport */
+            background-attachment: fixed; /* Fixes gradient relative to viewport */
+            transition: background-position 0.5s ease-out; /* Smooth transition for scroll effect */
         }
         .container {
             max-width: 1200px;
@@ -23,6 +28,16 @@
             margin-right: auto;
             padding-left: 1.5rem;
             padding-right: 1.5rem;
+        }
+
+        /* NEW COLOR PALETTE VARIABLES */
+        :root {
+            --color-deep-teal: #245365;
+            --color-warm-coral: #DB7A4D;
+            --color-soft-peach: #FFD9CC;
+            --color-dark-text: #1F2937;
+            --color-light-text: #4B5563;
+            --color-light-bg: #F9FAFB;
         }
 
         /* Hero Section - Full height, bold typography */
@@ -34,7 +49,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background-color: #E0E0E0; /* Fallback background for video */
+            background-color: var(--color-deep-teal); /* Fallback background for video */
         }
         .hero-video-container {
             position: absolute;
@@ -48,7 +63,7 @@
         }
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); /* Lighter overlay for brighter video */
+            background-color: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for text contrast */
             z-index: 0;
         }
         .hero-content {
@@ -119,7 +134,7 @@
         .section-heading {
             font-size: 3.5rem; /* Larger, more impactful */
             font-weight: 700;
-            color: #1F2937;
+            color: var(--color-dark-text);
             margin-bottom: 3rem;
             text-align: left; /* Aligned left for modern feel */
             position: relative;
@@ -140,7 +155,7 @@
             bottom: 0;
             width: 100px; /* Longer underline */
             height: 5px;
-            background-color: #3B82F6; /* Accent blue */
+            background-color: var(--color-warm-coral); /* Accent color */
             border-radius: 3px;
         }
 
@@ -180,7 +195,7 @@
             align-items: center;
             justify-content: center; /* Center content in skill item */
             font-size: 1.125rem;
-            color: #4B5563;
+            color: var(--color-light-text);
             padding: 0.75rem 1rem; /* More padding for button feel */
             border-radius: 0.5rem; /* Rounded corners */
             background-color: #FFFFFF; /* White background for skills */
@@ -206,46 +221,65 @@
         }
         .skill-item:hover {
             background-color: #F3F4F6; /* Light gray on hover */
-            color: #3B82F6; /* Accent blue text on hover */
-            border-color: #3B82F6; /* Accent blue border on hover */
+            color: var(--color-warm-coral); /* Accent text on hover */
+            border-color: var(--color-warm-coral); /* Accent border on hover */
         }
         .skill-item-icon { /* For the checkmark/bullet */
-            color: #3B82F6; /* Accent blue checkmark */
+            color: var(--color-deep-teal); /* Accent color checkmark */
             font-weight: bold;
             margin-right: 0.5rem;
         }
 
-        /* Filter button styling */
+        /* Filter button styling - ENHANCED */
         .skill-filter-btn {
-            background-color: #E5E7EB; /* Gray 200 */
-            color: #4B5563; /* Gray 700 */
-            transition: background-color 0.2s, color 0.2s, transform 0.1s ease-out;
+            background-color: var(--color-light-bg); /* Light background */
+            color: var(--color-light-text);
+            transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #D1D5DB; /* Subtle border */
         }
         .skill-filter-btn:hover {
-            background-color: #D1D5DB; /* Gray 300 */
-            transform: translateY(-1px);
+            background-color: var(--color-soft-peach); /* Light peach on hover */
+            color: var(--color-dark-text); /* Darker text on hover */
+            transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+            border-color: var(--color-warm-coral); /* Accent border on hover */
         }
         .skill-filter-btn.active {
-            background-color: #3B82F6; /* Accent blue */
+            background-color: var(--color-deep-teal); /* Primary color when active */
             color: white;
-            box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 10px rgba(36, 83, 101, 0.4); /* Stronger shadow when active */
+            transform: translateY(-2px) scale(1.01); /* Slight lift when active */
+            border-color: var(--color-deep-teal); /* Solid border when active */
         }
         .skill-filter-btn.active:hover {
-            background-color: #2563EB; /* Darker blue */
+            background-color: var(--color-primary-dark); /* Darker primary on active hover */
+            transform: translateY(-4px) scale(1.03); /* More pronounced lift on active hover */
+            box-shadow: 0 6px 15px rgba(36, 83, 101, 0.5); /* Even stronger shadow */
         }
 
         /* Navigation link button-like hover effect */
         .nav-link {
             font-weight: 500;
-            color: #4B5563;
+            color: var(--color-light-text);
             transition: color 0.3s ease, background-color 0.3s ease;
             padding: 0.5rem 0.75rem;
             border-radius: 0.5rem;
             display: inline-block;
         }
         .nav-link:hover {
-            color: #3B82F6;
-            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--color-deep-teal);
+            background-color: rgba(36, 83, 101, 0.1);
+        }
+        /* Specific styles for experience cards to make them more dynamic */
+        .experience-card-title {
+            color: var(--color-deep-teal); /* Use primary color for titles */
+        }
+        .experience-card-dates {
+            color: var(--color-warm-coral); /* Use secondary color for dates */
+        }
+        .experience-bullet-icon {
+            color: var(--color-warm-coral); /* Use secondary color for list icons */
         }
     </style>
 </head>
@@ -303,66 +337,68 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Experience Item 1: Congressional Staffer Fellow -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Congressional Staffer</h3>
-                    <p class="text-gray-600 mb-5 text-sm">U.S. House of Representatives | May 2025 – Present</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Served as primary account manager for the Department of Defense, Veterans Affairs, and the Military Academies. Refined and executed advanced data management systems. Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Primary account manager for DoD, VA, Military Academies.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Refined & executed advanced data management systems.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</span></li>
                     </ul>
                 </div>
                 <!-- Experience Item 2: Active Duty Army -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">U.S. Army, Project Manager/NCO</h3>
-                    <p class="text-gray-600 mb-5 text-sm">United States Army | Global Operations</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Directed complex logistical operations, ensuring maximum efficiency in South Pacific Theater.</li>
-                        <li>Led/mentored multinational teams in high-pressure operations, cultivating unity & achieving objectives.</li>
-                        <li>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Directed complex logistical operations, ensuring maximum efficiency in South Pacific.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Led & mentored multinational teams in high-pressure operations.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</span></li>
                     </ul>
                 </div>
                 <!-- Experience Item 3: Digital Optimization Supervisor -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Optimization Supervisor</h3>
-                    <p class="text-gray-600 mb-5 text-sm">McDonald's | Jun 2018 - Nov 2018</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Spearheaded content management (20% accuracy/efficiency gain).</li>
-                        <li>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
-                        <li>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Spearheaded content management (20% accuracy/efficiency gain).</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Drove consumer engagement (15% interaction, 10% retention uplift).</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Developed reporting tools/KPIs, achieving 25% sales increase.</span></li>
                     </ul>
                 </div>
                 <!-- Experience Item 4: Digital Marketing Manager -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Marketing Manager</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Association Forum | Nov 2017 - Jun 2018</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Increased visibility by 25% & member engagement by 20% via marketing/branding.</li>
-                        <li>Optimized websites (30% content visibility improvement), delivered detailed analytics.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Increased visibility by 25% & member engagement by 20% via marketing/branding.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Optimized websites (30% content visibility improvement), delivered detailed analytics.</span></li>
                     </ul>
                 </div>
                 <!-- Experience Item 5: Intern, Digital Content Strategist -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Intern, Digital Content Strategist</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Evolve & Elevate | Jun 2017 - Oct 2017</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Executed content strategy for digital channels (social media, website, email).</li>
-                        <li>Managed social media, coordinated marketing campaigns for fitness initiatives.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Executed content strategy for digital channels (social media, website, email).</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed social media, coordinated marketing campaigns for fitness initiatives.</span></li>
                     </ul>
                 </div>
                 <!-- Experience Item 6: Undergraduate Creative Director Intern -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Undergraduate Creative Director Intern</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Apr 2016 - Dec 2016</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Designed visual/digital content for student success, solidifying branding identity.</li>
-                        <li>Managed cross-functional teams, conducted market research.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Designed visual/digital content for student success, solidifying branding identity.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed cross-functional teams, conducted market research.</span></li>
                     </ul>
                 </div>
                 <!-- Experience Item 7: Student Orientation Supervisor -->
                 <div class="content-card slide-right-fade">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Student Orientation Supervisor</h3>
-                    <p class="text-gray-600 mb-5 text-sm">Purdue University | Apr 2016 - Aug 2016</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 text-base">
-                        <li>Supervised software solutions for course enrollment & new student management.</li>
-                        <li>Provided guidance/support to new students, fostering welcoming environment.</li>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
+                    <ul class="list-none text-gray-700 space-y-2 text-base">
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Supervised software solutions for course enrollment & new student management.</span></li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Provided guidance/support to new students, fostering welcoming environment.</span></li>
                     </ul>
                 </div>
             </div>
@@ -404,10 +440,10 @@
         <div class="container fade-in-section">
             <h2 class="section-heading">Skills</h2>
             <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-blue-600 text-white" data-filter="all">All Skills</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700" data-filter="technical">Technical</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700" data-filter="professional">Professional</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700" data-filter="leadership">Leadership</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="all">All Skills</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="technical">Technical</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="professional">Professional</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="leadership">Leadership</button>
             </div>
             <div id="skills-grid" class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 <!-- Technical Skills -->
@@ -540,27 +576,31 @@
 
             function filterSkills(filterCategory) {
                 const transitionDuration = 400; // Match CSS transition duration for scatter
-                const randomRange = 200; // Pixels to scatter randomly
+                const scatterDistance = 300; // Pixels to scatter randomly
+                const scatterRotateMax = 180; // Max degrees to rotate randomly
 
                 allSkillItems.forEach((item, index) => {
                     const itemCategory = item.dataset.category;
                     const isVisible = (filterCategory === 'all' || itemCategory === filterCategory);
 
                     if (isVisible) {
-                        // Make visible and reset transform for collection
+                        // Collect back into place
                         item.style.display = 'flex'; // Ensure it's rendered for animation
-                        // Use a tiny delay to ensure display:flex registers before transform applies
                         setTimeout(() => {
+                            item.classList.remove('scattered');
+                            item.classList.add('collected');
                             item.style.transform = 'scale(1) rotate(0deg) translate(0px, 0px)';
                             item.style.opacity = '1';
                             item.style.pointerEvents = 'auto';
-                        }, 10); // Small timeout
+                        }, 10); // Small delay to ensure display change registers
                     } else {
-                        // Scatter and hide
-                        const randomX = (Math.random() - 0.5) * 2 * randomRange;
-                        const randomY = (Math.random() - 0.5) * 2 * randomRange;
-                        const randomRotate = (Math.random() - 0.5) * 2 * 90; // Up to +/- 90 degrees
+                        // Scatter outwards and hide
+                        const randomX = (Math.random() - 0.5) * 2 * scatterDistance;
+                        const randomY = (Math.random() - 0.5) * 2 * scatterDistance;
+                        const randomRotate = (Math.random() - 0.5) * 2 * scatterRotateMax;
 
+                        item.classList.remove('collected');
+                        item.classList.add('scattered');
                         item.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.2) rotate(${randomRotate}deg)`;
                         item.style.opacity = '0';
                         item.style.pointerEvents = 'none';
