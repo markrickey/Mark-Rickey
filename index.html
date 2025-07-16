@@ -178,20 +178,61 @@
         .skill-item {
             display: flex;
             align-items: center;
+            justify-content: center; /* Center content in skill item */
             font-size: 1.125rem;
             color: #4B5563;
-            padding: 0.5rem 0;
-            opacity: 0; /* Initial state for animation */
-            transform: translateY(10px);
+            padding: 0.75rem 1rem; /* More padding for button feel */
+            border-radius: 0.5rem; /* Rounded corners */
+            background-color: #FFFFFF; /* White background for skills */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
+            border: 1px solid #E0E0E0; /* Light border */
+            cursor: pointer;
+            transition: all 0.4s ease-in-out; /* Smooth transitions for scatter */
+
+            /* Initial hidden state */
+            opacity: 0;
+            transform: scale(0.2);
+            pointer-events: none; /* Prevent clicks when hidden */
         }
-        .skill-item.is-visible {
+        .skill-item.scattered { /* Class to apply random scatter */
+            /* Transform will be set dynamically by JS */
+            opacity: 0;
+            pointer-events: none;
+        }
+        .skill-item.collected { /* Class to bring skills back to grid */
             opacity: 1;
-            transform: translateY(0);
+            transform: scale(1) rotate(0deg) translate(0, 0);
+            pointer-events: auto;
+        }
+        .skill-item:hover {
+            background-color: #F3F4F6; /* Light gray on hover */
+            color: #3B82F6; /* Accent blue text on hover */
+            border-color: #3B82F6; /* Accent blue border on hover */
+        }
+        .skill-item-icon { /* For the checkmark/bullet */
+            color: #3B82F6; /* Accent blue checkmark */
+            font-weight: bold;
+            margin-right: 0.5rem;
         }
 
-        /* Project Dynamic Visual Background (Removed as per user request for images) */
-        /* .project-dynamic-visual { ... } */
-        /* @keyframes gradientShift { ... } */
+        /* Filter button styling */
+        .skill-filter-btn {
+            background-color: #E5E7EB; /* Gray 200 */
+            color: #4B5563; /* Gray 700 */
+            transition: background-color 0.2s, color 0.2s, transform 0.1s ease-out;
+        }
+        .skill-filter-btn:hover {
+            background-color: #D1D5DB; /* Gray 300 */
+            transform: translateY(-1px);
+        }
+        .skill-filter-btn.active {
+            background-color: #3B82F6; /* Accent blue */
+            color: white;
+            box-shadow: 0 2px 5px rgba(59, 130, 246, 0.3);
+        }
+        .skill-filter-btn.active:hover {
+            background-color: #2563EB; /* Darker blue */
+        }
 
         /* Navigation link button-like hover effect */
         .nav-link {
@@ -362,25 +403,46 @@
     <section id="skills" class="py-20 bg-gray-50">
         <div class="container fade-in-section">
             <h2 class="section-heading">Skills</h2>
-            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-x-6 text-lg text-gray-700">
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Strategic Planning</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Process Optimization</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Data Analysis</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Constituent Relations</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Stakeholder Management</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Project Management</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Policy Research</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Google Workspace (Sheets, Forms)</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Microsoft Office Suite</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Public Speaking</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Cross-functional Collaboration</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Adaptability & Resilience</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Leadership & Mentorship</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Strategic Communication</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Python</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>SQL</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>AI/Machine Learning Concepts</span></div>
-                <div class="flex items-center space-x-3 fade-in-skill"><span class="text-blue-600 font-bold">&#10003;</span><span>Cybersecurity Concepts</span></div>
+            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-blue-600 text-white" data-filter="all">All Skills</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700" data-filter="technical">Technical</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700" data-filter="professional">Professional</button>
+                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700" data-filter="leadership">Leadership</button>
+            </div>
+            <div id="skills-grid" class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Technical Skills -->
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>HTML/CSS</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>JavaScript</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Tailwind CSS</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Python</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>SQL</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Sheets</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Google Forms</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Analysis</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Data Viz</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>UI/UX Design</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Canva</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>AI/ML Concepts</span></div>
+                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span><span>Cybersecurity Concepts</span></div>
+                
+                <!-- Professional Skills -->
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Planning</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Process Opt.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Constituent Relations</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Stakeholder Mgmt.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Project Mgmt.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Policy Research</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Public Speaking</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Cross-functional Collab.</span></div>
+                <div class="skill-item" data-category="professional"><span class="skill-item-icon">&#9881;</span><span>Strategic Comm.</span></div>
+
+                <!-- Leadership Skills -->
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Leadership</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Adaptability</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Resilience</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Mentorship</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Problem-Solving</span></div>
+                <div class="skill-item" data-category="leadership"><span class="skill-item-icon">&#9881;</span><span>Innovation</span></div>
             </div>
         </div>
     </section>
@@ -405,7 +467,7 @@
             // Select all elements that need fade-in or slide animations
             const fadeInSections = document.querySelectorAll('.fade-in-section');
             const fadeInCards = document.querySelectorAll('.content-card'); // Use content-card for experience/project cards
-            const fadeInSkills = document.querySelectorAll('.skill-item');
+            const skillItems = document.querySelectorAll('.skill-item'); // Get all skill items for individual fade-in
             const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-text, .hero-button, .profile-img');
 
 
@@ -432,7 +494,7 @@
 
             createObserver(fadeInSections);
             createObserver(fadeInCards, 100); // Stagger cards by 100ms
-            createObserver(fadeInSkills, 50); // Stagger skills by 50ms
+            createObserver(skillItems, 50); // Stagger skill items by 50ms
             createObserver(heroElements, 100); // Hero elements stagger on load
 
 
@@ -470,6 +532,64 @@
                 window.addEventListener('scroll', handleScroll);
                 window.addEventListener('resize', handleScroll);
             }
+
+            // Skills filtering logic
+            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
+            const skillsGrid = document.getElementById('skills-grid');
+            const allSkillItems = skillsGrid.querySelectorAll('.skill-item'); // Get all skill items once
+
+            function filterSkills(filterCategory) {
+                const transitionDuration = 400; // Match CSS transition duration for scatter
+                const randomRange = 200; // Pixels to scatter randomly
+
+                allSkillItems.forEach((item, index) => {
+                    const itemCategory = item.dataset.category;
+                    const isVisible = (filterCategory === 'all' || itemCategory === filterCategory);
+
+                    if (isVisible) {
+                        // Make visible and reset transform for collection
+                        item.style.display = 'flex'; // Ensure it's rendered for animation
+                        // Use a tiny delay to ensure display:flex registers before transform applies
+                        setTimeout(() => {
+                            item.style.transform = 'scale(1) rotate(0deg) translate(0px, 0px)';
+                            item.style.opacity = '1';
+                            item.style.pointerEvents = 'auto';
+                        }, 10); // Small timeout
+                    } else {
+                        // Scatter and hide
+                        const randomX = (Math.random() - 0.5) * 2 * randomRange;
+                        const randomY = (Math.random() - 0.5) * 2 * randomRange;
+                        const randomRotate = (Math.random() - 0.5) * 2 * 90; // Up to +/- 90 degrees
+
+                        item.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.2) rotate(${randomRotate}deg)`;
+                        item.style.opacity = '0';
+                        item.style.pointerEvents = 'none';
+
+                        // Hide completely after animation
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, transitionDuration);
+                    }
+                });
+            }
+
+            skillFilterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button style
+                    skillFilterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
+                    });
+                    button.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
+                    button.classList.add('bg-blue-600', 'text-white');
+
+                    // Apply filter
+                    filterSkills(button.dataset.filter);
+                });
+            });
+
+            // Initial filter for "All" on load
+            filterSkills('all');
         });
     </script>
 
