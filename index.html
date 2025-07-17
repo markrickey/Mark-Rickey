@@ -1,445 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark R. - Strategic Project Manager</title>
-    <!-- Tailwind CSS from CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            --color-deep-teal: #245365;
-            --color-warm-coral: #DB7A4D;
-            --color-soft-peach: #FFD9CC;
-        }
-
-        body {
-            background: linear-gradient(180deg, var(--color-deep-teal) 0%, var(--color-warm-coral) 50%, var(--color-soft-peach) 100%);
-            background-size: 100% 300vh;
-            background-attachment: fixed;
-            background-position-y: 0%;
-            transition: background-position 0.5s ease-out;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            color: #4B5563;
-            transition: color 0.3s, background-color 0.3s, transform 0.23s;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.5rem;
-            display: inline-block;
-        }
-        .nav-link:hover, .nav-link:focus {
-            color: var(--color-deep-teal);
-            background-color: #ffe5d7;
-            transform: scale(1.1);
-            outline: none;
-        }
-
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            background: none;
-        }
-        .hero-video-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1;
-        }
-        .hero-video-container video {
-            min-width: 100%; min-height: 100%; width: auto; height: auto;
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-        .hero-fade-bottom {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(to bottom, rgba(36,83,101, 0.0) 0%, #DB7A4D 32%, #FFD9CC 100%);
-            z-index: 2;
-            pointer-events: none;
-            opacity: 0.93;
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(36,83,101, 0.38);
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative; z-index: 10;
-            color: #fff;
-            padding: 2rem 1rem;
-        }
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-        }
-        .hero-subtitle {
-            font-size: 2.25rem;
-            font-weight: 400;
-            margin-bottom: 2.5rem;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-        }
-        .hero-text {
-            font-size: 1.12rem;
-            color: #e9e9e9;
-            margin-bottom: 2rem;
-        }
-        .hero-button {
-            background: var(--color-warm-coral);
-            color: #fff;
-            border: none;
-            padding: 0.9rem 2.5rem;
-            border-radius: 1rem;
-            font-weight: 600;
-            transition: background 0.25s, transform 0.22s;
-            box-shadow: 0 4px 18px rgba(36,83,101,0.17);
-            text-decoration: none;
-            display: inline-block;
-        }
-        .hero-button:hover, .hero-button:focus {
-            background: #c26636;
-            transform: scale(1.07);
-            outline: none;
-        }
-        .profile-img {
-            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 4px solid #FFFFFF; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
-            margin: 0 auto 2rem;
-        }
-
-        .section-heading {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #1F2937;
-            margin-bottom: 3rem;
-            text-align: left;
-            position: relative;
-            padding-bottom: 0.5rem;
-            line-height: 1.2;
-        }
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100px;
-            height: 5px;
-            background-color: var(--color-warm-coral);
-            border-radius: 3px;
-        }
-
-        .content-card {
-            background-color: rgba(255,255,255,0.95);
-            border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(36,83,101,0.07);
-            padding: 2.5rem;
-            border: 1px solid #EFEFEF;
-            transition: transform 0.32s cubic-bezier(.38,1.15,.58,1.18), box-shadow 0.32s cubic-bezier(.1,.65,.44,1.28), background 0.24s;
-            position: relative;
-            overflow: hidden;
-            will-change: transform, box-shadow;
-            cursor: pointer;
-        }
-        .content-card:hover, .content-card:focus-visible {
-            transform: translateY(-10px) scale(1.035) rotateZ(-1deg);
-            box-shadow: 0 14px 38px 0 rgba(36,83,101,0.14), 0 2px 4px 0 #ffd9cc84;
-            background: linear-gradient(120deg, #fff 70%, #DB7A4D 160%);
-            outline: none;
-        }
-        .experience-card-title {
-            color: var(--color-deep-teal);
-        }
-        .experience-card-dates {
-            color: var(--color-warm-coral);
-        }
-        .experience-bullet-icon {
-            color: var(--color-warm-coral);
-        }
-
-        /* Contact Banner Styles */
-        .contact-icon-link {
-            transition: color 0.2s, transform 0.22s, background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20%;
-            padding: .15em;
-        }
-        .contact-icon-link:focus, .contact-icon-link:hover {
-            color: var(--color-warm-coral);
-            background: #ffe5d7;
-            transform: scale(1.15);
-            outline: 2px solid var(--color-warm-coral);
-            outline-offset: 2px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Mark R. - Strategic Project Manager</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { font-family: 'Inter', sans-serif; }
+    /* Fade-out at hero bottom for seamless transition */
+    .hero-fade-bottom {
+      position: absolute;
+      left: 0; bottom: 0; width: 100%; height: 120px;
+      background: linear-gradient(to bottom, rgba(36,83,101,0.0) 0%, #FFF4EF 100%);
+      pointer-events: none; z-index: 1;
+    }
+    .hero-overlay {
+      background: rgba(36,83,101,0.40);
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    }
+    /* Animated nav */
+    .nav-link {
+      font-weight: 500;
+      color: #4B5563;
+      transition: color 0.18s, background 0.23s, transform 0.22s;
+      padding: 0.5rem 0.85rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: #245365;
+      background: #ffe5d7;
+      transform: scale(1.08);
+      outline: none;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gradient-to-b from-[#245365] via-[#DB7A4D] to-[#FFD9CC] text-gray-900 tracking-tight">
 
-    <!-- Navigation -->
-    <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
-        <div class="container flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#experience" class="nav-link">Experience</a></li>
-                    <li><a href="#projects" class="nav-link">Work Studies</a></li>
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- Navigation Header -->
+  <header class="bg-white/95 shadow-sm sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-4">
+      <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
+      <nav>
+        <ul class="flex space-x-4 sm:space-x-6">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Work Studies</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="relative">
-        <div class="hero-video-container">
-            <video autoplay loop muted playsinline>
-                <source src="herobanner.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="hero-fade-bottom"></div>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content container">
-            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img">
-            <h1 class="hero-title">Mark R.</h1>
-            <p class="hero-subtitle">Strategic Project & Data Management Leader</p>
-            <p class="text-lg mb-8 max-w-3xl mx-auto text-white hero-text">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
-            <a href="#contact" class="hero-button">Connect with Me</a>
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
+    <!-- Video bg -->
+    <div class="absolute inset-0 z-0">
+      <video autoplay loop muted playsinline class="w-full h-full object-cover">
+        <source src="herobanner.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-fade-bottom"></div>
+    </div>
+    <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
+      <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
+      <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
+      <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Data Management Leader</h2>
+      <p class="text-lg text-white max-w-2xl mx-auto mb-8">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
+      <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container">
-            <h2 class="section-heading">About Me</h2>
-            <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed space-y-6">
-                <p>A resilient professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and international stakeholder engagement, consistently delivering quantifiable results in complex, high-stakes environments.</p>
-                <p>My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning, positioning me as a sought-after expert in driving operational excellence and impactful solutions. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, driven by a desire for continuous learning and empowering others from behind the scenes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-20">
-        <div class="container">
-            <h2 class="section-heading">Experience</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Example content cards for Experience. Add more as needed. -->
-                <div class="content-card experience-item" tabindex="0">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
-                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
-                    <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
-                    </ul>
-                </div>
-                <!-- Repeat structure for other experience entries... -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects/Work Studies Section -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="container">
-            <h2 class="section-heading">Work Studies</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="content-card" tabindex="0">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Job Fair Data Management & Strategic Outreach</h3>
-                    <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
-                    <a href="work-studies/job-fair-data-study.html" class="text-blue-600 hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-                <!-- Repeat for other work study cards... -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
-        <div class="container">
-            <h2 class="section-heading">Skills</h2>
-            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8">
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="all">All Skills</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="technical">Technical</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="professional">Professional</button>
-                <button class="skill-filter-btn px-6 py-2 rounded-full text-lg font-semibold" data-filter="leadership">Leadership</button>
-            </div>
-            <div id="skills-grid" class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <!-- Skill items as needed, with attributes for filtering... -->
-                <div class="skill-item" data-category="technical"><span class="skill-item-icon">&#9881;</span>HTML/CSS</div>
-                <!-- Add remaining skills as per your original code... -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Banner (Prominent, always visible and accessible) -->
-    <section id="contact" class="w-full py-24 bg-gradient-to-br from-[#FFD9CC]/85 via-[#DB7A4D]/90 to-[#245365]/90 border-t-4 border-[#DB7A4D] mt-20">
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-extrabold tracking-tight text-[#245365] mb-4">Contact Me</h2>
-        <p class="mb-7 text-lg text-[#245365]/90 font-medium">Let’s connect and make something impactful together!</p>
-        <div class="flex justify-center gap-14 mb-10">
-          <!-- Email link -->
-          <a href="mailto:markrickey01@gmail.com" class="contact-icon-link text-5xl" aria-label="Email Mark Rickey">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="3"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
-          </a>
-          <!-- LinkedIn link -->
-          <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="contact-icon-link text-5xl" aria-label="LinkedIn Profile for Mark Rickey">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-              <rect width="4" height="12" x="2" y="9"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-          </a>
-        </div>
-        <p class="text-sm text-gray-500 text-center mt-8">&copy; 2025 Mark R. All rights reserved.</p>
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
+      <div class="text-lg text-gray-700 leading-relaxed space-y-6">
+        <p>A resilient professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and international stakeholder engagement, consistently delivering quantifiable results in complex, high-stakes environments.</p>
+        <p>My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, always seeking to empower others from behind the scenes.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeInSections = document.querySelectorAll('.fade-in-section');
-            const fadeInCards = document.querySelectorAll('.content-card');
-            const skillItems = document.querySelectorAll('.skill-item');
-            const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-text, .hero-button, .profile-img');
+  <!-- Experience Section -->
+  <section id="experience" class="py-20 bg-[#F9FAFB]">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Example Experience Card - repeat as needed -->
+        <div class="content-card focus:outline-none">
+          <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
+          <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Primary account manager for DoD, VA, Military Academies.</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Refined & executed advanced data management systems.</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</span></li>
+          </ul>
+        </div>
+        <div class="content-card focus:outline-none">
+          <h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
+          <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Directed complex logistical operations, ensuring maximum efficiency in South Pacific.</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Led & mentored multinational teams in high-pressure operations.</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</span></li>
+          </ul>
+        </div>
+        <div class="content-card focus:outline-none">
+          <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
+          <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Spearheaded content management (20% accuracy/efficiency gain).</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Drove consumer engagement (15% interaction, 10% retention uplift).</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Developed reporting tools/KPIs, achieving 25% sales increase.</span></li>
+          </ul>
+        </div>
+        <!-- ...more cards... -->
+      </div>
+    </div>
+  </section>
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+  <!-- Work Studies / Projects Section -->
+  <section id="projects" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="content-card focus:outline-none">
+          <h3 class="text-xl font-semibold text-[#245365] mb-2">Job Fair Data Management & Strategic Outreach</h3>
+          <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
+          <a href="work-studies/job-fair-data-study.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+        </div>
+        <div class="content-card focus:outline-none">
+          <h3 class="text-xl font-semibold text-[#245365] mb-2">Public Correspondence & Strategic Communication</h3>
+          <p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p>
+          <a href="work-studies/public-correspondence-study.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+        </div>
+        <div class="content-card focus:outline-none">
+          <h3 class="text-xl font-semibold text-[#245365] mb-2">Constituent Engagement Data Optimization</h3>
+          <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p>
+          <a href="work-studies/constituent-data-study.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const createObserver = (elements, delayMultiplier = 0) => {
-                const observerInstance = new IntersectionObserver((entries) => {
-                    entries.forEach((entry, index) => {
-                        if (entry.isIntersecting) {
-                            setTimeout(() => {
-                                entry.target.classList.add('is-visible');
-                                observerInstance.unobserve(entry.target);
-                            }, index * delayMultiplier);
-                        }
-                    });
-                }, observerOptions);
-                elements.forEach(element => observerInstance.observe(element));
-            };
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 bg-[#F9FAFB]">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Skills</h2>
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <span class="bg-[#DB7A4D] text-white px-4 py-2 rounded font-semibold text-sm mb-2">Project Management</span>
+        <span class="bg-[#245365] text-white px-4 py-2 rounded font-semibold text-sm mb-2">Python</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">SQL</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">Strategic Analysis</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">AI/ML Concepts</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">Stakeholder Engagement</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">Data Visualization</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">Leadership</span>
+        <span class="bg-white text-[#245365] px-4 py-2 rounded border font-semibold text-sm mb-2">Change Management</span>
+        <!-- Add any additional skills as needed -->
+      </div>
+    </div>
+  </section>
 
-            createObserver(fadeInSections);
-            createObserver(fadeInCards, 100);
-            createObserver(skillItems, 50);
-            createObserver(heroElements, 100);
-
-            // Dynamic background color for Experience section
-            const experienceSection = document.getElementById('experience');
-            if (experienceSection) {
-                const startH = 220, startS = 15, startL = 95;
-                const endH = 210, endS = 30, endL = 85;
-                function interpolateColor(color1, color2, factor) {
-                    const result = color1.slice();
-                    for (let i = 0; i < 3; i++) {
-                        result[i] = color1[i] + factor * (color2[i] - color1[i]);
-                    }
-                    return `hsl(${result[0]}, ${result[1]}%, ${result[2]}%)`;
-                }
-                const handleScroll = () => {
-                    const rect = experienceSection.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight;
-                    const elementHeight = rect.height;
-                    let scrollFactor = 1 - (rect.bottom / (viewportHeight + elementHeight));
-                    scrollFactor = Math.max(0, Math.min(1, scrollFactor));
-                    const interpolatedColor = interpolateColor(
-                        [startH, startS, startL],
-                        [endH, endS, endL],
-                        scrollFactor
-                    );
-                    experienceSection.style.backgroundColor = interpolatedColor;
-                };
-                handleScroll();
-                window.addEventListener('scroll', handleScroll);
-                window.addEventListener('resize', handleScroll);
-            }
-
-            // Skills filtering logic
-            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
-            const skillsGrid = document.getElementById('skills-grid');
-            const allSkillItems = skillsGrid.querySelectorAll('.skill-item');
-            function filterSkills(filterCategory) {
-                const transitionDuration = 400;
-                const scatterDistance = 300;
-                const scatterRotateMax = 180;
-                allSkillItems.forEach((item, index) => {
-                    const itemCategory = item.dataset.category;
-                    const isVisible = (filterCategory === 'all' || itemCategory === filterCategory);
-                    if (isVisible) {
-                        item.style.display = 'flex';
-                        setTimeout(() => {
-                            item.classList.remove('scattered');
-                            item.classList.add('collected');
-                            item.style.transform = 'scale(1) rotate(0deg) translate(0px, 0px)';
-                            item.style.opacity = '1';
-                            item.style.pointerEvents = 'auto';
-                        }, 10);
-                    } else {
-                        const randomX = (Math.random() - 0.5) * 2 * scatterDistance;
-                        const randomY = (Math.random() - 0.5) * 2 * scatterDistance;
-                        const randomRotate = (Math.random() - 0.5) * 2 * scatterRotateMax;
-                        item.classList.remove('collected');
-                        item.classList.add('scattered');
-                        item.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.2) rotate(${randomRotate}deg)`;
-                        item.style.opacity = '0';
-                        item.style.pointerEvents = 'none';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, transitionDuration);
-                    }
-                });
-            }
-            skillFilterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    skillFilterButtons.forEach(btn => {
-                        btn.classList.remove('bg-blue-600', 'text-white');
-                        btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
-                    });
-                    button.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-700');
-                    button.classList.add('bg-blue-600', 'text-white');
-                    filterSkills(button.dataset.filter);
-                });
-            });
-            filterSkills('all');
-        });
-    </script>
-
+  <!-- Contact Banner -->
+  <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
+      <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s connect and make something impactful together!</p>
+      <div class="flex justify-center gap-14 mb-10">
+        <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+      <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
+    </div>
+  </section>
 </body>
 </html>
