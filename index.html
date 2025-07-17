@@ -3,33 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Mark R. • Strategic Project Manager</title>
-  <meta name="description" content="Portfolio of Mark R.: Data-driven project manager and public sector leader specializing in analytics, process, and transformation." />
+  <title>Mark • Global Strategic Project Manager</title>
+  <meta name="description" content="Portfolio of Mark R., Data-driven project manager and public sector leader specializing in analytics, process, and transformation." />
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-    }
     body {
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      /* Initial fallback bg for no-JS users */
       background: linear-gradient(180deg, #245365 0%, #DB7A4D 60%, #FFD9CC 100%);
       background-attachment: fixed;
       transition: background 0.6s cubic-bezier(.58,.06,.72,.9);
       overflow-x: hidden;
     }
-
-    /* Navigation animation */
     nav a {
-      transition: 
-        color 0.18s,
-        background 0.25s,
-        transform 0.25s cubic-bezier(.56,1.12,.54,1.19), 
-        box-shadow 0.2s;
+      transition: color 0.18s, background 0.25s, transform 0.25s cubic-bezier(.56,1.12,.54,1.19), box-shadow 0.2s;
       border-radius: 0.5rem;
       position: relative;
       z-index: 1;
@@ -46,13 +35,8 @@
       outline: 3px solid #DB7A4D;
       outline-offset: 3px;
     }
-
-    /* Card / Experience / Work Study card animation */
     .card-dynamic {
-      transition:
-        transform 0.32s cubic-bezier(.38,1.15,.58,1.18),
-        box-shadow 0.32s cubic-bezier(.1,.65,.44,1.28),
-        background 0.24s;
+      transition: transform 0.32s cubic-bezier(.38,1.15,.58,1.18), box-shadow 0.32s cubic-bezier(.1,.65,.44,1.28), background 0.24s;
       box-shadow: 0 2px 18px rgba(36,83,101,0.07);
       background: linear-gradient(135deg, #f7fafc 74%, #ffe1d3 129%);
       border-radius: 1.15rem;
@@ -64,12 +48,10 @@
     }
     .card-dynamic:hover, .card-dynamic:focus-visible {
       transform: translateY(-12px) scale(1.035) rotateZ(-1deg);
-      box-shadow: 0 14px 38px 0 rgba(36,83,101,0.14), 0 2px 4px 0 #ffd9cc84;
+      box-shadow: 0 14px 38px 0 rgba(36,83,101,0.18), 0 2px 4px 0 #ffd9cc84;
       background: linear-gradient(120deg, #fff 70%, #DB7A4D 160%);
       outline: none;
     }
-
-    /* Card SVG accent for graphics */
     .card-svg-bg {
       position: absolute;
       top: -38px; right: -32px;
@@ -77,41 +59,44 @@
       opacity: 0.15;
       pointer-events: none;
     }
-
-    /* Hero overlay for better contrast */
-    .hero-overlay {
-      background: rgba(36,83,101,0.45);
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Section backgrounds/headers for distinction */
     section[id] > header h2 {
-      font-size: 2.2rem;
+      font-size: 2.15rem;
       font-weight: 800;
       color: #245365;
       letter-spacing: -0.015em;
       margin-bottom: 0.6em;
     }
-    /* Responsive fix for larger section headers */
     @media (min-width: 640px) {
-      section[id] > header h2 {
-        font-size: 2.6rem;
-      }
+      section[id] > header h2 { font-size: 2.6rem; }
+    }
+    /* Fading gradient overlay for hero video bottom */
+    .hero-fade-bottom {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(36,83,101, 0.0) 0%, #DB7A4D 32%, #FFD9CC 100%);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.93;
+    }
+    .hero-overlay {
+      background: rgba(36,83,101,0.46);
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 
-<!-- Dynamic Background Layer -->
 <div id="scroll-gradient-bg" style="pointer-events:none; position:fixed; z-index:0;top:0;left:0;width:100vw;height:100vh;mix-blend-mode:normal;"></div>
-
-<!-- Header / Navigation Bar -->
+<!-- Navigation -->
 <header class="bg-white/90 shadow-md sticky top-0 z-40" role="banner">
   <nav class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center" aria-label="Main navigation">
-    <a href="#hero" class="text-2xl font-extrabold text-gray-900 leading-none" aria-label="Home">Mark R.</a>
+    <a href="#hero" class="text-2xl font-extrabold text-gray-900" aria-label="Home">Mark</a>
     <ul class="flex space-x-6 text-base font-semibold select-none" role="list">
       <li><a href="#about" tabindex="0" class="px-3 py-1">About</a></li>
       <li><a href="#experience" tabindex="0" class="px-3 py-1">Experience</a></li>
@@ -124,7 +109,7 @@
 
 <main id="main-content" role="main" tabindex="-1">
 
-  <!-- Hero Banner with video -->
+  <!-- HERO (video banner with seamless fade) -->
   <section id="hero" class="relative min-h-screen flex items-center justify-center">
     <div class="absolute inset-0">
       <video autoplay loop muted playsinline class="w-full h-full object-cover pointer-events-none">
@@ -132,12 +117,13 @@
         Your browser does not support the video tag.
       </video>
       <div class="hero-overlay"></div>
+      <div class="hero-fade-bottom"></div>
     </div>
     <div class="relative z-10 text-center w-full px-4 flex flex-col items-center">
       <img src="profileheadshot.png" alt="Mark Rickey headshot" class="w-36 h-36 rounded-full mx-auto border-4 border-white shadow-lg mb-5" loading="lazy" />
       <h1 class="text-5xl sm:text-6xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
-      <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project &amp; Data Management Leader</h2>
-      <p class="text-lg text-white/90 max-w-xl mx-auto mb-8">Driving operational excellence and transformation through data, process innovation &amp; public service.</p>
+      <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Global Project &amp; Government Relations Management</h2>
+      <p class="text-lg text-white/90 max-w-xl mx-auto mb-8">Driving operational excellence and transformation through AI data alignment &amp; orchestrating complex, mission-critical, Global initiatives.</p>
       <a href="#contact" class="inline-block bg-[#DB7A4D] text-white px-8 py-3 rounded-xl font-semibold shadow hover:bg-[#c26636] focus-visible:outline-[#245365] outline-none transition-all" aria-label="Connect with Mark R.">Connect with Me</a>
     </div>
   </section>
@@ -150,7 +136,7 @@
       </header>
       <div class="space-y-5 text-lg text-gray-700">
         <p>A results-driven leader with 10+ years across military, government, and digital transformation. My expertise covers project management, process optimization, and stakeholder engagement in high-stakes settings.</p>
-        <p>Combining analytical strengths (Python, SQL, AI) and strategic communications, I thrive at the intersection of data and leadership—covering global operations, public policy, and business improvement.</p>
+        <p>Combining analytical strengths (Python, SQL, AI) and strategic communications, I thrive at the intersection of data and leadership, covering global operations, public policy, and business improvement.</p>
       </div>
     </div>
   </section>
@@ -169,11 +155,11 @@
             <circle cx="60" cy="60" r="50" fill="#245365"/>
             <rect x="42" y="40" width="36" height="35" rx="8" fill="#DB7A4D"/>
           </svg>
-          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Congressional Staffer Fellow</h3>
-          <p class="text-sm text-[#DB7A4D] mb-2 relative z-10">U.S. House, May 2025 – Present</p>
+          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Congressional Staffer | U.S. Army CSP, Fellow</h3>
+          <p class="text-sm text-[#DB7A4D] mb-2 relative z-10">U.S. House of Representatives, May 2025 – Present</p>
           <ul class="list-inside list-disc text-gray-700 space-y-1 text-base ml-2 relative z-10">
-            <li>Managed defense &amp; VA casework; data &amp; policy analytics.</li>
-            <li>Developed advanced data management &amp; briefings.</li>
+            <li>Managed DoD &amp; VA casework; data &amp; policy analytics.</li>
+            <li>Developed advanced project management &amp; briefings.</li>
           </ul>
         </article>
         <!-- Card 2 -->
@@ -182,10 +168,10 @@
             <ellipse cx="70" cy="50" rx="44" ry="36" fill="#DB7A4D"/>
             <circle cx="35" cy="78" r="24" fill="#FFD9CC"/>
           </svg>
-          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">U.S. Army: Project Manager</h3>
+          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">U.S. Army | Section Sergeant: Project Manager</h3>
           <p class="text-sm text-[#DB7A4D] mb-2 relative z-10">U.S. Army, Global Operations</p>
           <ul class="list-inside list-disc text-gray-700 space-y-1 text-base ml-2 relative z-10">
-            <li>Directed logistics in South Pacific region.</li>
+            <li>Directed intercontinental logistics throughout the South Pacific &amp; our allied nations.</li>
             <li>Managed $10M+ contracts; led multinational teams.</li>
           </ul>
         </article>
@@ -195,13 +181,13 @@
             <rect x="24" y="34" width="72" height="36" rx="16" fill="#245365"/>
             <ellipse cx="80" cy="80" rx="22" ry="16" fill="#DB7A4D"/>
           </svg>
-          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Digital Optimization Supervisor</h3>
+          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Digital Optimization Supervisor | Contractor</h3>
           <p class="text-sm text-[#DB7A4D] mb-2 relative z-10">McDonald's, 2018</p>
           <ul class="list-inside list-disc text-gray-700 space-y-1 text-base ml-2 relative z-10">
-            <li>Improved reporting tools; led UX and operational improvements.</li>
+            <li>Improved reporting tools; led UX and operational improvements across the Global digital markets.</li>
           </ul>
         </article>
-        <!-- ...additional experience cards as needed -->
+        <!-- ...add more cards as desired -->
       </div>
     </div>
   </section>
@@ -219,8 +205,8 @@
             <circle cx="60" cy="43" r="39" fill="#DB7A4D"/>
             <rect x="38" y="65" width="44" height="24" rx="10" fill="#245365"/>
           </svg>
-          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Job Fair Data Management &amp; Outreach</h3>
-          <p class="text-gray-700 mb-2 relative z-10">Built Google Forms/Sheets system to streamline engagement and yield actionable insights.</p>
+          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Career Fair Data Management &amp; Social Medie engagement</h3>
+          <p class="text-gray-700 mb-2 relative z-10">Optimized the Google management suite to streamline engagement, yield actionable insights, &amp; press releases.</p>
           <a href="#" class="text-[#245365] font-semibold hover:underline focus:underline focus:outline-none relative z-10 mt-auto">Read Case Study</a>
         </article>
         <!-- Card 2 -->
@@ -229,8 +215,8 @@
             <circle cx="40" cy="40" r="28" fill="#245365"/>
             <ellipse cx="80" cy="80" rx="27" ry="18" fill="#FFD9CC"/>
           </svg>
-          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Public Correspondence &amp; Communication</h3>
-          <p class="text-gray-700 mb-2 relative z-10">Drafted and managed high-stakes communications supporting outreach.</p>
+          <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Public Relations, Legislative analysis &amp; Communication</h3>
+          <p class="text-gray-700 mb-2 relative z-10">Spearheaded the development and execution of high-stakes communications that drove outreach efforts and informed policy research.</p>
           <a href="#" class="text-[#245365] font-semibold hover:underline focus:underline focus:outline-none relative z-10 mt-auto">Read Case Study</a>
         </article>
         <!-- Card 3 -->
@@ -240,7 +226,7 @@
             <rect x="36" y="82" width="48" height="20" rx="7" fill="#245365"/>
           </svg>
           <h3 class="text-xl font-bold text-[#245365] mb-1 relative z-10">Constituent Data Optimization</h3>
-          <p class="text-gray-700 mb-2 relative z-10">Used Zendesk and analytics to optimize response and process adherence.</p>
+          <p class="text-gray-700 mb-2 relative z-10">Used management systems and analytics to optimize communication and process adherence.</p>
           <a href="#" class="text-[#245365] font-semibold hover:underline focus:underline focus:outline-none relative z-10 mt-auto">Read Case Study</a>
         </article>
       </div>
@@ -267,13 +253,13 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact Me Banner -->
   <section id="contact" class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-4">
       <header>
         <h2>Contact Me</h2>
       </header>
-      <p class="mb-7 text-lg text-gray-700 text-center">Let’s connect to drive meaningful work together!</p>
+      <p class="mb-7 text-lg text-gray-700 text-center">Let's build something great!</p>
       <div class="flex justify-center gap-10 mb-8">
         <a href="mailto:markrickey01@gmail.com" class="text-[#245365] hover:text-[#DB7A4D] text-3xl focus:outline-none" aria-label="Email Mark Rickey">
           <span class="sr-only">Email</span>
@@ -289,19 +275,17 @@
 </main>
 
 <footer class="bg-[#245365] text-white py-6 mt-12 text-center text-sm" role="contentinfo">
-  &copy; 2025 Mark R. All rights reserved.
+  &copy; 2025 Mark - All rights reserved.
 </footer>
 
 <script>
-/** Dynamic background throughout the site **/
+/* Dynamic background throughout site */
 const gradientColors = [
-  // [hue, saturation, lightness]
   [204, 44, 34],  // #245365
   [23, 69, 58],   // #DB7A4D
   [17, 100, 90]   // #FFD9CC
 ];
 const $bg = document.getElementById('scroll-gradient-bg');
-
 function lerp(a, b, t) { return a + (b - a) * t; }
 function colorHSL(from, to, t) {
   return `hsl(${lerp(from[0],to[0],t)},${lerp(from[1],to[1],t)}%,${lerp(from[2],to[2],t)}%)`
@@ -310,7 +294,6 @@ function updateBgGradient() {
   const scrollY = window.scrollY;
   const dh = document.body.scrollHeight - window.innerHeight;
   let t = dh ? Math.min(scrollY / dh, 1) : 0;
-  // blend three stops: 0-0.6 from 0>1, 0.61>1 from 1>2
   let grad;
   if (t < 0.6) {
     const t2 = t/0.6;
@@ -329,13 +312,11 @@ window.addEventListener('scroll', updateBgGradient, {passive: true});
 window.addEventListener('resize', updateBgGradient);
 updateBgGradient();
 
-// For accessibility: keyboard focus on cards
 document.querySelectorAll('.card-dynamic').forEach(card => {
   card.addEventListener('keydown', e => {
     if (e.key === "Enter" || e.key === " ") card.click();
   });
 });
-
 </script>
 </body>
 </html>
