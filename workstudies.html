@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Case Studies | Mark R. - Congressional Work Studies & Data Management</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { font-family: 'Inter', sans-serif; }
+    body {
+      background: linear-gradient(180deg, #245365 0%, #DB7A4D 62%, #FFD9CC 100%);
+      background-attachment: fixed;
+      color: #1F2937;
+      min-height: 100vh;
+    }
+    .nav-link {
+      font-weight: 600;
+      color: #444960;
+      transition: color 0.18s, background 0.21s, transform 0.19s;
+      padding: 0.5rem 1.1rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: #245365;
+      background: #ffe5d7;
+      transform: scale(1.08);
+      outline: none;
+    }
+    .case-card {
+      background: rgba(255,255,255,0.98);
+      border-radius: 1.25rem;
+      box-shadow: 0 7px 24px 0 rgba(36,83,101,0.08);
+      padding: 2.8rem 2rem 2rem 2rem;
+      border: 1px solid #e4e8fa;
+      transition: transform 0.33s cubic-bezier(.16,.78,.65,1.26), box-shadow 0.33s cubic-bezier(.18,.83,.59,1.08), background 0.21s;
+      position: relative;
+      overflow: hidden;
+      will-change: transform, box-shadow;
+      cursor: pointer;
+    }
+    .case-card:hover, .case-card:focus-within {
+      transform: translateY(-10px) scale(1.035) rotateZ(-0.5deg);
+      box-shadow: 0 18px 38px 0 rgba(36,83,101,0.16), 0 2px 8px 0 #ffd9cc92;
+      background: linear-gradient(120deg, #fff 82%, #FFD9CC 190%);
+      outline: none;
+    }
+    .case-badge {
+      display: inline-block;
+      font-size: 0.90rem;
+      padding: 0.37em 1.22em;
+      background: #245365;
+      color: #fff;
+      border-radius: 2em;
+      letter-spacing: 0.035em;
+      margin-bottom: 0.7em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .case-metric {
+      display: inline-block;
+      font-size: 0.97rem;
+      background: #ffd9cc;
+      color: #a15a2d;
+      font-weight: 600;
+      padding: 0.19em 1.13em;
+      border-radius: 2em;
+      margin: 0.15em 0.42em 0.6em 0;
+    }
+    .case-link {
+      color: #DB7A4D;
+      font-weight: 600;
+      text-decoration: underline;
+      transition: color 0.15s;
+    }
+    .case-link:hover, .case-link:focus { color: #245365; }
+    /* Section Title underline accent */
+    .section-heading {
+      font-size: 2rem; 
+      font-weight: 800;
+      color: #245365;
+      margin-bottom: 2.7rem;
+      text-align: left;
+      position: relative;
+      padding-bottom: 0.25rem;
+    }
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 110px;
+      height: 5px;
+      background-color: #DB7A4D;
+      border-radius: 3px;
+    }
+    /* Responsive fine-tuning */
+    @media (min-width: 640px) { .section-heading { font-size:2.55rem; } }
+    @media (min-width: 480px) {
+      .case-card { padding-left:2.2rem; padding-right:2.2rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="bg-white/95 shadow-sm sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-4">
+      <a href="/" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
+      <nav>
+        <ul class="flex space-x-4 sm:space-x-6">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Banner -->
+    <section class="bg-gradient-to-br from-[#245365] via-[#DB7A4D] to-[#FFD9CC] py-16 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl mb-3">Congressional & Data Work Studies</h1>
+        <p class="text-lg text-white/90 mb-5 mx-auto max-w-2xl">Dynamic case studies highlighting strategic communications, government relations, and advanced data-driven solutions for public impact.</p>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="case-studies" class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-4">
+        <h2 class="section-heading">Case Studies</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+
+          <!-- 1: Strategic Public Correspondence -->
+          <div class="case-card mb-6 focus:outline-none">
+            <span class="case-badge">Public Correspondence</span>
+            <h3 class="text-2xl font-bold text-[#245365] mb-2">Strategic Public Correspondence & Stakeholder Communication</h3>
+            <p class="text-base text-gray-800 mb-5">
+              Lead drafter for a Congressional office, producing empathetic, voice-aligned letters for high-stakes events (e.g., <b>bridge dedications</b>, <b>sports bid advocacy</b>, <b>mayor recognitions</b>), adapting style for diverse constituent needs.
+            </p>
+            <ul class="text-gray-700 text-base mb-5 list-disc list-inside space-y-1">
+              <li><b>Audience-centric drafting</b>—tailored tone and message for families, officials, and organizations</li>
+              <li>Ensured <b>voice alignment</b> with the Member of Congress</li>
+              <li><b>Commemorative & strategic letter examples:</b>
+                <ul class="ml-7 list-[circle] mb-1">
+                  <li>Lance Corporal Andrew Whitacre Memorial Bridge Dedication</li>
+                  <li>Banana Ball Party Animals Tour bid</li>
+                  <li>Mayor John Whicker's Retirement Recognition</li>
+                </ul>
+              </li>
+              <li>Integrated research for specific, meaningful narrative</li>
+            </ul>
+            <span class="case-metric">Rapid, high-impact drafting</span>
+            <span class="case-metric">Widely praised tone</span>
+            <span class="case-metric">Strengthened stakeholder ties</span>
+            <div class="text-sm mt-5 pt-2 border-t"><span class="font-semibold">Skills:</span>
+              Rhetoric, Government Communication, Stakeholder Engagement
+            </div>
+            <!--
+              Uncomment this if you want a link to the full MD or detailed page:
+              <div class="mt-4"><a class="case-link" href="work-studies/public-correspondence-study.html">Read full project &rarr;</a></div>
+            -->
+          </div>
+          
+          <!-- 2: Strategic Job Fair Data Management & Market Analysis -->
+          <div class="case-card mb-6 focus:outline-none">
+            <span class="case-badge">Job Fair Data</span>
+            <h3 class="text-2xl font-bold text-[#245365] mb-2">Strategic Job Fair Data Management & Market Analysis</h3>
+            <p class="text-base text-gray-800 mb-5">
+               Designed a centralized data system for employer registration and reporting at a major job fair, supporting <b>1,363.5 open positions</b> across industries, for improved outreach and decision support.
+            </p>
+            <ul class="text-gray-700 text-base mb-5 list-disc list-inside space-y-1">
+              <li>Created Google Forms/Sheets data infrastructure</li>
+              <li>Analyzed job openings by industry, company, and type</li>
+              <li>Generated actionable insights for stakeholders, event planning, and job seekers</li>
+              <li>Produced detailed “Company Attendance Report” outlining workforce needs and key employers</li>
+            </ul>
+            <span class="case-metric">1,363.5 Openings</span>
+            <span class="case-metric">Centralized Data</span>
+            <span class="case-metric">Enhanced Outreach</span>
+            <div class="text-sm mt-5 pt-2 border-t"><span class="font-semibold">Skills:</span>
+              Data Analysis, Process Optimization, Communication
+            </div>
+            <!--
+              Uncomment this if you want a link to the full MD or detailed page:
+              <div class="mt-4"><a class="case-link" href="work-studies/job-fair-data-study.html">Read full project &rarr;</a></div>
+            -->
+          </div>
+        </div>
+        
+        <!-- Third case study: System Optimization & Strategic Outreach Analysis -->
+        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+          <div class="case-card focus:outline-none">
+            <span class="case-badge">System Optimization</span>
+            <h3 class="text-2xl font-bold text-[#245365] mb-2">Job Fair Data System Optimization & Strategic Outreach Analysis</h3>
+            <p class="text-base text-gray-800 mb-5">
+              Architected and implemented an advanced Google Forms/Sheets process for <b>employer & job seeker data capture</b>, automating analytics and delivering insights for <b>54 employers</b> and targeted outreach.
+            </p>
+            <ul class="text-gray-700 text-base mb-5 list-disc list-inside space-y-1">
+              <li>Designed/automated a scalable data management system</li>
+              <li>Analyzed industry, company size, experience level, logistics & more</li>
+              <li>Provided actionable intelligence to guide outreach, logistics, and messaging</li>
+              <li>Reported on key demand, e.g. 89% full-time roles and top market segments</li>
+            </ul>
+            <span class="case-metric">+54 Companies</span>
+            <span class="case-metric">Automated Analytics</span>
+            <span class="case-metric">Targeted Outreach</span>
+            <div class="text-sm mt-5 pt-2 border-t"><span class="font-semibold">Skills:</span>
+              Data Systems, Process Design, Public Admin
+            </div>
+            <!--
+              Uncomment this if you want a link to the full MD or detailed page:
+              <div class="mt-4"><a class="case-link" href="work-studies/constituent-data-study.html">Read full project &rarr;</a></div>
+            -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Banner -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D]">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
+        <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s network and collaborate on high-impact ideas!</p>
+        <div class="flex justify-center gap-14 mb-10">
+          <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+        <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
