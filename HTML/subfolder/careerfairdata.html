@@ -7,10 +7,8 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Vega/Vega-Lite Chart Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <!-- Plotly.js for 3D pie/donut charts -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <style>
     html, body {
       font-family: 'Inter', sans-serif;
@@ -45,7 +43,7 @@
       position: relative;
     }
     .section-heading {
-      font-size: 2.25rem; 
+      font-size: 2.25rem;
       font-weight: 800;
       color: #245365;
       margin-bottom: 1.7rem;
@@ -64,64 +62,6 @@
       height: 5px;
       background-color: #DB7A4D;
       border-radius: 3px;
-    }
-    .collapsible-btn {
-      font-weight: 700;
-      font-size: 1.13rem;
-      color: #245365;
-      background: #fff;
-      border: 2px solid #DB7A4D;
-      border-radius: 0.9rem;
-      padding: 0.75rem 1.45rem;
-      margin-top: 1.55rem;
-      margin-bottom: .75rem;
-      outline: none;
-      transition: background 0.21s, color 0.15s, border 0.15s, box-shadow 0.18s;
-      box-shadow: 0 2px 13px 0 rgba(36,83,101,0.07);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.66em;
-      width: 100%;
-      justify-content: space-between;
-    }
-    .collapsible-btn[aria-expanded="true"] {
-      color: #fff;
-      background: #DB7A4D;
-      border-color: #245365;
-    }
-    .collapsible-content {
-      padding-bottom: 0.2rem;
-      transition: max-height 0.37s cubic-bezier(.38,1.15,.58,1.18), opacity 0.33s;
-      overflow: hidden;
-    }
-    .collapsible-content.collapse-closed {
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .collapsible-content.collapse-open {
-      max-height: 2300px;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .chart-section {
-      margin: 2rem 0 2rem 0;
-      background: #eaf6fb;
-      padding: 1.4rem 1rem 2.1rem 1rem;
-      border-radius: 1.1rem;
-      box-shadow: 0 0.5px 10px 0 #db7a4d19;
-      border: 1.3px solid #ceeaf9;
-    }
-    .chart-section h3 {
-      font-size: 1.31rem; 
-      font-weight: 700;
-      color: #245365;
-      margin-bottom: 0.7rem;
-      text-align: left;
-    }
-    .highlight-num {
-      font-weight: 800; color: #DB7A4D; font-size: 2.15rem;
     }
     .stat-card {
       background: #fff7ef;
@@ -155,8 +95,21 @@
       margin-bottom: 1.8rem;
       margin-top: 1rem;
     }
-    /* Vega chart tooltips font fix */
-    .vega-tooltip { font-family: 'Inter', sans-serif !important; font-size:1rem !important;}
+    .contact-icon-link {
+      transition: color 0.2s, transform 0.22s, background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20%;
+      padding: .15em;
+    }
+    .contact-icon-link:focus, .contact-icon-link:hover {
+      color: #DB7A4D;
+      background: #ffe5d7;
+      transform: scale(1.15);
+      outline: 2px solid #DB7A4D;
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
@@ -175,7 +128,7 @@
     <section class="bg-gradient-to-br from-[#245365] via-[#DB7A4D] to-[#FFD9CC] py-12 px-4">
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl mb-3">Job Fair Data Analysis</h1>
-        <p class="text-lg text-white/90 mb-5 mx-auto max-w-2xl">Insights, visualizations, and actionable findings from employer registration for a public job fair event.</p>
+        <p class="text-lg text-white/90 mb-5 mx-auto max-w-2xl">Dynamic insights & interactive 3D visualization of employer registration and opportunity data from a public job fair event.</p>
         <p class="text-sm text-white/70">Data Analysis by Mark R. | Updated July 2025</p>
       </div>
     </section>
@@ -187,7 +140,7 @@
       
       <h2 class="section-heading">Key Takeaways</h2>
       <ul class="mb-8 list-disc list-inside px-1 text-gray-700 text-lg">
-        <li><span class="font-bold text-[#DB7A4D]">Manufacturing leads in demand:</span> Highest employer participation and open positions, signifying robust sector growth.</li>
+        <li><span class="font-bold text-[#DB7A4D]">Manufacturing leads in demand:</span> Highest employer participation and open positions.</li>
         <li><span class="font-bold text-[#245365]">Diverse opportunities:</span> Not just full/part-time but also internships, apprenticeships, and seasonal roles.</li>
         <li><span class="font-bold text-[#DB7A4D]">Data improvement needed:</span> Many "Unspecified" entries emphasize need for better structured data collection.</li>
       </ul>
@@ -229,14 +182,19 @@
         The "Unspecified" industry makes up a large portion of records, underscoring a need for refined data entry in future fairs.
       </div>
 
-      <!-- Charts Section -->
-      <section class="chart-section mb-8">
-        <h3>Employer Count by Industry</h3>
-        <div id="chart_employer_count" style="min-height: 375px;"></div>
-      </section>
-      <section class="chart-section mb-4">
-        <h3>Open Positions by Industry</h3>
-        <div id="chart_open_positions" style="min-height: 375px;"></div>
+      <!-- 3D Interactive Pie/Donut Charts Section -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-[#245365] mb-4">Interactive 3D Donut Charts</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div>
+            <h3 class="font-semibold mb-2 text-[#DB7A4D]">Employer Count by Industry</h3>
+            <div id="pie_employer_count" class="rounded-xl border bg-gradient-to-br from-[#F9FAFB] via-[#fff5e8] to-[#ebf4ff] p-6 shadow-lg"></div>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2 text-[#245365]">Open Positions by Industry</h3>
+            <div id="pie_open_positions" class="rounded-xl border bg-gradient-to-br from-[#f3faed] via-[#ffd9cc] to-[#e6f3f5] p-6 shadow-lg"></div>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -244,7 +202,7 @@
     <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-14">
       <div class="max-w-3xl mx-auto px-4 text-center">
         <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
-        <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s connect and collaborate!</p>
+        <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s connect and collaborate on data-driven solutions!</p>
         <div class="flex justify-center gap-14 mb-10">
           <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="Email">
             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -258,105 +216,70 @@
     </section>
   </main>
   <script>
-    // Data
+    // Group data by industry for pie chart
     const data = [
-      {"Industry": "Manufacturing", "Opportunity Type": "Full-time", "Total_Open_Positions": 97, "Total_Employer_Count": 15},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time", "Total_Open_Positions": 156, "Total_Employer_Count": 8},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time", "Total_Open_Positions": 29, "Total_Employer_Count": 3},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Paid Internship", "Total_Open_Positions": 15, "Total_Employer_Count": 3},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Seasonal/Temporary Hires", "Total_Open_Positions": 804, "Total_Employer_Count": 2},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires", "Total_Open_Positions": 25, "Total_Employer_Count": 2},
-      {"Industry": "Healthcare", "Opportunity Type": "Full-time", "Total_Open_Positions": 0, "Total_Employer_Count": 2},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Paid Internship", "Total_Open_Positions": 2, "Total_Employer_Count": 2},
-      {"Industry": "Unspecified", "Opportunity Type": "Part-time", "Total_Open_Positions": 112, "Total_Employer_Count": 2},
-      {"Industry": "Law Enforcement", "Opportunity Type": "Full-time", "Total_Open_Positions": 0, "Total_Employer_Count": 2},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Paid Internship, Apprenticeship, Seasonal/Temporary Hires", "Total_Open_Positions": 10, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Unpaid Internship", "Total_Open_Positions": 2, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Job Corps is a trade training program for 16–24-year-old", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires, Reserve Patrol Officer", "Total_Open_Positions": 3, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires, Professional Direct Hire / Temp to Perm Roles", "Total_Open_Positions": 100, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Part-time, Co-op Programs", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
-      {"Industry": "DoD", "Opportunity Type": "Full-time, Part-time", "Total_Open_Positions": 25, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Apprenticeship", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Paid Internship, Apprenticeship, Co-op Programs, Seasonal/Temporary Hires, Educational Opportunities", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Continuing Education opportunities", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Paid Internship, Co-op Programs", "Total_Open_Positions": 5, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Paid Internship, Apprenticeship", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Apprenticeship, Seasonal/Temporary Hires", "Total_Open_Positions": 10, "Total_Employer_Count": 1},
-      {"Industry": "Transportation", "Opportunity Type": "Full-time", "Total_Open_Positions": 4, "Total_Employer_Count": 1},
-      {"Industry": "Retail", "Opportunity Type": "Full-time, Part-time, Paid Internship, Apprenticeship", "Total_Open_Positions": 20, "Total_Employer_Count": 1},
-      {"Industry": "Recruiter", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires", "Total_Open_Positions": 20, "Total_Employer_Count": 1},
-      {"Industry": "Other/Not Applicable", "Opportunity Type": "Contractors/Instructors for Healthcare and Adv. Manufacturing", "Total_Open_Positions": 3, "Total_Employer_Count": 1},
-      {"Industry": "Unspecified", "Opportunity Type": "volunteers", "Total_Open_Positions": 0, "Total_Employer_Count": 1}
+      {"Industry": "Manufacturing", "Total_Open_Positions": 97, "Total_Employer_Count": 15},
+      {"Industry": "Unspecified", "Total_Open_Positions": 1167, "Total_Employer_Count": 22},
+      {"Industry": "Healthcare", "Total_Open_Positions": 0, "Total_Employer_Count": 2},
+      {"Industry": "Law Enforcement", "Total_Open_Positions": 0, "Total_Employer_Count": 2},
+      {"Industry": "DoD", "Total_Open_Positions": 25, "Total_Employer_Count": 1},
+      {"Industry": "Transportation", "Total_Open_Positions": 4, "Total_Employer_Count": 1},
+      {"Industry": "Retail", "Total_Open_Positions": 20, "Total_Employer_Count": 1},
+      {"Industry": "Recruiter", "Total_Open_Positions": 20, "Total_Employer_Count": 1},
+      {"Industry": "Other/Not Applicable", "Total_Open_Positions": 3, "Total_Employer_Count": 1}
     ];
 
-    // Interactive, dynamic charts
-    function createAndEmbedCharts() {
-      // Dynamic color palette echoing the brand
-      const colorScheme = [
-        "#245365","#DB7A4D","#FFD9CC","#3B82F6","#4B5563","#EAD6C5","#0974a6","#8EDDD3","#A1B0C2","#FEAF66","#DA5F63"
-      ];
-
-      // Chart 1
-      const chartEmployerCountSpec = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "data": {"values": data},
-        "mark": {"type": "bar", "tooltip": true, "cornerRadiusTopLeft":7,"cornerRadiusTopRight":7},
-        "encoding": {
-          "x": {"field": "Industry", "type": "nominal", "title":"Industry", "sort": "-y"},
-          "y": {"aggregate":"sum","field": "Total_Employer_Count","type": "quantitative","title":"Employer Count"},
-          "color": {"field": "Industry", "type": "nominal","scale": {"range": colorScheme}},
-          "tooltip": [
-            {"field":"Industry","type":"nominal"},
-            {"aggregate":"sum","field":"Total_Employer_Count","type":"quantitative","title":"Employer Count"}
-          ]
-        },
-        "width": 540,
-        "height": 350,
-        "config": {
-          "axis": {"labelFont":"Inter","titleFont":"Inter"},
-          "legend": {"titleFont":"Inter","labelFont":"Inter"},
-          "view": {"stroke": null}
-        }
+    // Pie chart 3D tilt interactivity for employer count
+    const pieColors = ['#245365','#DB7A4D','#FFD9CC','#87CDE9','#EAD6C5','#0974a6','#FEAF66','#DA5F63','#CAAC8F'];
+    function render3DPie(id, values, labels, title, colors) {
+      const chart = document.getElementById(id);
+      const dataPie = [{
+        values: values,
+        labels: labels,
+        textinfo: 'label+percent',
+        pull: 0.06,
+        showlegend: false,
+        marker: {colors:colors, line: {color:'#d2dbe3',width:2}},
+        type: 'pie',
+        hole: 0.45
+      }];
+      // Layout for 3D effect with camera tilt
+      const figLayout = {
+        height: 370,
+        margin: {l: 15, r: 15, b: 30, t: 40},
+        annotations: [{text: title, font: {size: 16, color: '#245365', family:"Inter"}, showarrow: false, x: 0.5, y: -0.1, xref: 'paper', yref: 'paper'}],
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        font: {family: 'Inter', size: 15, color: '#314669'},
+        showlegend: false
       };
-      vegaEmbed("#chart_employer_count", chartEmployerCountSpec, {actions: false});
-
-      // Chart 2
-      const chartOpenPositionsSpec = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "data": {"values": data},
-        "mark": {"type":"bar","tooltip": true,"cornerRadiusTopLeft":7,"cornerRadiusTopRight":7},
-        "encoding": {
-          "x": {"field":"Industry","type":"nominal","title":"Industry","sort":"-y"},
-          "y": {"aggregate":"sum","field":"Total_Open_Positions","type":"quantitative","title":"Open Positions"},
-          "color": {"field": "Industry", "type":"nominal","scale": {"range": colorScheme}},
-          "tooltip": [
-            {"field":"Industry","type":"nominal"},
-            {"aggregate":"sum","field":"Total_Open_Positions","type":"quantitative","title":"Open Positions"}
-          ]
-        },
-        "width": 540,
-        "height": 350,
-        "config": {
-          "axis": {"labelFont":"Inter","titleFont":"Inter"},
-          "legend": {"titleFont":"Inter","labelFont":"Inter"},
-          "view": {"stroke": null}
-        }
+      // Initial start in neutral tilt
+      let pullTilt = 0;
+      Plotly.newPlot(chart, dataPie, figLayout, {responsive:true, displayModeBar:false});
+      // Handle slight 3D tilt on hover
+      chart.onmouseover = (e) => {
+        if (pullTilt===1) return;
+        pullTilt = 1;
+        Plotly.relayout(chart, {"piecolorway":colors, "margin":{l:0,r:0,t:32,b:38}});
+        chart.querySelectorAll('.slice').forEach(slice => {
+          slice.style.transition = "transform .39s cubic-bezier(.38,1.15,.58,1.18)";
+          slice.style.transform = "perspective(560px) rotateX(14deg) scale3d(1.01,1.01,1.01)";
+        });
       };
-      vegaEmbed("#chart_open_positions", chartOpenPositionsSpec, {actions: false});
+      chart.onmouseout = (e) => {
+        if (pullTilt===0) return;
+        pullTilt=0;
+        chart.querySelectorAll('.slice').forEach(slice => {
+          slice.style.transition = "transform .65s cubic-bezier(0.34,0.86,0.52,1.44)";
+          slice.style.transform = "perspective(560px) rotateX(0deg) scale3d(1,1,1)";
+        });
+      };
     }
-    document.addEventListener('DOMContentLoaded', createAndEmbedCharts);
-
-    // Accessibility: collapsible for future expansions.
-    document.querySelectorAll('.collapsible-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const id = btn.getAttribute('aria-controls');
-        const pane = document.getElementById(id);
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        pane.classList.toggle('collapse-closed', expanded);
-        pane.classList.toggle('collapse-open', !expanded);
-      });
+    document.addEventListener('DOMContentLoaded', function () {
+      const industryLabels = data.map(d=>d.Industry);
+      const employerCounts = data.map(d=>d.Total_Employer_Count);
+      const openPositions = data.map(d=>d.Total_Open_Positions);
+      render3DPie('pie_employer_count', employerCounts, industryLabels, 'Employers by Industry', pieColors);
+      render3DPie('pie_open_positions', openPositions, industryLabels, 'Open Positions by Industry', pieColors);
     });
   </script>
 </body>
