@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Job Fair Data Analysis | Mark R.</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Vega/Vega-Lite Chart Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <style>
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #245365 0%, #DB7A4D 54%, #FFD9CC 100%);
+      background-attachment: fixed;
+      color: #22303a;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    .nav-link {
+      font-weight: 600;
+      color: #314669;
+      transition: color 0.17s, background 0.19s, transform 0.18s;
+      padding: 0.5rem 1.1rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: #245365;
+      background: #ffe5d7;
+      transform: scale(1.07);
+      outline: none;
+    }
+    .main-card {
+      max-width: 1100px;
+      margin: 2.5rem auto 2.5rem auto;
+      padding: 2.5rem 2rem 2.7rem 2rem;
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.3rem;
+      box-shadow: 0 7px 26px 0 rgba(36,83,101,0.10);
+      border: 1.4px solid #e1ebf9;
+      position: relative;
+    }
+    .section-heading {
+      font-size: 2.25rem; 
+      font-weight: 800;
+      color: #245365;
+      margin-bottom: 1.7rem;
+      text-align: left;
+      position: relative;
+      padding-bottom: 0.22rem;
+      letter-spacing: -0.018em;
+      line-height: 1.16;
+    }
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 110px;
+      height: 5px;
+      background-color: #DB7A4D;
+      border-radius: 3px;
+    }
+    .collapsible-btn {
+      font-weight: 700;
+      font-size: 1.13rem;
+      color: #245365;
+      background: #fff;
+      border: 2px solid #DB7A4D;
+      border-radius: 0.9rem;
+      padding: 0.75rem 1.45rem;
+      margin-top: 1.55rem;
+      margin-bottom: .75rem;
+      outline: none;
+      transition: background 0.21s, color 0.15s, border 0.15s, box-shadow 0.18s;
+      box-shadow: 0 2px 13px 0 rgba(36,83,101,0.07);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.66em;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .collapsible-btn[aria-expanded="true"] {
+      color: #fff;
+      background: #DB7A4D;
+      border-color: #245365;
+    }
+    .collapsible-content {
+      padding-bottom: 0.2rem;
+      transition: max-height 0.37s cubic-bezier(.38,1.15,.58,1.18), opacity 0.33s;
+      overflow: hidden;
+    }
+    .collapsible-content.collapse-closed {
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .collapsible-content.collapse-open {
+      max-height: 2300px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .chart-section {
+      margin: 2rem 0 2rem 0;
+      background: #eaf6fb;
+      padding: 1.4rem 1rem 2.1rem 1rem;
+      border-radius: 1.1rem;
+      box-shadow: 0 0.5px 10px 0 #db7a4d19;
+      border: 1.3px solid #ceeaf9;
+    }
+    .chart-section h3 {
+      font-size: 1.31rem; 
+      font-weight: 700;
+      color: #245365;
+      margin-bottom: 0.7rem;
+      text-align: left;
+    }
+    .highlight-num {
+      font-weight: 800; color: #DB7A4D; font-size: 2.15rem;
+    }
+    .stat-card {
+      background: #fff7ef;
+      border-radius: 1.1rem;
+      padding: 1.2rem 1rem;
+      box-shadow: 0 2px 13px 0 rgba(36,83,101,0.09);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .stat-title {
+      font-size: 1.04em;
+      color: #245365;
+      font-weight: 600;
+      margin-bottom: 0.11em;
+    }
+    .stat-value {
+      font-size: 2.1em;
+      font-weight: 900;
+      color: #DB7A4D;
+      line-height: 1.05;
+    }
+    .disclaimer {
+      background: #fffbea;
+      border-left: 6px solid #f59e0b;
+      padding: 0.95em 1.2em;
+      color: #965c0f;
+      font-size: 0.96rem;
+      border-radius: 0.8rem;
+      margin-bottom: 1.8rem;
+      margin-top: 1rem;
+    }
+    /* Vega chart tooltips font fix */
+    .vega-tooltip { font-family: 'Inter', sans-serif !important; font-size:1rem !important;}
+  </style>
+</head>
+<body>
+  <header class="bg-white/95 shadow-sm sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-4">
+      <a href="/" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
+      <nav>
+        <ul class="flex space-x-4 sm:space-x-6">
+          <li><a href="/#projects" class="nav-link">Back to Work Studies</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="bg-gradient-to-br from-[#245365] via-[#DB7A4D] to-[#FFD9CC] py-12 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl mb-3">Job Fair Data Analysis</h1>
+        <p class="text-lg text-white/90 mb-5 mx-auto max-w-2xl">Insights, visualizations, and actionable findings from employer registration for a public job fair event.</p>
+        <p class="text-sm text-white/70">Data Analysis by Mark R. | Updated July 2025</p>
+      </div>
+    </section>
+
+    <div class="main-card shadow-lg">
+      <div class="disclaimer mb-6">
+        <b>Note:</b> Some industry and opportunity fields were unstructured; trend and chart interpretations are simplified for clarity.
+      </div>
+      
+      <h2 class="section-heading">Key Takeaways</h2>
+      <ul class="mb-8 list-disc list-inside px-1 text-gray-700 text-lg">
+        <li><span class="font-bold text-[#DB7A4D]">Manufacturing leads in demand:</span> Highest employer participation and open positions, signifying robust sector growth.</li>
+        <li><span class="font-bold text-[#245365]">Diverse opportunities:</span> Not just full/part-time but also internships, apprenticeships, and seasonal roles.</li>
+        <li><span class="font-bold text-[#DB7A4D]">Data improvement needed:</span> Many "Unspecified" entries emphasize need for better structured data collection.</li>
+      </ul>
+      
+      <h2 class="section-heading">Detailed Analysis</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-7 mb-7">
+        <div class="stat-card">
+          <span class="stat-title">Total Employers</span>
+          <span class="stat-value">43</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Total Open Positions</span>
+          <span class="stat-value text-green-700">1,473</span>
+        </div>
+      </div>
+      
+      <h3 class="text-xl font-semibold text-[#245365] mt-10 mb-3">Industry Leaders</h3>
+      <div class="mb-7 px-1">
+        <ul class="list-disc list-inside text-gray-800 text-base">
+          <li class="mb-2"><b class="text-[#DB7A4D]">Manufacturing:</b> 15 employers, 97 positions (mostly full-time).</li>
+          <li class="mb-2"><b class="text-[#245365]">DoD:</b> 1 employer, 25 positions (full & part-time, highlighting government roles).</li>
+          <li class="mb-2"><b class="text-[#DB7A4D]">Healthcare & Law Enforcement:</b> Presence, but 0 reported positions—important for networking, not just hiring.</li>
+          <li><b class="text-[#245365]">Other sectors:</b> Transportation, Retail, Recruiters, and Other—smaller but important diversity contributors.</li>
+        </ul>
+      </div>
+      
+      <h3 class="text-xl font-semibold text-[#245365] mt-7 mb-2">Opportunity Types Offered</h3>
+      <div class="mb-7 px-1">
+        <ul class="list-disc list-inside text-gray-800 text-base">
+          <li><b>Full-time</b>: Most common type, present across industries.</li>
+          <li><b>Full-time & Part-time</b>: Especially prevalent among Unspecified category—156 openings.</li>
+          <li><b>Internships & Apprenticeships</b>: Indicate student and upskilling pathways.</li>
+          <li><b>Seasonal/Temp</b>: Satisfy short-term local labor market needs.</li>
+        </ul>
+      </div>
+      
+      <h3 class="text-xl font-semibold text-[#DB7A4D] mt-7 mb-2">Data Quality Challenge</h3>
+      <div class="mb-8 px-1 text-gray-700">
+        The "Unspecified" industry makes up a large portion of records, underscoring a need for refined data entry in future fairs.
+      </div>
+
+      <!-- Charts Section -->
+      <section class="chart-section mb-8">
+        <h3>Interactive Visualization: Employer Count by Industry</h3>
+        <div id="chart_employer_count" style="min-height: 375px;"></div>
+      </section>
+      <section class="chart-section mb-4">
+        <h3>Interactive Visualization: Open Positions by Industry</h3>
+        <div id="chart_open_positions" style="min-height: 375px;"></div>
+      </section>
+    </div>
+
+    <!-- Contact Banner -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-14">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
+        <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s connect and collaborate on data-driven solutions!</p>
+        <div class="flex justify-center gap-14 mb-10">
+          <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+        <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Data
+    const data = [
+      {"Industry": "Manufacturing", "Opportunity Type": "Full-time", "Total_Open_Positions": 97, "Total_Employer_Count": 15},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time", "Total_Open_Positions": 156, "Total_Employer_Count": 8},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time", "Total_Open_Positions": 29, "Total_Employer_Count": 3},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Paid Internship", "Total_Open_Positions": 15, "Total_Employer_Count": 3},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Seasonal/Temporary Hires", "Total_Open_Positions": 804, "Total_Employer_Count": 2},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires", "Total_Open_Positions": 25, "Total_Employer_Count": 2},
+      {"Industry": "Healthcare", "Opportunity Type": "Full-time", "Total_Open_Positions": 0, "Total_Employer_Count": 2},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Paid Internship", "Total_Open_Positions": 2, "Total_Employer_Count": 2},
+      {"Industry": "Unspecified", "Opportunity Type": "Part-time", "Total_Open_Positions": 112, "Total_Employer_Count": 2},
+      {"Industry": "Law Enforcement", "Opportunity Type": "Full-time", "Total_Open_Positions": 0, "Total_Employer_Count": 2},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Paid Internship, Apprenticeship, Seasonal/Temporary Hires", "Total_Open_Positions": 10, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Unpaid Internship", "Total_Open_Positions": 2, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Job Corps is a trade training program for 16–24-year-old", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires, Reserve Patrol Officer", "Total_Open_Positions": 3, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires, Professional Direct Hire / Temp to Perm Roles", "Total_Open_Positions": 100, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Part-time, Co-op Programs", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
+      {"Industry": "DoD", "Opportunity Type": "Full-time, Part-time", "Total_Open_Positions": 25, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Apprenticeship", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Paid Internship, Apprenticeship, Co-op Programs, Seasonal/Temporary Hires, Educational Opportunities", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Part-time, Continuing Education opportunities", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Paid Internship, Co-op Programs", "Total_Open_Positions": 5, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Paid Internship, Apprenticeship", "Total_Open_Positions": 0, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "Full-time, Apprenticeship, Seasonal/Temporary Hires", "Total_Open_Positions": 10, "Total_Employer_Count": 1},
+      {"Industry": "Transportation", "Opportunity Type": "Full-time", "Total_Open_Positions": 4, "Total_Employer_Count": 1},
+      {"Industry": "Retail", "Opportunity Type": "Full-time, Part-time, Paid Internship, Apprenticeship", "Total_Open_Positions": 20, "Total_Employer_Count": 1},
+      {"Industry": "Recruiter", "Opportunity Type": "Full-time, Part-time, Seasonal/Temporary Hires", "Total_Open_Positions": 20, "Total_Employer_Count": 1},
+      {"Industry": "Other/Not Applicable", "Opportunity Type": "Contractors/Instructors for Healthcare and Adv. Manufacturing", "Total_Open_Positions": 3, "Total_Employer_Count": 1},
+      {"Industry": "Unspecified", "Opportunity Type": "volunteers", "Total_Open_Positions": 0, "Total_Employer_Count": 1}
+    ];
+
+    // Interactive, dynamic charts
+    function createAndEmbedCharts() {
+      // Dynamic color palette echoing the brand
+      const colorScheme = [
+        "#245365","#DB7A4D","#FFD9CC","#3B82F6","#4B5563","#EAD6C5","#0974a6","#8EDDD3","#A1B0C2","#FEAF66","#DA5F63"
+      ];
+
+      // Chart 1
+      const chartEmployerCountSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "data": {"values": data},
+        "mark": {"type": "bar", "tooltip": true, "cornerRadiusTopLeft":7,"cornerRadiusTopRight":7},
+        "encoding": {
+          "x": {"field": "Industry", "type": "nominal", "title":"Industry", "sort": "-y"},
+          "y": {"aggregate":"sum","field": "Total_Employer_Count","type": "quantitative","title":"Employer Count"},
+          "color": {"field": "Industry", "type": "nominal","scale": {"range": colorScheme}},
+          "tooltip": [
+            {"field":"Industry","type":"nominal"},
+            {"aggregate":"sum","field":"Total_Employer_Count","type":"quantitative","title":"Employer Count"}
+          ]
+        },
+        "width": 540,
+        "height": 350,
+        "config": {
+          "axis": {"labelFont":"Inter","titleFont":"Inter"},
+          "legend": {"titleFont":"Inter","labelFont":"Inter"},
+          "view": {"stroke": null}
+        }
+      };
+      vegaEmbed("#chart_employer_count", chartEmployerCountSpec, {actions: false});
+
+      // Chart 2
+      const chartOpenPositionsSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "data": {"values": data},
+        "mark": {"type":"bar","tooltip": true,"cornerRadiusTopLeft":7,"cornerRadiusTopRight":7},
+        "encoding": {
+          "x": {"field":"Industry","type":"nominal","title":"Industry","sort":"-y"},
+          "y": {"aggregate":"sum","field":"Total_Open_Positions","type":"quantitative","title":"Open Positions"},
+          "color": {"field": "Industry", "type":"nominal","scale": {"range": colorScheme}},
+          "tooltip": [
+            {"field":"Industry","type":"nominal"},
+            {"aggregate":"sum","field":"Total_Open_Positions","type":"quantitative","title":"Open Positions"}
+          ]
+        },
+        "width": 540,
+        "height": 350,
+        "config": {
+          "axis": {"labelFont":"Inter","titleFont":"Inter"},
+          "legend": {"titleFont":"Inter","labelFont":"Inter"},
+          "view": {"stroke": null}
+        }
+      };
+      vegaEmbed("#chart_open_positions", chartOpenPositionsSpec, {actions: false});
+    }
+    document.addEventListener('DOMContentLoaded', createAndEmbedCharts);
+
+    // Accessibility: collapsible for future expansions.
+    document.querySelectorAll('.collapsible-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const id = btn.getAttribute('aria-controls');
+        const pane = document.getElementById(id);
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        pane.classList.toggle('collapse-closed', expanded);
+        pane.classList.toggle('collapse-open', !expanded);
+      });
+    });
+  </script>
+</body>
+</html>
