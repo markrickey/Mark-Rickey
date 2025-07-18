@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Mark - Global Strategic Project Manager</title>
-  <!-- Tailwind CSS CDN -->
+  <title>Mark R. – Global Strategic Project Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +12,7 @@
       background: linear-gradient(180deg, #245365 0%, #DB7A4D 50%, #FFD9CC 100%);
       background-attachment: fixed;
       color: #333;
-      line-height: 1.6;
+      min-height: 100vh;
       overflow-x: hidden;
     }
     .nav-link {
@@ -41,7 +40,7 @@
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
     }
     .content-card {
-      background-color: rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.97);
       border-radius: 1rem;
       box-shadow: 0 4px 15px rgba(36,83,101,0.09);
       border: 1px solid #EFEFEF;
@@ -50,6 +49,7 @@
       overflow: hidden;
       will-change: transform, box-shadow;
       cursor: pointer;
+      padding: 2rem 1.5rem 2rem 1.5rem;
     }
     .content-card:hover, .content-card:focus-visible {
       transform: translateY(-10px) scale(1.035) rotateZ(-1deg);
@@ -108,13 +108,13 @@
       background: #fff4ef;
       color: #245365;
       padding: 0.5rem 1.15rem;
-      font-size: 1.02rem;
-      margin: .18rem .22rem .55rem .22rem;
+      margin: .1rem .3rem .6rem .3rem;
+      font-size: 1.08rem;
       font-weight: 700;
       border: 2px solid #DB7A4D;
       border-radius: 1rem;
       outline: none;
-      box-shadow: 0 1px 4px rgba(36,83,101,.07);
+      box-shadow: 0 1px 4px rgba(36,83,101,.08);
       cursor: pointer;
       transition: background 0.16s, color 0.17s, border-color 0.16s, transform 0.18s;
     }
@@ -124,34 +124,25 @@
       border-color: #245365;
       transform: scale(1.05);
     }
-    /* Responsive font & card scaling */
-    @media (max-width: 900px) {
-      h1 { font-size: 2.5rem!important; }
-      h2 { font-size: 1.65rem!important; }
-      .content-card { padding: 2rem;}
+    @media (max-width: 870px) {
+      .content-card { padding: 1.25rem .7rem 1.5rem .7rem;}
     }
-    @media (max-width: 600px) {
-      .max-w-6xl, .max-w-5xl, .max-w-3xl { max-width: 98vw!important; }
-      h1 { font-size: 2rem!important; }
-      h2 { font-size: 1.2rem!important; }
-      .content-card { padding: 1.10rem!important; }
-    }
-    @media (max-width: 500px) {
-      .content-card { padding: 0.75rem!important; }
-      .nav-link { font-size: 1rem; padding: 0.48rem 0.68rem }
-      .skill-chip { padding: 0.5rem 0.7rem; font-size: 0.97rem; }
-      .skill-filter-btn { font-size: .97rem; padding: .37rem .75rem;}
+    @media (max-width: 640px) {
+      .content-card { padding: 1rem; }
+      .hero-title { font-size: 2.18rem !important; }
+      .hero-subtitle { font-size: 1.1rem !important; }
+      .nav-link { font-size: 1rem; padding: 0.36rem 0.67rem;}
     }
   </style>
 </head>
 <body>
 
-  <!-- Header/Navigation -->
+  <!-- Navigation -->
   <header class="bg-white/95 shadow-sm sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto flex flex-wrap md:flex-nowrap justify-between items-center px-4 py-3">
+    <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-4">
       <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
-      <nav class="w-full md:w-auto mt-2 md:mt-0">
-        <ul class="flex flex-wrap md:flex-nowrap gap-2 md:gap-4 lg:gap-6 justify-center">
+      <nav>
+        <ul class="flex flex-wrap space-x-2 sm:space-x-6">
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
           <li><a href="#projects" class="nav-link">Work Studies</a></li>
@@ -163,7 +154,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
+  <section id="hero" class="relative min-h-[85vh] flex flex-col items-center justify-center">
     <div class="absolute inset-0 z-0">
       <video autoplay loop muted playsinline class="w-full h-full object-cover">
         <source src="herobanner.mp4" type="video/mp4">
@@ -172,20 +163,20 @@
       <div class="hero-overlay"></div>
       <div class="hero-fade-bottom"></div>
     </div>
-    <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
-      <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-28 h-28 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2 drop-shadow">Mark</h1>
-      <h2 class="text-xl sm:text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Global Government Relations Management</h2>
-      <p class="text-base sm:text-lg text-white max-w-lg mx-auto mb-8">As a leader in strategic analysis and data-driven solutions, I optimize global operations to deliver impactful results through public service.</p>
-      <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-7 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105 text-base sm:text-lg">Connect Today!</a>
+    <div class="relative z-10 flex flex-col items-center text-center pt-16 pb-16 w-full px-4">
+      <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
+      <h1 class="hero-title text-3xl sm:text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
+      <h2 class="hero-subtitle text-lg sm:text-2xl text-[#FFD9CC] mb-4 sm:mb-6 font-semibold">Strategic Project & Global Government Relations Management</h2>
+      <p class="text-base sm:text-lg text-white max-w-2xl mx-auto mb-6">As a leader in strategic analysis and data-driven solutions, I optimize global operations to deliver impactful results through public service.</p>
+      <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-6 sm:px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect Today!</a>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-14 sm:py-20 bg-white">
+  <section id="about" class="py-12 sm:py-20 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
-      <div class="text-base sm:text-lg text-gray-700 leading-relaxed space-y-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-4 sm:mb-6">About Me</h2>
+      <div class="text-base sm:text-lg text-gray-700 leading-relaxed space-y-5 sm:space-y-6">
         <p>A resilient and adaptable professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. My journey has involved diverse, high-impact engagements where I've consistently excelled at process optimization, data-driven leadership, and international stakeholder engagement, delivering quantifiable results in complex, high-stakes environments.</p>
         <p>My unique background combines unwavering discipline with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning, positioning me as a sought-after expert in driving operational excellence and impactful solutions. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration. I thrive in environments where I can streamline operations and contribute to meaningful objectives, always seeking to empower others from behind the scenes.</p>
       </div>
@@ -193,55 +184,105 @@
   </section>
 
   <!-- Experience Section -->
-  <section id="experience" class="py-14 sm:py-20 bg-[#F9FAFB]">
+  <section id="experience" class="py-12 sm:py-20 bg-[#F9FAFB]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8">
-        <!-- Cards (repeat structure for each card) -->
-        <div class="content-card mb-4 sm:mb-0">
-          <h3 class="text-lg sm:text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
-          <p class="text-gray-600 mb-3 sm:mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-4 sm:mb-6">Experience</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="content-card">
+          <h3 class="text-xl font-semibold experience-card-title mb-2">Congressional Staffer</h3>
+          <p class="text-gray-600 mb-4 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
           <ul class="list-none text-gray-700 space-y-2 text-base">
-            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Primary account manager for DoD, VA, Military Academies.</span></li>
-            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Refined & executed advanced data management systems.</span></li>
-            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span><span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</span></li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
           </ul>
         </div>
-        <!-- Repeat other experience cards as before... -->
-        <!-- ... -->
+        <div class="content-card">
+          <h3 class="text-xl font-semibold experience-card-title mb-2">U.S. Army, Project Manager/NCO</h3>
+          <p class="text-gray-600 mb-4 text-sm experience-card-dates">United States Army | Global Operations</p>
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed complex logistical operations in the South Pacific.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Led & mentored multinational teams in high-pressure operations.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3 class="text-xl font-semibold experience-card-title mb-2">Digital Optimization Supervisor</h3>
+          <p class="text-gray-600 mb-4 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
+          </ul>
+        </div>
+        <!-- Add additional experience content-cards as needed -->
       </div>
     </div>
   </section>
 
-  <!-- Work Studies / Projects Section -->
-  <section id="projects" class="py-14 sm:py-20 bg-white">
+  <!-- Projects/Work Studies Section -->
+  <section id="projects" class="py-12 sm:py-20 bg-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8">
-        <div class="content-card mb-4 sm:mb-0">
-          <h3 class="text-lg sm:text-xl font-semibold text-[#245365] mb-2">Job Fair Data Management & Strategic Outreach</h3>
-          <p class="text-gray-700 text-sm mb-4">Architected and deployed comprehensive Google data management systems to streamline employer/employee data capture, providing actionable insights for future events.</p>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-4 sm:mb-6">Work Studies</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="content-card">
+          <h3 class="text-xl font-semibold text-[#245365] mb-2">Job Fair Data Management & Strategic Outreach</h3>
+          <p class="text-gray-700 text-sm mb-4">Architected and deployed comprehensive Google data management systems (Python, SQL, AI/ML) to streamline employer/employee data capture, providing actionable insights for future events.</p>
           <a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
         </div>
-        <!-- Repeat for other cards... -->
+        <div class="content-card">
+          <h3 class="text-xl font-semibold text-[#245365] mb-2">Public Correspondence & Strategic Communication</h3>
+          <p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p>
+          <a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+        </div>
+        <div class="content-card">
+          <h3 class="text-xl font-semibold text-[#245365] mb-2">Constituent Engagement Data Optimization</h3>
+          <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p>
+          <a href="/Mark-Rickey/HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="py-14 sm:py-20 bg-[#F9FAFB]">
+  <section id="skills" class="py-12 sm:py-20 bg-[#F9FAFB]">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Skills</h2>
-      <div class="flex flex-wrap justify-center mb-7 gap-1 sm:gap-2">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#245365] mb-4 sm:mb-6">Skills</h2>
+      <div class="flex flex-wrap justify-center mb-6 gap-2">
         <button class="skill-filter-btn active" data-filter="all" type="button">All</button>
         <button class="skill-filter-btn" data-filter="technical" type="button">Technical</button>
         <button class="skill-filter-btn" data-filter="professional" type="button">Professional</button>
         <button class="skill-filter-btn" data-filter="leadership" type="button">Leadership</button>
       </div>
       <div class="flex flex-wrap justify-center max-w-3xl mx-auto" id="skills-chips">
-        <!-- ...skill chips (same structure)... -->
         <span class="skill-chip cat-technical" data-cat="technical">HTML/CSS</span>
-        <!-- ...other skill chips... -->
+        <span class="skill-chip cat-technical" data-cat="technical">JavaScript</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Tailwind CSS</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Python</span>
+        <span class="skill-chip cat-technical" data-cat="technical">SQL</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Google Sheets</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Google Forms</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Data Analysis</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Data Visualization</span>
+        <span class="skill-chip cat-technical" data-cat="technical">UI/UX Design</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Canva</span>
+        <span class="skill-chip cat-technical" data-cat="technical">AI/ML Concepts</span>
+        <span class="skill-chip cat-technical" data-cat="technical">Cybersecurity Concepts</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Project Management</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span>
+        <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span>
+        <span class="skill-chip cat-leadership" data-cat="leadership">Leadership</span>
+        <span class="skill-chip cat-leadership" data-cat="leadership">Adaptability</span>
+        <span class="skill-chip cat-leadership" data-cat="leadership">Resilience</span>
+        <span class="skill-chip cat-leadership" data-cat="leadership">Mentorship</span>
+        <span class="skill-chip cat-leadership" data-cat="leadership">Problem-Solving</span>
+        <span class="skill-chip cat-leadership" data-cat="leadership">Innovation</span>
       </div>
     </div>
   </section>
@@ -251,38 +292,4 @@
     <div class="max-w-3xl mx-auto px-4 text-center">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
       <p class="mb-6 text-base sm:text-lg text-[#245365]/90 font-medium">Let’s connect and make something impactful together!</p>
-      <div class="flex flex-wrap justify-center gap-8 sm:gap-14 mb-10">
-        <a href="mailto:markrickey01@gmail.com" class="text-4xl sm:text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="Email">
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-4xl sm:text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-      </div>
-      <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
-    </div>
-  </section>
-
-  <script>
-    // SKILLS FILTER (chips version)
-    document.querySelectorAll('.skill-filter-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.skill-filter-btn').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.getAttribute('data-filter');
-        document.querySelectorAll('#skills-chips .skill-chip').forEach((chip) => {
-          if (filter === 'all' || chip.getAttribute('data-cat') === filter) {
-            chip.style.display = 'inline-block';
-          } else {
-            chip.style.display = 'none';
-          }
-        });
-      });
-    });
-    // Default to show all on load (refresh fix)
-    window.addEventListener('DOMContentLoaded', function(){
-      document.querySelector('.skill-filter-btn[data-filter="all"]').click();
-    });
-  </script>
-</body>
-</html>
+      <
