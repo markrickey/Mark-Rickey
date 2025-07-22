@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Mark R. – Global Strategic Project Manager</title>
+  <title>Mark - Global Strategic Project Manager</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -12,26 +12,12 @@
       background: linear-gradient(180deg, #245365 0%, #DB7A4D 50%, #FFD9CC 100%);
       background-attachment: fixed;
       color: #333;
-      min-height: 100vh;
+      line-height: 1.6;
       overflow-x: hidden;
-    }
-    .nav-link {
-      font-weight: 500;
-      color: #4B5563;
-      transition: color 0.18s, background 0.23s, transform 0.22s;
-      padding: 0.5rem 0.85rem;
-      border-radius: 0.5rem;
-      display: inline-block;
-    }
-    .nav-link:hover, .nav-link:focus {
-      color: #245365;
-      background: #ffe5d7;
-      transform: scale(1.08);
-      outline: none;
     }
     .hero-fade-bottom {
       position: absolute;
-      left: 0; bottom: 0; width: 100%; height: 120px;
+      left: 0; bottom: 0; width: 100%; height: 100px;
       background: linear-gradient(to bottom, rgba(36,83,101,0.0) 0%, #FFF4EF 100%);
       pointer-events: none; z-index: 1;
     }
@@ -39,190 +25,118 @@
       background: rgba(36,83,101,0.40);
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
     }
-    .content-card {
-      background: rgba(255,255,255,0.98);
-      border-radius: 1rem;
-      box-shadow: 0 4px 15px rgba(36,83,101,0.09);
-      border: 1px solid #EFEFEF;
-      transition: transform 0.32s cubic-bezier(.38,1.15,.58,1.18), box-shadow 0.32s cubic-bezier(.1,.65,.44,1.28), background 0.24s;
-      position: relative;
-      overflow: hidden;
-      will-change: transform, box-shadow;
-      cursor: pointer;
-      padding: 2rem 1.5rem 2rem 1.5rem;
+    .nav-link {
+      @apply transition-colors duration-200 py-2 px-4 text-base font-medium rounded-md focus:outline-none;
     }
-    .content-card:hover, .content-card:focus-visible {
-      transform: translateY(-10px) scale(1.035) rotateZ(-1deg);
-      box-shadow: 0 14px 38px 0 rgba(36,83,101,0.14), 0 2px 4px 0 #ffd9cc84;
-      background: linear-gradient(120deg, #fff 70%, #DB7A4D 160%);
+    .nav-link:hover, .nav-link:focus {
+      color: #245365;
+      background: #ffe5d7;
       outline: none;
     }
-    .experience-card-title { color: #245365; }
-    .experience-card-dates { color: #DB7A4D; }
-    .experience-bullet-icon { color: #DB7A4D; }
-    .contact-icon-link {
-      transition: color 0.2s, transform 0.22s, background 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20%;
-      padding: .15em;
+    /* Hamburger menu */
+    .bar {
+      width:28px; height:4px; margin:5px 0; background:#245365; border-radius:2px; transition:0.3s;
+      display:block;
     }
-    .contact-icon-link:focus, .contact-icon-link:hover {
-      color: #DB7A4D;
-      background: #ffe5d7;
-      transform: scale(1.15);
-      outline: 2px solid #DB7A4D;
-      outline-offset: 2
-
-        }
-        .skill-chip {
-            display: inline-block;
-            margin: .25rem;
-            padding: 0.6rem 1.25rem;
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 1.5rem;
-            background: #fff;
-            color: #245365;
-            border: 1.5px solid #DB7A4D;
-            box-shadow: 0 1px 4px rgba(36,83,101,0.08);
-            transition: background 0.19s, color 0.19s, box-shadow 0.19s;
-            cursor: default;
-        }
-        .skill-chip.cat-technical { background: #245365; color: #fff; border-color: #245365; }
-        .skill-chip.cat-professional { background: #e4eef8; color: #245365; border-color: #245365;}
-        .skill-chip.cat-leadership { background: #ffd9cc; color: #a15a2d; border-color: #DB7A4D; }
-        .skill-filter-btn {
-            background: #fff4ef;
-            color: #245365;
-            padding: 0.6rem 1.5rem;
-            font-size: 1.08rem;
-            margin: .15rem .35rem .6rem .35rem;
-            font-weight: 700;
-            border: 2px solid #DB7A4D;
-            border-radius: 1rem;
-            outline: none;
-            box-shadow: 0 1px 4px rgba(36,83,101,.07);
-            cursor: pointer;
-            transition: background 0.16s, color 0.17s, border-color 0.16s, transform 0.18s;
-        }
-        .skill-filter-btn.active, .skill-filter-btn:focus {
-            background: #DB7A4D;
-            color: #fff;
-            border-color: #245365;
-            transform: scale(1.05);
-        }
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 40;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .mobile-menu-overlay.is-active { opacity: 1; visibility: visible; }
-        .mobile-nav {
-            position: fixed;
-            top: 0; right: 0; width: 70%; max-width: 300px; height: 100%;
-            background: #245365;
-            z-index: 50;
-            transform: translateX(100%);
-            transition: transform 0.3s ease-out;
-            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            display: flex; flex-direction: column;
-        }
-        .mobile-nav.is-active { transform: translateX(0); }
-        .mobile-nav ul { list-style: none; padding: 0; margin-top: 2rem;}
-        .mobile-nav ul li { margin-bottom: 1.5rem;}
-        .mobile-nav ul li a {
-            color: #fff; font-size: 1.5rem; font-weight: 600;
-            display: block; padding: 0.5rem 0; transition: color 0.2s;
-        }
-        .mobile-nav ul li a:hover, .mobile-nav ul li a:focus { color: #DB7A4D;}
-        .hamburger-button {
-            display: flex; flex-direction: column; justify-content: space-around;
-            width: 30px; height: 24px;
-            background: transparent; border: none; cursor: pointer;
-            padding: 0; z-index: 60; position: relative;
-        }
-        .hamburger-button span {
-            display: block; width: 100%; height: 3px;
-            background: #fff; border-radius: 2px;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger-button.is-active span:nth-child(1) { transform: translateY(10.5px) rotate(45deg);}
-        .hamburger-button.is-active span:nth-child(2) { opacity: 0; }
-        .hamburger-button.is-active span:nth-child(3) { transform: translateY(-10.5px) rotate(-45deg);}
-        .desktop-nav { display: none; }
-        @media (min-width: 768px) {
-            .desktop-nav { display: block; }
-            .hamburger-button { display: none;}
-        }
-    </style>
+    .bar-active:nth-child(1) { transform: translateY(9px) rotate(45deg);}
+    .bar-active:nth-child(2) { opacity:0;}
+    .bar-active:nth-child(3) { transform: translateY(-9px) rotate(-45deg);}
+  </style>
 </head>
 <body>
-    <!-- Header/Navigation -->
-    <header class="header-gradient shadow-sm sticky top-0 z-50">
-      <div class="max-w-5xl mx-auto flex justify-end items-center px-4 py-1">
-        <a href="#hero" class="flex items-center">
-          <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-56 sm:h-64 md:h-72 w-auto">
-        </a>
-        <nav class="desktop-nav ml-auto">
-          <ul class="flex space-x-4 sm:space-x-6">
-            <li><a href="#about" class="nav-link text-white hover:text-[#FFD9CC]">About</a></li>
-            <li><a href="#experience" class="nav-link text-white hover:text-[#FFD9CC]">Experience</a></li>
-            <li><a href="#projects" class="nav-link text-white hover:text-[#FFD9CC]">Work Studies</a></li>
-            <li><a href="#skills" class="nav-link text-white hover:text-[#FFD9CC]">Skills</a></li>
-            <li><a href="#contact" class="nav-link text-white hover:text-[#FFD9CC]">Contact</a></li>
-          </ul>
-        </nav>
-        <button class="hamburger-button md:hidden ml-4" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+  <!-- Header/Navigation: Banner column right, hamburger always -->
+  <header class="bg-white/95 shadow-sm sticky top-0 z-50 w-full">
+    <div class="flex flex-row-reverse justify-between items-center max-w-6xl mx-auto px-4 py-4">
+      <!-- Banner now on the far right (column layout) -->
+      <div class="flex flex-col items-end justify-center gap-3">
+        <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-14 h-14 rounded-full border-2 border-[#DB7A4D] object-cover" loading="lazy">
+        <span class="text-lg md:text-2xl font-bold text-[#245365]">Mark R.</span>
+        <span class="hidden md:block text-sm text-[#DB7A4D]">Strategic Project Manager</span>
       </div>
-    </header>
 
-    <div id="menu-overlay" class="mobile-menu-overlay"></div>
-    <nav id="mobile-nav" class="mobile-nav">
-        <button class="hamburger-button is-active self-end" id="close-menu-btn" aria-label="Close navigation menu">
-            <span></span>
-            <span></span>
-            <span></span>
+      <!-- Always hamburger menu -->
+      <nav class="relative z-50">
+        <button aria-label="Open menu" id="nav-toggle"
+          class="block md:hidden focus:outline-none" tabindex="0"
+          aria-expanded="false" aria-controls="mobile-nav" type="button">
+          <span class="bar" id="b1"></span>
+          <span class="bar" id="b2"></span>
+          <span class="bar" id="b3"></span>
         </button>
-        <ul>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#experience" class="nav-link">Experience</a></li>
-            <li><a href="#projects" class="nav-link">Work Studies</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+        <ul id="mobile-nav"
+            class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 flex flex-col gap-2 items-start px-8 pt-28 pb-10 translate-x-full transition-transform duration-300 ease-in-out md:relative md:top-0 md:right-0 md:h-auto md:w-auto md:bg-transparent md:shadow-none md:flex-row md:items-center md:gap-6 md:px-0 md:pt-0 md:pb-0 md:translate-x-0"
+            style="transition: transform 0.3s;">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Work Studies</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-    </nav>
+      </nav>
+    </div>
+    <script>
+      // Hamburger always on, mobile nav
+      const toggle = document.getElementById('nav-toggle');
+      const mobileNav = document.getElementById('mobile-nav');
+      const bars = [document.getElementById('b1'), document.getElementById('b2'), document.getElementById('b3')];
 
-    <!-- Hero, About, Experience (expand/collapse), Projects, Skills, Contact - UNCHANGED from your code above -->
+      function setNav(open) {
+        if (open) {
+          mobileNav.style.transform = "translateX(0)";
+          bars.forEach(bar => bar.classList.add('bar-active'));
+          toggle.setAttribute('aria-expanded', 'true');
+        } else {
+          mobileNav.style.transform = "";
+          bars.forEach(bar => bar.classList.remove('bar-active'));
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      }
 
-    <!-- Hero Section -->
-    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
-        <div class="absolute inset-0 z-0">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="hero.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="hero-overlay"></div>
-            <div class="hero-fade-bottom"></div>
-        </div>
-        <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
-            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
-            <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
-            <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Data Management Leader</h2>
-            <p class="text-lg text-white max-w-2xl mx-auto mb-8">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
-            <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
-        </div>
-    </section>
+      // Open/close on hamburger toggle
+      toggle.addEventListener('click', function () {
+        const isOpen = (bars[0].classList.contains('bar-active'));
+        setNav(!isOpen);
+      });
+
+      // Close menu when a link is clicked (mobile)
+      document.querySelectorAll('#mobile-nav a').forEach(link => {
+        link.addEventListener('click', () => setNav(false));
+      });
+
+      // Always show as side drawer on small, horizontal inline nav on desktop
+      function handleResize() {
+        if (window.innerWidth >= 768) {
+          mobileNav.classList.remove('fixed', 'h-full', 'w-64', 'bg-white', 'shadow-lg');
+          mobileNav.classList.add('md:relative', 'md:top-0', 'md:right-0', 'md:h-auto', 'md:w-auto', 'md:bg-transparent', 'md:shadow-none', 'md:flex-row', 'md:items-center', 'md:gap-6', 'md:px-0', 'md:pt-0', 'md:pb-0', 'md:translate-x-0');
+          mobileNav.style.transform = "";
+        } else {
+          mobileNav.classList.add('fixed', 'h-full', 'w-64', 'bg-white', 'shadow-lg');
+          setNav(false);
+        }
+      }
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('DOMContentLoaded', handleResize);
+    </script>
+  </header>
+
+  <!-- Hero Section (unchanged) -->
+  <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
+    <div class="absolute inset-0 z-0">
+      <video autoplay loop muted playsinline class="w-full h-full object-cover">
+        <source src="herobanner.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-fade-bottom"></div>
+    </div>
+    <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
+      <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
+      <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark</h1>
+      <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Global Government Relations Management</h2>
+      <p class="text-lg text-white max-w-2xl mx-auto mb-8">As a leader in strategic analysis and data-driven solutions, I optimize global operations to deliver impactful results through public service.</p>
+      <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect Today!</a>
+    </div>
+  </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-white">
