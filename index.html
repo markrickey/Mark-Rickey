@@ -136,18 +136,120 @@
             }
             header { padding-left: 0.8rem !important; padding-right: 0.8rem !important; }
         }
+
+        /* Mobile Menu Specific Styles */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40; /* Below menu, above content */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .mobile-menu-overlay.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 70%; /* Adjust width as needed */
+            max-width: 300px; /* Max width for larger screens */
+            height: 100%;
+            background: #245365; /* Dark blue background for menu */
+            z-index: 50;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-nav.is-active {
+            transform: translateX(0);
+        }
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        .mobile-nav ul li {
+            margin-bottom: 1.5rem;
+        }
+        .mobile-nav ul li a {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+        .mobile-nav ul li a:hover, .mobile-nav ul li a:focus {
+            color: #DB7A4D; /* Orange hover color */
+        }
+        .hamburger-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 60; /* Above mobile menu */
+            position: relative; /* For transition */
+        }
+        .hamburger-button span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #fff; /* White lines for hamburger */
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-button.is-active span:nth-child(1) {
+            transform: translateY(10.5px) rotate(45deg);
+        }
+        .hamburger-button.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-button.is-active span:nth-child(3) {
+            transform: translateY(-10.5px) rotate(-45deg);
+        }
+
+        /* Desktop Navigation - Hidden on Mobile */
+        .desktop-nav {
+            display: none; /* Hidden by default */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .desktop-nav {
+                display: block; /* Show on desktop */
+            }
+            .hamburger-button {
+                display: none; /* Hide hamburger on desktop */
+            }
+        }
     </style>
 </head>
 <body>
 
     <!-- Header/Navigation -->
     <header class="header-gradient shadow-sm sticky top-0 z-50">
-      <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-1">
+      <div class="max-w-5xl mx-auto flex justify-end items-center px-4 py-1">
+        <!-- Logo/Signature on the right -->
         <a href="#hero" class="flex items-center">
-          <!-- Image size is perfect, now applying height to header and gradient -->
           <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-56 sm:h-64 md:h-72 w-auto">
         </a>
-        <nav>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav ml-auto">
           <ul class="flex space-x-4 sm:space-x-6">
             <li><a href="#about" class="nav-link text-white hover:text-[#FFD9CC]">About</a></li>
             <li><a href="#experience" class="nav-link text-white hover:text-[#FFD9CC]">Experience</a></li>
@@ -156,14 +258,38 @@
             <li><a href="#contact" class="nav-link text-white hover:text-[#FFD9CC]">Contact</a></li>
           </ul>
         </nav>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger-button md:hidden ml-4" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
       </div>
     </header>
+
+    <!-- Mobile Navigation Menu (Always by Default) -->
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <nav id="nav" class="nav">
+        <button class="hamburger-button is-active self-end" aria-label="Close navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#projects" class="nav-link">Work Studies</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
         <div class="absolute inset-0 z-0">
             <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="herobanner.mp4" type="video/mp4">
+                <source src="hero.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="hero-overlay"></div>
