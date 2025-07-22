@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>Mark - Global Strategic Project Manager</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Mark - Global Strategic Project Manager</title>
     <!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-@@ -16,11 +15,9 @@
-line-height: 1.6;
-overflow-x: hidden;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { font-family: 'Inter', sans-serif; }
+        body {
+            background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
         /* Custom header gradient for fading effect */
-.header-gradient {
-background: linear-gradient(to bottom, #245365 0%, rgba(36,83,101,0.0) 100%);
-}
+        .header-gradient {
+            background-color: #245365; /* Solid color for the base */
+            position: relative;
+            overflow: hidden;
+        }
+        .header-gradient::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%; /* Fade out the bottom half of the header */
+            background: linear-gradient(to top, rgba(36,83,101,0.0) 0%, rgba(36,83,101,1) 100%); /* Fades from transparent to solid color */
+            pointer-events: none;
+            z-index: 1; /* Above header content, below logo/nav */
+        }
 
-.nav-link {
-font-weight: 500;
-color: #4B5563;
-@@ -51,17 +48,54 @@
-box-shadow: 0 4px 15px rgba(36,83,101,0.09);
-padding: 2.5rem;
-border: 1px solid #EFEFEF;
-            transition: transform 0.32s cubic-bezier(.38,1.15,.58,1.18), box-shadow 0.32s cubic-bezier(.1,.65,.44,1.28), background 0.24s;
+        .nav-link {
+            font-weight: 500;
+            color: #4B5563;
+            transition: color 0.18s, background 0.23s, transform 0.22s;
+            padding: 0.5rem 0.85rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+        }
+        .nav-link:hover, .nav-link:focus {
+            color: #245365;
+            background: #ffe5d7;
+            transform: scale(1.08);
+            outline: none;
+        }
+        .hero-fade-bottom {
+            position: absolute;
+            left: 0; bottom: 0; width: 100%; height: 120px;
+            background: linear-gradient(to bottom, rgba(36,83,101,0.0) 0%, #FFF4EF 100%);
+            pointer-events: none; z-index: 1;
+        }
+        .hero-overlay {
+            background: rgba(36,83,101,0.40);
+            position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        }
+        .content-card {
+            background-color: rgba(255,255,255,0.97);
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(36,83,101,0.09);
+            padding: 2.5rem;
+            border: 1px solid #EFEFEF;
             transition: 
                 box-shadow 0.32s cubic-bezier(.1,.65,.44,1.28), 
                 background 0.24s, 
                 transform 0.29s cubic-bezier(.18,1.05,.45,1.12), 
                 max-height .39s cubic-bezier(.47,.8,.72,1.12),
                 opacity 0.22s;
-position: relative;
-overflow: hidden;
+            position: relative;
+            overflow: hidden;
             will-change: transform, box-shadow;
-cursor: pointer;
+            cursor: pointer;
             user-select: none;
-}
+        }
         .content-card:hover, .content-card:focus-visible {
             transform: translateY(-10px) scale(1.035) rotateZ(-1deg);
             box-shadow: 0 14px 38px 0 rgba(36,83,101,0.14), 0 2px 4px 0 #ffd9cc84;
             background: linear-gradient(120deg, #fff 70%, #DB7A4D 160%);
             outline: none;
+        }
+        /* Specific styles for expanded/collapsed cards */
         .content-card:hover:not(.card-open):not(.card-collapsing) .experience-card-details {
-            max-height: 95px;
+            max-height: 95px; /* Glimpse height on hover */
             opacity: .79;
             filter: blur(0.5px);
             pointer-events: none;
@@ -59,7 +100,7 @@ cursor: pointer;
         }
         .content-card.card-open .experience-card-details,
         .content-card.card-collapsing .experience-card-details {
-            max-height: 300px;
+            max-height: 300px; /* Full height when open */
             opacity: 1;
             filter: blur(0);
             pointer-events: auto;
@@ -74,26 +115,76 @@ cursor: pointer;
         .content-card.card-collapsing {
             pointer-events: none !important;
         }
-        @media (max-width: 768px) {
-            .content-card {
-                padding: 1.5rem 1.1rem;
-            }
-            .experience-card-title { font-size: 1.10rem !important;}
-}
-.experience-card-title { color: #245365; }
-.experience-card-dates { color: #DB7A4D; }
-@@ -81,7 +115,6 @@
-outline: 2px solid #DB7A4D;
-outline-offset: 2px;
-}
+        .experience-card-title { color: #245365; }
+        .experience-card-dates { color: #DB7A4D; }
+        .experience-bullet-icon { color: #DB7A4D; }
+        /* Plus/Minus icon for expand/collapse */
+        .expand-icon {
+            position: absolute;
+            bottom: 1rem;
+            right: 1.25rem;
+            font-size: 1.5rem;
+            line-height: 1;
+            color: #245365;
+            transition: transform 0.3s ease;
+        }
+        .content-card.card-open .expand-icon {
+            transform: rotate(45deg); /* Rotate to form an 'X' or just a dash */
+        }
+
+        .contact-icon-link {
+            transition: color 0.2s, transform 0.22s, background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20%;
+            padding: .15em;
+        }
+        .contact-icon-link:focus, .contact-icon-link:hover {
+            color: #DB7A4D;
+            background: #ffe5d7;
+            transform: scale(1.15);
+            outline: 2px solid #DB7A4D;
+            outline-offset: 2px;
+        }
         /* Skills Chips */
-.skill-chip {
-display: inline-block;
-margin: .25rem;
-@@ -119,136 +152,63 @@
-border-color: #245365;
-transform: scale(1.05);
-}
+        .skill-chip {
+            display: inline-block;
+            margin: .25rem;
+            padding: 0.6rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 1.5rem;
+            background: #fff;
+            color: #245365;
+            border: 1.5px solid #DB7A4D;
+            box-shadow: 0 1px 4px rgba(36,83,101,0.08);
+            transition: background 0.19s, color 0.19s, box-shadow 0.19s;
+            cursor: default;
+        }
+        .skill-chip.cat-technical { background: #245365; color: #fff; border-color: #245365; }
+        .skill-chip.cat-professional { background: #e4eef8; color: #245365; border-color: #245365;}
+        .skill-chip.cat-leadership { background: #ffd9cc; color: #a15a2d; border-color: #DB7A4D; }
+        .skill-filter-btn {
+            background: #fff4ef;
+            color: #245365;
+            padding: 0.6rem 1.5rem;
+            font-size: 1.08rem;
+            margin: .15rem .35rem .6rem .35rem;
+            font-weight: 700;
+            border: 2px solid #DB7A4D;
+            border-radius: 1rem;
+            outline: none;
+            box-shadow: 0 1px 4px rgba(36,83,101,.07);
+            cursor: pointer;
+            transition: background 0.16s, color 0.17s, border-color 0.16s, transform 0.18s;
+        }
+        .skill-filter-btn.active, .skill-filter-btn:focus {
+            background: #DB7A4D;
+            color: #fff;
+            border-color: #245365;
+            transform: scale(1.05);
+        }
         /* Mobile transitions for experience cards and sections */
         @media (max-width: 768px) {
             .content-card {
@@ -113,194 +204,143 @@ transform: scale(1.05);
         }
 
         /* Mobile Menu Specific Styles */
-.mobile-menu-overlay {
-position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .mobile-menu-overlay {
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-background: rgba(0, 0, 0, 0.5);
-            z-index: 40; /* Below menu, above content */
+            background: rgba(0, 0, 0, 0.5);
             z-index: 40;
-opacity: 0;
-visibility: hidden;
-transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-        .mobile-menu-overlay.is-active {
-            opacity: 1;
-            visibility: visible;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-
         .mobile-menu-overlay.is-active { opacity: 1; visibility: visible; }
-.mobile-nav {
-position: fixed;
-            top: 0;
-            right: 0;
-            width: 70%; /* Adjust width as needed */
-            max-width: 300px; /* Max width for larger screens */
-            height: 100%;
-            background: #245365; /* Dark blue background for menu */
+        .mobile-nav {
+            position: fixed;
             top: 0; right: 0; width: 70%; max-width: 300px; height: 100%;
             background: #245365;
-z-index: 50;
-transform: translateX(100%);
-transition: transform 0.3s ease-out;
-box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
-padding: 2rem;
+            z-index: 50;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
             display: flex;
             flex-direction: column;
         }
-        .mobile-nav.is-active {
-            transform: translateX(0);
-        }
-        .mobile-nav ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 2rem;
-        }
-        .mobile-nav ul li {
-            margin-bottom: 1.5rem;
-            display: flex; flex-direction: column;
-}
         .mobile-nav.is-active { transform: translateX(0); }
         .mobile-nav ul { list-style: none; padding: 0; margin-top: 2rem;}
         .mobile-nav ul li { margin-bottom: 1.5rem;}
-.mobile-nav ul li a {
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 600;
-            display: block;
-            padding: 0.5rem 0;
-            transition: color 0.2s;
-        }
-        .mobile-nav ul li a:hover, .mobile-nav ul li a:focus {
-            color: #DB7A4D; /* Orange hover color */
+        .mobile-nav ul li a {
             color: #fff; font-size: 1.5rem; font-weight: 600;
             display: block; padding: 0.5rem 0; transition: color 0.2s;
-}
+        }
         .mobile-nav ul li a:hover, .mobile-nav ul li a:focus { color: #DB7A4D;}
-.hamburger-button {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px;
-            height: 24px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 60; /* Above mobile menu */
-            position: relative; /* For transition */
+        .hamburger-button { 
             display: flex; flex-direction: column; justify-content: space-around;
             width: 30px; height: 24px;
             background: transparent; border: none; cursor: pointer;
             padding: 0; z-index: 60; position: relative;
-}
-.hamburger-button span {
-            display: block;
-            width: 100%;
-            height: 3px;
-            background: #fff; /* White lines for hamburger */
-            border-radius: 2px;
+        }
+        .hamburger-button span { 
             display: block; width: 100%; height: 3px;
             background: #fff; border-radius: 2px;
-transition: all 0.3s ease-in-out;
-}
-        .hamburger-button.is-active span:nth-child(1) {
-            transform: translateY(10.5px) rotate(45deg);
+            transition: all 0.3s ease-in-out;
         }
-        .hamburger-button.is-active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger-button.is-active span:nth-child(3) {
-            transform: translateY(-10.5px) rotate(-45deg);
-        }
-
-        /* Desktop Navigation - Hidden on Mobile */
-        .desktop-nav {
-            display: none; /* Hidden by default */
-        }
-        @media (min-width: 768px) { /* md breakpoint */
-            .desktop-nav {
-                display: block; /* Show on desktop */
-            }
-            .hamburger-button {
-                display: none; /* Hide hamburger on desktop */
-            }
         .hamburger-button.is-active span:nth-child(1) { transform: translateY(10.5px) rotate(45deg);}
         .hamburger-button.is-active span:nth-child(2) { opacity: 0; }
         .hamburger-button.is-active span:nth-child(3) { transform: translateY(-10.5px) rotate(-45deg);}
+        /* Desktop Navigation - Hidden on Mobile */
         .desktop-nav { display: none; }
-        @media (min-width: 768px) {
+        @media (min-width: 768px) { /* md breakpoint */
             .desktop-nav { display: block; }
             .hamburger-button { display: none;}
-}
-</style>
+        }
+    </style>
 </head>
 <body>
 
-<!-- Header/Navigation -->
-<header class="header-gradient shadow-sm sticky top-0 z-50">
-<div class="max-w-5xl mx-auto flex justify-end items-center px-4 py-1">
-        <!-- Logo/Signature on the right -->
-<a href="#hero" class="flex items-center">
-<img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-56 sm:h-64 md:h-72 w-auto">
-</a>
+    <!-- Header/Navigation -->
+    <header class="header-gradient shadow-sm sticky top-0 z-50">
+      <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-0"> <!-- py-0 for maximum narrowness -->
+        <!-- Logo/Signature on the left for desktop, pushed to right for mobile -->
+        <a href="#hero" class="flex items-center" id="header-logo-link">
+          <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-56 sm:h-64 md:h-72 w-auto">
+        </a>
 
         <!-- Desktop Navigation -->
-<nav class="desktop-nav ml-auto">
-<ul class="flex space-x-4 sm:space-x-6">
-<li><a href="#about" class="nav-link text-white hover:text-[#FFD9CC]">About</a></li>
-@@ -258,20 +218,17 @@
-<li><a href="#contact" class="nav-link text-white hover:text-[#FFD9CC]">Contact</a></li>
-</ul>
-</nav>
+        <nav class="desktop-nav"> 
+          <ul class="flex space-x-4 sm:space-x-6">
+            <li><a href="#about" class="nav-link text-white hover:text-[#FFD9CC]">About</a></li>
+            <li><a href="#experience" class="nav-link text-white hover:text-[#FFD9CC]">Experience</a></li>
+            <li><a href="#projects" class="nav-link text-white hover:text-[#FFD9CC]">Work Studies</a></li>
+            <li><a href="#skills" class="nav-link text-white hover:text-[#FFD9CC]">Skills</a></li>
+            <li><a href="#contact" class="nav-link text-white hover:text-[#FFD9CC]">Contact</a></li>
+          </ul>
+        </nav>
 
-        <!-- Hamburger Button -->
-        <button class="hamburger-button md:hidden ml-4" aria-label="Toggle navigation menu" aria-expanded="false">
+        <!-- Hamburger Button (Mobile Only) -->
         <button class="hamburger-button md:hidden ml-4" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-<span></span>
-<span></span>
-<span></span>
-</button>
-</div>
-</header>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+      </div>
+    </header>
 
-    <!-- Mobile Navigation Menu (Always by Default) -->
-    <div id="menu-overlay" class="menu-overlay"></div>
-    <nav id="nav" class="nav">
-        <button class="hamburger-button is-active self-end" aria-label="Close navigation menu">
-    <div id="menu-overlay" class="mobile-menu-overlay"></div>
+    <!-- Mobile Navigation Menu (Hidden by Default) -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
         <button class="hamburger-button is-active self-end" id="close-menu-btn" aria-label="Close navigation menu">
-<span></span>
-<span></span>
-<span></span>
-@@ -285,6 +242,8 @@
-</ul>
-</nav>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#projects" class="nav-link">Work Studies</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Hero, About, Experience (expand/collapse), Projects, Skills, Contact - UNCHANGED from your code above -->
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
+        <div class="absolute inset-0 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="herobanner.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-fade-bottom"></div>
+        </div>
+        <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
+            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
+            <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
+            <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Data Management Leader</h2>
+            <p class="text-lg text-white max-w-2xl mx-auto mb-8">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
+            <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
+        </div>
+    </section>
 
-<!-- Hero Section -->
-<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
-<div class="absolute inset-0 z-0">
-@@ -315,196 +274,97 @@
-</div>
-</section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
+            <div class="text-lg text-gray-700 leading-relaxed space-y-6">
+                <p>A highly resilient and results-oriented professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and complex international/inter-agency stakeholder engagement, consistently delivering quantifiable results in the most demanding, high-stakes environments.</p>
+                <p>My unique background combines unwavering discipline and unparalleled operational acumen (honed through managing multi-billion dollar global initiatives and orchestrating inter-agency/inter-service collaboration) with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration within the public sector. I thrive in environments where I can streamline operations, drive impactful change, and contribute to mission-critical objectives, always seeking to empower others and elevate organizational performance.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Experience Section -->
-    <!-- Experience Section (expand/collapse) -->
-<section id="experience" class="py-20 bg-[#F9FAFB]">
-<div class="max-w-6xl mx-auto px-6">
-<h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 experience-card-grid">
-                <div class="content-card focus:outline-none">
-                <!-- Example Experience Cards (same as before, now with expand/collapse) -->
+    <section id="experience" class="py-20 bg-[#F9FAFB]">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 experience-card-grid">
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
@@ -308,33 +348,38 @@ transition: all 0.3s ease-in-out;
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded strategic federal account management and direct coordination with key federal agencies (e.g., DoD, VA, Military Academies, Federal Medicaid programs), ensuring equitable outcomes for complex constituent inquiries, particularly for elderly Veterans (60+) navigating benefits, healthcare, and housing resources.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drafted and refined high-impact speeches and remarks for the Member of Congress, delivered at various outreach events, including engagements with key donors and community leaders, ensuring alignment with strategic messaging and public relations objectives.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed and implemented advanced data management systems (Google Forms/Sheets) to streamline employer/employee data capture for major community engagement initiatives, providing actionable intelligence and strategic insights that directly informed outreach efficacy.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Conducted in-depth policy research and data analysis on critical constituent concerns, including Medicaid eligibility and access to services, leveraging findings to author high-impact policy briefing memos and consult on legislative strategy.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations, adeptly navigating complex federal and state program guidelines to resolve critical issues and secure vital services.</li>
                         </ul>
                     </div>
-</div>
-                <div class="content-card focus:outline-none">
+                    <span class="expand-icon">+</span>
+                </div>
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed complex logistical operations, ensuring maximum efficiency in South Pacific.</li>
-                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Led & mentored multinational teams in high-pressure operations.</li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li>
+                        <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration during large-scale national exercises.</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed complex logistical operations, ensuring maximum efficiency in South Pacific.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Led & mentored multinational teams in high-pressure operations.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives across the South Pacific Theater and CONUS, personally conceiving, planning, and executing complex logistical strategies for high-value equipment, ordnance, and chemicals.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated and managed inter-agency and inter-service collaboration during large-scale national exercises, operating alongside all branches of the U.S. Military (Army, Navy, Air Force, Marines, Space Force) and key federal agencies (e.g., FBI, CIA, high-level Special Forces entities) to ensure seamless mission-critical success.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Led and optimized cross-functional, multi-national teams in high-pressure operational and crisis scenarios (including during COVID-19), providing real-time strategic intelligence from Command HQ (e.g., analyzing aircraft footage, movements, pilot strength, weather patterns) to enable critical decision support and achieve strategic outcomes from concept to implementation.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed Government Contracts exceeding $10M, driving process optimization initiatives that resulted in a 20% boost in operational efficiency and a 15% reduction in project costs within complex procurement and installation programs.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at high-impact international conferences and strategic engagements, leveraging advanced communication and stakeholder management to shape global perceptions and foster robust alliances.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Contributed critical operational intelligence through comprehensive reports (e.g., fuel use, execution status, personnel and equipment readiness, resource/communications management), directly informing daily mission planning and enhancing air defense capabilities.</li>
                         </ul>
                     </div>
-</div>
-                <div class="content-card focus:outline-none">
+                    <span class="expand-icon">+</span>
+                </div>
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
@@ -342,87 +387,86 @@ transition: all 0.3s ease-in-out;
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded daily content management and data entry processes across all promotional platforms, achieving a **20% enhancement in content accuracy and efficiency**.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Partnered with diverse stakeholders in marketing and operations to drive innovative consumer engagement strategies, resulting in a **15% increase in interaction rates** and a **10% uplift in customer retention**.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed robust reporting tools, benchmarks, and KPIs to drive sales traffic, achieving an **overall sales increase of 25% within six months**.</li>
                         </ul>
                     </div>
-</div>
-                <div class="content-card focus:outline-none">
+                    <span class="expand-icon">+</span>
+                </div>
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20% via marketing/branding.</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites (30% content visibility improvement), delivered detailed analytics.</li>
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20% via marketing/branding.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites (30% content visibility improvement), delivered detailed analytics.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Played a pivotal role in creating and promoting departmental marketing campaigns, identifying and developing targeted keywords for social media and website optimization.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Coordinated effective communication strategies for new branding initiatives, enhancing brand visibility by **25%** and achieving a **20% increase in membership engagement**.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed and optimized company websites, achieving a **30% improvement in content visibility** within customer search results and delivering detailed analytics for strategic decision-making.</li>
                         </ul>
                     </div>
-</div>
-                <div class="content-card focus:outline-none">
+                    <span class="expand-icon">+</span>
+                </div>
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media, coordinated marketing campaigns for fitness initiatives.</li>
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media, coordinated marketing campaigns for fitness initiatives.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed and executed comprehensive content strategies for digital channels (social media, website, email), crafting engaging content to promote gym memberships and fitness services.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media accounts and coordinated marketing campaigns, collaborating with cross-functional teams to align with organizational goals.</li>
                         </ul>
                     </div>
-</div>
-                <div class="content-card focus:outline-none">
+                    <span class="expand-icon">+</span>
+                </div>
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding identity.</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams, conducted market research.</li>
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding identity.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams, conducted market research.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed and designed impactful visual content to promote student success initiatives, solidifying branding identity and managing visual identity for the Student Success Center.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research to inform design decisions, mentoring junior designers and interns.</li>
                         </ul>
                     </div>
-</div>
-                <div class="content-card focus:outline-none">
+                    <span class="expand-icon">+</span>
+                </div>
                 <div class="content-card focus:outline-none" tabindex="0">
-<h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
-<p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
+                    <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
+                    <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li>
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering welcoming environment.</li>
                     </ul>
                     <div class="experience-card-details">
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering welcoming environment.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised the implementation of tailored software solutions to enhance course enrollment processes and improve new student management systems.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided personalized guidance and support to new students, fostering a welcoming environment and assisting with practical matters like class registration based on curriculum knowledge.</li>
                         </ul>
                     </div>
-</div>
-</div>
-</div>
-</section>
+                    <span class="expand-icon">+</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Work Studies / Projects Section -->
-    <!-- Work Studies, Skills, Contact (same as before) -->
-    <!-- ... remaining sections unchanged, as in your original HTML ... -->
-
-<section id="projects" class="py-20 bg-white">
-<div class="max-w-6xl mx-auto px-6">
-<h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="content-card focus:outline-none">
-<h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3>
-<p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="content-card focus:outline-none">
+                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3>
+                    <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
                     <a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
                 </div>
                 <div class="content-card focus:outline-none">
@@ -537,7 +581,38 @@ transition: all 0.3s ease-in-out;
                 }
             });
         });
+
+        // Experience Card Expand/Collapse Functionality
+        document.querySelectorAll('.content-card').forEach(card => {
+            card.addEventListener('click', function(event) {
+                // Prevent click on links inside the card from toggling collapse
+                if (event.target.tagName === 'A' || event.target.closest('a')) {
+                    return;
+                }
+
+                const details = this.querySelector('.experience-card-details');
+                const icon = this.querySelector('.expand-icon');
+
+                if (this.classList.contains('card-open')) {
+                    // Collapse the card
+                    this.classList.add('card-collapsing'); // Add collapsing class
+                    this.classList.remove('card-open');
+                    details.style.maxHeight = '0';
+                    icon.textContent = '+';
+                    // Remove collapsing class after transition
+                    details.addEventListener('transitionend', function handler() {
+                        card.classList.remove('card-collapsing');
+                        details.removeEventListener('transitionend', handler);
+                    });
+                } else {
+                    // Expand the card
+                    this.classList.remove('card-collapsing'); // Ensure collapsing is removed
+                    this.classList.add('card-open');
+                    details.style.maxHeight = details.scrollHeight + 'px'; // Set to scrollHeight for smooth transition
+                    icon.textContent = '-';
+                }
+            });
+        });
     </script>
 </body>
 </html>
-                    <a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4
