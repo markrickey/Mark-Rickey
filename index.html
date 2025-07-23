@@ -291,8 +291,8 @@
 </section>
 
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-[#F9FAFB]">
+    <!-- Skills Section: interactive chip filters -->
+<section id="skills" class="py-20 bg-[#F9FAFB]">
   <div class="max-w-5xl mx-auto px-6">
     <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">
       Skills
@@ -344,6 +344,28 @@
     </div>
   </div>
 </section>
+
+<!-- Re-use (or keep) the same JS from your earlier build -->
+<script>
+  document.querySelectorAll('.skill-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.skill-filter-btn')
+              .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('#skills-chips .skill-chip').forEach(chip => {
+        chip.style.display =
+          filter === 'all' || chip.dataset.cat === filter ? 'inline-block' : 'none';
+      });
+    });
+  });
+
+  // Ensure “All” is selected on load
+  window.addEventListener('DOMContentLoaded', () =>
+    document.querySelector('.skill-filter-btn[data-filter="all"]').click());
+</script>
+
 
     <!-- Contact Banner: Visually Unified and Striking -->
 <section id="contact" class="relative py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16 overflow-x-hidden">
@@ -460,23 +482,6 @@
       document.addEventListener('keydown', function(e){
         if(e.key==="Escape" && mobileNav.classList.contains('active')) closeNav();
     });
-  document.querySelectorAll('.skill-filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.skill-filter-btn')
-              .forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('#skills-chips .skill-chip').forEach(chip => {
-        chip.style.display =
-          filter === 'all' || chip.dataset.cat === filter ? 'inline-block' : 'none';
-      });
-    });
-  });
-
-  // Ensure “All” is selected on load
-  window.addEventListener('DOMContentLoaded', () =>
-    document.querySelector('.skill-filter-btn[data-filter="all"]').click());
   </script>
 </body>
 </html>
