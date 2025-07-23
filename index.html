@@ -22,9 +22,11 @@
             position: relative;
             overflow: hidden;
             /* Adjust height to accommodate large signature and narrow banner */
-            height: 100px; /* Base height, will adjust with image */
+            /* Removed fixed height, letting content define height */
             display: flex;
             align-items: center;
+            padding-top: 0.5rem; /* Added minimal padding to top */
+            padding-bottom: 0.5rem; /* Added minimal padding to bottom */
         }
         .header-gradient::after {
             content: '';
@@ -32,8 +34,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 50%; /* Fade out the bottom half of the header */
-            background: linear-gradient(to top, rgba(36,83,101,0.0) 0%, rgba(36,83,101,1) 100%); /* Fades from transparent to solid color */
+            /* Adjusted height and gradient direction to fade from bottom of banner */
+            height: 100%; /* Cover full height of header */
+            background: linear-gradient(to top, rgba(36,83,101,0.0) 0%, rgba(36,83,101,1) 50%); /* Fades from transparent at bottom to solid at 50% height */
             pointer-events: none;
             z-index: 1; /* Above header content, below logo/nav */
         }
@@ -311,7 +314,7 @@
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
         <div class="absolute inset-0 z-0">
             <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="hero.mp4" type="video/mp4">
+                <source src="herobanner.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="hero-overlay"></div>
