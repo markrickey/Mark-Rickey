@@ -17,31 +17,35 @@
       display: block; width: 100%; height: 4px;
       background: #245365; border-radius: 3px; transition: all 0.33s;
     }
-    .hamburger-button.active .bar1 {
-      transform: translateY(12px) rotate(45deg);
-    }
-    .hamburger-button.active .bar2 {
-      opacity: 0;
-    }
-    .hamburger-button.active .bar3 {
-      transform: translateY(-12px) rotate(-45deg);
-    }
+    .hamburger-button.active .bar1 { transform: translateY(12px) rotate(45deg);}
+    .hamburger-button.active .bar2 { opacity: 0;}
+    .hamburger-button.active .bar3 { transform: translateY(-12px) rotate(-45deg);}
     .mobile-nav {
-      position: fixed; top: 0; right: 0; width: 80vw; max-width: 320px; height: 100vh;
+      position: fixed; top: 0; right: 0;
+      width: 80vw; max-width: 320px; height: 100vh;
       background: #245365; z-index: 60; transform: translateX(100%);
       transition: transform 0.3s cubic-bezier(.7,0,.46,1.06);
-      display: flex; flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; box-shadow: -4px 0 20px #082b42b3;
+      display: flex; flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem;
+      box-shadow: -4px 0 20px #082b42b3;
     }
     .mobile-nav.active { transform: translateX(0); }
-    .mobile-nav ul { list-style: none; width: 100%; padding: 0; margin: 2.5rem 0 0 0; }
+    .mobile-nav ul {
+      list-style: none; width: 100%; padding: 0; margin: 2.5rem 0 0 0;
+    }
     .mobile-nav li { margin-bottom: 2rem; }
     .mobile-nav a {
       color: #fff; font-weight: 600; font-size: 1.5rem;
       display: block; width: 100%; padding: 0.5rem 0; border-radius: 0.6rem;
       transition: background 0.21s, color 0.21s;
     }
-    .mobile-nav a:hover, .mobile-nav a:focus { color: #FFD9CC; background: #DB7A4D33; }
+    .mobile-nav a:hover, .mobile-nav a:focus {
+      color: #FFD9CC; background: #DB7A4D33;
+    }
     .overlay {
+      display: none;
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.5); z-index: 59;
     }
     .overlay.active { display: block; }
   </style>
@@ -50,31 +54,28 @@
 
   <!-- Header: Signature and Always-Visible Hamburger-->
   <header class="w-full flex items-center justify-between px-5 py-3 bg-white/90 shadow-md fixed top-0 left-0 z-40">
-    <div class="fixed-header-container">
-  <div class="flex items-center gap-3">
-    <!-- Signature Image -->
-    <a href="#hero" aria-label="Home">
-      <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-12 sm:h-16 w-auto" />
-    </a>
-    <!-- Headshot Image -->
-    <a href="#hero" aria-label="Mark Rickey Headshot">
-      <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="h-12 sm:h-16 w-auto rounded-full border-2 border-[#DB7A4D] shadow-md" />
-    </a>
-  </div>
-  <!-- Hamburger Menu Button -->
-  <button class="hamburger-button" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</div>
-
+    <div class="flex items-center gap-3">
+      <!-- Signature Image -->
+      <a href="#hero" aria-label="Home">
+        <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-12 sm:h-16 w-auto" />
+      </a>
+      <!-- Headshot Image -->
+      <a href="#hero" aria-label="Mark Rickey Headshot">
+        <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="h-12 sm:h-16 w-auto rounded-full border-2 border-[#DB7A4D] shadow-md" />
+      </a>
+    </div>
+    <!-- Hamburger Menu Button: ALWAYS SHOWN -->
+    <button class="hamburger-button" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-bar bar1"></span>
+      <span class="hamburger-bar bar2"></span>
+      <span class="hamburger-bar bar3"></span>
+    </button>
   </header>
 
   <!-- Overlay for mobile nav -->
   <div id="overlay" class="overlay"></div>
 
-  <!-- Mobile/Nav Drawer (always used) -->
+  <!-- Mobile/Hamburger Nav (always used, always visible on open) -->
   <nav id="mobileNav" class="mobile-nav" aria-label="Main navigation">
     <button class="hamburger-button ml-auto mb-8" id="closeNavBtn" aria-label="Close navigation">
       <span class="hamburger-bar bar1"></span>
@@ -298,50 +299,64 @@
   </div>
 </section>
 
-    <!-- Contact Banner -->
-  <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16">
-    <div class="max-w-3xl mx-auto px-4 text-center flex flex-col items-center">
-      <img 
-        src="MarkRickeySignature.png" 
-        alt="Mark Rickey Signature" 
-        class="mx-auto h-56 sm:h-64 md:h-72 w-auto drop-shadow-lg mb-8"
-        style="max-width:100%;"
-      >
-      <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Let’s Collaborate</h2>
-      <p class="mb-8 text-lg text-[#245365]/90 font-medium">
-        Want to create something impactful together? Let's connect!
+    <!-- Contact Banner: Visually Unified and Striking -->
+<section id="contact" class="relative py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16 overflow-x-hidden">
+  <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-14">
+
+    <!-- Left: Signature & Visual Accent -->
+    <div class="flex-shrink-0 md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">
+      <div class="bg-white/80 rounded-2xl shadow-lg p-4 pb-1 flex flex-col items-center border-2 border-[#FFD9CC]">
+        <img 
+          src="MarkRickeySignature.png" 
+          alt="Mark Rickey Signature" 
+          class="h-44 sm:h-52 md:h-56 w-auto drop-shadow-md rounded-md mt-1 mb-2"
+          style="max-width:100%;"
+        >
+        <div class="text-[#DB7A4D] font-medium text-base italic mt-1">Mark Rickey</div>
+      </div>
+    </div>
+
+    <!-- Right: Message & Actions -->
+    <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-3">Let’s Collaborate</h2>
+      <p class="mb-5 text-lg text-[#245365]/90 font-medium">
+        Want to create something impactful together? <br class="hidden md:inline">Just reach out!
       </p>
-      <div class="flex justify-center gap-14 mb-10">
+      <div class="flex gap-9 mb-7">
         <a 
           href="mailto:markrickey01@gmail.com" 
-          class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link"
+          class="inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-4xl md:text-5xl text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70"
           aria-label="Email"
         >
           <!-- Email SVG Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
             <rect width="20" height="16" x="2" y="4" rx="3"/>
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
         </a>
         <a 
           href="https://www.linkedin.com/in/markrickey01" 
-          target="_blank" 
-          rel="noopener" 
-          class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-4xl md:text-5xl text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70"
           aria-label="LinkedIn"
         >
           <!-- LinkedIn SVG Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
             <rect width="4" height="12" x="2" y="9"/>
             <circle cx="4" cy="4" r="2"/>
           </svg>
         </a>
       </div>
-      <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
+      <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
+        <span>&copy; 2025 Mark R.</span>
+        <span aria-hidden="true">&mdash;</span>
+        <span>All rights reserved.</span>
+      </p>
     </div>
-  </section>
-
+  </div>
+</section>
   <script>
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileNav = document.getElementById('mobileNav');
