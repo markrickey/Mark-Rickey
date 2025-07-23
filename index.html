@@ -52,6 +52,9 @@
 
   <!-- Header: Signature and Always-Visible Hamburger-->
   <header class="w-full flex items-center justify-between px-5 py-3 bg-white/90 shadow-md fixed top-0 left-0 z-40">
+    <div class="fixed-header-container">
+  <div class="flex items-center gap-3">
+    <!-- Signature Image -->
     <a href="#hero" aria-label="Home">
       <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-12 sm:h-16 w-auto" />
     </a>
@@ -59,11 +62,15 @@
     <a href="#hero" aria-label="Mark Rickey Headshot">
       <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="h-12 sm:h-16 w-auto rounded-full border-2 border-[#DB7A4D] shadow-md" />
     </a>
-    <button class="hamburger-button" id="hamburgerBtn" aria-label="Open navigation" aria-expanded="false">
-      <span class="hamburger-bar bar1"></span>
-      <span class="hamburger-bar bar2"></span>
-      <span class="hamburger-bar bar3"></span>
-    </button>
+  </div>
+  <!-- Hamburger Menu Button -->
+  <button class="hamburger-button" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
   </header>
 
   <!-- Overlay for mobile nav -->
