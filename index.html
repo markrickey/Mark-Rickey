@@ -21,6 +21,10 @@
             background-color: #245365; /* Solid color for the base */
             position: relative;
             overflow: hidden;
+            /* Adjust height to accommodate large signature and narrow banner */
+            height: 100px; /* Base height, will adjust with image */
+            display: flex;
+            align-items: center;
         }
         .header-gradient::after {
             content: '';
@@ -307,7 +311,7 @@
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
         <div class="absolute inset-0 z-0">
             <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="herobanner.mp4" type="video/mp4">
+                <source src="hero.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="hero-overlay"></div>
@@ -564,7 +568,7 @@
             document.querySelector('.skill-filter-btn[data-filter="all"]').click();
 
             // Mobile-specific appear effect for experience cards
-            if (window.innerWidth < 769) {
+            if (window.innerWidth < 768) { // Changed to 768px for consistency with md breakpoint
                 document.querySelectorAll('.experience-card-grid .content-card').forEach(function(card, idx){
                     setTimeout(()=>{ card.classList.add('card-appear'); },130 * idx+50);
                 });
@@ -572,7 +576,7 @@
         });
         // For dynamically showing transitions if mobile device orientation/size changes
         window.addEventListener('resize',function(){
-            const mobile = window.innerWidth < 769;
+            const mobile = window.innerWidth < 768; // Changed to 768px
             document.querySelectorAll('.experience-card-grid .content-card').forEach(function(card){
                 if(mobile && !card.classList.contains('card-appear')){
                     card.classList.add('card-appear');
@@ -612,6 +616,37 @@
                     icon.textContent = '-';
                 }
             });
+        });
+
+        // Mobile Menu Toggle Logic
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const navLinksMobile = mobileNav.querySelectorAll('.nav-link'); // Get links inside mobile nav
+
+        function toggleMobileMenu() {
+            mobileNav.classList.toggle('is-active');
+            mobileMenuOverlay.classList.toggle('is-active');
+            hamburgerBtn.classList.toggle('is-active'); // Sync hamburger icon state
+            document.body.classList.toggle('overflow-hidden'); // Prevent scrolling body when menu is open
+            hamburgerBtn.setAttribute('aria-expanded', mobileNav.classList.contains('is-active'));
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+        closeMenuBtn.addEventListener('click', toggleMobileMenu); // Close button inside menu
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu); // Click overlay to close
+
+        // Close menu when a navigation link is clicked
+        navLinksMobile.forEach(link => {
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && mobileNav.classList.contains('is-active')) {
+                toggleMobileMenu();
+            }
         });
     </script>
 </body>
