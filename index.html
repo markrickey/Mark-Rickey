@@ -152,7 +152,7 @@
         </div>
     </section>
 
-    <!-<section id="experience" class="py-20 bg-[#F9FAFB]">
+    <section id="experience" class="py-20 bg-[#F9FAFB]">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 experience-card-grid">
@@ -291,63 +291,56 @@
 </section>
 
 
-    <!-- Work Studies / Projects Section -->
-    <section id="projects" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="content-card focus:outline-none">
-                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3>
-                    <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
-                    <a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-                <div class="content-card focus:outline-none">
-                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3>
-                    <p class="text-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p>
-                    <a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-                <div class="content-card focus:outline-none">
-                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3>
-                    <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p>
-                    <a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Skills Section -->
     <section id="skills" class="py-20 bg-[#F9FAFB]">
   <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-7">Skills</h2>
-    <div id="skills-tiles" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
-      <div class="skill-tile" tabindex="0" data-cat="technical">HTML/CSS</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">JavaScript</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Tailwind CSS</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Python</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">SQL</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Google Sheets</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Google Forms</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Data Analysis</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Data Visualization</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">UI/UX Design</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Canva</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">AI/ML Concepts</div>
-      <div class="skill-tile" tabindex="0" data-cat="technical">Cybersecurity Concepts</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Strategic Planning</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Process Optimization</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Constituent Relations</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Stakeholder Management</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Project Management</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Policy Research</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Public Speaking</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Cross-functional Collaboration</div>
-      <div class="skill-tile" tabindex="0" data-cat="professional">Strategic Communication</div>
-      <div class="skill-tile" tabindex="0" data-cat="leadership">Leadership</div>
-      <div class="skill-tile" tabindex="0" data-cat="leadership">Adaptability</div>
-      <div class="skill-tile" tabindex="0" data-cat="leadership">Resilience</div>
-      <div class="skill-tile" tabindex="0" data-cat="leadership">Mentorship</div>
-      <div class="skill-tile" tabindex="0" data-cat="leadership">Problem-Solving</div>
-      <div class="skill-tile" tabindex="0" data-cat="leadership">Innovation</div>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">
+      Skills
+    </h2>
+
+    <!-- Filter buttons -->
+    <div class="flex flex-wrap justify-center mb-7 gap-2">
+      <button class="skill-filter-btn active" data-filter="all" type="button">All</button>
+      <button class="skill-filter-btn" data-filter="technical"   type="button">Technical</button>
+      <button class="skill-filter-btn" data-filter="professional" type="button">Professional</button>
+      <button class="skill-filter-btn" data-filter="leadership"  type="button">Leadership</button>
+    </div>
+
+    <!-- Skill chips -->
+    <div id="skills-chips" class="flex flex-wrap justify-center max-w-3xl mx-auto">
+      <!-- technical -->
+      <span class="skill-chip cat-technical"   data-cat="technical">HTML/CSS</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">JavaScript</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Tailwind CSS</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Python</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">SQL</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Google Sheets</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Google Forms</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Data Analysis</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Data Visualization</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">UI/UX Design</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Canva</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">AI/ML Concepts</span>
+      <span class="skill-chip cat-technical"   data-cat="technical">Cybersecurity Concepts</span>
+
+      <!-- professional -->
+      <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Project Management</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span>
+      <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span>
+
+      <!-- leadership -->
+      <span class="skill-chip cat-leadership"  data-cat="leadership">Leadership</span>
+      <span class="skill-chip cat-leadership"  data-cat="leadership">Adaptability</span>
+      <span class="skill-chip cat-leadership"  data-cat="leadership">Resilience</span>
+      <span class="skill-chip cat-leadership"  data-cat="leadership">Mentorship</span>
+      <span class="skill-chip cat-leadership"  data-cat="leadership">Problem-Solving</span>
+      <span class="skill-chip cat-leadership"  data-cat="leadership">Innovation</span>
     </div>
   </div>
 </section>
@@ -411,23 +404,19 @@
   </div>
 </section>
   <script>
+    // Hamburger menu logic (unchanged)
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileNav = document.getElementById('mobileNav');
     const overlay = document.getElementById('overlay');
     const closeNavBtn = document.getElementById('closeNavBtn');
     const navLinks = mobileNav.querySelectorAll('.nav-link');
-
     function openNav() {
-      hamburgerBtn.classList.add('active');
-      mobileNav.classList.add('active');
-      overlay.classList.add('active');
-      hamburgerBtn.setAttribute('aria-expanded', true);
+      hamburgerBtn.classList.add('active'); mobileNav.classList.add('active');
+      overlay.classList.add('active'); hamburgerBtn.setAttribute('aria-expanded', true);
     }
     function closeNav() {
-      hamburgerBtn.classList.remove('active');
-      mobileNav.classList.remove('active');
-      overlay.classList.remove('active');
-      hamburgerBtn.setAttribute('aria-expanded', false);
+      hamburgerBtn.classList.remove('active'); mobileNav.classList.remove('active');
+      overlay.classList.remove('active'); hamburgerBtn.setAttribute('aria-expanded', false);
     }
     hamburgerBtn.addEventListener('click', openNav);
     closeNavBtn.addEventListener('click', closeNav);
@@ -435,6 +424,41 @@
     navLinks.forEach(link => link.addEventListener('click', closeNav));
     document.addEventListener('keydown', evt => {
       if (evt.key === "Escape" && mobileNav.classList.contains('active')) closeNav();
+    });
+
+    // Experience cards expand/collapse: only one open, click away to close
+    document.addEventListener('DOMContentLoaded', function() {
+      let openCard = null;
+      document.querySelectorAll('.exp-toggle').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const card = btn.closest('.exp-card');
+          if (openCard && openCard !== card) {
+            openCard.classList.remove('open');
+            openCard.querySelector('.exp-toggle').classList.remove('open');
+          }
+          if (card.classList.contains('open')) {
+            card.classList.remove('open');
+            btn.classList.remove('open');
+            openCard = null;
+          } else {
+            card.classList.add('open');
+            btn.classList.add('open');
+            openCard = card;
+          }
+        });
+      });
+      // Close on click away
+      document.addEventListener('click', function(e) {
+        if (openCard && !openCard.contains(e.target)) {
+          openCard.classList.remove('open');
+          openCard.querySelector('.exp-toggle').classList.remove('open');
+          openCard = null;
+        }
+      });
+      // Also allow pressing Escape to close details
+      document.addEventListener('keydown', function(e){
+        if(e.key==="Escape" && mobileNav.classList.contains('active')) closeNav();
     });
   </script>
 </body>
