@@ -17,33 +17,20 @@
             overflow-x: hidden;
         }
 
-        /* Header gradient with fade behind content */
-        .header-gradient {
-            background-color: #245365;
-            position: relative;
-            overflow: hidden;
-        }
-        .header-gradient::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 50%;
-            background: linear-gradient(to top, rgba(36,83,101,0.0) 0%, rgba(36,83,101,1) 100%);
-            pointer-events: none;
-            z-index: -1;
-        }
+        /* Removed header-gradient styles as the header banner is removed */
+        /* .header-gradient { ... } */
+        /* .header-gradient::after { ... } */
 
-        /* Navigation link styles */
         .nav-link {
             font-weight: 500;
-            color: #4B5563;
+            color: #4B5563; /* Default for mobile nav links */
             transition: color 0.18s, background 0.23s, transform 0.22s;
             padding: 0.5rem 0.85rem;
             border-radius: 0.5rem;
             display: inline-block;
         }
         .nav-link:hover, .nav-link:focus {
-            color: #245365;
+            color: #245365; /* Desktop nav hover color, now applies to mobile as well */
             background: #ffe5d7;
             transform: scale(1.08);
             outline: none;
@@ -88,18 +75,20 @@
         .skill-filter-btn { /* … */ }
 
         /* Force-hiding any old desktop nav */
-        .desktop-nav { display: none !important; }
+        .desktop-nav { display: none !important; } /* Ensure desktop nav is always hidden */
 
         /* Hamburger button always visible */
         .hamburger-button {
             display: flex; flex-direction: column; justify-content: space-around;
             width: 30px; height: 24px;
             background: transparent; border: none; cursor: pointer;
-            padding: 0; z-index: 60; position: relative;
+            padding: 0; z-index: 60; /* Higher z-index to be on top */
+            position: relative;
         }
         .hamburger-button span {
             display: block; width: 100%; height: 3px;
-            background: #fff; border-radius: 2px;
+            background: #fff; /* White lines for hamburger */
+            border-radius: 2px;
             transition: all 0.3s ease-in-out;
         }
         .hamburger-button.is-active span:nth-child(1) { transform: translateY(10.5px) rotate(45deg); }
@@ -145,26 +134,39 @@
         .mobile-nav ul li a:hover, .mobile-nav ul li a:focus {
             color: #DB7A4D;
         }
+
+        /* New fixed header container for signature and hamburger */
+        .fixed-header-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100; /* Extremely high z-index to be on top of everything */
+            padding: 1rem; /* Adjust padding to control narrowness and spacing */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Push content to the right */
+            gap: 1rem; /* Space between signature and hamburger */
+            /* Background will be transparent, allowing hero video/gradient to show through */
+        }
+        .fixed-header-container img {
+            /* Inherits h-56 sm:h-64 md:h-72 from HTML, ensuring large size */
+            margin-bottom: 0 !important; /* Override any mb-1 from previous attempts */
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header/Navigation -->
-    <header class="header-gradient shadow-sm sticky top-0 z-50">
-      <div class="max-w-5xl mx-auto flex justify-start items-start px-4 py-0">
-        <div class="flex flex-col items-start space-y-2 pt-1">
-          <a href="#hero" id="header-logo-link">
-            <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-40 md:h-56 w-auto mb-1">
-          </a>
-          <button class="hamburger-button" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false">
+    <!-- New Fixed Header Container for Signature and Hamburger -->
+    <div class="fixed-header-container">
+        <a href="#hero" id="header-logo-link">
+            <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-56 sm:h-64 md:h-72 w-auto">
+        </a>
+        <button class="hamburger-button" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
-          </button>
-        </div>
-        <div class="flex-1"></div>
-      </div>
-    </header>
+        </button>
+    </div>
 
     <!-- Mobile Navigation Slide-out -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
@@ -180,20 +182,21 @@
 
     <!-- Hero Section (unchanged) -->
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
-      <div class="absolute inset-0 z-0">
-        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-          <source src="hero.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-fade-bottom"></div>
-      </div>
-      <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
-        <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
-        <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
-        <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Data Management Leader</h2>
-        <p class="text-lg text-white max-w-2xl mx-auto mb-8">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
-        <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
-      </div>
+        <div class="absolute inset-0 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="hero.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-fade-bottom"></div>
+        </div>
+        <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
+            <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-6" loading="lazy">
+            <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark</h1>
+            <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Agile Data Management Certified Professional</h2>
+            <p class="text-lg text-white max-w-2xl mx-auto mb-8">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
+            <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
+        </div>
     </section>
 
     <!-- About Section -->
