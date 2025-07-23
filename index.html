@@ -48,8 +48,397 @@
       background: rgba(0,0,0,0.5); z-index: 59;
     }
     .overlay.active { display: block; }
+
+    /* Experience expand/collapse */
+    .exp-card {
+      transition: box-shadow .24s;
+      position: relative;
+    }
+    .exp-toggle {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      background: #fff;
+      border: 2px solid #DB7A4D;
+      color: #DB7A4D;
+      border-radius: 50%;
+      height: 2.4rem; width: 2.4rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 7px 0 #DB7A4D23;
+      transition: background .18s, border-color .18s, color .18s, transform .2s;
+    }
+    .exp-toggle.open {
+      background: #DB7A4D;
+      border-color: #245365;
+      color: #fff;
+      transform: rotate(45deg);
+    }
+    .exp-details {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height .38s cubic-bezier(.4,1.3,.7,1.12), opacity .23s;
+      will-change:max-height;
+    }
+    .exp-card.open .exp-details {
+      max-height: 600px;
+      opacity: 1;
+      margin-top: 1.2rem;
+    }
   </style>
 </head>
+<body class="bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] min-h-screen flex flex-col">
+
+  <!-- Header: Signature and Always-Visible Hamburger-->
+  <header class="w-full flex items-center justify-between px-5 py-3 bg-white/90 shadow-md fixed top-0 left-0 z-40">
+    <div class="flex items-center gap-3">
+      <!-- Signature Image -->
+      <a href="#hero" aria-label="Home">
+        <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-12 sm:h-16 w-auto" />
+      </a>
+      <!-- Headshot Image -->
+      <a href="#hero" aria-label="Mark Rickey Headshot">
+        <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="h-12 sm:h-16 w-auto rounded-full border-2 border-[#DB7A4D] shadow-md" />
+      </a>
+    </div>
+    <!-- Hamburger Menu Button: ALWAYS SHOWN -->
+    <button class="hamburger-button" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger-bar bar1"></span>
+      <span class="hamburger-bar bar2"></span>
+      <span class="hamburger-bar bar3"></span>
+    </button>
+  </header>
+
+  <!-- Overlay for mobile nav -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Mobile/Hamburger Nav (always used, always visible on open) -->
+  <nav id="mobileNav" class="mobile-nav" aria-label="Main navigation">
+    <button class="hamburger-button ml-auto mb-8" id="closeNavBtn" aria-label="Close navigation">
+      <span class="hamburger-bar bar1"></span>
+      <span class="hamburger-bar bar2"></span>
+      <span class="hamburger-bar bar3"></span>
+    </button>
+    <ul>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+      <li><a href="#projects" class="nav-link">Work Studies</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content below fixed header -->
+  <main class="pt-20 flex-1 flex flex-col">
+    <!-- Hero Example -->
+    <section id="hero" class="flex flex-col gap-6 items-center justify-center min-h-[75vh] bg-white/80 rounded-xl shadow mt-6 mx-2 pb-10 mb-10 sm:mb-16 md:mb-20">
+      <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="w-36 h-36 rounded-full object-cover border-2 border-[#DB7A4D] shadow mb-5 mt-5" loading="lazy">
+      <h1 class="text-4xl font-extrabold text-[#245365] drop-shadow-sm mb-2">Mark</h1>
+      <h2 class="text-xl text-[#DB7A4D] font-semibold">Strategic Project & Agile Data Management Professional</h2>
+      <a href="#contact" class="mt-6 px-7 py-3 bg-[#DB7A4D] text-white rounded-xl font-semibold shadow hover:bg-[#c26636] transition text-lg inline-block">Connect with Me</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
+            <div class="text-lg text-gray-700 leading-relaxed space-y-6">
+                <p>A highly resilient and results-oriented professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and complex international/inter-agency stakeholder engagement, consistently delivering quantifiable results in the most demanding, high-stakes environments.</p>
+                <p>My unique background combines unwavering discipline and unparalleled operational acumen (honed through managing multi-billion dollar global initiatives and orchestrating inter-agency/inter-service collaboration) with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration within the public sector. I thrive in environments where I can streamline operations, drive impactful change, and contribute to mission-critical objectives, always seeking to empower others and elevate organizational performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-<section id="experience" class="py-20 bg-[#F9FAFB]">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 experience-card-grid">
+      <!-- Congressional Staffer -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded strategic federal account management and direct coordination with key federal agencies (e.g., DoD, VA, Military Academies, Federal Medicaid programs), ensuring equitable outcomes for complex constituent inquiries, particularly for elderly Veterans (60+) navigating benefits, healthcare, and housing resources.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drafted and refined high-impact speeches and remarks for the Member of Congress, delivered at various outreach events, including engagements with key donors and community leaders, ensuring alignment with strategic messaging and public relations objectives.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed and implemented advanced data management systems (Google Forms/Sheets) to streamline employer/employee data capture for major community engagement initiatives, providing actionable intelligence and strategic insights that directly informed outreach efficacy.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Conducted in-depth policy research and data analysis on critical constituent concerns, including Medicaid eligibility and access to services, leveraging findings to author high-impact policy briefing memos and consult on legislative strategy.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations, adeptly navigating complex federal and state program guidelines to resolve critical issues and secure vital services.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- U.S. Army, Project Manager/NCO -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations across the South Pacific Theater and CONUS, including planning and executing complex logistical strategies for valuable equipment and chemicals.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed inter-agency collaboration with all branches of US Military and key federal agencies to ensure mission-critical success.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Led multinational teams in crisis scenarios, offering real-time strategic intelligence from Command HQ to achieve outcomes from concept to implementation.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized cross-functional teams and managed government contracts exceeding $10M, driving a 20% boost in efficiency and 15% cost reduction.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as spokesperson at international conferences, managing global communication and complex alliances.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Contributed key operational intelligence to inform mission planning and capabilities.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Digital Optimization Supervisor -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed content/data processes, improving accuracy/efficiency by 20%.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Partnered in marketing, boosting engagement 15% and retention 10%.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Devised KPIs, driving a 25% sales increase in six months.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Digital Marketing Manager -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites (30% content visibility improvement).</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Created & promoted marketing/branding campaigns; identified targeted SEO keywords.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Enhanced brand visibility by 25% and membership engagement by 20%.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed websites, improving content visibility 30% & delivering analytics.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Intern, Digital Content Strategist -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media, coordinated fitness campaigns.</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Completed content strategies for all digital channels.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Ran social media and coordinated major marketing efforts for fitness brand.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Undergraduate Creative Director Intern -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams, research.</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed all visual content and managed university branding for Student Success Center.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Ran cross-functional teams & mentored junior designers/interns.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Student Orientation Supervisor -->
+      <div class="content-card exp-card mb-4" tabindex="0">
+        <button class="exp-toggle" aria-label="Toggle details"><span class="sr-only">Show details</span>+</button>
+        <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
+        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
+        <ul class="list-none text-gray-700 space-y-2 text-base">
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li>
+          <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering welcoming environment.</li>
+        </ul>
+        <div class="exp-details">
+          <ul class="list-none text-gray-700 space-y-2 text-base">
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised implementation of software for enrollment and new student management systems.</li>
+            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Guided and supported new students, ensuring a positive onboarding experience.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Work Studies / Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="content-card focus:outline-none">
+                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3>
+                    <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
+                    <a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+                </div>
+                <div class="content-card focus:outline-none">
+                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3>
+                    <p class="text-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p>
+                    <a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+                </div>
+                <div class="content-card focus:outline-none">
+                    <h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3>
+                    <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p>
+                    <a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-[#F9FAFB]">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-7">Skills</h2>
+    <div id="skills-tiles" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+      <div class="skill-tile" tabindex="0" data-cat="technical">HTML/CSS</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">JavaScript</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Tailwind CSS</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Python</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">SQL</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Google Sheets</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Google Forms</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Data Analysis</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Data Visualization</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">UI/UX Design</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Canva</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">AI/ML Concepts</div>
+      <div class="skill-tile" tabindex="0" data-cat="technical">Cybersecurity Concepts</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Strategic Planning</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Process Optimization</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Constituent Relations</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Stakeholder Management</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Project Management</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Policy Research</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Public Speaking</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Cross-functional Collaboration</div>
+      <div class="skill-tile" tabindex="0" data-cat="professional">Strategic Communication</div>
+      <div class="skill-tile" tabindex="0" data-cat="leadership">Leadership</div>
+      <div class="skill-tile" tabindex="0" data-cat="leadership">Adaptability</div>
+      <div class="skill-tile" tabindex="0" data-cat="leadership">Resilience</div>
+      <div class="skill-tile" tabindex="0" data-cat="leadership">Mentorship</div>
+      <div class="skill-tile" tabindex="0" data-cat="leadership">Problem-Solving</div>
+      <div class="skill-tile" tabindex="0" data-cat="leadership">Innovation</div>
+    </div>
+  </div>
+</section>
+
+    <!-- Contact Banner: Visually Unified and Striking -->
+<section id="contact" class="relative py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16 overflow-x-hidden">
+  <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-14">
+
+    <!-- Left: Signature & Visual Accent -->
+    <div class="flex-shrink-0 md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">
+      <div class="bg-white/80 rounded-2xl shadow-lg p-4 pb-1 flex flex-col items-center border-2 border-[#FFD9CC]">
+        <img 
+          src="MarkRickeySignature.png" 
+          alt="Mark Rickey Signature" 
+          class="h-44 sm:h-52 md:h-56 w-auto drop-shadow-md rounded-md mt-1 mb-2"
+          style="max-width:100%;"
+        >
+        <div class="text-[#DB7A4D] font-medium text-base italic mt-1">Mark Rickey</div>
+      </div>
+    </div>
+
+    <!-- Right: Message & Actions -->
+    <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-3">Let’s Collaborate</h2>
+      <p class="mb-5 text-lg text-[#245365]/90 font-medium">
+        Want to create something impactful together? <br class="hidden md:inline">Just reach out!
+      </p>
+      <div class="flex gap-9 mb-7">
+        <a 
+          href="mailto:markrickey01@gmail.com" 
+          class="inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-4xl md:text-5xl text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70"
+          aria-label="Email"
+        >
+          <!-- Email SVG Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+            <rect width="20" height="16" x="2" y="4" rx="3"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/markrickey01" 
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-4xl md:text-5xl text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70"
+          aria-label="LinkedIn"
+        >
+          <!-- LinkedIn SVG Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect width="4" height="12" x="2" y="9"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+      <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
+        <span>&copy; 2025 Mark R.</span>
+        <span aria-hidden="true">&mdash;</span>
+        <span>All rights reserved.</span>
+      </p>
+    </div>
+  </div>
+</section>
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('overlay');
+    const closeNavBtn = document.getElementById('closeNavBtn');
+    const navLinks = mobileNav.querySelectorAll('.nav-link');
+
+    function openNav() {
+      hamburgerBtn.classList.add('active');
+      mobileNav.classList.add('active');
+      overlay.classList.add('active');
+      hamburgerBtn.setAttribute('aria-expanded', true);
+    }
+    function closeNav() {
+      hamburgerBtn.classList.remove('active');
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+      hamburgerBtn.setAttribute('aria-expanded', false);
+    }
+    hamburgerBtn.addEventListener('click', openNav);
+    closeNavBtn.addEventListener('click', closeNav);
+    overlay.addEventListener('click', closeNav);
+    navLinks.forEach(link => link.addEventListener('click', closeNav));
+    document.addEventListener('keydown', evt => {
+      if (evt.key === "Escape" && mobileNav.classList.contains('active')) closeNav();
+    });
+  </script>
+</body>
+</html>
 <body class="bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] min-h-screen flex flex-col">
 
   <!-- Header: Signature and Always-Visible Hamburger-->
@@ -358,23 +747,19 @@
   </div>
 </section>
   <script>
+    // Hamburger menu logic (unchanged)
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const mobileNav = document.getElementById('mobileNav');
     const overlay = document.getElementById('overlay');
     const closeNavBtn = document.getElementById('closeNavBtn');
     const navLinks = mobileNav.querySelectorAll('.nav-link');
-
     function openNav() {
-      hamburgerBtn.classList.add('active');
-      mobileNav.classList.add('active');
-      overlay.classList.add('active');
-      hamburgerBtn.setAttribute('aria-expanded', true);
+      hamburgerBtn.classList.add('active'); mobileNav.classList.add('active');
+      overlay.classList.add('active'); hamburgerBtn.setAttribute('aria-expanded', true);
     }
     function closeNav() {
-      hamburgerBtn.classList.remove('active');
-      mobileNav.classList.remove('active');
-      overlay.classList.remove('active');
-      hamburgerBtn.setAttribute('aria-expanded', false);
+      hamburgerBtn.classList.remove('active'); mobileNav.classList.remove('active');
+      overlay.classList.remove('active'); hamburgerBtn.setAttribute('aria-expanded', false);
     }
     hamburgerBtn.addEventListener('click', openNav);
     closeNavBtn.addEventListener('click', closeNav);
@@ -382,6 +767,41 @@
     navLinks.forEach(link => link.addEventListener('click', closeNav));
     document.addEventListener('keydown', evt => {
       if (evt.key === "Escape" && mobileNav.classList.contains('active')) closeNav();
+    });
+
+    // Experience cards expand/collapse: only one open, click away to close
+    document.addEventListener('DOMContentLoaded', function() {
+      let openCard = null;
+      document.querySelectorAll('.exp-toggle').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const card = btn.closest('.exp-card');
+          if (openCard && openCard !== card) {
+            openCard.classList.remove('open');
+            openCard.querySelector('.exp-toggle').classList.remove('open');
+          }
+          if (card.classList.contains('open')) {
+            card.classList.remove('open');
+            btn.classList.remove('open');
+            openCard = null;
+          } else {
+            card.classList.add('open');
+            btn.classList.add('open');
+            openCard = card;
+          }
+        });
+      });
+      // Close on click away
+      document.addEventListener('click', function(e) {
+        if (openCard && !openCard.contains(e.target)) {
+          openCard.classList.remove('open');
+          openCard.querySelector('.exp-toggle').classList.remove('open');
+          openCard = null;
+        }
+      });
+      // Also allow pressing Escape to close details
+      document.addEventListener('keydown', function(e){
+        if(e.key==="Escape" & mobileNav.classList.contains('active')) closeNav();
     });
   </script>
 </body>
