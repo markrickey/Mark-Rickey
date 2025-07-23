@@ -17,9 +17,25 @@
             overflow-x: hidden;
         }
 
-        /* Removed header-gradient styles as the header banner is removed */
-        /* .header-gradient { ... } */
-        /* .header-gradient::after { ... } */
+        /* Fixed Header Container for Signature and Hamburger */
+        .fixed-header-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100; /* Extremely high z-index to be on top of everything */
+            width: 100%; /* Span full width to allow justify-end */
+            padding: 0.5rem 1rem; /* Very narrow padding (py-0.5) */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Push content to the far right */
+            gap: 1rem; /* Space between signature and hamburger */
+            /* Gradient background for the header banner */
+            background: linear-gradient(to bottom, #245365 0%, rgba(36,83,101,0.0) 100%); /* Fades from solid top to transparent bottom */
+        }
+        .fixed-header-container img {
+            /* Inherits h-56 sm:h-64 md:h-72 from HTML, ensuring large size */
+            margin-bottom: 0 !important; /* Override any mb-1 from previous attempts */
+        }
 
         .nav-link {
             font-weight: 500;
@@ -200,7 +216,7 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 40;
             opacity: 0;
-            visibility: 
+            visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
         .mobile-menu-overlay.is-active { opacity: 1; visibility: visible; }
@@ -238,7 +254,11 @@
         .hamburger-button.is-active span:nth-child(1) { transform: translateY(10.5px) rotate(45deg);}
         .hamburger-button.is-active span:nth-child(2) { opacity: 0; }
         .hamburger-button.is-active span:nth-child(3) { transform: translateY(-10.5px) rotate(-45deg);}
-       
+        /* Desktop Navigation - Hidden on Mobile */
+        .desktop-nav { display: none; }
+        @media (min-width: 768px) { /* md breakpoint */
+            .desktop-nav { display: block; }
+            .hamburger-button { display: none;}
         }
     </style>
 </head>
