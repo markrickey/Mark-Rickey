@@ -154,7 +154,7 @@
                 <div class="hero-fade-bottom"></div>
             </div>
             <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
-                <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark</h1>
+                <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
                 <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold typing-container">
                     <span id="typing-effect"></span>
                 </h2>
@@ -224,6 +224,7 @@
              <a href="#hero" class="inline-block">
                 <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-48 mx-auto transition-transform duration-300 ease-in-out hover:scale-105">
              </a>
+             <p class="text-gray-500 text-sm mt-2">&copy; 2025 Mark R. All rights reserved.</p>
         </div>
 
 
@@ -255,116 +256,4 @@
             const roles = ["Data-Driven Leader", "Strategic Planner", "Process Optimizer", "Global Operations Manager", "AI & Tech Proficient"];
             let roleIndex = 0, charIndex = 0, isDeleting = false;
             function type() {
-                const currentRole = roles[roleIndex];
-                let typeSpeed = 120;
-                if (isDeleting) {
-                    typeSpeed = 50;
-                    typingElement.textContent = currentRole.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    typingElement.textContent = currentRole.substring(0, charIndex + 1);
-                    charIndex++;
-                }
-                if (!isDeleting && charIndex === currentRole.length) {
-                    isDeleting = true;
-                    typeSpeed = 2000;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    roleIndex = (roleIndex + 1) % roles.length;
-                    typeSpeed = 500;
-                }
-                setTimeout(type, typeSpeed);
-            }
-            type();
-        }
-
-        const competencyContainer = document.getElementById('competency-rotator');
-        if(competencyContainer) {
-            const competencies = competencyContainer.querySelectorAll('span');
-            let competencyIndex = 0;
-            function showNextCompetency() {
-                if(competencies.length === 0) return;
-                competencies.forEach(c => c.classList.remove('is-visible'));
-                competencies[competencyIndex].classList.add('is-visible');
-                competencyIndex = (competencyIndex + 1) % competencies.length;
-            }
-            if (competencies.length > 0) {
-                showNextCompetency();
-                setInterval(showNextCompetency, 3000);
-            }
-        }
-
-        // --- SKILLS FILTER ---
-        const filterBtns = document.querySelectorAll('.skill-filter-btn');
-        const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const filter = this.getAttribute('data-filter');
-                skillChips.forEach(chip => {
-                    chip.style.display = (filter === 'all' || chip.getAttribute('data-cat') === filter) ? 'inline-block' : 'none';
-                });
-            });
-        });
-        document.querySelector('.skill-filter-btn[data-filter="all"]').click();
-
-        // --- EXPERIENCE CARD ROTATOR ---
-        const rotatorContainer = document.querySelector('.experience-card-rotator');
-        if (rotatorContainer) {
-            const cards = rotatorContainer.querySelectorAll('.content-card');
-            let cardIndex = 0;
-            function showNextCard() {
-                if (cards.length === 0) return;
-                cards[cardIndex].classList.remove('is-active');
-                cardIndex = (cardIndex + 1) % cards.length;
-                cards[cardIndex].classList.add('is-active');
-            }
-            if (cards.length > 0) {
-                cards[0].classList.add('is-active');
-                setInterval(showNextCard, 7000);
-            }
-        }
-
-        // --- ACTIVE NAV LINK ON SCROLL ---
-        const sections = document.querySelectorAll('.main-content section, .main-content > div'); // Include the signature div
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
-        
-        window.addEventListener('scroll', () => {
-            let currentId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.pageYOffset >= sectionTop - 150) {
-                    currentId = section.id;
-                }
-            });
-
-            // If the signature block is the current "section", we still want "skills" to be active.
-            if (currentId === undefined || !document.getElementById(currentId)) {
-                // Find the last valid section ID before the signature
-                for (let i = sections.length - 1; i >= 0; i--) {
-                    if (sections[i].id) {
-                         if (window.pageYOffset >= sections[i].offsetTop - 150) {
-                             currentId = sections[i].id;
-                             break;
-                         }
-                    }
-                }
-            }
-            
-            const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2;
-            if (isAtBottom) {
-                currentId = 'contact'; // The ID of your last section
-            }
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(currentId)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    });
-    </script>
-</body>
-</html>
+                const currentRole = roles
