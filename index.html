@@ -33,7 +33,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1rem; /* Reset padding */
+            padding: 2rem 1rem;
+            /* Added bottom padding for signature overflow */
+            padding-bottom: 2rem;
             box-shadow: -10px 0 30px rgba(0,0,0,0.2);
         }
         .fixed-sidebar .profile-img {
@@ -57,19 +59,23 @@
         .sidebar-nav li a:hover, .sidebar-nav li a.active {
             background: #DB7A4D; color: #fff;
         }
-        /* New signature style: anchored to the bottom */
+        /* UPDATED: Signature now larger and overflowing */
         .fixed-sidebar .signature-link {
-            margin-top: auto; /* Pushes this element to the bottom of the flex container */
+            margin-top: auto;
             padding-top: 2rem;
+            width: 100%;
+            position: relative;
         }
         .fixed-sidebar .signature-img {
-            width: 180px; /* A more reasonable size for the bottom */
-            max-width: 100%;
+            width: 320px; /* Even bigger width */
             opacity: 0.8;
-            transition: opacity 0.2s;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            /* Move it left, down, and rotate for a dynamic overflow effect */
+            transform: translate(-40px, 20px) rotate(-4deg);
         }
         .fixed-sidebar .signature-img:hover {
             opacity: 1;
+            transform: translate(-45px, 15px) rotate(-2deg) scale(1.03);
         }
 
         /* Adjust main content to not overlap sidebar */
@@ -81,7 +87,7 @@
             .main-content { margin-right: 0; }
         }
 
-        /* --- NEW DYNAMIC TEXT STYLES --- */
+        /* Dynamic Text Styles */
         .typing-container::after {
             content: '|';
             display: inline-block;
@@ -194,68 +200,13 @@
             <div class="max-w-4xl mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-8 text-center">Experience</h2>
                 <div class="experience-card-rotator">
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li>
-                        </ul>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li>
-                        </ul>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
-                        </ul>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li>
-                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for 30% content visibility improvement.</li>
-                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Delivered detailed analytics for strategic decision-making.</li>
-                        </ul>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li>
-                        </ul>
-                    </div>
-                     <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li>
-                        </ul>
-                    </div>
-                     <div class="content-card">
-                        <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
-                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
-                        <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering a welcoming environment.</li>
-                        </ul>
-                    </div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li></ul></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li></ul></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li></ul></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for 30% content visibility improvement.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Delivered detailed analytics for strategic decision-making.</li></ul></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li></ul></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li></ul></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering a welcoming environment.</li></ul></div>
                 </div>
             </div>
         </section>
@@ -298,66 +249,59 @@
                 <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
             </div>
         </section>
+        
+        <div class="h-96"></div>
+
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-
         // --- DYNAMIC TEXT SCRIPTS ---
-        // 1. Typing effect for Hero Section
         const typingElement = document.getElementById('typing-effect');
-        const roles = [
-            "Data-Driven Leader",
-            "Strategic Planner",
-            "Process Optimizer",
-            "Global Operations Manager",
-            "AI & Tech Proficient"
-        ];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentRole = roles[roleIndex];
-            if (isDeleting) {
-                typingElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
+        if (typingElement) {
+            const roles = ["Data-Driven Leader", "Strategic Planner", "Process Optimizer", "Global Operations Manager", "AI & Tech Proficient"];
+            let roleIndex = 0, charIndex = 0, isDeleting = false;
+            function type() {
+                const currentRole = roles[roleIndex];
+                let typeSpeed = 120;
+                if (isDeleting) {
+                    typeSpeed = 50;
+                    typingElement.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+                if (!isDeleting && charIndex === currentRole.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    typeSpeed = 500;
+                }
+                setTimeout(type, typeSpeed);
             }
-
-            if (!isDeleting && charIndex === currentRole.length) {
-                isDeleting = true;
-                setTimeout(type, 2000); // Pause at end of word
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                setTimeout(type, 500); // Pause before new word
-            } else {
-                const typingSpeed = isDeleting ? 50 : 120;
-                setTimeout(type, typingSpeed);
-            }
+            type();
         }
-        type();
 
-        // 2. Fading competencies for About Section
         const competencyContainer = document.getElementById('competency-rotator');
         if(competencyContainer) {
             const competencies = competencyContainer.querySelectorAll('span');
             let competencyIndex = 0;
-            
             function showNextCompetency() {
                 if(competencies.length === 0) return;
                 competencies.forEach(c => c.classList.remove('is-visible'));
                 competencies[competencyIndex].classList.add('is-visible');
                 competencyIndex = (competencyIndex + 1) % competencies.length;
             }
-            showNextCompetency();
-            setInterval(showNextCompetency, 3000); // Rotate every 3 seconds
+            if (competencies.length > 0) {
+                showNextCompetency();
+                setInterval(showNextCompetency, 3000);
+            }
         }
 
-        // --- Skills Filter Logic ---
+        // --- SKILLS FILTER ---
         const filterBtns = document.querySelectorAll('.skill-filter-btn');
         const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
         filterBtns.forEach(btn => {
@@ -372,7 +316,7 @@
         });
         document.querySelector('.skill-filter-btn[data-filter="all"]').click();
 
-        // --- Experience Card Rotator ---
+        // --- EXPERIENCE CARD ROTATOR ---
         const rotatorContainer = document.querySelector('.experience-card-rotator');
         if (rotatorContainer) {
             const cards = rotatorContainer.querySelectorAll('.content-card');
@@ -389,7 +333,7 @@
             }
         }
 
-        // --- Active Nav Link on Scroll ---
+        // --- ACTIVE NAV LINK ON SCROLL ---
         const sections = document.querySelectorAll('.main-content section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
         window.addEventListener('scroll', () => {
