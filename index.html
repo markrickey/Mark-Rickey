@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Mark – Global Strategic Project Manager</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -264,7 +263,6 @@
 </head>
 <body>
 
-    <!-- New Fixed Header Container for Signature and Hamburger -->
     <div class="fixed-header-container">
         <a href="#hero" class="flex items-center" id="header-logo-link">
           <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-56 sm:h-64 md:h-72 w-auto">
@@ -276,7 +274,6 @@
         </button>
     </div>
 
-    <!-- Mobile Navigation Menu (Hidden by Default) -->
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     <nav id="mobile-nav" class="mobile-nav">
         <button class="hamburger-button is-active self-end" id="close-menu-btn" aria-label="Close navigation menu">
@@ -293,7 +290,6 @@
         </ul>
     </nav>
 
-    <!-- Hero Section (unchanged) -->
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
         <div class="absolute inset-0 z-0">
             <video autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -312,7 +308,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-20 bg-white">
         <div class="max-w-5xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
@@ -323,7 +318,6 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience" class="py-20 bg-[#F9FAFB]">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Experience</h2>
@@ -449,11 +443,15 @@
         </div>
     </section>
 
-    <!-- Work Studies / Projects Section -->
     <section id="projects" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="content-card focus:outline-none">
+                    <h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3>
+                    <p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p>
+                    <a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a>
+                </div>
                 <div class="content-card focus:outline-none">
                     <h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3>
                     <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
@@ -473,7 +471,6 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="py-20 bg-[#F9FAFB]">
         <div class="max-w-5xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Skills</h2>
@@ -516,7 +513,6 @@
         </div>
     </section>
 
-    <!-- Contact Banner -->
     <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D]">
         <div class="max-w-3xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
@@ -582,6 +578,9 @@
 
                 const details = this.querySelector('.experience-card-details');
                 const icon = this.querySelector('.expand-icon');
+                
+                // This logic only applies to cards that have details to expand
+                if (!details || !icon) return;
 
                 if (this.classList.contains('card-open')) {
                     // Collapse the card
@@ -605,7 +604,7 @@
         });
 
         // Mobile Menu Toggle Logic
-        const hamburgerBtn = document.getElementById('hamburger-btn');
+      const hamburgerBtn = document.getElementById('hamburger-btn');
       const mobileNav = document.getElementById('mobile-nav');
       const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
       const navLinksMobile = mobileNav.querySelectorAll('.nav-link');
