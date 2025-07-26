@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        html, body { 
+        html, body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        /* NEW: Fixed Sidebar Navigation */
+        /* Fixed Sidebar Navigation */
         .fixed-sidebar {
             position: fixed;
             top: 0;
@@ -37,7 +37,7 @@
             box-shadow: -10px 0 30px rgba(0,0,0,0.2);
         }
         .fixed-sidebar .signature-img {
-            max-height: 100px; /* Adjusted size for sidebar */
+            max-height: 100px;
             width: auto;
             margin-bottom: 1.5rem;
         }
@@ -68,7 +68,7 @@
             color: #fff;
         }
 
-        /* NEW: Adjust main content to not overlap sidebar */
+        /* Adjust main content to not overlap sidebar */
         .main-content {
             margin-right: 280px;
         }
@@ -92,10 +92,10 @@
             pointer-events: none; z-index: 1;
         }
 
-        /* NEW: Experience Card Rotator Styles */
+        /* Experience Card Rotator Styles */
         .experience-card-rotator {
             position: relative;
-            min-height: 420px; /* Set a height to prevent page jump */
+            min-height: 450px; /* Set a height to prevent page jump */
         }
         .experience-card-rotator .content-card {
             position: absolute;
@@ -118,7 +118,7 @@
              box-shadow: 0 4px 15px rgba(36,83,101,0.09);
              background: rgba(255,255,255,0.97);
         }
-        
+
         /* Original Content Card Styles (for non-rotator cards) */
          .content-card {
             background-color: rgba(255,255,255,0.97);
@@ -132,7 +132,7 @@
         .experience-card-dates { color: #DB7A4D; }
         .experience-bullet-icon { color: #DB7A4D; }
 
-        /* Other styles remain largely unchanged */
+        /* Other styles */
         .contact-icon-link {
             transition: color 0.2s, transform 0.22s;
         }
@@ -214,8 +214,8 @@
                         <ul class="list-none text-gray-700 space-y-2 text-base">
                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li>
                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas, consulting on legislative strategy.</li>
-                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li>
                         </ul>
                     </div>
                     <div class="content-card">
@@ -223,30 +223,54 @@
                         <p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p>
                         <ul class="list-none text-gray-700 space-y-2 text-base">
                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration during exercises.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20% & reducing costs by 15%.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at high-impact international conferences.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li>
                         </ul>
                     </div>
                     <div class="content-card">
                         <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3>
                         <p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p>
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management, achieving a 20% gain in accuracy and efficiency.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement, resulting in a 15% interaction and 10% retention uplift.</li>
-                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools and KPIs, contributing to a 25% sales increase.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li>
                         </ul>
                     </div>
                     <div class="content-card">
                         <h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3>
                         <p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p>
                         <ul class="list-none text-gray-700 space-y-2 text-base">
-                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased brand visibility by 25% & member engagement by 20%.</li>
-                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for a 30% content visibility improvement.</li>
+                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li>
+                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for 30% content visibility improvement.</li>
                              <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Delivered detailed analytics for strategic decision-making.</li>
                         </ul>
                     </div>
+                    <div class="content-card">
+                        <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
+                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
+                        <ul class="list-none text-gray-700 space-y-2 text-base">
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li>
+                        </ul>
                     </div>
+                    <div class="content-card">
+                        <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
+                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
+                        <ul class="list-none text-gray-700 space-y-2 text-base">
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
+                        <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
+                        <ul class="list-none text-gray-700 space-y-2 text-base">
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li>
+                            <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering a welcoming environment.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -334,33 +358,27 @@
         // Default to show all skills on load
         document.querySelector('.skill-filter-btn[data-filter="all"]').click();
 
-        // --- NEW: Experience Card Rotator ---
+        // --- Experience Card Rotator ---
         const rotatorContainer = document.querySelector('.experience-card-rotator');
         if (rotatorContainer) {
             const cards = rotatorContainer.querySelectorAll('.content-card');
             let currentIndex = 0;
 
             function showNextCard() {
-                // Hide the current card
+                if (cards.length === 0) return;
                 cards[currentIndex].classList.remove('is-active');
-                
-                // Calculate the next index, looping back to 0 if at the end
                 currentIndex = (currentIndex + 1) % cards.length;
-
-                // Show the next card
                 cards[currentIndex].classList.add('is-active');
             }
 
-            // Show the first card initially
             if (cards.length > 0) {
                 cards[0].classList.add('is-active');
-                // Set an interval to rotate the cards every 7 seconds (7000 milliseconds)
-                setInterval(showNextCard, 7000);
+                setInterval(showNextCard, 7000); // Rotate every 7 seconds
             }
         }
 
-        // --- NEW: Active Nav Link on Scroll ---
-        const sections = document.querySelectorAll('section');
+        // --- Active Nav Link on Scroll ---
+        const sections = document.querySelectorAll('.main-content section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
 
         window.addEventListener('scroll', () => {
