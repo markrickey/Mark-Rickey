@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        /* Fixed Sidebar Navigation */
+        /* --- UPDATED SIDEBAR STYLES --- */
         .fixed-sidebar {
             position: fixed;
             top: 0;
@@ -33,152 +33,111 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1rem;
+            padding: 2rem 1rem; /* Reset padding */
             box-shadow: -10px 0 30px rgba(0,0,0,0.2);
-            /* NEW: Added top padding to make space for the absolute-positioned signature */
-            padding-top: 180px; 
         }
-
-        /* --- NEW: SIGNATURE IMAGE STYLES --- */
-        .fixed-sidebar .signature-img {
-            position: absolute; /* Lifts the image out of the normal document flow */
-            top: 30px; /* Position from the top of the sidebar */
-            right: -20px; /* Position from the right edge of the sidebar */
-            width: 400px; /* Significantly larger width */
-            max-height: none; /* Removes any height restriction */
-            transform: rotate(-4deg); /* Adds a slight angle */
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 101; /* Ensures it sits on top of the sidebar background */
-        }
-        .fixed-sidebar .signature-img:hover {
-            transform: rotate(-2deg) scale(1.05); /* Fun hover effect */
-        }
-        /* --- END NEW STYLES --- */
-
         .fixed-sidebar .profile-img {
             width: 100px;
             height: 100px;
             border: 3px solid #fff;
             margin-bottom: 2rem;
-            flex-shrink: 0; /* Prevents the image from shrinking */
+            flex-shrink: 0;
+        }
+        .sidebar-nav {
+            width: 100%;
         }
         .sidebar-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            text-align: center;
+            list-style: none; padding: 0; margin: 0; text-align: center;
         }
         .sidebar-nav li a {
-            display: block;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
+            display: block; color: #fff; font-size: 1.1rem;
+            font-weight: 600; padding: 0.75rem 1rem; border-radius: 0.5rem;
             transition: background 0.2s, color 0.2s;
         }
         .sidebar-nav li a:hover, .sidebar-nav li a.active {
-            background: #DB7A4D;
-            color: #fff;
+            background: #DB7A4D; color: #fff;
+        }
+        /* New signature style: anchored to the bottom */
+        .fixed-sidebar .signature-link {
+            margin-top: auto; /* Pushes this element to the bottom of the flex container */
+            padding-top: 2rem;
+        }
+        .fixed-sidebar .signature-img {
+            width: 180px; /* A more reasonable size for the bottom */
+            max-width: 100%;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .fixed-sidebar .signature-img:hover {
+            opacity: 1;
         }
 
         /* Adjust main content to not overlap sidebar */
         .main-content {
             margin-right: 280px;
         }
-        @media (max-width: 1024px) { /* On smaller screens, sidebar is hidden */
-            .fixed-sidebar {
-                display: none;
-            }
-            .main-content {
-                margin-right: 0;
-            }
+        @media (max-width: 1024px) {
+            .fixed-sidebar { display: none; }
+            .main-content { margin-right: 0; }
         }
 
-        /* Hero overlays */
-        .hero-overlay {
-            background: rgba(36,83,101,0.40);
-            position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        /* --- NEW DYNAMIC TEXT STYLES --- */
+        .typing-container::after {
+            content: '|';
+            display: inline-block;
+            animation: blink 0.7s infinite;
+            color: #FFD9CC;
         }
-        .hero-fade-bottom {
-            position: absolute; left: 0; bottom: 0; width: 100%; height: 120px;
-            background: linear-gradient(to bottom, rgba(36,83,101,0.0) 0%, #FFF4EF 100%);
-            pointer-events: none; z-index: 1;
+        @keyframes blink {
+            50% { opacity: 0; }
         }
-
-        /* Experience Card Rotator Styles */
-        .experience-card-rotator {
+        .competency-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
             position: relative;
-            min-height: 450px; /* Set a height to prevent page jump */
+            min-height: 40px; /* Prevent layout jump */
         }
-        .experience-card-rotator .content-card {
+        .competency-list span {
+            background-color: #e4eef8;
+            color: #245365;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-weight: 600;
+            border: 1px solid #245365;
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            pointer-events: none;
-            cursor: default;
+            transition: opacity 0.5s ease-in-out;
         }
-        .experience-card-rotator .content-card.is-active {
+        .competency-list span.is-visible {
             opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .experience-card-rotator .content-card:hover { /* Disable hover effect for rotator */
-             transform: none;
-             box-shadow: 0 4px 15px rgba(36,83,101,0.09);
-             background: rgba(255,255,255,0.97);
         }
 
-        /* Original Content Card Styles (for non-rotator cards) */
-         .content-card {
-            background-color: rgba(255,255,255,0.97);
-            border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(36,83,101,0.09);
-            padding: 2.5rem;
-            border: 1px solid #EFEFEF;
-        }
-
+        /* Other styles */
+        .hero-overlay { background: rgba(36,83,101,0.40); position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+        .hero-fade-bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, rgba(36,83,101,0.0) 0%, #FFF4EF 100%); pointer-events: none; z-index: 1; }
+        .experience-card-rotator { position: relative; min-height: 450px; }
+        .experience-card-rotator .content-card { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; cursor: default; }
+        .experience-card-rotator .content-card.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .experience-card-rotator .content-card:hover { transform: none; box-shadow: 0 4px 15px rgba(36,83,101,0.09); background: rgba(255,255,255,0.97); }
+        .content-card { background-color: rgba(255,255,255,0.97); border-radius: 1rem; box-shadow: 0 4px 15px rgba(36,83,101,0.09); padding: 2.5rem; border: 1px solid #EFEFEF; }
         .experience-card-title { color: #245365; }
         .experience-card-dates { color: #DB7A4D; }
         .experience-bullet-icon { color: #DB7A4D; }
-
-        /* Other styles */
-        .contact-icon-link {
-            transition: color 0.2s, transform 0.22s;
-        }
+        .contact-icon-link { transition: color 0.2s, transform 0.22s; }
         .contact-icon-link:hover { color: #DB7A4D; transform: scale(1.1); }
-        .skill-chip {
-            display: inline-block; margin: .25rem; padding: 0.6rem 1.25rem;
-            font-size: 1rem; font-weight: 500; border-radius: 1.5rem;
-            background: #fff; color: #245365; border: 1.5px solid #DB7A4D;
-            box-shadow: 0 1px 4px rgba(36,83,101,0.08); cursor: default;
-        }
+        .skill-chip { display: inline-block; margin: .25rem; padding: 0.6rem 1.25rem; font-size: 1rem; font-weight: 500; border-radius: 1.5rem; background: #fff; color: #245365; border: 1.5px solid #DB7A4D; box-shadow: 0 1px 4px rgba(36,83,101,0.08); cursor: default; }
         .skill-chip.cat-technical { background: #245365; color: #fff; border-color: #245365; }
         .skill-chip.cat-professional { background: #e4eef8; color: #245365; border-color: #245365;}
         .skill-chip.cat-leadership { background: #ffd9cc; color: #a15a2d; border-color: #DB7A4D; }
-        .skill-filter-btn {
-            background: #fff4ef; color: #245365; padding: 0.6rem 1.5rem;
-            font-size: 1.08rem; margin: .15rem .35rem .6rem .35rem; font-weight: 700;
-            border: 2px solid #DB7A4D; border-radius: 1rem; cursor: pointer;
-            transition: background 0.16s, color 0.17s, transform 0.18s;
-        }
-        .skill-filter-btn.active, .skill-filter-btn:focus {
-            background: #DB7A4D; color: #fff; border-color: #245365; transform: scale(1.05);
-        }
+        .skill-filter-btn { background: #fff4ef; color: #245365; padding: 0.6rem 1.5rem; font-size: 1.08rem; margin: .15rem .35rem .6rem .35rem; font-weight: 700; border: 2px solid #DB7A4D; border-radius: 1rem; cursor: pointer; transition: background 0.16s, color 0.17s, transform 0.18s; }
+        .skill-filter-btn.active, .skill-filter-btn:focus { background: #DB7A4D; color: #fff; border-color: #245365; transform: scale(1.05); }
     </style>
 </head>
 <body class="relative">
 
     <aside class="fixed-sidebar">
-        <a href="#hero">
-            <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="signature-img">
-        </a>
-        
         <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img rounded-full object-cover">
         
         <nav class="sidebar-nav">
@@ -190,13 +149,17 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
+
+        <a href="#hero" class="signature-link">
+            <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="signature-img">
+        </a>
     </aside>
 
     <div class="main-content">
         <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
             <div class="absolute inset-0 z-0">
                 <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                    <source src="herobanner.mp4" type="video/mp4">
+                    <source src="hero.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="hero-overlay"></div>
@@ -204,8 +167,10 @@
             </div>
             <div class="relative z-10 flex flex-col items-center text-center pt-20 pb-20 w-full px-4">
                 <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
-                <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold">Strategic Project & Data Management Leader</h2>
-                <p class="text-lg text-white max-w-2xl mx-auto mb-8">Leveraging strategic analysis and data-driven solutions to enhance operational excellence, driving impactful results through public service.</p>
+                <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold typing-container">
+                    <span id="typing-effect"></span>
+                </h2>
+                <p class="text-lg text-white max-w-2xl mx-auto mb-8">A seasoned leader leveraging data-driven solutions to enhance operational excellence and drive impactful results in public service.</p>
                 <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
             </div>
         </section>
@@ -213,9 +178,14 @@
         <section id="about" class="py-20 bg-white">
             <div class="max-w-5xl mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
-                <div class="text-lg text-gray-700 leading-relaxed space-y-6">
-                    <p>A highly resilient and results-oriented professional with over a decade of experience spanning global military operations, strategic government relations, and digital transformation. I excel at process optimization, data-driven leadership, and complex international/inter-agency stakeholder engagement, consistently delivering quantifiable results in the most demanding, high-stakes environments.</p>
-                    <p>My unique background combines unwavering discipline and unparalleled operational acumen (honed through managing multi-billion dollar global initiatives and orchestrating inter-agency/inter-service collaboration) with advanced analytical and technical proficiencies, including Python, SQL, and AI/Machine Learning. My career transition through the Congressional Staffer Program (CSP) Fellowship has further honed my abilities in strategic engagement and cross-functional collaboration within the public sector. I thrive in environments where I can streamline operations, drive impactful change, and contribute to mission-critical objectives, always seeking to empower others and elevate organizational performance.</p>
+                <p class="text-lg text-gray-700 leading-relaxed">With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.</p>
+                <div class="competency-list" id="competency-rotator">
+                    <span>Process Optimization</span>
+                    <span>Data-Driven Leadership</span>
+                    <span>Strategic Planning</span>
+                    <span>AI & Machine Learning</span>
+                    <span>Stakeholder Engagement</span>
+                    <span>Global Operations Management</span>
                 </div>
             </div>
         </section>
@@ -294,26 +264,10 @@
             <div class="max-w-6xl mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3>
-                        <p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p>
-                        <a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3>
-                        <p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p>
-                        <a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3>
-                        <p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p>
-                        <a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3>
-                        <p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p>
-                        <a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
-                    </div>
+                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div>
+                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div>
                 </div>
             </div>
         </section>
@@ -338,12 +292,8 @@
                 <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
                 <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s connect and make something impactful together!</p>
                 <div class="flex justify-center gap-14 mb-10">
-                    <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] contact-icon-link" aria-label="Email">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-5xl text-[#245365] contact-icon-link" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                    </a>
+                    <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] contact-icon-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-5xl text-[#245365] contact-icon-link" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
                 </div>
                 <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
             </div>
@@ -352,22 +302,71 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        // --- DYNAMIC TEXT SCRIPTS ---
+        // 1. Typing effect for Hero Section
+        const typingElement = document.getElementById('typing-effect');
+        const roles = [
+            "Data-Driven Leader",
+            "Strategic Planner",
+            "Process Optimizer",
+            "Global Operations Manager",
+            "AI & Tech Proficient"
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typingElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                setTimeout(type, 2000); // Pause at end of word
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(type, 500); // Pause before new word
+            } else {
+                const typingSpeed = isDeleting ? 50 : 120;
+                setTimeout(type, typingSpeed);
+            }
+        }
+        type();
+
+        // 2. Fading competencies for About Section
+        const competencyContainer = document.getElementById('competency-rotator');
+        if(competencyContainer) {
+            const competencies = competencyContainer.querySelectorAll('span');
+            let competencyIndex = 0;
+            
+            function showNextCompetency() {
+                if(competencies.length === 0) return;
+                competencies.forEach(c => c.classList.remove('is-visible'));
+                competencies[competencyIndex].classList.add('is-visible');
+                competencyIndex = (competencyIndex + 1) % competencies.length;
+            }
+            showNextCompetency();
+            setInterval(showNextCompetency, 3000); // Rotate every 3 seconds
+        }
+
         // --- Skills Filter Logic ---
         const filterBtns = document.querySelectorAll('.skill-filter-btn');
         const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
-        
         filterBtns.forEach(btn => {
             btn.addEventListener('click', function () {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 const filter = this.getAttribute('data-filter');
-                
                 skillChips.forEach(chip => {
-                    if (filter === 'all' || chip.getAttribute('data-cat') === filter) {
-                        chip.style.display = 'inline-block';
-                    } else {
-                        chip.style.display = 'none';
-                    }
+                    chip.style.display = (filter === 'all' || chip.getAttribute('data-cat') === filter) ? 'inline-block' : 'none';
                 });
             });
         });
@@ -377,15 +376,13 @@
         const rotatorContainer = document.querySelector('.experience-card-rotator');
         if (rotatorContainer) {
             const cards = rotatorContainer.querySelectorAll('.content-card');
-            let currentIndex = 0;
-
+            let cardIndex = 0;
             function showNextCard() {
                 if (cards.length === 0) return;
-                cards[currentIndex].classList.remove('is-active');
-                currentIndex = (currentIndex + 1) % cards.length;
-                cards[currentIndex].classList.add('is-active');
+                cards[cardIndex].classList.remove('is-active');
+                cardIndex = (cardIndex + 1) % cards.length;
+                cards[cardIndex].classList.add('is-active');
             }
-
             if (cards.length > 0) {
                 cards[0].classList.add('is-active');
                 setInterval(showNextCard, 7000);
@@ -395,19 +392,17 @@
         // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('.main-content section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
-
         window.addEventListener('scroll', () => {
-            let current = '';
+            let currentId = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 if (pageYOffset >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+                    currentId = section.getAttribute('id');
                 }
             });
-
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
+                if (link.getAttribute('href').includes(currentId)) {
                     link.classList.add('active');
                 }
             });
