@@ -33,19 +33,34 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1rem;
+            padding: 1rem;
             box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            /* NEW: Added top padding to make space for the absolute-positioned signature */
+            padding-top: 180px; 
         }
+
+        /* --- NEW: SIGNATURE IMAGE STYLES --- */
         .fixed-sidebar .signature-img {
-            max-height: 100px;
-            width: auto;
-            margin-bottom: 1.5rem;
+            position: absolute; /* Lifts the image out of the normal document flow */
+            top: 30px; /* Position from the top of the sidebar */
+            right: -20px; /* Position from the right edge of the sidebar */
+            width: 400px; /* Significantly larger width */
+            max-height: none; /* Removes any height restriction */
+            transform: rotate(-4deg); /* Adds a slight angle */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 101; /* Ensures it sits on top of the sidebar background */
         }
+        .fixed-sidebar .signature-img:hover {
+            transform: rotate(-2deg) scale(1.05); /* Fun hover effect */
+        }
+        /* --- END NEW STYLES --- */
+
         .fixed-sidebar .profile-img {
             width: 100px;
             height: 100px;
             border: 3px solid #fff;
             margin-bottom: 2rem;
+            flex-shrink: 0; /* Prevents the image from shrinking */
         }
         .sidebar-nav ul {
             list-style: none;
@@ -163,6 +178,7 @@
         <a href="#hero">
             <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="signature-img">
         </a>
+        
         <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img rounded-full object-cover">
         
         <nav class="sidebar-nav">
@@ -254,7 +270,7 @@
                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li>
                         </ul>
                     </div>
-                    <div class="content-card">
+                     <div class="content-card">
                         <h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3>
                         <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p>
                         <ul class="list-none text-gray-700 space-y-2 text-base">
@@ -262,7 +278,7 @@
                             <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li>
                         </ul>
                     </div>
-                    <div class="content-card">
+                     <div class="content-card">
                         <h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3>
                         <p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p>
                         <ul class="list-none text-gray-700 space-y-2 text-base">
@@ -355,7 +371,6 @@
                 });
             });
         });
-        // Default to show all skills on load
         document.querySelector('.skill-filter-btn[data-filter="all"]').click();
 
         // --- Experience Card Rotator ---
@@ -373,7 +388,7 @@
 
             if (cards.length > 0) {
                 cards[0].classList.add('is-active');
-                setInterval(showNextCard, 7000); // Rotate every 7 seconds
+                setInterval(showNextCard, 7000);
             }
         }
 
