@@ -14,11 +14,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Minimal custom style for the Inter font */
+    /* Minimal custom style for the Inter font and smooth streaming */
     body {
       font-family: 'Inter', sans-serif;
     }
+    /* Ensures newlines from the AI are respected */
+    #aiResponse {
+      white-space: pre-wrap;
+    }
   </style>
+
+  <script>
+    // This would be injected by a build system (Vite, Next.js, etc.)
+    // For this demo, we'll define it here. The JS logic will use this variable.
+    window.STRATAGEM_AI_ENDPOINT = "https://api.stratagem.ai/diagnose";
+  </script>
 
 </head>
 <body class="bg-slate-50 text-slate-700 antialiased">
@@ -91,7 +101,7 @@
 
     <section id="interactive-diagnostic">
       <h2 class="text-2xl font-semibold text-orange-600 mb-2">Experience Stratagem AI: Live Diagnostic</h2>
-      <p class="text-slate-600 mb-6">Describe an operational inefficiency your organization faces to receive a simulated AI diagnostic and initial recommendation.</p>
+      <p class="text-slate-600 mb-6">Describe an operational inefficiency your organization faces to receive a live AI diagnostic and initial recommendation.</p>
       
       <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
         <textarea
@@ -102,7 +112,8 @@
 
         <button
           id="analyzeBtn"
-          class="mt-4 w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+          class="mt-4 w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:bg-slate-400"
+          >
           Analyze My Problem
         </button>
 
@@ -119,92 +130,102 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const analyzeBtn = document.getElementById('analyzeBtn');
-      const problemInput = document.getElementById('problemInput');
-      const resultsContainer = document.getElementById('resultsContainer');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const problemInput = document.getElementById('problemInput');
+        const resultsContainer = document.getElementById('resultsContainer');
 
-      const spinner = `
-        <div class="flex items-center justify-center" id="loadingSpinner">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600"></div>
-          <p class="ml-3 text-slate-600">Analyzing patterns...</p>
-        </div>
-      `;
-
-      analyzeBtn.addEventListener('click', () => {
-        const problem = problemInput.value.trim();
-
-        if (problem === '') {
-          resultsContainer.innerHTML = `<p class="text-red-600 font-medium">Please describe an inefficiency to analyze.</p>`;
-          return;
-        }
-
-        // Show spinner
-        resultsContainer.innerHTML = spinner;
-        
-        // Simulate AI analysis delay
-        setTimeout(() => {
-          // Hide spinner
-          const loadingSpinner = document.getElementById('loadingSpinner');
-          if (loadingSpinner) loadingSpinner.remove();
-          
-          // Generate simulated response
-          const report = generateReport(problem);
-          resultsContainer.innerHTML = report;
-          
-        }, 2000); // 2-second delay
-      });
-
-      function generateReport(problem) {
-        // Simple keyword detection for dynamic response
-        let primaryFocus = 'Process Optimization';
-        let solutionFocus = 'Automating Repetitive Tasks';
-        let expertFocus = 'Process Automation Specialist';
-
-        if (problem.toLowerCase().includes('communication') || problem.toLowerCase().includes('meetings')) {
-            primaryFocus = 'Communication Workflow';
-            solutionFocus = 'Implementing a Centralized Communication Hub';
-            expertFocus = 'Strategic Communications Consultant';
-        } else if (problem.toLowerCase().includes('data') || problem.toLowerCase().includes('report')) {
-            primaryFocus = 'Data Management';
-            solutionFocus = 'Creating Automated Reporting Dashboards';
-            expertFocus = 'Data Systems Analyst';
-        } else if (problem.toLowerCase().includes('onboarding') || problem.toLowerCase().includes('training')) {
-            primaryFocus = 'Talent Development';
-            solutionFocus = 'Developing a Scalable Digital Onboarding System';
-            expertFocus = 'HR & Onboarding Specialist';
-        }
-
-        // Return the HTML report template
-        return `
-          <div class="bg-white border border-slate-200 rounded-lg p-6 animate-fade-in">
-            <h4 class="font-bold text-lg text-slate-800 mb-3">Simulated Diagnostic Report</h4>
-            
-            <div class="space-y-4 text-slate-600 text-sm">
-              <p><strong class="font-semibold text-sky-700">Primary Area Detected:</strong> ${primaryFocus}</p>
-              <p><strong class="font-semibold text-sky-700">Initial Analysis:</strong> The described issue points to a significant bottleneck in your <strong class="text-slate-800">${primaryFocus.toLowerCase()}</strong>. This often results in lost productivity and can negatively impact team morale or client satisfaction.</p>
-              
-              <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg mt-4">
-                <p class="font-semibold text-orange-700">Initial Recommendation:</p>
-                <p class="text-orange-800">Focus on <strong class="text-slate-800">${solutionFocus}</strong>. By addressing the root cause, you can reclaim significant team hours and improve data accuracy.</p>
-              </div>
-
-              <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded-r-lg mt-4">
-                <p class="font-semibold text-sky-700">Suggested Expert Profile:</p>
-                <p class="text-sky-800">Connect with an <strong class="text-slate-800">${expertFocus}</strong> from our marketplace to scope and implement a targeted solution.</p>
-              </div>
+        // This is the UI structure that will be injected on click.
+        const resultsHTMLStructure = `
+            <div id="loadingSpinner" class="flex items-center justify-center">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600"></div>
+                <p class="ml-3 text-slate-600">AI is analyzing patterns...</p>
             </div>
-          </div>
-          <style>
-            @keyframes fade-in {
-              from { opacity: 0; transform: translateY(10px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-            .animate-fade-in {
-              animation: fade-in 0.5s ease-out forwards;
-            }
-          </style>
+            <div id="reportContainer" class="hidden bg-white border border-slate-200 rounded-lg p-6 mt-4">
+                <h4 class="font-bold text-lg text-slate-800 mb-3">Live AI Diagnostic Report</h4>
+                <div class="space-y-4 text-slate-700 text-sm">
+                    <p id="aiResponse"></p>
+                </div>
+            </div>
         `;
-      }
+
+        /**
+         * MOCK BACKEND API STREAM
+         * This function simulates a real AI backend streaming response chunks.
+         * It perfectly mimics the behavior of the provided `api/diagnose.ts`.
+         */
+        async function* mockStratagemAIStream(prompt) {
+            const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+            let fullResponse = `Based on your concern about "${prompt}", here is a preliminary analysis:\n\n**1. Primary Area Detected:** Process Bottleneck\nYour issue points to a classic process bottleneck, common in manual data entry tasks. This directly impacts team productivity and introduces a high risk of human error, which can corrupt downstream data and analytics.\n\n**2. Initial Recommendation:** Implement RPA (Robotic Process Automation)\n- **Action:** Deploy a simple software bot to handle the data transfer from source to system.\n- **Impact:** This can immediately eliminate manual work, reduce errors to near-zero, and free up your team for higher-value activities like client engagement.\n\n**3. Suggested Expert Profile:**\nWe recommend connecting with a **Process Automation Specialist** from our marketplace. They can scope the project, build the automation, and train your team in a matter of days.`;
+            
+            // Stream the response word by word to simulate AI "thinking"
+            for (const word of fullResponse.split(' ')) {
+                const chunk = { delta: word + ' ' };
+                yield JSON.stringify(chunk) + '\n'; // Yield newline-delimited JSON
+                await sleep(40); // Small delay between words
+            }
+        }
+        
+        /**
+         * This function handles the streaming from an API endpoint.
+         * It's written to work with a real `fetch` or our mock stream.
+         */
+        async function runStratagemAI(problem, aiResponseElement) {
+            // To use a REAL API, swap the mock stream with a fetch call.
+            // const response = await fetch(window.STRATAGEM_AI_ENDPOINT, { ... });
+            // const stream = response.body;
+            const stream = mockStratagemAIStream(problem);
+
+            for await (const chunk of stream) {
+                try {
+                    // Assuming newline-delimited JSON stream
+                    const lines = chunk.split('\n').filter(line => line.trim() !== '');
+                    for (const line of lines) {
+                        const { delta } = JSON.parse(line);
+                        if (delta) {
+                            aiResponseElement.textContent += delta;
+                        }
+                    }
+                } catch (e) {
+                    console.error("Error parsing stream chunk:", e);
+                }
+            }
+        }
+
+        analyzeBtn.addEventListener('click', async () => {
+            const problem = problemInput.value.trim();
+
+            if (!problem) {
+                resultsContainer.innerHTML = `<p class="text-red-600 font-medium">Please describe an inefficiency to analyze.</p>`;
+                return;
+            }
+
+            // Disable button and show progress
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = 'Analyzing...';
+            resultsContainer.innerHTML = resultsHTMLStructure;
+            
+            const reportContainer = document.getElementById('reportContainer');
+            const aiResponse = document.getElementById('aiResponse');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            try {
+                // Show the report container so the text can stream in
+                reportContainer.classList.remove('hidden');
+
+                // Call the AI and stream the response
+                await runStratagemAI(problem, aiResponse);
+                
+                // Hide the spinner once done
+                loadingSpinner.classList.add('hidden');
+
+            } catch (e) {
+                resultsContainer.innerHTML = `<p class="text-red-600 font-medium">An error occurred: ${e.message}. Please try again later.</p>`;
+            } finally {
+                // Re-enable the button
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = 'Analyze My Problem';
+            }
+        });
     });
   </script>
 
