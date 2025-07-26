@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stratagem AI: Optimized Operations for Impact – Mark R.</title>
+  <meta name="description" content="Stratagem AI diagnoses operational inefficiencies and connects organizations with freelance experts for implementation.">
+  
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Minimal custom style for the Inter font */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+
+</head>
+<body class="bg-slate-50 text-slate-700 antialiased">
+
+  <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-white rounded-2xl shadow-lg">
+    
+    <section class="text-center mb-10">
+      <h1 class="text-4xl sm:text-5xl font-bold text-slate-800 mb-4">Stratagem AI</h1>
+      <p class="text-lg sm:text-xl text-slate-600">Optimized Operations for Measurable Impact</p>
+    </section>
+
+    <hr class="my-10 border-slate-200">
+
+    <section>
+      <h2 class="text-2xl font-semibold text-orange-600 mb-4">The Cost of Inefficiency &amp; Unmet Needs</h2>
+      <div class="space-y-4 text-slate-600">
+        <p>Many organizations struggle with inefficient internal processes, unclear communication, and under-utilized data. They know they have problems but lack the expertise, time, or resources to identify root causes and implement solutions.</p>
+        <p>This leads to wasted resources, missed opportunities, and frustrated teams. These organizations also struggle to find and vet specialized talent for short-term, high-impact projects, leaving critical gaps unaddressed.</p>
+      </div>
+    </section>
+
+    <hr class="my-10 border-slate-200">
+
+    <section>
+      <h2 class="text-2xl font-semibold text-sky-700 mb-4">The Stratagem AI Solution</h2>
+      <p class="text-slate-600">Stratagem AI uses advanced analytics to diagnose inefficiencies, generate actionable recommendations, and connect clients with vetted freelance experts for implementation, ensuring measurable impact.</p>
+    </section>
+    
+    <hr class="my-10 border-slate-200">
+
+    <section>
+      <h2 class="text-3xl font-bold text-slate-800 text-center mb-8">A Four-Step Path to Excellence</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
+          <div class="flex items-center text-sky-800 mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+            <h3 class="font-bold text-lg">1. AI-Powered Diagnostic</h3>
+          </div>
+          <p class="text-slate-600 text-sm">Upload anonymized data; Stratagem AI highlights workflow bottlenecks, communication gaps, and data inefficiencies in intuitive dashboards.</p>
+        </div>
+
+        <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+          <div class="flex items-center text-orange-700 mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+            <h3 class="font-bold text-lg">2. Actionable Recommendations</h3>
+          </div>
+          <p class="text-slate-600 text-sm">Receive a prioritized list of strategic recommendations—from streamlining onboarding to refining communication protocols.</p>
+        </div>
+
+        <div class="bg-sky-50 border border-sky-200 rounded-lg p-6">
+          <div class="flex items-center text-sky-800 mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            <h3 class="font-bold text-lg">3. “ImpactBridge” Marketplace</h3>
+          </div>
+          <p class="text-slate-600 text-sm">Get matched with a curated pool of experts in Process Optimization, Data Systems, Strategic Communication, and AI Integration.</p>
+        </div>
+
+        <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
+          <div class="flex items-center text-slate-700 mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+            <h3 class="font-bold text-lg">4. Progress Tracking</h3>
+          </div>
+          <p class="text-slate-600 text-sm">Track real-time implementation progress and see KPI improvements—efficiency gains, cost savings, and communication scores.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-10 border-slate-200">
+
+    <section id="interactive-diagnostic">
+      <h2 class="text-2xl font-semibold text-orange-600 mb-2">Experience Stratagem AI: Live Diagnostic</h2>
+      <p class="text-slate-600 mb-6">Describe an operational inefficiency your organization faces to receive a simulated AI diagnostic and initial recommendation.</p>
+      
+      <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
+        <textarea
+          id="problemInput"
+          class="w-full p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"
+          rows="4"
+          placeholder="E.g., 'Our team wastes hours on manual data entry for client onboarding.'"></textarea>
+
+        <button
+          id="analyzeBtn"
+          class="mt-4 w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+          Analyze My Problem
+        </button>
+
+        <div id="resultsContainer" class="mt-6" aria-live="polite">
+          </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <footer class="text-center py-6">
+      <p class="text-sm text-slate-500">&copy; 2025 Mark R. Conceptual Design – Stratagem AI</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const analyzeBtn = document.getElementById('analyzeBtn');
+      const problemInput = document.getElementById('problemInput');
+      const resultsContainer = document.getElementById('resultsContainer');
+
+      const spinner = `
+        <div class="flex items-center justify-center" id="loadingSpinner">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600"></div>
+          <p class="ml-3 text-slate-600">Analyzing patterns...</p>
+        </div>
+      `;
+
+      analyzeBtn.addEventListener('click', () => {
+        const problem = problemInput.value.trim();
+
+        if (problem === '') {
+          resultsContainer.innerHTML = `<p class="text-red-600 font-medium">Please describe an inefficiency to analyze.</p>`;
+          return;
+        }
+
+        // Show spinner
+        resultsContainer.innerHTML = spinner;
+        
+        // Simulate AI analysis delay
+        setTimeout(() => {
+          // Hide spinner
+          const loadingSpinner = document.getElementById('loadingSpinner');
+          if (loadingSpinner) loadingSpinner.remove();
+          
+          // Generate simulated response
+          const report = generateReport(problem);
+          resultsContainer.innerHTML = report;
+          
+        }, 2000); // 2-second delay
+      });
+
+      function generateReport(problem) {
+        // Simple keyword detection for dynamic response
+        let primaryFocus = 'Process Optimization';
+        let solutionFocus = 'Automating Repetitive Tasks';
+        let expertFocus = 'Process Automation Specialist';
+
+        if (problem.toLowerCase().includes('communication') || problem.toLowerCase().includes('meetings')) {
+            primaryFocus = 'Communication Workflow';
+            solutionFocus = 'Implementing a Centralized Communication Hub';
+            expertFocus = 'Strategic Communications Consultant';
+        } else if (problem.toLowerCase().includes('data') || problem.toLowerCase().includes('report')) {
+            primaryFocus = 'Data Management';
+            solutionFocus = 'Creating Automated Reporting Dashboards';
+            expertFocus = 'Data Systems Analyst';
+        } else if (problem.toLowerCase().includes('onboarding') || problem.toLowerCase().includes('training')) {
+            primaryFocus = 'Talent Development';
+            solutionFocus = 'Developing a Scalable Digital Onboarding System';
+            expertFocus = 'HR & Onboarding Specialist';
+        }
+
+        // Return the HTML report template
+        return `
+          <div class="bg-white border border-slate-200 rounded-lg p-6 animate-fade-in">
+            <h4 class="font-bold text-lg text-slate-800 mb-3">Simulated Diagnostic Report</h4>
+            
+            <div class="space-y-4 text-slate-600 text-sm">
+              <p><strong class="font-semibold text-sky-700">Primary Area Detected:</strong> ${primaryFocus}</p>
+              <p><strong class="font-semibold text-sky-700">Initial Analysis:</strong> The described issue points to a significant bottleneck in your <strong class="text-slate-800">${primaryFocus.toLowerCase()}</strong>. This often results in lost productivity and can negatively impact team morale or client satisfaction.</p>
+              
+              <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded-r-lg mt-4">
+                <p class="font-semibold text-orange-700">Initial Recommendation:</p>
+                <p class="text-orange-800">Focus on <strong class="text-slate-800">${solutionFocus}</strong>. By addressing the root cause, you can reclaim significant team hours and improve data accuracy.</p>
+              </div>
+
+              <div class="bg-sky-50 border-l-4 border-sky-400 p-4 rounded-r-lg mt-4">
+                <p class="font-semibold text-sky-700">Suggested Expert Profile:</p>
+                <p class="text-sky-800">Connect with an <strong class="text-slate-800">${expertFocus}</strong> from our marketplace to scope and implement a targeted solution.</p>
+              </div>
+            </div>
+          </div>
+          <style>
+            @keyframes fade-in {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+              animation: fade-in 0.5s ease-out forwards;
+            }
+          </style>
+        `;
+      }
+    });
+  </script>
+
+</body>
+</html>
