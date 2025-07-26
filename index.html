@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        /* Fixed Sidebar Navigation */
+        /* --- UPDATED SIDEBAR STYLES --- */
         .fixed-sidebar {
             position: fixed;
             top: 0;
@@ -34,7 +34,6 @@
             flex-direction: column;
             align-items: center;
             padding: 2rem 1rem;
-            padding-bottom: 2rem;
             box-shadow: -10px 0 30px rgba(0,0,0,0.2);
         }
         .fixed-sidebar .profile-img {
@@ -47,6 +46,8 @@
         .sidebar-nav {
             width: 100%;
         }
+        /* Removed all old .signature-img and .signature-link sidebar styles */
+
         .sidebar-nav ul {
             list-style: none; padding: 0; margin: 0; text-align: center;
         }
@@ -57,22 +58,6 @@
         }
         .sidebar-nav li a:hover, .sidebar-nav li a.active {
             background: #DB7A4D; color: #fff;
-        }
-        .fixed-sidebar .signature-link {
-            margin-top: auto;
-            padding-top: 2rem;
-            width: 100%;
-            position: relative;
-        }
-        .fixed-sidebar .signature-img {
-            width: 320px;
-            opacity: 0.8;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            transform: translate(-40px, 20px) rotate(-4deg);
-        }
-        .fixed-sidebar .signature-img:hover {
-            opacity: 1;
-            transform: translate(-45px, 15px) rotate(-2deg) scale(1.03);
         }
 
         /* Adjust main content to not overlap sidebar */
@@ -158,11 +143,7 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
-
-        <a href="#hero" class="signature-link">
-            <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="signature-img">
-        </a>
-    </aside>
+        </aside>
 
     <div class="main-content">
         <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center">
@@ -241,6 +222,13 @@
             </div>
         </section>
 
+        <div class="bg-white py-16 text-center">
+             <a href="#hero" class="inline-block">
+                <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-28 mx-auto transition-transform duration-300 ease-in-out hover:scale-105">
+             </a>
+        </div>
+
+
         <section id="contact" class="bg-[#245365] text-gray-200">
             <div class="max-w-6xl mx-auto px-6 py-16">
                 <div class="md:flex md:justify-between md:items-center text-center md:text-left">
@@ -259,9 +247,7 @@
             </div>
         </section>
         
-        <div class="h-48 bg-[#245365]"></div>
-
-    </div>
+        </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -345,14 +331,21 @@
         // --- ACTIVE NAV LINK ON SCROLL ---
         const sections = document.querySelectorAll('.main-content section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
+        
         window.addEventListener('scroll', () => {
             let currentId = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
+                if (window.pageYOffset >= sectionTop - 150) {
                     currentId = section.getAttribute('id');
                 }
             });
+
+            const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2;
+            if (isAtBottom) {
+                currentId = 'contact'; // The ID of your last section
+            }
+
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href').includes(currentId)) {
