@@ -19,6 +19,52 @@
             overflow-x: hidden;
         }
 
+        /* --- NEW: Animated Section Headers --- */
+        .section-header {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem; /* Replaces mb-6 */
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background-color: #DB7A4D;
+            transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .section-header.in-view::after {
+            width: 70%; /* Animate the line to 70% width */
+        }
+
+        /* --- NEW: Dynamic Hover for Work Study Cards --- */
+        .work-study-card {
+            position: relative;
+            overflow: hidden; /* Important for the zoom effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .work-study-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(36, 83, 101, 0.2);
+        }
+        .work-study-card .card-bg {
+            /* Placeholder background - replace with images if you have them */
+            background-color: #e4eef8; 
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            transition: transform 0.4s ease;
+            z-index: 0;
+        }
+        .work-study-card:hover .card-bg {
+            transform: scale(1.1);
+        }
+        .work-study-card .card-content {
+            position: relative; /* Sits on top of the background */
+            z-index: 1;
+        }
+
         /* Fixed Sidebar Navigation */
         .fixed-sidebar {
             position: fixed;
@@ -58,9 +104,8 @@
             background: #DB7A4D; color: #fff;
         }
         
-        /* UPDATED: Sidebar copyright and signature styles */
         .sidebar-footer {
-            margin-top: auto; /* Pushes this element to the bottom */
+            margin-top: auto;
             width: 100%;
             text-align: center;
             padding-top: 1.5rem;
@@ -79,49 +124,17 @@
             opacity: 1;
         }
 
-        /* Adjust main content to not overlap sidebar */
-        .main-content {
-            margin-right: 280px;
-        }
+        /* Other styles */
+        .main-content { margin-right: 280px; }
         @media (max-width: 1024px) {
             .fixed-sidebar { display: none; }
             .main-content { margin-right: 0; }
         }
-
-        /* Dynamic Text Styles */
-        .typing-container::after {
-            content: '|';
-            display: inline-block;
-            animation: blink 0.7s infinite;
-            color: #FFD9CC;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        .competency-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 2rem;
-            position: relative;
-            min-height: 40px;
-        }
-        .competency-list span {
-            background-color: #e4eef8;
-            color: #245365;
-            padding: 0.5rem 1rem;
-            border-radius: 1.5rem;
-            font-weight: 600;
-            border: 1px solid #245365;
-            position: absolute;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .competency-list span.is-visible {
-            opacity: 1;
-        }
-
-        /* Other styles */
+        .typing-container::after { content: '|'; display: inline-block; animation: blink 0.7s infinite; color: #FFD9CC; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .competency-list { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; position: relative; min-height: 40px; }
+        .competency-list span { background-color: #e4eef8; color: #245365; padding: 0.5rem 1rem; border-radius: 1.5rem; font-weight: 600; border: 1px solid #245365; position: absolute; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .competency-list span.is-visible { opacity: 1; }
         .hero-overlay { background: rgba(36,83,101,0.40); position: absolute; inset: 0; z-index: 0; pointer-events: none; }
         .hero-fade-bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, rgba(36,83,101,0.0) 0%, #FFF4EF 100%); pointer-events: none; z-index: 1; }
         .experience-card-rotator { position: relative; min-height: 450px; }
@@ -132,14 +145,8 @@
         .experience-card-title { color: #245365; }
         .experience-card-dates { color: #DB7A4D; }
         .experience-bullet-icon { color: #DB7A4D; }
-        .contact-icon-link {
-            color: #cbd5e1; /* slate-300 */
-            transition: color 0.2s, transform 0.2s;
-        }
-        .contact-icon-link:hover {
-            color: #DB7A4D;
-            transform: scale(1.1);
-        }
+        .contact-icon-link { color: #cbd5e1; transition: color 0.2s, transform 0.2s; }
+        .contact-icon-link:hover { color: #DB7A4D; transform: scale(1.1); }
         .skill-chip { display: inline-block; margin: .25rem; padding: 0.6rem 1.25rem; font-size: 1rem; font-weight: 500; border-radius: 1.5rem; background: #fff; color: #245365; border: 1.5px solid #DB7A4D; box-shadow: 0 1px 4px rgba(36,83,101,0.08); cursor: default; }
         .skill-chip.cat-technical { background: #245365; color: #fff; border-color: #245365; }
         .skill-chip.cat-professional { background: #e4eef8; color: #245365; border-color: #245365;}
@@ -193,7 +200,7 @@
 
         <section id="about" class="py-20 bg-white">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">About Me</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">About Me</h2>
                 <p class="text-lg text-gray-700 leading-relaxed">With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.</p>
                 <div class="competency-list" id="competency-rotator">
                     <span>Process Optimization</span>
@@ -208,7 +215,7 @@
 
         <section id="experience" class="py-20 bg-[#F9FAFB]">
             <div class="max-w-4xl mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-8 text-center">Experience</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] text-center section-header">Experience</h2>
                 <div class="experience-card-rotator">
                     <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li></ul></div>
                     <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li></ul></div>
@@ -223,19 +230,19 @@
 
         <section id="projects" class="py-20 bg-white">
             <div class="max-w-6xl mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Work Studies</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Work Studies</h2>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div>
+                    <div class="content-card work-study-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
+                    <div class="content-card work-study-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="content-card work-study-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="content-card work-study-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
                 </div>
             </div>
         </section>
 
         <section id="skills" class="py-20 bg-[#F9FAFB]">
             <div class="max-w-5xl mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-6">Skills</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Skills</h2>
                 <div class="flex flex-wrap justify-center mb-7 gap-2">
                     <button class="skill-filter-btn active" data-filter="all" type="button">All</button>
                     <button class="skill-filter-btn" data-filter="technical" type="button">Technical</button>
@@ -252,7 +259,7 @@
             <div class="max-w-6xl mx-auto px-6 py-16">
                 <div class="md:flex md:justify-between md:items-center text-center md:text-left">
                     <div>
-                        <h2 class="text-3xl font-extrabold text-white mb-2">Contact Me</h2>
+                        <h2 class="text-3xl font-extrabold text-white mb-2 section-header">Contact Me</h2>
                         <p class="mb-6 md:mb-0">Let’s connect and create something impactful.</p>
                     </div>
                     <div class="flex flex-col items-center md:items-end">
@@ -345,7 +352,25 @@
             }
         }
 
-        // --- ACTIVE NAV LINK ON SCROLL ---
+        // --- UPDATED JAVASCRIPT FOR ANIMATIONS ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-header').forEach(header => {
+            observer.observe(header);
+        });
+
         const sections = document.querySelectorAll('.main-content section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
         
