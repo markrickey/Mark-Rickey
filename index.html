@@ -19,25 +19,42 @@
             overflow-x: hidden;
         }
 
-        #hero, #about, #experience, #projects, #skills {
+        /* --- NEW: Compact Card Styles for Sections --- */
+        .content-section {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
             position: relative;
         }
+        .content-card-wrapper {
+            max-width: 900px; /* Controls the width of the content */
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        .bg-gray-card {
+            background: rgba(249, 250, 251, 0.9); /* #F9FAFB */
+        }
 
-        /* Subtle Motion & Parallax Styles */
+        /* Parent sections need a position context for the animated shapes */
+        #hero, #about, #experience, #projects, #skills, #contact {
+            position: relative;
+        }
+        
+        /* Other styles... */
         .animated-bg-shapes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
         .shape { position: absolute; border-radius: 50%; background: rgba(219, 122, 77, 0.1); will-change: transform; }
         .shape.shape-1 { top: 10%; left: 5%; width: 150px; height: 150px; animation: subtle-drift 25s linear infinite alternate; }
         .shape.shape-2 { bottom: 15%; right: 10%; width: 250px; height: 250px; animation: subtle-drift 35s linear infinite alternate-reverse; }
         .shape.shape-3 { top: 20%; right: 20%; width: 50px; height: 50px; background: rgba(255, 217, 204, 0.15); animation: subtle-drift 20s linear infinite; }
-        
-        @keyframes subtle-drift {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            50% { transform: translate(40px, -60px) rotate(90deg) scale(1.1); }
-            100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-        }
-        
+        @keyframes subtle-drift { 0% { transform: translate(0, 0) rotate(0deg) scale(1); } 50% { transform: translate(40px, -60px) rotate(90deg) scale(1.1); } 100% { transform: translate(0, 0) rotate(0deg) scale(1); } }
         .insight-rotator { margin-top: 2.5rem; position: relative; min-height: 110px; }
-        .insight-rotator .insight-card { background-color: #f9fafb; border-left: 4px solid #DB7A4D; padding: 1.5rem; border-radius: 0.5rem; position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; pointer-events: none; }
+        .insight-rotator .insight-card { background-color: #f0f3f8; border-left: 4px solid #DB7A4D; padding: 1.5rem; border-radius: 0.5rem; position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; pointer-events: none; }
         .insight-rotator .insight-card.is-active { opacity: 1; pointer-events: auto; }
         .insight-heading { font-weight: 600; color: #245365; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
         .insight-content { font-style: italic; color: #4a5568; }
@@ -46,20 +63,17 @@
         .section-header { position: relative; display: inline-block; margin-bottom: 1.5rem; }
         .section-header::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 4px; background-color: #DB7A4D; transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
         .section-header.in-view::after { width: 70%; }
-        .work-study-card { position: relative; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .work-study-card { position: relative; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: #fff; border-radius: 0.5rem; padding: 1.5rem; }
         .work-study-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(36, 83, 101, 0.2); }
         .work-study-card .card-bg { background-color: #e4eef8; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: transform 0.4s ease; z-index: 0; }
         .work-study-card:hover .card-bg { transform: scale(1.1); }
         .work-study-card .card-content { position: relative; z-index: 1; }
         .fixed-sidebar { position: fixed; top: 0; right: 0; height: 100vh; width: 280px; background: rgba(36, 83, 101, 0.9); backdrop-filter: blur(10px); border-left: 1px solid rgba(255, 255, 255, 0.1); z-index: 100; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem; box-shadow: -10px 0 30px rgba(0,0,0,0.2); }
         .fixed-sidebar .profile-img { width: 100px; height: 100px; border: 3px solid #fff; margin-bottom: 2rem; flex-shrink: 0; }
-        .sidebar-nav { width: 100%; }
+        .sidebar-nav { width: 100%; margin: auto 0; }
         .sidebar-nav ul { list-style: none; padding: 0; margin: 0; text-align: center; }
         .sidebar-nav li a { display: block; color: #fff; font-size: 1.1rem; font-weight: 600; padding: 0.75rem 1rem; border-radius: 0.5rem; transition: background 0.2s, color 0.2s; }
         .sidebar-nav li a:hover, .sidebar-nav li a.active { background: #DB7A4D; color: #fff; }
-        .sidebar-contact-icons { display: flex; justify-content: center; gap: 1.5rem; padding: 1.5rem 0; }
-        .contact-icon-link { color: rgba(255, 255, 255, 0.6); transition: color 0.2s, transform 0.2s; }
-        .contact-icon-link:hover { color: #DB7A4D; transform: scale(1.1); }
         .sidebar-footer { margin-top: auto; width: 100%; text-align: center; padding-top: 1.5rem; }
         .sidebar-copyright { color: rgba(255, 255, 255, 0.4); font-size: 0.75rem; margin-bottom: 1rem; }
         .sidebar-signature { width: 150px; opacity: 0.7; transition: opacity 0.2s; }
@@ -68,19 +82,20 @@
         @media (max-width: 1024px) {
             .fixed-sidebar { display: none; }
             .main-content { margin-right: 0; }
+            .content-card-wrapper { padding: 1.5rem; }
         }
         .typing-container::after { content: '|'; display: inline-block; animation: blink 0.7s infinite; color: #FFD9CC; }
         @keyframes blink { 50% { opacity: 0; } }
         .hero-overlay { background: rgba(36,83,101,0.40); position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-        .hero-fade-bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FFF 100%); z-index: 1; pointer-events: none; }
+        .hero-fade-bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 100%); z-index: 1; pointer-events: none; }
         .experience-card-rotator { position: relative; min-height: 450px; }
-        .experience-card-rotator .content-card { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; cursor: default; }
+        .experience-card-rotator .content-card { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; cursor: default; background-color: #fff; border-radius: 0.5rem; padding: 2rem; box-shadow: 0 4px 15px rgba(36,83,101,0.09); }
         .experience-card-rotator .content-card.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        .experience-card-rotator .content-card:hover { transform: none; box-shadow: 0 4px 15px rgba(36,83,101,0.09); background: rgba(255,255,255,0.97); }
-        .content-card { background-color: rgba(255,255,255,0.97); border-radius: 1rem; box-shadow: 0 4px 15px rgba(36,83,101,0.09); padding: 2.5rem; border: 1px solid #EFEFEF; }
         .experience-card-title { color: #245365; }
         .experience-card-dates { color: #DB7A4D; }
         .experience-bullet-icon { color: #DB7A4D; }
+        .contact-icon-link { color: #cbd5e1; transition: color 0.2s, transform 0.2s; }
+        .contact-icon-link:hover { color: #DB7A4D; transform: scale(1.1); }
         .skill-chip { display: inline-block; margin: .25rem; padding: 0.6rem 1.25rem; font-size: 1rem; font-weight: 500; border-radius: 1.5rem; background: #fff; color: #245365; border: 1.5px solid #DB7A4D; box-shadow: 0 1px 4px rgba(36,83,101,0.08); cursor: default; }
         .skill-chip.cat-technical { background: #245365; color: #fff; border-color: #245365; }
         .skill-chip.cat-professional { background: #e4eef8; color: #245365; border-color: #245365;}
@@ -89,7 +104,7 @@
         .skill-filter-btn.active, .skill-filter-btn:focus { background: #DB7A4D; color: #fff; border-color: #245365; transform: scale(1.05); }
     </style>
 </head>
-<body>
+<body class="relative">
 
     <aside class="fixed-sidebar">
         <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img rounded-full object-cover">
@@ -100,13 +115,9 @@
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Work Studies</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
-
-        <div class="sidebar-contact-icons">
-            <a href="mailto:markrickey01@gmail.com" class="contact-icon-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-            <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="contact-icon-link" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-        </div>
 
         <div class="sidebar-footer">
             <p class="sidebar-copyright">&copy; 2025 Mark R. All rights reserved.</p>
@@ -116,7 +127,7 @@
         </div>
     </aside>
 
-    <main class="main-content">
+    <div class="main-content">
         <section id="hero">
             <div class="absolute inset-0 z-0">
                 <video autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -132,37 +143,28 @@
                     <span id="typing-effect"></span>
                 </h2>
                 <p class="text-lg text-white max-w-2xl mx-auto mb-8">A seasoned leader leveraging data-driven solutions to enhance operational excellence and drive impactful results in public service.</p>
-                <a href="mailto:markrickey01@gmail.com" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
+                <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
             </div>
         </section>
 
-        <section id="about" class="py-20 bg-white">
+        <section id="about" class="content-section">
             <div class="animated-bg-shapes parallax-bg">
                 <div class="shape shape-1"></div>
             </div>
-            <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="content-card-wrapper">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">About Me</h2>
                 <p class="text-lg text-gray-700 leading-relaxed">With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.</p>
                 
                 <div class="insight-rotator" id="insight-rotator">
-                    <div class="insight-card">
-                        <p class="insight-heading">Current Focus</p>
-                        <p class="insight-content">"Exploring the integration of predictive AI to forecast and mitigate operational bottlenecks in public sector logistics. The potential for efficiency gains is immense."</p>
-                    </div>
-                    <div class="insight-card">
-                        <p class="insight-heading">New Research</p>
-                        <p class="insight-content">"Analyzing the latest trends in data visualization for stakeholder briefings. Effective communication is not just about the data, but how you tell its story."</p>
-                    </div>
-                    <div class="insight-card">
-                        <p class="insight-heading">Opinion</p>
-                        <p class="insight-content">"The most underutilized asset in any organization isn't its technology, but its institutional knowledge. The next frontier is leveraging AI to effectively capture and deploy that wisdom."</p>
-                    </div>
+                    <div class="insight-card"><p class="insight-heading">Current Focus</p><p class="insight-content">"Exploring the integration of predictive AI to forecast and mitigate operational bottlenecks in public sector logistics. The potential for efficiency gains is immense."</p></div>
+                    <div class="insight-card"><p class="insight-heading">New Research</p><p class="insight-content">"Analyzing the latest trends in data visualization for stakeholder briefings. Effective communication is not just about the data, but how you tell its story."</p></div>
+                    <div class="insight-card"><p class="insight-heading">Opinion</p><p class="insight-content">"The most underutilized asset in any organization isn't its technology, but its institutional knowledge. The next frontier is leveraging AI to effectively capture and deploy that wisdom."</p></div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="py-20 bg-[#F9FAFB]">
-             <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <section id="experience" class="content-section">
+             <div class="content-card-wrapper bg-gray-card">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] text-center section-header">Experience</h2>
                 <div class="experience-card-rotator">
                     <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li></ul></div>
@@ -176,26 +178,26 @@
             </div>
         </section>
 
-        <section id="projects" class="py-20 bg-white">
+        <section id="projects" class="content-section">
              <div class="animated-bg-shapes parallax-bg">
                 <div class="shape shape-2"></div>
             </div>
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="content-card-wrapper">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Work Studies</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
+                    <div class="work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management</h3><p class="text-gray-700 text-sm mb-4">Architected a Google Forms/Sheets system to streamline data capture for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication</h3><p class="text-gray-700 text-sm mb-4">Drafted precise and strategically tailored official communications for high-stakes events.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data to improve constituent engagement.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-20 bg-[#F9FAFB]">
+        <section id="skills" class="content-section">
             <div class="animated-bg-shapes parallax-bg">
                 <div class="shape shape-3"></div>
             </div>
-            <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="content-card-wrapper bg-gray-card">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Skills</h2>
                 <div class="flex flex-wrap justify-center mb-7 gap-2">
                     <button class="skill-filter-btn active" data-filter="all" type="button">All</button>
@@ -204,120 +206,51 @@
                     <button class="skill-filter-btn" data-filter="leadership" type="button">Leadership</button>
                 </div>
                 <div id="skills-chips-container" class="relative">
-                    <div class="flex flex-wrap justify-center max-w-3xl mx-auto" id="skills-chips">
-                        <span class="skill-chip cat-technical" data-cat="technical">HTML/CSS</span> <span class="skill-chip cat-technical" data-cat="technical">JavaScript</span> <span class="skill-chip cat-technical" data-cat="technical">Tailwind CSS</span> <span class="skill-chip cat-technical" data-cat="technical">Python</span> <span class="skill-chip cat-technical" data-cat="technical">SQL</span> <span class="skill-chip cat-technical" data-cat="technical">Google Sheets</span> <span class="skill-chip cat-technical" data-cat="technical">Google Forms</span> <span class="skill-chip cat-technical" data-cat="technical">Data Analysis</span> <span class="skill-chip cat-technical" data-cat="technical">Data Visualization</span> <span class="skill-chip cat-technical" data-cat="technical">UI/UX Design</span> <span class="skill-chip cat-technical" data-cat="technical">Canva</span> <span class="skill-chip cat-technical" data-cat="technical">AI/ML Concepts</span> <span class="skill-chip cat-technical" data-cat="technical">Cybersecurity Concepts</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span> <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span> <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span> <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span> <span class="skill-chip cat-professional" data-cat="professional">Project Management</span> <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span> <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span> <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span> <span class="skill-chip cat-leadership" data-cat="leadership">Leadership</span> <span class="skill-chip cat-leadership" data-cat="leadership">Adaptability</span> <span class="skill-chip cat-leadership" data-cat="leadership">Resilience</span> <span class="skill-chip cat-leadership" data-cat="leadership">Mentorship</span> <span class="skill-chip cat-leadership" data-cat="leadership">Problem-Solving</span> <span class="skill-chip cat-leadership" data-cat="leadership">Innovation</span>
+                    <div class="flex flex-wrap justify-center" id="skills-chips">
+                         <span class="skill-chip cat-technical" data-cat="technical">HTML/CSS</span> <span class="skill-chip cat-technical" data-cat="technical">JavaScript</span> <span class="skill-chip cat-technical" data-cat="technical">Tailwind CSS</span> <span class="skill-chip cat-technical" data-cat="technical">Python</span> <span class="skill-chip cat-technical" data-cat="technical">SQL</span> <span class="skill-chip cat-technical" data-cat="technical">Google Sheets</span> <span class="skill-chip cat-technical" data-cat="technical">Google Forms</span> <span class="skill-chip cat-technical" data-cat="technical">Data Analysis</span> <span class="skill-chip cat-technical" data-cat="technical">Data Visualization</span> <span class="skill-chip cat-technical" data-cat="technical">UI/UX Design</span> <span class="skill-chip cat-technical" data-cat="technical">Canva</span> <span class="skill-chip cat-technical" data-cat="technical">AI/ML Concepts</span> <span class="skill-chip cat-technical" data-cat="technical">Cybersecurity Concepts</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span> <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span> <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span> <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span> <span class="skill-chip cat-professional" data-cat="professional">Project Management</span> <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span> <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span> <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span> <span class="skill-chip cat-leadership" data-cat="leadership">Leadership</span> <span class="skill-chip cat-leadership" data-cat="leadership">Adaptability</span> <span class="skill-chip cat-leadership" data-cat="leadership">Resilience</span> <span class="skill-chip cat-leadership" data-cat="leadership">Mentorship</span> <span class="skill-chip cat-leadership" data-cat="leadership">Problem-Solving</span> <span class="skill-chip cat-leadership" data-cat="leadership">Innovation</span>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
-    
+        
+        <footer id="contact" class="bg-[#245365] text-gray-200">
+            <div class="max-w-6xl mx-auto px-6 py-16 relative z-10">
+                <div class="md:flex md:justify-between md:items-center text-center md:text-left">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-white mb-2">Contact Me</h2>
+                        <p class="mb-6 md:mb-0">Let’s connect and create something impactful.</p>
+                    </div>
+                    <div class="flex flex-col items-center md:items-end mt-6 md:mt-0">
+                        <div class="flex justify-center gap-8 mb-4">
+                            <a href="mailto:markrickey01@gmail.com" class="contact-icon-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+                            <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="contact-icon-link" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        
         // --- ALL DYNAMIC SCRIPTS ---
-
         const typingElement = document.getElementById('typing-effect');
-        if (typingElement) {
-            const roles = ["Data-Driven Leader", "Strategic Planner", "Process Optimizer", "Global Operations Manager", "AI & Tech Proficient"];
-            let roleIndex = 0, charIndex = 0, isDeleting = false;
-            function type() {
-                const currentRole = roles[roleIndex];
-                let typeSpeed = 120;
-                if (isDeleting) { typeSpeed = 50; typingElement.textContent = currentRole.substring(0, charIndex - 1); charIndex--; } 
-                else { typingElement.textContent = currentRole.substring(0, charIndex + 1); charIndex++; }
-                if (!isDeleting && charIndex === currentRole.length) { isDeleting = true; typeSpeed = 2000; } 
-                else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
-                setTimeout(type, typeSpeed);
-            }
-            type();
-        }
-
+        if (typingElement) { const roles = ["Data-Driven Leader", "Strategic Planner", "Process Optimizer", "Global Operations Manager", "AI & Tech Proficient"]; let roleIndex = 0, charIndex = 0, isDeleting = false; function type() { const currentRole = roles[roleIndex]; let typeSpeed = 120; if (isDeleting) { typeSpeed = 50; typingElement.textContent = currentRole.substring(0, charIndex - 1); charIndex--; } else { typingElement.textContent = currentRole.substring(0, charIndex + 1); charIndex++; } if (!isDeleting && charIndex === currentRole.length) { isDeleting = true; typeSpeed = 2000; } else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; } setTimeout(type, typeSpeed); } type(); }
         const insightContainer = document.getElementById('insight-rotator');
-        if(insightContainer) {
-            const insights = insightContainer.querySelectorAll('.insight-card');
-            let insightIndex = 0;
-            function showNextInsight() {
-                if(insights.length === 0) return;
-                insights.forEach(c => c.classList.remove('is-active'));
-                insights[insightIndex].classList.add('is-active');
-                insightIndex = (insightIndex + 1) % insights.length;
-            }
-            if (insights.length > 0) { showNextInsight(); setInterval(showNextInsight, 8000); }
-        }
-
+        if(insightContainer) { const insights = insightContainer.querySelectorAll('.insight-card'); let insightIndex = 0; function showNextInsight() { if(insights.length === 0) return; insights.forEach(c => c.classList.remove('is-active')); insights[insightIndex].classList.add('is-active'); insightIndex = (insightIndex + 1) % insights.length; } if (insights.length > 0) { showNextInsight(); setInterval(showNextInsight, 8000); } }
         const skillsContainer = document.getElementById('skills-chips-container');
-        if (skillsContainer) {
-            // Set a fixed min-height for the container to prevent layout jump on filter
-            const initialHeight = skillsContainer.offsetHeight;
-            skillsContainer.style.minHeight = `${initialHeight}px`;
-        }
+        if (skillsContainer) { const initialHeight = skillsContainer.offsetHeight; skillsContainer.style.minHeight = `${initialHeight}px`; }
         const filterBtns = document.querySelectorAll('.skill-filter-btn');
         const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
-        if (filterBtns.length > 0) {
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    const filter = this.getAttribute('data-filter');
-                    skillChips.forEach(chip => {
-                        chip.style.display = (filter === 'all' || chip.getAttribute('data-cat') === filter) ? 'inline-block' : 'none';
-                    });
-                });
-            });
-            document.querySelector('.skill-filter-btn[data-filter="all"]').click();
-        }
-
+        if (filterBtns.length > 0) { filterBtns.forEach(btn => { btn.addEventListener('click', function () { filterBtns.forEach(b => b.classList.remove('active')); this.classList.add('active'); const filter = this.getAttribute('data-filter'); skillChips.forEach(chip => { chip.style.display = (filter === 'all' || chip.getAttribute('data-cat') === filter) ? 'inline-block' : 'none'; }); }); }); document.querySelector('.skill-filter-btn[data-filter="all"]').click(); }
         const rotatorContainer = document.querySelector('.experience-card-rotator');
-        if (rotatorContainer) {
-            const cards = rotatorContainer.querySelectorAll('.content-card');
-            let cardIndex = 0;
-            function showNextCard() {
-                if (cards.length === 0) return;
-                cards[cardIndex].classList.remove('is-active');
-                cardIndex = (cardIndex + 1) % cards.length;
-                cards[cardIndex].classList.add('is-active');
-            }
-            if (cards.length > 0) { cards[0].classList.add('is-active'); setInterval(showNextCard, 7000); }
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                }
-            });
-        }, { threshold: 0.2 });
+        if (rotatorContainer) { const cards = rotatorContainer.querySelectorAll('.content-card'); let cardIndex = 0; function showNextCard() { if (cards.length === 0) return; cards[cardIndex].classList.remove('is-active'); cardIndex = (cardIndex + 1) % cards.length; cards[cardIndex].classList.add('is-active'); } if (cards.length > 0) { cards[0].classList.add('is-active'); setInterval(showNextCard, 7000); } }
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); } }); }, { threshold: 0.2 });
         document.querySelectorAll('.section-header, .fade-in-on-scroll').forEach(el => observer.observe(el));
-        
-        const sections = document.querySelectorAll('main > section'); // Select direct children sections of main
+        const sections = document.querySelectorAll('.page-wrapper > main > section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
         const parallaxElements = document.querySelectorAll('.parallax-bg');
-
-        window.addEventListener('scroll', () => {
-            const scrollY = window.pageYOffset;
-            
-            parallaxElements.forEach(el => {
-                el.style.transform = `translateY(${scrollY * 0.2}px)`;
-            });
-
-            let currentId = '';
-            sections.forEach(section => {
-                if (scrollY >= section.offsetTop - 300) {
-                    currentId = section.getAttribute('id');
-                }
-            });
-            const isAtBottom = (window.innerHeight + scrollY) >= document.body.offsetHeight - 5;
-            if (isAtBottom) {
-                currentId = 'contact';
-            }
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (currentId && link.getAttribute('href').includes(currentId)) {
-                    link.classList.add('active');
-                }
-            });
-        });
+        window.addEventListener('scroll', () => { const scrollY = window.pageYOffset; parallaxElements.forEach(el => { el.style.transform = `translateY(${scrollY * 0.2}px)`; }); let currentId = ''; sections.forEach(section => { if (scrollY >= section.offsetTop - 300) { currentId = section.getAttribute('id'); } }); const isAtBottom = (window.innerHeight + scrollY) >= document.body.offsetHeight - 5; if (isAtBottom) { currentId = 'contact'; } navLinks.forEach(link => { link.classList.remove('active'); if (currentId && link.getAttribute('href').includes(currentId)) { link.classList.add('active'); } }); });
     });
     </script>
 </body>
