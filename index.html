@@ -7,59 +7,40 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        html, body {
+        html {
             height: 100%;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
         }
         body {
+            min-height: 100%;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
             background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
             background-attachment: fixed;
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* Page Structure for Sticky Footer */
+        /* --- NEW: Definitive Sticky Footer & Page Structure --- */
         .page-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin-right: 280px;
+            margin-right: 280px; /* Make space for the fixed sidebar */
         }
         main.main-content {
-            flex-grow: 1;
+            flex-grow: 1; /* Key property: makes the main content expand to fill all available space */
         }
         @media (max-width: 1024px) {
-            .page-wrapper { margin-right: 0; }
+            .page-wrapper {
+                margin-right: 0;
+            }
         }
+        /* --- End New Structure --- */
 
-        /* --- NEW: Contact Banner Fade Effect --- */
-        footer#contact {
-            padding-top: 6rem; /* Increased top padding */
-            padding-bottom: 120px; /* Make space for the fade */
-            position: relative;
-            z-index: 1;
-        }
-        .contact-fade-bottom {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(to bottom, rgba(36, 83, 101, 0) 0%, rgba(36, 83, 101, 1) 100%);
-            z-index: 10;
-            pointer-events: none;
-        }
-        
-        /* General Sections */
-        #hero, #about, #experience, #projects, #skills {
+        #hero, #about, #experience, #projects, #skills, #contact {
             position: relative;
         }
-
-        /* Subtle Motion & Parallax Styles */
         .animated-bg-shapes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
         .shape { position: absolute; border-radius: 50%; background: rgba(219, 122, 77, 0.1); will-change: transform; }
         .shape.shape-1 { top: 10%; left: 5%; width: 150px; height: 150px; animation: subtle-drift 25s linear infinite alternate; }
@@ -72,14 +53,11 @@
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
         
-        /* Insight Rotator in "About Me" */
         .insight-rotator { margin-top: 2.5rem; position: relative; min-height: 110px; }
         .insight-rotator .insight-card { background-color: #f9fafb; border-left: 4px solid #DB7A4D; padding: 1.5rem; border-radius: 0.5rem; position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; pointer-events: none; }
         .insight-rotator .insight-card.is-active { opacity: 1; pointer-events: auto; }
         .insight-heading { font-weight: 600; color: #245365; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
         .insight-content { font-style: italic; color: #4a5568; }
-        
-        /* Other styles... */
         .fade-in-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in-on-scroll.in-view { opacity: 1; transform: translateY(0); }
         .section-header { position: relative; display: inline-block; margin-bottom: 1.5rem; }
@@ -138,7 +116,7 @@
         </nav>
 
         <div class="sidebar-footer">
-            <p class="sidebar-copyright">&copy; 2025 Mark All rights reserved.</p>
+            <p class="sidebar-copyright">&copy; 2025 Mark R. All rights reserved.</p>
             <a href="#hero">
                 <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="sidebar-signature mx-auto">
             </a>
@@ -157,7 +135,7 @@
                     <div class="hero-fade-bottom"></div>
                 </div>
                 <div class="relative min-h-screen flex flex-col items-center justify-center text-center pt-20 pb-20 w-full px-4 z-10">
-                    <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark</h1>
+                    <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
                     <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold typing-container">
                         <span id="typing-effect"></span>
                     </h2>
@@ -247,9 +225,8 @@
                 <div class="md:flex md:justify-between md:items-center text-center md:text-left">
                     <div>
                         <h2 class="text-3xl font-extrabold text-white mb-2 section-header">Contact Me</h2>
-                        <p class="mb-6 md:mb-0">Let’s connect</p>
+                        <p class="mb-6 md:mb-0">Let’s connect and create something impactful.</p>
                     </div>
-                    <div class="contact-fade-bottom"></div>
                     <div class="flex flex-col items-center md:items-end">
                         <div class="flex justify-center gap-8 mb-4">
                             <a href="mailto:markrickey01@gmail.com" class="contact-icon-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
