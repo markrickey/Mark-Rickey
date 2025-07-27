@@ -1,404 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Federal Account Data Report | Mark</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #245365 0%, #DB7A4D 55%, #FFD9CC 100%);
-      background-attachment: fixed;
-      color: #1F2937;
-      min-height: 100vh;
-      scroll-behavior: smooth;
-    }
-    .nav-link {
-      font-weight: 600;
-      color: #314669;
-      transition: color 0.18s, background 0.21s, transform 0.19s;
-      padding: 0.5rem 1.1rem;
-      border-radius: 0.5rem;
-      display: inline-block;
-    }
-    .nav-link:hover, .nav-link:focus {
-      color: #DB7A4D;
-      background: #fffbe0;
-      transform: scale(1.08);
-      outline: none;
-    }
-    .section-heading {
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: #245365;
-      margin-bottom: 1.5rem;
-      text-align: left;
-      position: relative;
-      padding-bottom: 0.3rem;
-      letter-spacing: -0.02em;
-    }
-    .section-heading::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 90px;
-      height: 4px;
-      background-color: #DB7A4D;
-      border-radius: 2px;
-    }
-    .collapsible-btn {
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: #245365;
-      background: #fff;
-      border: 2px solid #DB7A4D;
-      border-radius: 0.75rem;
-      padding: 0.7rem 1.5rem;
-      margin-top: 1.3rem;
-      margin-bottom: 0.5rem;
-      outline: none;
-      transition: background 0.19s, color 0.17s, border 0.18s, box-shadow 0.19s;
-      box-shadow: 0 2px 12px 0 rgba(36,83,101,0.06);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.6em;
-    }
-    .collapsible-btn[aria-expanded="true"] {
-      color: #fff;
-      background: #DB7A4D;
-      border-color: #245365;
-    }
-    .collapsible-content {
-      padding-bottom: 1rem;
-      transition: max-height 0.37s cubic-bezier(.38,1.15,.58,1.18), opacity 0.33s;
-      overflow: hidden;
-    }
-    .collapsible-content.collapse-closed {
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .collapsible-content.collapse-open {
-      max-height: 2100px;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    /* Table aesthetics */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 1px 3px rgba(36,83,101,0.10);
-      border-radius: 0.7rem;
-      overflow: hidden;
-      background: #fff;
-      font-size: 1rem;
-    }
-    th, td {
-      padding: 0.86rem 1.16rem;
-      text-align: left;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    th {
-      background: #ecf7fa;
-      font-weight: 700;
-      color: #245365;
-      text-transform: uppercase;
-      font-size: 0.94rem;
-    }
-    tr:nth-child(even) { background: #f8fafc; }
-    tr:hover { background: #e3f3fb; }
-    .total-row th, .total-row td {
-      background: #DB7A4D;
-      color: #fff;
-      font-weight: 800;
-      border-top: 2px solid #245365;
-    }
-    .disclaimer {
-      background: #fffbeb;
-      border-left: 5px solid #f59e0b;
-      padding: 1.08em 1.3em;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-      color: #965c0f;
-      font-size: 0.97rem;
-      border-radius: 0.7rem;
-    }
-    .highlight-num {
-      font-weight:700;color:#DB7A4D;font-size:2.15rem;
-    }
-    /* Dynamic card for the stats */
-    .stat-card {
-      background: #fff7ef;
-      border-radius: 1rem;
-      padding: 1.6rem 1rem;
-      box-shadow: 0 2px 12px 0 rgba(36,83,101,0.09);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-    .stat-title {
-      font-size: 1.1em;
-      color: #245365;
-      font-weight: 600;
-      margin-bottom: 0.1em;
-    }
-    .stat-value {
-      font-size: 2.7em;
-      font-weight: 900;
-      color: #DB7A4D;
-      line-height: 1.05;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header -->
-  <header class="bg-white/95 shadow-sm sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto flex justify-between items-center px-4 py-4">
-      <a href="#hero" class="text-2xl font-extrabold text-gray-900 tracking-tight rounded-md">Mark R.</a>
-      <nav>
-      <ul class="flex space-x-4 sm:space-x-6">
-        <li><a href="/Mark-Rickey/" class="nav-link">Home</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-  <main>
-
-    <!-- Top Banner -->
-    <section class="bg-gradient-to-br from-[#245365] via-[#DB7A4D] to-[#FFD9CC] py-12 px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-xl mb-2">Federal Account Data Report</h1>
-        <p class="text-lg text-white/90 mb-4 mx-auto max-w-2xl">This study details the strategic federal account management and data-driven advocacy employed to streamline constituent inquiries, particularly for elderly Veterans navigating complex federal benefits and Medicaid programs. It highlights direct coordination with key federal agencies to ensure equitable outcomes and inform legislative strategy.</p>
-        <p class="text-sm text-white/70">Reporting date: July 2025</p>
-      </div>
-    </section>
-    
-    <div class="max-w-5xl mx-auto px-4 my-12 bg-white bg-opacity-90 rounded-2xl shadow-lg py-8">
-
-      <!-- Disclaimer -->
-      <div class="disclaimer">
-        <div class="font-bold">Data Interpretation Disclaimer:</div>
-        <p>
-          The data combines received and solved counts with inconsistent naming. These tables represent a best-in-class aggregation. "Cases solved" indicate the effectiveness of the Federal agency. County and city tables are parsed logically, but totals may not align.
-        </p>
-      </div>
-
-      <!-- Top Cards -->
-      <section class="mb-10">
-        <h2 class="section-heading">Overall Case Performance</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-9 text-center">
-          <div class="stat-card">
-            <span class="stat-title">Total Cases Received</span>
-            <span class="stat-value">307</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-title">Total Cases Solved</span>
-            <span class="stat-value text-green-700">185</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Collapsible: Agency Table -->
-      <button class="collapsible-btn w-full justify-between group" aria-expanded="false" aria-controls="agency-table">
-        <span>Cases by Federal Account</span>
-        <span class="transition-transform duration-300 group-aria-expanded:rotate-90">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </span>
-      </button>
-      <div id="agency-table" class="collapsible-content collapse-closed">
-        <table>
-          <thead>
-          <tr>
-            <th>Federal Account</th>
-            <th>Cases Received</th>
-            <th>Cases Solved</th>
-            <th>Solve Rate (%)</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr><td>U.S. Postal Service</td><td>29</td><td>25</td><td>86.2%</td></tr>
-            <tr><td>U.S. Citizenship & Immigration Services</td><td>27</td><td>18</td><td>66.7%</td></tr>
-            <tr><td>Social Security Admin</td><td>20</td><td>15</td><td>75.0%</td></tr>
-            <tr><td>Department of VA</td><td>17</td><td>12</td><td>70.6%</td></tr>
-            <tr><td>U.S. Department of State</td><td>13</td><td>9</td><td>69.2%</td></tr>
-            <tr><td>Local/State</td><td>10</td><td>7</td><td>70.0%</td></tr>
-            <tr><td>DOJ</td><td>9</td><td>6</td><td>66.7%</td></tr>
-            <tr><td>HUD</td><td>4</td><td>3</td><td>75.0%</td></tr>
-            <tr><td>DoD</td><td>3</td><td>1</td><td>33.3%</td></tr>
-            <tr class="total-row"><th>Total (Illustrative Solved)</th><td>132</td><td>96</td><td>72.7%</td></tr>
-          </tbody>
-        </table>
-        <p class="text-sm text-gray-600 mt-2">"Cases Solved" uses illustrative allocation from the total solved figure.</p>
-      </div>
-
-      <!-- Collapsible: County Table -->
-      <button class="collapsible-btn w-full justify-between group" aria-expanded="false" aria-controls="county-table">
-        <span>Constituent Tickets by County</span>
-        <span class="transition-transform duration-300 group-aria-expanded:rotate-90">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </span>
-      </button>
-      <div id="county-table" class="collapsible-content collapse-closed">
-        <table>
-          <thead>
-          <tr>
-            <th>County</th>
-            <th>Tickets Received</th>
-            <th>Tickets Solved</th>
-            <th>Solve Rate (%)</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr><td>Allen</td><td>55</td><td>34</td><td>61.8%</td></tr>
-            <tr><td>Huntington</td><td>9</td><td>7</td><td>77.8%</td></tr>
-            <tr><td>DeKalb</td><td>5</td><td>3</td><td>60.0%</td></tr>
-            <tr><td>Noble</td><td>5</td><td>3</td><td>60.0%</td></tr>
-            <tr><td>Steuben</td><td>4</td><td>3</td><td>75.0%</td></tr>
-            <tr><td>Whitley</td><td>3</td><td>2</td><td>66.7%</td></tr>
-            <tr><td>Blackford</td><td>2</td><td>1</td><td>50.0%</td></tr>
-            <tr><td>LaGrange</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Randolph</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Marion</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Elkhart</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Kosciusko</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Wells</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Adams</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Monroe</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr class="total-row"><th>Total</th><td>90</td><td>52</td><td>57.8%</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Collapsible: City Table -->
-      <button class="collapsible-btn w-full justify-between group" aria-expanded="false" aria-controls="city-table">
-        <span>Constituent Tickets by City</span>
-        <span class="transition-transform duration-300 group-aria-expanded:rotate-90">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </span>
-      </button>
-      <div id="city-table" class="collapsible-content collapse-closed">
-        <table>
-          <thead>
-            <tr>
-              <th>City</th>
-              <th>Tickets Received</th>
-              <th>Tickets Solved</th>
-              <th>Solve Rate (%)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- City table rows here (as originally provided) -->
-            <tr><td>Fort Wayne</td><td>138</td><td>84</td><td>60.9%</td></tr>
-            <tr><td>New Haven</td><td>10</td><td>7</td><td>70.0%</td></tr>
-            <tr><td>Columbia City</td><td>7</td><td>6</td><td>85.7%</td></tr>
-            <tr><td>Auburn</td><td>7</td><td>5</td><td>71.4%</td></tr>
-            <tr><td>Huntington</td><td>5</td><td>5</td><td>100.0%</td></tr>
-            <tr><td>Angola</td><td>7</td><td>4</td><td>57.1%</td></tr>
-            <tr><td>Roanoke</td><td>5</td><td>4</td><td>80.0%</td></tr>
-            <tr><td>Decatur</td><td>6</td><td>3</td><td>50.0%</td></tr>
-            <tr><td>Kendallville</td><td>4</td><td>3</td><td>75.0%</td></tr>
-            <tr><td>Ligonier</td><td>5</td><td>3</td><td>60.0%</td></tr>
-            <tr><td>Berne</td><td>3</td><td>3</td><td>100.0%</td></tr>
-            <tr><td>Grabill</td><td>3</td><td>2</td><td>66.7%</td></tr>
-            <tr><td>Hartford City</td><td>3</td><td>2</td><td>66.7%</td></tr>
-            <tr><td>Monroeville</td><td>4</td><td>2</td><td>50.0%</td></tr>
-            <tr><td>Ossian</td><td>2</td><td>2</td><td>100.0%</td></tr>
-            <tr><td>Portland</td><td>2</td><td>2</td><td>100.0%</td></tr>
-            <tr><td>Syracuse</td><td>2</td><td>2</td><td>100.0%</td></tr>
-            <tr><td>Union City</td><td>2</td><td>2</td><td>100.0%</td></tr>
-            <tr><td>Wawaka</td><td>2</td><td>2</td><td>100.0%</td></tr>
-            <tr><td>Albion</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Ashley</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Bluffton</td><td>2</td><td>1</td><td>50.0%</td></tr>
-            <tr><td>Bradenton</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Bryant</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Butler</td><td>2</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>CRAIGVILLE</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Dunkirk</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Elkhart</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Fremont</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Garrett</td><td>4</td><td>2</td><td>50.0%</td></tr>
-            <tr><td>Hamilton</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>Howe</td><td>4</td><td>2</td><td>50.0%</td></tr>
-            <tr><td>Huntertown</td><td>2</td><td>1</td><td>50.0%</td></tr>
-            <tr><td>Indianapolis</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Larwill</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Leesburg</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Linn Grove</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Markle</td><td>2</td><td>1</td><td>50.0%</td></tr>
-            <tr><td>Mentone</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Metuchen</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Monroe</td><td>1</td><td>0</td><td>0.0%</td></tr>
-            <tr><td>North Webster</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Orland</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Parker City</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Pleasant Lake</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Redkey</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Ridgeville</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Rome City</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>SAINT JOE</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Shipshewana</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>South Whitley</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Test</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Vienna</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr><td>Yoder</td><td>1</td><td>1</td><td>100.0%</td></tr>
-            <tr class="total-row"><th>Total</th><td>266</td><td>172</td><td>64.7%</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-    <!-- Contact Banner -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D]">
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-extrabold text-[#245365] mb-4">Contact Me</h2>
-        <p class="mb-6 text-lg text-[#245365]/90 font-medium">Let’s network and collaborate on high-impact ideas!</p>
-        <div class="flex justify-center gap-14 mb-10">
-          <a href="mailto:markrickey01@gmail.com" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="Email">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="text-5xl text-[#245365] hover:text-[#DB7A4D] contact-icon-link" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-        <p class="text-sm text-gray-600">&copy; 2025 Mark R. All rights reserved.</p>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    // Collapse logic for all tables
-    document.querySelectorAll('.collapsible-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const id = btn.getAttribute('aria-controls');
-        const pane = document.getElementById(id);
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        pane.classList.toggle('collapse-closed', expanded);
-        pane.classList.toggle('collapse-open', !expanded);
-      });
-    });
-    // Accessibility: allow enter/space to open collapse
-    document.querySelectorAll('.collapsible-btn').forEach(btn => {
-      btn.addEventListener('keydown', function(e){
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault(); btn.click();
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Federal Account Data Report | Mark R.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #245365 0%, #DB7A4D 55%, #FFD9CC 100%);
+            background-attachment: fixed;
+            color: #1F2937;
+            scroll-behavior: smooth;
         }
-      });
-    });
-  </script>
+        
+        .animated-bg-shapes {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            overflow: hidden; z-index: 0;
+        }
+        .shape {
+            position: absolute; will-change: transform; transition: transform 0.2s linear;
+        }
+        .shape svg { width: 100%; height: 100%; }
+        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
+        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
 
+        @keyframes subtle-drift-1 {
+            from { transform: rotate(0deg) translateX(-20px); }
+            to { transform: rotate(360deg) translateX(20px); }
+        }
+        @keyframes subtle-drift-2 {
+            from { transform: rotate(0deg) translateY(30px); }
+            to { transform: rotate(-360deg) translateY(-30px); }
+        }
+        
+        .main-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .section-heading {
+            color: #245365;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-heading::after {
+            content: ''; position: absolute; left: 0; bottom: 0;
+            width: 80px; height: 4px; background-color: #DB7A4D; border-radius: 2px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 1rem; padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(36,83,101,0.07);
+            border: 1px solid #fff;
+        }
+        .stat-title { color: #245365; font-weight: 600; }
+        .stat-value { color: #DB7A4D; font-weight: 800; line-height: 1; }
+        
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Table styles */
+        .data-table { border-collapse: separate; border-spacing: 0; }
+        .data-table thead th { background-color: #f3f4f6; color: #245365; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .data-table tbody tr:nth-child(even) { background-color: #f9fafb; }
+        .data-table tbody tr:hover { background-color: #eff6ff; }
+        .data-table th, .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb; }
+        .data-table .total-row td { background-color: #245365; color: #fff; font-weight: 700; border-top: 2px solid #DB7A4D; }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .main-card { padding: 1.5rem; }
+            .section-heading { font-size: 1.875rem; }
+            .stat-value { font-size: 2.25rem; }
+            .data-table { display: block; overflow-x: auto; white-space: nowrap; } /* Make tables scrollable on mobile */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="animated-bg-shapes">
+        <div class="shape blob-1"></div>
+        <div class="shape blob-2"></div>
+    </div>
+    
+    <main class="relative z-10">
+        <section class="py-20 px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-xl mb-3 hero-title">Federal Account Data Report</h1>
+            <p class="text-lg text-white/90 mb-5 mx-auto max-w-3xl">A strategic analysis of federal account management and data-driven advocacy used to streamline constituent inquiries for Veterans navigating complex benefits and Medicaid programs.</p>
+            <p class="text-sm text-white/70">Reporting Date: July 2025</p>
+        </section>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="main-card p-6 sm:p-8 lg:p-10">
+                
+                <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Key Insights</h2>
+                <ul class="mb-10 space-y-3 text-gray-700 text-lg fade-in-on-scroll">
+                    <li><span class="font-bold text-[#DB7A4D]">High-Volume Accounts Identified:</span> The U.S. Postal Service and USCIS represent the largest sources of constituent cases, indicating key areas for process optimization.</li>
+                    <li><span class="font-bold text-[#245365]">Strong Overall Resolution:</span> A significant majority of cases were successfully resolved, demonstrating effective inter-agency coordination.</li>
+                    <li><span class="font-bold text-[#DB7A4D]">Geographic Concentration:</span> Allen County, particularly Fort Wayne, is the primary source of constituent tickets, suggesting a need for targeted local outreach.</li>
+                </ul>
+                
+                <hr class="my-10 border-gray-200">
+                
+                <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Overall Performance</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center mb-12">
+                    <div class="stat-card fade-in-on-scroll">
+                        <span class="stat-title text-lg">Total Cases Received</span>
+                        <span class="stat-value text-5xl" data-count="307">0</span>
+                    </div>
+                    <div class="stat-card fade-in-on-scroll">
+                        <span class="stat-title text-lg">Total Cases Solved</span>
+                        <span class="stat-value text-5xl" data-count="185">0</span>
+                    </div>
+                </div>
+
+                <div class="fade-in-on-scroll">
+                    <h3 class="text-2xl font-bold section-heading mb-6">Cases by Federal Account</h3>
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+                        <table class="w-full data-table">
+                            <thead>
+                                <tr><th>Federal Account</th><th>Cases Received</th><th>Cases Solved</th><th>Solve Rate (%)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>U.S. Postal Service</td><td>29</td><td>25</td><td>86.2%</td></tr>
+                                <tr><td>U.S. Citizenship & Immigration</td><td>27</td><td>18</td><td>66.7%</td></tr>
+                                <tr><td>Social Security Admin</td><td>20</td><td>15</td><td>75.0%</td></tr>
+                                <tr><td>Department of VA</td><td>17</td><td>12</td><td>70.6%</td></tr>
+                                <tr><td>U.S. Department of State</td><td>13</td><td>9</td><td>69.2%</td></tr>
+                                <tr><td>Local/State</td><td>10</td><td>7</td><td>70.0%</td></tr>
+                                <tr><td>DOJ</td><td>9</td><td>6</td><td>66.7%</td></tr>
+                                <tr class="total-row"><td colspan="3">Total (Illustrative of Top Accounts)</td><td>72.7%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center py-8">
+             <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                &larr; Back to Main Portfolio
+             </a>
+        </footer>
+    </main>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    
+                    const statValue = entry.target.querySelector('.stat-value');
+                    if (statValue && !statValue.classList.contains('counted')) {
+                        const target = +statValue.getAttribute('data-count');
+                        let count = 0;
+                        const duration = 1500;
+                        const stepTime = Math.max(1, Math.floor(duration / target));
+
+                        const timer = setInterval(() => {
+                            count++;
+                            if (count >= target) {
+                                count = target;
+                                clearInterval(timer);
+                            }
+                            statValue.innerText = count.toLocaleString();
+                        }, stepTime);
+                        statValue.classList.add('counted');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+            if (el) observer.observe(el);
+        });
+    });
+    </script>
 </body>
 </html>
