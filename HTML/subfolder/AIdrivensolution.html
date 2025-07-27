@@ -13,35 +13,56 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* NEW: Matching gradient from your main site */
             background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
             background-attachment: fixed;
         }
         #aiResponse {
             white-space: pre-wrap;
         }
-        /* Custom scrollbar to match the aesthetic */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Animated Background Shapes */
+        .animated-bg-shapes {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            overflow: hidden;
+            z-index: -1;
         }
-        ::-webkit-scrollbar-track {
-            background: #245365;
+        .shape {
+            position: absolute;
+            will-change: transform;
+            transition: transform 0.2s linear;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #DB7A4D;
-            border-radius: 4px;
+        .shape svg {
+            width: 100%;
+            height: 100%;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #c26636;
+        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
+        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
+
+        @keyframes subtle-drift-1 {
+            from { transform: rotate(0deg) translateX(-20px); }
+            to { transform: rotate(360deg) translateX(20px); }
+        }
+        @keyframes subtle-drift-2 {
+            from { transform: rotate(0deg) translateY(30px); }
+            to { transform: rotate(-360deg) translateY(-30px); }
         }
     </style>
     <script>
-        window.STRATagem_AI_ENDPOINT = "https://api.stratagem.ai/diagnose";
+        window.STRATAGEM_AI_ENDPOINT = "https://api.stratagem.ai/diagnose";
     </script>
 </head>
 <body class="text-gray-200 antialiased">
 
-    <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-gray-900/50 backdrop-blur-lg border border-white/10 rounded-2xl shadow-lg">
+    <div class="animated-bg-shapes">
+        <div class="shape blob-1" data-speed="0.3">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
+        </div>
+         <div class="shape blob-2" data-speed="0.2">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-gray-900/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg">
         
         <section class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Stratagem AI</h1>
@@ -51,10 +72,9 @@
         <hr class="my-10 border-white/20">
 
         <section>
-            <h2 class="text-2xl font-semibold text-[#DB7A4D] mb-4">The Cost of Inefficiency & Unmet Needs</h2>
+            <h2 class="text-2xl font-semibold text-[#DB7A4D] mb-4">The Cost of Inefficiency</h2>
             <div class="space-y-4 text-gray-300">
-                <p>Many organizations struggle with inefficient internal processes, unclear communication, and underutilized data. They recognize they have problems but lack the expertise, time, or resources to identify the root causes and implement effective solutions.</p>
-                <p>This leads to wasted resources, missed opportunities, and frustrated teams. These organizations also struggle to find and vet specialized talent for short-term, high-impact projects, resulting in critical gaps that remain unaddressed.</p>
+                <p>Organizations often struggle with inefficient processes and underutilized data. They know problems exist but lack the time or expertise to find the root cause, leading to wasted resources, missed opportunities, and frustrated teams.</p>
             </div>
         </section>
 
@@ -62,7 +82,7 @@
 
         <section>
             <h2 class="text-2xl font-semibold text-sky-300 mb-4">The Stratagem AI Solution</h2>
-            <p class="text-gray-300">Stratagem AI uses advanced analytics to diagnose inefficiencies, generate actionable recommendations, and connect clients with vetted freelance experts for implementation, ensuring measurable impact.</p>
+            <p class="text-gray-300">Stratagem AI uses advanced analytics to diagnose inefficiencies, generate actionable recommendations, and connect clients with vetted freelance experts to ensure measurable impact.</p>
         </section>
         
         <hr class="my-10 border-white/20">
@@ -76,7 +96,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         <h3 class="font-bold text-lg">1. AI-Powered Diagnostic</h3>
                     </div>
-                    <p class="text-gray-400 text-sm">Upload anonymized data; Stratagem AI highlights workflow bottlenecks, communication gaps, and data inefficiencies in intuitive dashboards.</p>
+                    <p class="text-gray-400 text-sm">Upload anonymized data; Stratagem AI highlights workflow bottlenecks and data inefficiencies in intuitive dashboards.</p>
                 </div>
 
                 <div class="bg-orange-900/20 border border-orange-400/20 rounded-lg p-6">
@@ -84,7 +104,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                         <h3 class="font-bold text-lg">2. Actionable Recommendations</h3>
                     </div>
-                    <p class="text-orange-200/80 text-sm">Receive a prioritized list of strategic recommendations—from streamlining onboarding to refining communication protocols.</p>
+                    <p class="text-orange-200/80 text-sm">Receive a prioritized list of strategic recommendations to streamline your specific operational needs.</p>
                 </div>
 
                 <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
@@ -92,7 +112,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                         <h3 class="font-bold text-lg">3. “ImpactBridge” Marketplace</h3>
                     </div>
-                    <p class="text-gray-400 text-sm">Get matched with a curated pool of experts in Process Optimization, Data Systems, Strategic Communication, and AI Integration.</p>
+                    <p class="text-gray-400 text-sm">Get matched with a curated pool of experts in Process Optimization, Data Systems, and AI Integration.</p>
                 </div>
 
                 <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
@@ -100,7 +120,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                         <h3 class="font-bold text-lg">4. Progress Tracking</h3>
                     </div>
-                    <p class="text-gray-400 text-sm">Track real-time implementation progress and see KPI improvements—efficiency gains, cost savings, and communication scores.</p>
+                    <p class="text-gray-400 text-sm">Track real-time implementation progress and see KPI improvements—efficiency gains, cost savings, and more.</p>
                 </div>
             </div>
         </section>
@@ -109,7 +129,7 @@
 
         <section id="interactive-diagnostic">
             <h2 class="text-2xl font-semibold text-[#DB7A4D] mb-2">Experience Stratagem AI: Live Diagnostic</h2>
-            <p class="text-gray-300 mb-6">Describe an operational inefficiency your organization faces to receive a live AI diagnostic and initial recommendation.</p>
+            <p class="text-gray-300 mb-6">Describe an operational inefficiency to receive a live AI diagnostic and initial recommendation.</p>
             
             <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
                 <textarea
@@ -142,7 +162,7 @@
                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#DB7A4D]"></div>
                 <p class="ml-3 text-gray-300">AI is analyzing patterns...</p>
             </div>
-            <div id="reportContainer" class="hidden bg-gray-900/70 border border-white/10 rounded-lg p-6 mt-4">
+            <div id="reportContainer" class="hidden bg-black/20 border border-white/10 rounded-lg p-6 mt-4">
                 <h4 class="font-bold text-lg text-white mb-3">Live AI Diagnostic Report</h4>
                 <div class="space-y-4 text-gray-300 text-sm">
                     <p id="aiResponse"></p>
@@ -172,9 +192,7 @@
                             aiResponseElement.textContent += delta;
                         }
                     }
-                } catch (e) {
-                    console.error("Error parsing stream chunk:", e);
-                }
+                } catch (e) { console.error("Error parsing stream chunk:", e); }
             }
         }
 
@@ -203,6 +221,16 @@
                 analyzeBtn.disabled = false;
                 analyzeBtn.textContent = 'Analyze My Problem';
             }
+        });
+        
+        // Parallax effect for background shapes
+        const parallaxElements = document.querySelectorAll('.shape');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.pageYOffset;
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-speed') || '0.5');
+                el.style.transform = `translateY(${scrollY * speed}px)`;
+            });
         });
     });
     </script>
