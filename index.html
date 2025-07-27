@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         html, body {
+            height: 100%;
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
@@ -19,24 +20,28 @@
             overflow-x: hidden;
         }
 
-        /* All sections that contain animations need a position context */
+        /* --- NEW: Sticky Footer & Page Structure --- */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin-right: 280px; /* Make space for the sidebar */
+        }
+        main.main-content {
+            flex-grow: 1; /* This is the key: makes the main content expand to fill space */
+        }
+        @media (max-width: 1024px) {
+            .page-wrapper {
+                margin-right: 0;
+            }
+        }
+        /* --- End New Structure --- */
+
         #hero, #about, #experience, #projects, #skills, #contact {
             position: relative;
         }
-
-        /* Subtle Motion & Parallax Styles */
-        .animated-bg-shapes {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            overflow: hidden;
-            z-index: 0;
-        }
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(219, 122, 77, 0.1);
-            will-change: transform;
-        }
+        .animated-bg-shapes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
+        .shape { position: absolute; border-radius: 50%; background: rgba(219, 122, 77, 0.1); will-change: transform; }
         .shape.shape-1 { top: 10%; left: 5%; width: 150px; height: 150px; animation: subtle-drift 25s linear infinite alternate; }
         .shape.shape-2 { bottom: 15%; right: 10%; width: 250px; height: 250px; animation: subtle-drift 35s linear infinite alternate-reverse; }
         .shape.shape-3 { top: 20%; right: 20%; width: 50px; height: 50px; background: rgba(255, 217, 204, 0.15); animation: subtle-drift 20s linear infinite; }
@@ -47,41 +52,11 @@
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
         
-        /* Single Insight Rotator in "About Me" */
-        .insight-rotator {
-            margin-top: 2.5rem;
-            position: relative;
-            min-height: 110px; /* Adjust height as needed */
-        }
-        .insight-rotator .insight-card {
-            background-color: #f9fafb;
-            border-left: 4px solid #DB7A4D;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            pointer-events: none;
-        }
-        .insight-rotator .insight-card.is-active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .insight-heading {
-            font-weight: 600;
-            color: #245365;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .insight-content {
-            font-style: italic;
-            color: #4a5568;
-        }
-
-        /* Other styles... */
+        .insight-rotator { margin-top: 2.5rem; position: relative; min-height: 110px; }
+        .insight-rotator .insight-card { background-color: #f9fafb; border-left: 4px solid #DB7A4D; padding: 1.5rem; border-radius: 0.5rem; position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; pointer-events: none; }
+        .insight-rotator .insight-card.is-active { opacity: 1; pointer-events: auto; }
+        .insight-heading { font-weight: 600; color: #245365; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .insight-content { font-style: italic; color: #4a5568; }
         .fade-in-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in-on-scroll.in-view { opacity: 1; transform: translateY(0); }
         .section-header { position: relative; display: inline-block; margin-bottom: 1.5rem; }
@@ -102,11 +77,6 @@
         .sidebar-copyright { color: rgba(255, 255, 255, 0.4); font-size: 0.75rem; margin-bottom: 1rem; }
         .sidebar-signature { width: 150px; opacity: 0.7; transition: opacity 0.2s; }
         .sidebar-signature:hover { opacity: 1; }
-        .main-content { margin-right: 280px; }
-        @media (max-width: 1024px) {
-            .fixed-sidebar { display: none; }
-            .main-content { margin-right: 0; }
-        }
         .typing-container::after { content: '|'; display: inline-block; animation: blink 0.7s infinite; color: #FFD9CC; }
         @keyframes blink { 50% { opacity: 0; } }
         .hero-overlay { background: rgba(36,83,101,0.40); position: absolute; inset: 0; z-index: 0; pointer-events: none; }
@@ -129,7 +99,7 @@
         .skill-filter-btn.active, .skill-filter-btn:focus { background: #DB7A4D; color: #fff; border-color: #245365; transform: scale(1.05); }
     </style>
 </head>
-<body class="relative">
+<body>
 
     <aside class="fixed-sidebar">
         <img src="profileheadshot.png" alt="Mark Rickey Headshot" class="profile-img rounded-full object-cover">
@@ -152,98 +122,102 @@
         </div>
     </aside>
 
-    <div class="main-content">
-        <section id="hero">
-            <div class="absolute inset-0 z-0">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                    <source src="hero.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="hero-overlay"></div>
-                <div class="hero-fade-bottom"></div>
-            </div>
-            <div class="relative min-h-screen flex flex-col items-center justify-center text-center pt-20 pb-20 w-full px-4 z-10">
-                <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
-                <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold typing-container">
-                    <span id="typing-effect"></span>
-                </h2>
-                <p class="text-lg text-white max-w-2xl mx-auto mb-8">A seasoned leader leveraging data-driven solutions to enhance operational excellence and drive impactful results in public service.</p>
-                <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
-            </div>
-        </section>
+    <div class="page-wrapper">
+        <main class="main-content">
+            <section id="hero">
+                <div class="absolute inset-0 z-0">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                        <source src="hero.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="hero-overlay"></div>
+                    <div class="hero-fade-bottom"></div>
+                </div>
+                <div class="relative min-h-screen flex flex-col items-center justify-center text-center pt-20 pb-20 w-full px-4 z-10">
+                    <h1 class="text-5xl font-extrabold text-white mb-2 drop-shadow">Mark R.</h1>
+                    <h2 class="text-2xl text-[#FFD9CC] mb-6 font-semibold typing-container">
+                        <span id="typing-effect"></span>
+                    </h2>
+                    <p class="text-lg text-white max-w-2xl mx-auto mb-8">A seasoned leader leveraging data-driven solutions to enhance operational excellence and drive impactful results in public service.</p>
+                    <a href="#contact" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
+                </div>
+            </section>
 
-        <section id="about" class="py-20 bg-white">
-            <div class="animated-bg-shapes parallax-bg">
-                <div class="shape shape-1"></div>
-            </div>
-            <div class="max-w-5xl mx-auto px-6 relative z-10">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">About Me</h2>
-                <p class="text-lg text-gray-700 leading-relaxed">With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.</p>
-                
-                <div class="insight-rotator" id="insight-rotator">
-                    <div class="insight-card">
-                        <p class="insight-heading">Current Focus</p>
-                        <p class="insight-content">"Exploring the integration of predictive AI to forecast and mitigate operational bottlenecks in public sector logistics. The potential for efficiency gains is immense."</p>
+            <section id="about" class="py-20 bg-white">
+                <div class="animated-bg-shapes parallax-bg">
+                    <div class="shape shape-1"></div>
+                </div>
+                <div class="max-w-5xl mx-auto px-6 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">About Me</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed">With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.</p>
+                    
+                    <div class="insight-rotator" id="insight-rotator">
+                        <div class="insight-card">
+                            <p class="insight-heading">Current Focus</p>
+                            <p class="insight-content">"Exploring the integration of predictive AI to forecast and mitigate operational bottlenecks in public sector logistics. The potential for efficiency gains is immense."</p>
+                        </div>
+                        <div class="insight-card">
+                            <p class="insight-heading">New Research</p>
+                            <p class="insight-content">"Analyzing the latest trends in data visualization for stakeholder briefings. Effective communication is not just about the data, but how you tell its story."</p>
+                        </div>
+                        <div class="insight-card">
+                            <p class="insight-heading">Opinion</p>
+                            <p class="insight-content">"The most underutilized asset in any organization isn't its technology, but its institutional knowledge. The next frontier is leveraging AI to effectively capture and deploy that wisdom."</p>
+                        </div>
                     </div>
-                    <div class="insight-card">
-                        <p class="insight-heading">New Research</p>
-                        <p class="insight-content">"Analyzing the latest trends in data visualization for stakeholder briefings. Effective communication is not just about the data, but how you tell its story."</p>
+                </div>
+            </section>
+
+            <section id="experience" class="py-20 bg-[#F9FAFB]">
+                 <div class="max-w-4xl mx-auto px-6 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] text-center section-header">Experience</h2>
+                    <div class="experience-card-rotator">
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li></ul></div>
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li></ul></div>
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li></ul></div>
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for 30% content visibility improvement.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Delivered detailed analytics for strategic decision-making.</li></ul></div>
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li></ul></div>
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li></ul></div>
+                        <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering a welcoming environment.</li></ul></div>
                     </div>
-                    <div class="insight-card">
-                        <p class="insight-heading">Opinion</p>
-                        <p class="insight-content">"The most underutilized asset in any organization isn't its technology, but its institutional knowledge. The next frontier is leveraging AI to effectively capture and deploy that wisdom."</p>
+                </div>
+            </section>
+
+            <section id="projects" class="py-20 bg-white">
+                 <div class="animated-bg-shapes parallax-bg">
+                    <div class="shape shape-2"></div>
+                </div>
+                <div class="max-w-6xl mx-auto px-6 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Work Studies</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
+                        <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                        <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                        <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="experience" class="py-20 bg-[#F9FAFB]">
-             <div class="max-w-4xl mx-auto px-6 relative z-10">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] text-center section-header">Experience</h2>
-                <div class="experience-card-rotator">
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for 30% content visibility improvement.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Delivered detailed analytics for strategic decision-making.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering a welcoming environment.</li></ul></div>
+            <section id="skills" class="py-20 bg-[#F9FAFB]">
+                <div class="animated-bg-shapes parallax-bg">
+                    <div class="shape shape-3"></div>
                 </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-20 bg-white">
-             <div class="animated-bg-shapes parallax-bg">
-                <div class="shape shape-2"></div>
-            </div>
-            <div class="max-w-6xl mx-auto px-6 relative z-10">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Work Studies</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                <div class="max-w-5xl mx-auto px-6 relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Skills</h2>
+                    <div class="flex flex-wrap justify-center mb-7 gap-2">
+                        <button class="skill-filter-btn active" data-filter="all" type="button">All</button>
+                        <button class="skill-filter-btn" data-filter="technical" type="button">Technical</button>
+                        <button class="skill-filter-btn" data-filter="professional" type="button">Professional</button>
+                        <button class="skill-filter-btn" data-filter="leadership" type="button">Leadership</button>
+                    </div>
+                    <div id="skills-chips-container" class="relative">
+                        <div class="flex flex-wrap justify-center max-w-3xl mx-auto" id="skills-chips">
+                            <span class="skill-chip cat-technical" data-cat="technical">HTML/CSS</span> <span class="skill-chip cat-technical" data-cat="technical">JavaScript</span> <span class="skill-chip cat-technical" data-cat="technical">Tailwind CSS</span> <span class="skill-chip cat-technical" data-cat="technical">Python</span> <span class="skill-chip cat-technical" data-cat="technical">SQL</span> <span class="skill-chip cat-technical" data-cat="technical">Google Sheets</span> <span class="skill-chip cat-technical" data-cat="technical">Google Forms</span> <span class="skill-chip cat-technical" data-cat="technical">Data Analysis</span> <span class="skill-chip cat-technical" data-cat="technical">Data Visualization</span> <span class="skill-chip cat-technical" data-cat="technical">UI/UX Design</span> <span class="skill-chip cat-technical" data-cat="technical">Canva</span> <span class="skill-chip cat-technical" data-cat="technical">AI/ML Concepts</span> <span class="skill-chip cat-technical" data-cat="technical">Cybersecurity Concepts</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span> <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span> <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span> <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span> <span class="skill-chip cat-professional" data-cat="professional">Project Management</span> <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span> <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span> <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span> <span class="skill-chip cat-leadership" data-cat="leadership">Leadership</span> <span class="skill-chip cat-leadership" data-cat="leadership">Adaptability</span> <span class="skill-chip cat-leadership" data-cat="leadership">Resilience</span> <span class="skill-chip cat-leadership" data-cat="leadership">Mentorship</span> <span class="skill-chip cat-leadership" data-cat="leadership">Problem-Solving</span> <span class="skill-chip cat-leadership" data-cat="leadership">Innovation</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="skills" class="py-20 bg-[#F9FAFB]">
-            <div class="animated-bg-shapes parallax-bg">
-                <div class="shape shape-3"></div>
-            </div>
-            <div class="max-w-5xl mx-auto px-6 relative z-10">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Skills</h2>
-                <div class="flex flex-wrap justify-center mb-7 gap-2">
-                    <button class="skill-filter-btn active" data-filter="all" type="button">All</button>
-                    <button class="skill-filter-btn" data-filter="technical" type="button">Technical</button>
-                    <button class="skill-filter-btn" data-filter="professional" type="button">Professional</button>
-                    <button class="skill-filter-btn" data-filter="leadership" type="button">Leadership</button>
-                </div>
-                <div class="flex flex-wrap justify-center max-w-3xl mx-auto" id="skills-chips">
-                    <span class="skill-chip cat-technical" data-cat="technical">HTML/CSS</span> <span class="skill-chip cat-technical" data-cat="technical">JavaScript</span> <span class="skill-chip cat-technical" data-cat="technical">Tailwind CSS</span> <span class="skill-chip cat-technical" data-cat="technical">Python</span> <span class="skill-chip cat-technical" data-cat="technical">SQL</span> <span class="skill-chip cat-technical" data-cat="technical">Google Sheets</span> <span class="skill-chip cat-technical" data-cat="technical">Google Forms</span> <span class="skill-chip cat-technical" data-cat="technical">Data Analysis</span> <span class="skill-chip cat-technical" data-cat="technical">Data Visualization</span> <span class="skill-chip cat-technical" data-cat="technical">UI/UX Design</span> <span class="skill-chip cat-technical" data-cat="technical">Canva</span> <span class="skill-chip cat-technical" data-cat="technical">AI/ML Concepts</span> <span class="skill-chip cat-technical" data-cat="technical">Cybersecurity Concepts</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span> <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span> <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span> <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span> <span class="skill-chip cat-professional" data-cat="professional">Project Management</span> <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span> <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span> <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span> <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span> <span class="skill-chip cat-leadership" data-cat="leadership">Leadership</span> <span class="skill-chip cat-leadership" data-cat="leadership">Adaptability</span> <span class="skill-chip cat-leadership" data-cat="leadership">Resilience</span> <span class="skill-chip cat-leadership" data-cat="leadership">Mentorship</span> <span class="skill-chip cat-leadership" data-cat="leadership">Problem-Solving</span> <span class="skill-chip cat-leadership" data-cat="leadership">Innovation</span>
-                </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <footer id="contact" class="bg-[#245365] text-gray-200">
             <div class="max-w-6xl mx-auto px-6 py-16 relative z-10">
@@ -268,7 +242,6 @@
         
         // --- ALL DYNAMIC SCRIPTS ---
 
-        // Typing Effect
         const typingElement = document.getElementById('typing-effect');
         if (typingElement) {
             const roles = ["Data-Driven Leader", "Strategic Planner", "Process Optimizer", "Global Operations Manager", "AI & Tech Proficient"];
@@ -276,14 +249,8 @@
             function type() {
                 const currentRole = roles[roleIndex];
                 let typeSpeed = 120;
-                if (isDeleting) {
-                    typeSpeed = 50;
-                    typingElement.textContent = currentRole.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    typingElement.textContent = currentRole.substring(0, charIndex + 1);
-                    charIndex++;
-                }
+                if (isDeleting) { typeSpeed = 50; typingElement.textContent = currentRole.substring(0, charIndex - 1); charIndex--; } 
+                else { typingElement.textContent = currentRole.substring(0, charIndex + 1); charIndex++; }
                 if (!isDeleting && charIndex === currentRole.length) { isDeleting = true; typeSpeed = 2000; } 
                 else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
                 setTimeout(type, typeSpeed);
@@ -291,7 +258,6 @@
             type();
         }
 
-        // Insight Rotator
         const insightContainer = document.getElementById('insight-rotator');
         if(insightContainer) {
             const insights = insightContainer.querySelectorAll('.insight-card');
@@ -305,7 +271,11 @@
             if (insights.length > 0) { showNextInsight(); setInterval(showNextInsight, 8000); }
         }
 
-        // Skills Filter
+        const skillsContainer = document.getElementById('skills-chips-container');
+        if (skillsContainer) {
+            const initialHeight = skillsContainer.offsetHeight;
+            skillsContainer.style.minHeight = `${initialHeight}px`;
+        }
         const filterBtns = document.querySelectorAll('.skill-filter-btn');
         const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
         if (filterBtns.length > 0) {
@@ -322,7 +292,6 @@
             document.querySelector('.skill-filter-btn[data-filter="all"]').click();
         }
 
-        // Experience Card Rotator
         const rotatorContainer = document.querySelector('.experience-card-rotator');
         if (rotatorContainer) {
             const cards = rotatorContainer.querySelectorAll('.content-card');
@@ -336,7 +305,6 @@
             if (cards.length > 0) { cards[0].classList.add('is-active'); setInterval(showNextCard, 7000); }
         }
 
-        // Intersection Observer for Animations on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -346,20 +314,17 @@
         }, { threshold: 0.2 });
         document.querySelectorAll('.section-header, .fade-in-on-scroll').forEach(el => observer.observe(el));
         
-        // Scroll Listener for Parallax and Active Nav Links
-        const sections = document.querySelectorAll('.main-content section');
+        const sections = document.querySelectorAll('.page-wrapper > main > section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
         const parallaxElements = document.querySelectorAll('.parallax-bg');
 
         window.addEventListener('scroll', () => {
             const scrollY = window.pageYOffset;
             
-            // Parallax effect
             parallaxElements.forEach(el => {
                 el.style.transform = `translateY(${scrollY * 0.2}px)`;
             });
 
-            // Active nav link logic
             let currentId = '';
             sections.forEach(section => {
                 if (scrollY >= section.offsetTop - 300) {
