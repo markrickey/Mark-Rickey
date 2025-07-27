@@ -57,6 +57,27 @@
         .sidebar-nav li a:hover, .sidebar-nav li a.active {
             background: #DB7A4D; color: #fff;
         }
+        
+        /* UPDATED: Sidebar copyright and signature styles */
+        .sidebar-footer {
+            margin-top: auto; /* Pushes this element to the bottom */
+            width: 100%;
+            text-align: center;
+            padding-top: 1.5rem;
+        }
+        .sidebar-copyright {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .sidebar-signature {
+            width: 150px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .sidebar-signature:hover {
+            opacity: 1;
+        }
 
         /* Adjust main content to not overlap sidebar */
         .main-content {
@@ -141,6 +162,13 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
+
+        <div class="sidebar-footer">
+            <p class="sidebar-copyright">&copy; 2025 Mark R. All rights reserved.</p>
+            <a href="#hero">
+                <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="sidebar-signature mx-auto">
+            </a>
+        </div>
     </aside>
 
     <div class="main-content">
@@ -220,14 +248,7 @@
             </div>
         </section>
 
-        <div class="bg-white py-10 text-center relative z-10 -mb-20">
-             <a href="#hero" class="inline-block">
-                <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-48 mx-auto transition-transform duration-300 ease-in-out hover:scale-105">
-             </a>
-        </div>
-
-
-        <section id="contact" class="bg-[#245365] text-gray-200 pt-28">
+        <section id="contact" class="bg-[#245365] text-gray-200">
             <div class="max-w-6xl mx-auto px-6 py-16">
                 <div class="md:flex md:justify-between md:items-center text-center md:text-left">
                     <div>
@@ -239,12 +260,10 @@
                             <a href="mailto:markrickey01@gmail.com" class="contact-icon-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
                             <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="contact-icon-link" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
                         </div>
-                        <p class="text-sm text-gray-400">&copy; 2025 Mark R. All rights reserved.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
     </div>
 
     <script>
@@ -326,29 +345,26 @@
             }
         }
 
-        // --- ACTIVE NAV LINK ON SCROLL (FIXED) ---
+        // --- ACTIVE NAV LINK ON SCROLL ---
         const sections = document.querySelectorAll('.main-content section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
         
         window.addEventListener('scroll', () => {
             let currentId = '';
-
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (window.pageYOffset >= sectionTop - 250) { // Adjusted offset for better accuracy
+                if (window.pageYOffset >= sectionTop - 250) {
                     currentId = section.getAttribute('id');
                 }
             });
 
-            // Force the last link to be active if scrolled to the very bottom
             const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2;
             if (isAtBottom) {
-                currentId = 'contact'; // The ID of your last section
+                currentId = 'contact';
             }
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                // Check that currentId has a value before trying to find a link
                 if (currentId && link.getAttribute('href').includes(currentId)) {
                     link.classList.add('active');
                 }
