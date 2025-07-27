@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        /* --- NEW: Subtle Motion & Parallax Styles --- */
+        /* Subtle Motion & Parallax Styles */
         .animated-bg-shapes {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -29,8 +29,8 @@
         .shape {
             position: absolute;
             border-radius: 50%;
-            background: rgba(219, 122, 77, 0.1); /* Subtle orange */
-            will-change: transform; /* Performance optimization */
+            background: rgba(219, 122, 77, 0.1);
+            will-change: transform;
         }
         .shape.shape-1 { top: 10%; left: 5%; width: 150px; height: 150px; animation: subtle-drift 25s linear infinite alternate; }
         .shape.shape-2 { bottom: 15%; right: 10%; width: 250px; height: 250px; animation: subtle-drift 35s linear infinite alternate-reverse; }
@@ -42,13 +42,13 @@
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
 
-        /* NEW: Fade-in on Scroll Animation */
-        .fade-in-card {
+        /* Fade-in on Scroll Animation */
+        .fade-in-on-scroll {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        .fade-in-card.in-view {
+        .fade-in-on-scroll.in-view {
             opacity: 1;
             transform: translateY(0);
         }
@@ -65,7 +65,7 @@
         .work-study-card:hover .card-bg { transform: scale(1.1); }
         .work-study-card .card-content { position: relative; z-index: 1; }
         
-        /* Fixed Sidebar & other styles... */
+        /* Other Styles */
         .fixed-sidebar { position: fixed; top: 0; right: 0; height: 100vh; width: 280px; background: rgba(36, 83, 101, 0.9); backdrop-filter: blur(10px); border-left: 1px solid rgba(255, 255, 255, 0.1); z-index: 100; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem; box-shadow: -10px 0 30px rgba(0,0,0,0.2); }
         .fixed-sidebar .profile-img { width: 100px; height: 100px; border: 3px solid #fff; margin-bottom: 2rem; flex-shrink: 0; }
         .sidebar-nav { width: 100%; }
@@ -187,10 +187,10 @@
             <div class="max-w-6xl mx-auto px-6 relative z-10">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header">Work Studies</h2>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="content-card work-study-card fade-in-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
-                    <div class="content-card work-study-card fade-in-card"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">AI-Powered Operational Diagnostic</h3><p class="text-gray-700 text-sm mb-4">Developed a conceptual AI tool to diagnose organizational inefficiencies and connect businesses with specialized freelance talent for implementation.</p><a href="HTML/subfolder/AIdrivensolution.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View AI Concept &rarr;</a></div></div>
+                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Data/SEO Management & Strategic Outreach</h3><p class="text-gray-700 text-sm mb-4">Architected and deployed a comprehensive Google Forms/Sheets system to streamline employer/employee data capture, providing actionable insights for outreach.</p><a href="HTML/subfolder/careerfairdata.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Communication & Public Relations</h3><p class="text-gray-700 text-sm mb-4">Drafted precise, empathetic, and strategically tailored official communications for high-stakes community events, honoring constituents and supporting local initiatives.</p><a href="HTML/subfolder/workstudies.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
+                    <div class="content-card work-study-card fade-in-on-scroll"><div class="card-bg"></div><div class="card-content"><h3 class="text-xl font-semibold text-[#245365] mb-2">Account Management & Systems Optimization</h3><p class="text-gray-700 text-sm mb-4">Managed Zendesk and Google Analytics data collection and processing to improve constituent engagement, monitor response times, and ensure adherence to SOPs.</p><a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a></div></div>
                 </div>
             </div>
         </section>
@@ -233,26 +233,75 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- DYNAMIC TEXT SCRIPTS ---
+        // --- RESTORED FULL SCRIPT ---
+        
+        // Dynamic Typing Effect
         const typingElement = document.getElementById('typing-effect');
-        if (typingElement) { /* ... existing typing script ... */ }
+        if (typingElement) {
+            const roles = ["Data-Driven Leader", "Strategic Planner", "Process Optimizer", "Global Operations Manager", "AI & Tech Proficient"];
+            let roleIndex = 0, charIndex = 0, isDeleting = false;
+            function type() {
+                const currentRole = roles[roleIndex];
+                let typeSpeed = 120;
+                if (isDeleting) {
+                    typeSpeed = 50;
+                    typingElement.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+                if (!isDeleting && charIndex === currentRole.length) { isDeleting = true; typeSpeed = 2000; } 
+                else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
+                setTimeout(type, typeSpeed);
+            }
+            type();
+        }
+
+        // Fading Competencies
         const competencyContainer = document.getElementById('competency-rotator');
-        if(competencyContainer) { /* ... existing competency script ... */ }
+        if (competencyContainer) {
+            const competencies = competencyContainer.querySelectorAll('span');
+            let competencyIndex = 0;
+            function showNextCompetency() {
+                if(competencies.length === 0) return;
+                competencies.forEach(c => c.classList.remove('is-visible'));
+                competencies[competencyIndex].classList.add('is-visible');
+                competencyIndex = (competencyIndex + 1) % competencies.length;
+            }
+            if (competencies.length > 0) { showNextCompetency(); setInterval(showNextCompetency, 3000); }
+        }
 
-        // --- SKILLS FILTER ---
+        // Skills Filter
         const filterBtns = document.querySelectorAll('.skill-filter-btn');
-        if (filterBtns.length > 0) { /* ... existing skills script ... */ }
+        const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.getAttribute('data-filter');
+                skillChips.forEach(chip => {
+                    chip.style.display = (filter === 'all' || chip.getAttribute('data-cat') === filter) ? 'inline-block' : 'none';
+                });
+            });
+        });
+        if (filterBtns.length > 0) { document.querySelector('.skill-filter-btn[data-filter="all"]').click(); }
 
-        // --- EXPERIENCE CARD ROTATOR ---
+        // Experience Card Rotator
         const rotatorContainer = document.querySelector('.experience-card-rotator');
-        if (rotatorContainer) { /* ... existing rotator script ... */ }
+        if (rotatorContainer) {
+            const cards = rotatorContainer.querySelectorAll('.content-card');
+            let cardIndex = 0;
+            function showNextCard() {
+                if (cards.length === 0) return;
+                cards[cardIndex].classList.remove('is-active');
+                cardIndex = (cardIndex + 1) % cards.length;
+                cards[cardIndex].classList.add('is-active');
+            }
+            if (cards.length > 0) { cards[0].classList.add('is-active'); setInterval(showNextCard, 7000); }
+        }
 
-        // --- UPDATED: Combined Observer & Scroll Logic ---
-        const sections = document.querySelectorAll('.main-content section');
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
-        const parallaxElements = document.querySelectorAll('.parallax-bg');
-
-        // Observer for fade-in and header-line animations
+        // Intersection Observer for Animations on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -260,13 +309,17 @@
                 }
             });
         }, { threshold: 0.2 });
+        document.querySelectorAll('.section-header, .fade-in-on-scroll').forEach(el => observer.observe(el));
+        
+        // Scroll Listener for Parallax and Active Nav Links
+        const sections = document.querySelectorAll('.main-content section');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        const parallaxElements = document.querySelectorAll('.parallax-bg');
 
-        document.querySelectorAll('.section-header, .fade-in-card').forEach(el => observer.observe(el));
-
-        // Scroll listener for parallax and active nav links
         window.addEventListener('scroll', () => {
-            // Parallax effect
             const scrollY = window.pageYOffset;
+            
+            // Parallax effect
             parallaxElements.forEach(el => {
                 el.style.transform = `translateY(${scrollY * 0.2}px)`;
             });
@@ -278,12 +331,10 @@
                     currentId = section.getAttribute('id');
                 }
             });
-
             const isAtBottom = (window.innerHeight + scrollY) >= document.body.offsetHeight - 5;
             if (isAtBottom) {
                 currentId = 'contact';
             }
-
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (currentId && link.getAttribute('href').includes(currentId)) {
@@ -292,8 +343,6 @@
             });
         });
     });
-    // NOTE: For brevity, the full JS for typing, competencies, etc. is omitted here,
-    // but it is present in the complete code block above.
     </script>
 </body>
 </html>
