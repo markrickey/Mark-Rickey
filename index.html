@@ -18,28 +18,48 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- NEW: Sticky Footer & Page Structure --- */
+        /* Page Structure for Sticky Footer */
         .page-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin-right: 280px; /* Make space for the sidebar */
+            margin-right: 280px;
         }
         main.main-content {
-            flex-grow: 1; /* This is the key: makes the main content expand to fill space */
+            flex-grow: 1;
         }
         @media (max-width: 1024px) {
-            .page-wrapper {
-                margin-right: 0;
-            }
+            .page-wrapper { margin-right: 0; }
         }
-        /* --- End New Structure --- */
 
-        #hero, #about, #experience, #projects, #skills, #contact {
+        /* --- NEW: Contact Banner Fade Effect --- */
+        footer#contact {
+            padding-top: 6rem; /* Increased top padding */
+            padding-bottom: 120px; /* Make space for the fade */
+            position: relative;
+            z-index: 1;
+        }
+        .contact-fade-bottom {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to bottom, rgba(36, 83, 101, 0) 0%, rgba(36, 83, 101, 1) 100%);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        /* General Sections */
+        #hero, #about, #experience, #projects, #skills {
             position: relative;
         }
+
+        /* Subtle Motion & Parallax Styles */
         .animated-bg-shapes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
         .shape { position: absolute; border-radius: 50%; background: rgba(219, 122, 77, 0.1); will-change: transform; }
         .shape.shape-1 { top: 10%; left: 5%; width: 150px; height: 150px; animation: subtle-drift 25s linear infinite alternate; }
@@ -52,11 +72,14 @@
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
         
+        /* Insight Rotator in "About Me" */
         .insight-rotator { margin-top: 2.5rem; position: relative; min-height: 110px; }
         .insight-rotator .insight-card { background-color: #f9fafb; border-left: 4px solid #DB7A4D; padding: 1.5rem; border-radius: 0.5rem; position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; pointer-events: none; }
         .insight-rotator .insight-card.is-active { opacity: 1; pointer-events: auto; }
         .insight-heading { font-weight: 600; color: #245365; margin-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
         .insight-content { font-style: italic; color: #4a5568; }
+        
+        /* Other styles... */
         .fade-in-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in-on-scroll.in-view { opacity: 1; transform: translateY(0); }
         .section-header { position: relative; display: inline-block; margin-bottom: 1.5rem; }
