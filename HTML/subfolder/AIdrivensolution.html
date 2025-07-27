@@ -1,183 +1,170 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Stratagem AI: Optimized Operations for Impact – Mark R.</title>
-  <meta name="description" content="Stratagem AI diagnoses operational inefficiencies and connects organizations with freelance experts for implementation.">
-  
-  <script src="https://cdn.tailwindcss.com" defer></script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* Minimal custom style for the Inter font and smooth streaming */
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    /* Ensures newlines from the AI are respected */
-    #aiResponse {
-      white-space: pre-wrap;
-    }
-  </style>
-
-  <script>
-    // This would be injected by a build system (Vite, Next.js, etc.)
-    // For this demo, we'll define it here. The JS logic will use this variable.
-    window.STRATAGEM_AI_ENDPOINT = "https://api.stratagem.ai/diagnose";
-  </script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratagem AI: Optimized Operations for Impact – Mark R.</title>
+    <meta name="description" content="Stratagem AI diagnoses operational inefficiencies and connects organizations with freelance experts for implementation.">
+    
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* NEW: Matching gradient from your main site */
+            background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
+            background-attachment: fixed;
+        }
+        #aiResponse {
+            white-space: pre-wrap;
+        }
+        /* Custom scrollbar to match the aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #245365;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DB7A4D;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c26636;
+        }
+    </style>
+    <script>
+        window.STRATagem_AI_ENDPOINT = "https://api.stratagem.ai/diagnose";
+    </script>
 </head>
-<body class="bg-slate-50 text-slate-700 antialiased">
+<body class="text-gray-200 antialiased">
 
-  <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-white rounded-2xl shadow-lg">
+    <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-gray-900/50 backdrop-blur-lg border border-white/10 rounded-2xl shadow-lg">
+        
+        <section class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">Stratagem AI</h1>
+            <p class="text-lg sm:text-xl text-orange-200">Optimized Operations for Measurable Impact</p>
+        </section>
+
+        <hr class="my-10 border-white/20">
+
+        <section>
+            <h2 class="text-2xl font-semibold text-[#DB7A4D] mb-4">The Cost of Inefficiency & Unmet Needs</h2>
+            <div class="space-y-4 text-gray-300">
+                <p>Many organizations struggle with inefficient internal processes, unclear communication, and underutilized data. They recognize they have problems but lack the expertise, time, or resources to identify the root causes and implement effective solutions.</p>
+                <p>This leads to wasted resources, missed opportunities, and frustrated teams. These organizations also struggle to find and vet specialized talent for short-term, high-impact projects, resulting in critical gaps that remain unaddressed.</p>
+            </div>
+        </section>
+
+        <hr class="my-10 border-white/20">
+
+        <section>
+            <h2 class="text-2xl font-semibold text-sky-300 mb-4">The Stratagem AI Solution</h2>
+            <p class="text-gray-300">Stratagem AI uses advanced analytics to diagnose inefficiencies, generate actionable recommendations, and connect clients with vetted freelance experts for implementation, ensuring measurable impact.</p>
+        </section>
+        
+        <hr class="my-10 border-white/20">
+
+        <section>
+            <h2 class="text-3xl font-bold text-white text-center mb-8">A Four-Step Path to Excellence</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
+                    <div class="flex items-center text-sky-400 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        <h3 class="font-bold text-lg">1. AI-Powered Diagnostic</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Upload anonymized data; Stratagem AI highlights workflow bottlenecks, communication gaps, and data inefficiencies in intuitive dashboards.</p>
+                </div>
+
+                <div class="bg-orange-900/20 border border-orange-400/20 rounded-lg p-6">
+                    <div class="flex items-center text-[#DB7A4D] mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        <h3 class="font-bold text-lg">2. Actionable Recommendations</h3>
+                    </div>
+                    <p class="text-orange-200/80 text-sm">Receive a prioritized list of strategic recommendations—from streamlining onboarding to refining communication protocols.</p>
+                </div>
+
+                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
+                    <div class="flex items-center text-sky-400 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        <h3 class="font-bold text-lg">3. “ImpactBridge” Marketplace</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Get matched with a curated pool of experts in Process Optimization, Data Systems, Strategic Communication, and AI Integration.</p>
+                </div>
+
+                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
+                    <div class="flex items-center text-gray-300 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        <h3 class="font-bold text-lg">4. Progress Tracking</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Track real-time implementation progress and see KPI improvements—efficiency gains, cost savings, and communication scores.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-10 border-white/20">
+
+        <section id="interactive-diagnostic">
+            <h2 class="text-2xl font-semibold text-[#DB7A4D] mb-2">Experience Stratagem AI: Live Diagnostic</h2>
+            <p class="text-gray-300 mb-6">Describe an operational inefficiency your organization faces to receive a live AI diagnostic and initial recommendation.</p>
+            
+            <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
+                <textarea
+                    id="problemInput"
+                    class="w-full p-3 bg-gray-900/70 border border-white/20 rounded-md shadow-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DB7A4D] focus:border-[#DB7A4D] transition"
+                    rows="4"
+                    placeholder="E.g., 'Our team wastes hours on manual data entry for client onboarding.'"></textarea>
+                <button
+                    id="analyzeBtn"
+                    class="mt-4 w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-[#DB7A4D] hover:bg-[#c26636] text-white font-bold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-[#c26636] disabled:bg-gray-600">
+                    Analyze My Problem
+                </button>
+                <div id="resultsContainer" class="mt-6" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
     
-    <section class="text-center mb-10">
-      <h1 class="text-4xl sm:text-5xl font-bold text-slate-800 mb-4">Stratagem AI</h1>
-      <p class="text-lg sm:text-xl text-slate-600">Optimized Operations for Measurable Impact</p>
-    </section>
+    <footer class="text-center py-6">
+        <p class="text-sm text-orange-200/70">&copy; 2025 Mark R. Conceptual Design – Stratagem AI</p>
+    </footer>
 
-    <hr class="my-10 border-slate-200">
-
-    <section>
-      <h2 class="text-2xl font-semibold text-orange-600 mb-4">The Cost of Inefficiency &amp; Unmet Needs</h2>
-      <div class="space-y-4 text-slate-600">
-        <p>Many organizations struggle with inefficient internal processes, unclear communication, and under-utilized data. They know they have problems but lack the expertise, time, or resources to identify root causes and implement solutions.</p>
-        <p>This leads to wasted resources, missed opportunities, and frustrated teams. These organizations also struggle to find and vet specialized talent for short-term, high-impact projects, leaving critical gaps unaddressed.</p>
-      </div>
-    </section>
-
-    <hr class="my-10 border-slate-200">
-
-    <section>
-      <h2 class="text-2xl font-semibold text-sky-700 mb-4">The Stratagem AI Solution</h2>
-      <p class="text-slate-600">Stratagem AI uses advanced analytics to diagnose inefficiencies, generate actionable recommendations, and connect clients with vetted freelance experts for implementation, ensuring measurable impact.</p>
-    </section>
-    
-    <hr class="my-10 border-slate-200">
-
-    <section>
-      <h2 class="text-3xl font-bold text-slate-800 text-center mb-8">A Four-Step Path to Excellence</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
-          <div class="flex items-center text-sky-800 mb-3">
-             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-            <h3 class="font-bold text-lg">1. AI-Powered Diagnostic</h3>
-          </div>
-          <p class="text-slate-600 text-sm">Upload anonymized data; Stratagem AI highlights workflow bottlenecks, communication gaps, and data inefficiencies in intuitive dashboards.</p>
-        </div>
-
-        <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
-          <div class="flex items-center text-orange-700 mb-3">
-             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-            <h3 class="font-bold text-lg">2. Actionable Recommendations</h3>
-          </div>
-          <p class="text-slate-600 text-sm">Receive a prioritized list of strategic recommendations—from streamlining onboarding to refining communication protocols.</p>
-        </div>
-
-        <div class="bg-sky-50 border border-sky-200 rounded-lg p-6">
-          <div class="flex items-center text-sky-800 mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-            <h3 class="font-bold text-lg">3. “ImpactBridge” Marketplace</h3>
-          </div>
-          <p class="text-slate-600 text-sm">Get matched with a curated pool of experts in Process Optimization, Data Systems, Strategic Communication, and AI Integration.</p>
-        </div>
-
-        <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
-          <div class="flex items-center text-slate-700 mb-3">
-             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-            <h3 class="font-bold text-lg">4. Progress Tracking</h3>
-          </div>
-          <p class="text-slate-600 text-sm">Track real-time implementation progress and see KPI improvements—efficiency gains, cost savings, and communication scores.</p>
-        </div>
-      </div>
-    </section>
-
-    <hr class="my-10 border-slate-200">
-
-    <section id="interactive-diagnostic">
-      <h2 class="text-2xl font-semibold text-orange-600 mb-2">Experience Stratagem AI: Live Diagnostic</h2>
-      <p class="text-slate-600 mb-6">Describe an operational inefficiency your organization faces to receive a live AI diagnostic and initial recommendation.</p>
-      
-      <div class="bg-slate-100 border border-slate-200 rounded-lg p-6">
-        <textarea
-          id="problemInput"
-          class="w-full p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"
-          rows="4"
-          placeholder="E.g., 'Our team wastes hours on manual data entry for client onboarding.'"></textarea>
-
-        <button
-          id="analyzeBtn"
-          class="mt-4 w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:bg-slate-400"
-          >
-          Analyze My Problem
-        </button>
-
-        <div id="resultsContainer" class="mt-6" aria-live="polite">
-          </div>
-      </div>
-    </section>
-
-  </main>
-  
-  <footer class="text-center py-6">
-      <p class="text-sm text-slate-500">&copy; 2025 Mark R. Conceptual Design – Stratagem AI</p>
-  </footer>
-
-  <script>
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
         const analyzeBtn = document.getElementById('analyzeBtn');
         const problemInput = document.getElementById('problemInput');
         const resultsContainer = document.getElementById('resultsContainer');
 
-        // This is the UI structure that will be injected on click.
         const resultsHTMLStructure = `
             <div id="loadingSpinner" class="flex items-center justify-center">
-                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600"></div>
-                <p class="ml-3 text-slate-600">AI is analyzing patterns...</p>
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#DB7A4D]"></div>
+                <p class="ml-3 text-gray-300">AI is analyzing patterns...</p>
             </div>
-            <div id="reportContainer" class="hidden bg-white border border-slate-200 rounded-lg p-6 mt-4">
-                <h4 class="font-bold text-lg text-slate-800 mb-3">Live AI Diagnostic Report</h4>
-                <div class="space-y-4 text-slate-700 text-sm">
+            <div id="reportContainer" class="hidden bg-gray-900/70 border border-white/10 rounded-lg p-6 mt-4">
+                <h4 class="font-bold text-lg text-white mb-3">Live AI Diagnostic Report</h4>
+                <div class="space-y-4 text-gray-300 text-sm">
                     <p id="aiResponse"></p>
                 </div>
             </div>
         `;
 
-        /**
-         * MOCK BACKEND API STREAM
-         * This function simulates a real AI backend streaming response chunks.
-         * It perfectly mimics the behavior of the provided `api/diagnose.ts`.
-         */
         async function* mockStratagemAIStream(prompt) {
             const sleep = (ms) => new Promise(res => setTimeout(res, ms));
-            let fullResponse = `Based on your concern about "${prompt}", here is a preliminary analysis:\n\n**1. Primary Area Detected:** Process Bottleneck\nYour issue points to a classic process bottleneck, common in manual data entry tasks. This directly impacts team productivity and introduces a high risk of human error, which can corrupt downstream data and analytics.\n\n**2. Initial Recommendation:** Implement RPA (Robotic Process Automation)\n- **Action:** Deploy a simple software bot to handle the data transfer from source to system.\n- **Impact:** This can immediately eliminate manual work, reduce errors to near-zero, and free up your team for higher-value activities like client engagement.\n\n**3. Suggested Expert Profile:**\nWe recommend connecting with a **Process Automation Specialist** from our marketplace. They can scope the project, build the automation, and train your team in a matter of days.`;
+            let fullResponse = `Based on your concern about "${prompt}", here is a preliminary analysis:\n\n**1. Primary Area Detected:** Process Bottleneck\nYour issue points to a classic process bottleneck, common in manual data entry tasks. This directly impacts team productivity and introduces a high risk of human error.\n\n**2. Initial Recommendation:** Implement RPA (Robotic Process Automation)\n- **Action:** Deploy a simple software bot to handle data transfer from source to system.\n- **Impact:** This can immediately eliminate manual work and free up your team for higher-value activities.\n\n**3. Suggested Expert Profile:**\nWe recommend connecting with a **Process Automation Specialist** from our marketplace.`;
             
-            // Stream the response word by word to simulate AI "thinking"
             for (const word of fullResponse.split(' ')) {
                 const chunk = { delta: word + ' ' };
-                yield JSON.stringify(chunk) + '\n'; // Yield newline-delimited JSON
-                await sleep(40); // Small delay between words
+                yield JSON.stringify(chunk) + '\n';
+                await sleep(40);
             }
         }
         
-        /**
-         * This function handles the streaming from an API endpoint.
-         * It's written to work with a real `fetch` or our mock stream.
-         */
         async function runStratagemAI(problem, aiResponseElement) {
-            // To use a REAL API, swap the mock stream with a fetch call.
-            // const response = await fetch(window.STRATAGEM_AI_ENDPOINT, { ... });
-            // const stream = response.body;
             const stream = mockStratagemAIStream(problem);
-
             for await (const chunk of stream) {
                 try {
-                    // Assuming newline-delimited JSON stream
                     const lines = chunk.split('\n').filter(line => line.trim() !== '');
                     for (const line of lines) {
                         const { delta } = JSON.parse(line);
@@ -193,13 +180,11 @@
 
         analyzeBtn.addEventListener('click', async () => {
             const problem = problemInput.value.trim();
-
             if (!problem) {
-                resultsContainer.innerHTML = `<p class="text-red-600 font-medium">Please describe an inefficiency to analyze.</p>`;
+                resultsContainer.innerHTML = `<p class="text-orange-400 font-medium">Please describe an inefficiency to analyze.</p>`;
                 return;
             }
 
-            // Disable button and show progress
             analyzeBtn.disabled = true;
             analyzeBtn.textContent = 'Analyzing...';
             resultsContainer.innerHTML = resultsHTMLStructure;
@@ -209,25 +194,18 @@
             const loadingSpinner = document.getElementById('loadingSpinner');
 
             try {
-                // Show the report container so the text can stream in
                 reportContainer.classList.remove('hidden');
-
-                // Call the AI and stream the response
                 await runStratagemAI(problem, aiResponse);
-                
-                // Hide the spinner once done
                 loadingSpinner.classList.add('hidden');
-
             } catch (e) {
-                resultsContainer.innerHTML = `<p class="text-red-600 font-medium">An error occurred: ${e.message}. Please try again later.</p>`;
+                resultsContainer.innerHTML = `<p class="text-orange-400 font-medium">An error occurred: ${e.message}. Please try again later.</p>`;
             } finally {
-                // Re-enable the button
                 analyzeBtn.disabled = false;
                 analyzeBtn.textContent = 'Analyze My Problem';
             }
         });
     });
-  </script>
+    </script>
 
 </body>
 </html>
