@@ -21,7 +21,15 @@
 
         #hero, #about, #experience, #projects, #skills {
             position: relative;
+            /* NEW: Increased vertical spacing between sections */
+            padding-top: 6rem;
+            padding-bottom: 6rem;
         }
+        #hero {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
 
         .animated-bg-shapes { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
         .shape { position: absolute; border-radius: 50%; background: rgba(219, 122, 77, 0.1); will-change: transform; }
@@ -134,7 +142,7 @@
             </div>
         </section>
 
-        <section id="about" class="py-20 bg-white">
+        <section id="about" class="bg-white">
             <div class="animated-bg-shapes parallax-bg">
                 <div class="shape shape-1"></div>
             </div>
@@ -159,7 +167,7 @@
             </div>
         </section>
 
-        <section id="experience" class="py-20 bg-[#F9FAFB]">
+        <section id="experience" class="bg-[#F9FAFB]">
              <div class="max-w-4xl mx-auto px-6 relative z-10">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] text-center section-header">Experience</h2>
                 <div class="experience-card-rotator">
@@ -174,7 +182,7 @@
             </div>
         </section>
 
-        <section id="projects" class="py-20 bg-white">
+        <section id="projects" class="bg-white">
              <div class="animated-bg-shapes parallax-bg">
                 <div class="shape shape-2"></div>
             </div>
@@ -189,7 +197,7 @@
             </div>
         </section>
 
-        <section id="skills" class="py-20 bg-[#F9FAFB]">
+        <section id="skills" class="bg-[#F9FAFB]">
             <div class="animated-bg-shapes parallax-bg">
                 <div class="shape shape-3"></div>
             </div>
