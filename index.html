@@ -83,8 +83,6 @@
         .skill-chip.cat-leadership{ background: #ffd9cc; color:#a15a2d; border-color:#DB7A4D;}
         .skill-filter-btn { background: #fff4ef; color: #245365; padding: 0.6rem 1.5rem; font-size: 1.08rem; margin: .15rem .35rem .6rem .35rem; font-weight: 700; border: 2px solid #DB7A4D; border-radius: 1rem; cursor: pointer; transition: background 0.16s, color 0.17s, transform 0.18s;}
         .skill-filter-btn.active, .skill-filter-btn:focus { background: #DB7A4D; color: #fff; border-color: #245365; transform: scale(1.05);}
-        
-        /* ADDED: Smooth transition for the skills container height */
         #skills-chips-container {
             transition: min-height 0.3s ease-out;
         }
@@ -178,32 +176,27 @@
         </section>
 
         <footer id="contact" class="flex-shrink-0 relative py-12 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16 overflow-x-hidden">
-             <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-14">
-                <div class="flex-shrink-0 md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">
-                    <div class="bg-white/80 rounded-2xl shadow-lg p-4 pb-1 flex flex-col items-center border-2 border-[#FFD9CC]">
-                        <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-44 sm:h-52 md:h-56 w-auto drop-shadow-md rounded-md mt-1 mb-2" style="max-width:100%;">
-                        <div class="text-[#DB7A4D] font-medium text-base italic mt-1">Mark Rickey</div>
-                    </div>
+            <div class="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-3">Let’s Collaborate</h2>
+                <p class="mb-5 text-lg text-[#245365]/90 font-medium">
+                    Want to create something impactful together? Just reach out.
+                </p>
+                <div class="flex items-center gap-6 mb-7">
+                    <a href="mailto:markrickey01@gmail.com" class="w-16 h-16 inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                    <a href="Mark_Rickey_Resume.pdf" download="Mark_Rickey_Resume.pdf" target="_blank" class="w-16 h-16 inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70" aria-label="Download Resume">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="w-16 h-16 inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70" aria-label="LinkedIn">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
                 </div>
-                <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-3">Let’s Collaborate</h2>
-                    <p class="mb-5 text-lg text-[#245365]/90 font-medium">
-                        Want to create something impactful together? <br class="hidden md:inline">Just reach out!
-                    </p>
-                    <div class="flex items-center gap-6 mb-7">
-                        <a href="mailto:markrickey01@gmail.com" class="w-16 h-16 inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70" aria-label="Email">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="w-16 h-16 inline-flex items-center justify-center rounded-full bg-white/80 hover:bg-[#ffd9cc] shadow-lg transition-all duration-200 text-[#245365] hover:text-[#DB7A4D] focus:ring-4 focus:ring-[#DB7A4D]/70" aria-label="LinkedIn">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                    </div>
-                    <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
-                        <span>&copy; 2025 Mark R.</span>
-                        <span aria-hidden="true">&mdash;</span>
-                        <span>All rights reserved.</span>
-                    </p>
-                </div>
+                <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
+                    <span>&copy; 2025 Mark R.</span>
+                    <span aria-hidden="true">&mdash;</span>
+                    <span>All rights reserved.</span>
+                </p>
             </div>
         </footer>
     </main>
@@ -232,22 +225,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Dynamic Content Population ---
     const experienceContainer = document.querySelector('.experience-card-rotator');
-    experienceData.forEach(job => {
-        const card = document.createElement('div');
-        card.className = 'content-card';
-        card.innerHTML = `<h3 class="text-xl font-semibold experience-card-title mb-3">${job.title}</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">${job.company} | ${job.dates}</p><ul class="list-none text-gray-700 space-y-2 text-base">${job.points.map(p => `<li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>${p}</li>`).join('')}</ul>`;
-        experienceContainer.appendChild(card);
-    });
+    if (experienceContainer) {
+        experienceData.forEach(job => {
+            const card = document.createElement('div');
+            card.className = 'content-card';
+            card.innerHTML = `<h3 class="text-xl font-semibold experience-card-title mb-3">${job.title}</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">${job.company} | ${job.dates}</p><ul class="list-none text-gray-700 space-y-2 text-base">${job.points.map(p => `<li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>${p}</li>`).join('')}</ul>`;
+            experienceContainer.appendChild(card);
+        });
+    }
 
     const skillsChipsContainer = document.getElementById('skills-chips');
-    skillsData.forEach(skill => {
-        const chip = document.createElement('span');
-        chip.className = `skill-chip cat-${skill.category}`;
-        chip.setAttribute('data-cat', skill.category);
-        chip.textContent = skill.name;
-        skillsChipsContainer.appendChild(chip);
-    });
-
+    if (skillsChipsContainer) {
+        skillsData.forEach(skill => {
+            const chip = document.createElement('span');
+            chip.className = `skill-chip cat-${skill.category}`;
+            chip.setAttribute('data-cat', skill.category);
+            chip.textContent = skill.name;
+            skillsChipsContainer.appendChild(chip);
+        });
+    }
 
     // --- Core Functionality ---
 
@@ -268,35 +264,25 @@ document.addEventListener('DOMContentLoaded', function() {
         type();
     }
 
-    // --- MODIFICATION START: Functions to prevent layout shift in Skills section ---
+    // Functions to prevent layout shift in Skills section
     const skillsContainer = document.getElementById('skills-chips-container');
     const skillsChips = document.getElementById('skills-chips');
-    let resizeTimer;
-
-    // This function measures the container and sets a min-height to prevent it from collapsing
-    const setSkillsContainerHeight = () => {
-        // Temporarily reset min-height to accurately measure the natural height
-        skillsContainer.style.minHeight = '0px';
-        const containerHeight = skillsChips.offsetHeight;
-        skillsContainer.style.minHeight = `${containerHeight}px`;
-    };
-    
-    // Debounce function to limit how often the resize function is called
-    const debounce = (func, delay) => {
-        return function(...args) {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                func.apply(this, args);
-            }, delay);
+    if (skillsContainer && skillsChips) {
+        let resizeTimer;
+        const setSkillsContainerHeight = () => {
+            skillsContainer.style.minHeight = '0px';
+            const containerHeight = skillsChips.offsetHeight;
+            skillsContainer.style.minHeight = `${containerHeight}px`;
         };
-    };
-
-    // Set the height on initial load
-    setSkillsContainerHeight();
-    // Re-calculate and set the height on window resize (debounced for performance)
-    window.addEventListener('resize', debounce(setSkillsContainerHeight, 250));
-    // --- MODIFICATION END ---
-
+        const debounce = (func, delay) => {
+            return function(...args) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+        setSkillsContainerHeight();
+        window.addEventListener('resize', debounce(setSkillsContainerHeight, 250));
+    }
 
     // Skills filter
     const filterBtns = document.querySelectorAll('.skill-filter-btn');
