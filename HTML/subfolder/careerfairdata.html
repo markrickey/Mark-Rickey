@@ -25,13 +25,17 @@
         .shape {
             position: absolute;
             will-change: transform;
+            animation-duration: 45s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
         }
         .shape svg {
             width: 100%;
             height: 100%;
         }
-        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
-        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
+        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation-name: subtle-drift-1; }
+        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation-name: subtle-drift-2; }
 
         @keyframes subtle-drift-1 {
             from { transform: rotate(0deg) translateX(-20px); }
@@ -93,19 +97,19 @@
         /* --- MOBILE OPTIMIZATIONS --- */
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem; /* Smaller title on mobile */
+                font-size: 2.5rem;
             }
             .main-card {
-                padding: 1.5rem; /* Less padding on mobile */
+                padding: 1.5rem;
             }
             .section-heading {
-                font-size: 1.875rem; /* Smaller section headers */
+                font-size: 1.875rem;
             }
             .stat-value {
-                font-size: 2.25rem; /* Smaller stat numbers */
+                font-size: 2.25rem;
             }
             .chart-container {
-                grid-template-columns: 1fr; /* Stack charts vertically */
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -174,111 +178,118 @@
              </a>
         </footer>
     </main>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const data = [
-            {"Industry": "Manufacturing", "Positions": 97, "Employers": 15},
-            {"Industry": "Unspecified", "Positions": 1167, "Employers": 22},
-            {"Industry": "Healthcare", "Positions": 0, "Employers": 2},
-            {"Industry": "Law Enforcement", "Positions": 0, "Employers": 2},
-            {"Industry": "DoD", "Positions": 25, "Employers": 1},
-            {"Industry": "Transportation", "Positions": 4, "Employers": 1},
-            {"Industry": "Retail", "Positions": 20, "Employers": 1},
-            {"Industry": "Recruiter", "Positions": 20, "Employers": 1},
-            {"Industry": "Other", "Positions": 3, "Employers": 1}
-        ];
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Data and Chart Configuration ---
+    const data = [
+        {"Industry": "Manufacturing", "Positions": 97, "Employers": 15},
+        {"Industry": "Unspecified", "Positions": 1167, "Employers": 22},
+        {"Industry": "Healthcare", "Positions": 0, "Employers": 2},
+        {"Industry": "Law Enforcement", "Positions": 0, "Employers": 2},
+        {"Industry": "DoD", "Positions": 25, "Employers": 1},
+        {"Industry": "Transportation", "Positions": 4, "Employers": 1},
+        {"Industry": "Retail", "Positions": 20, "Employers": 1},
+        {"Industry": "Recruiter", "Positions": 20, "Employers": 1},
+        {"Industry": "Other", "Positions": 3, "Employers": 1}
+    ];
 
-        const labels = data.map(d => d.Industry);
-        const pieColors = ['#245365','#DB7A4D','#87CDE9', '#FEAF66', '#314669', '#CAAC8F', '#DA5F63', '#EAD6C5', '#a87b5a'];
+    const labels = data.map(d => d.Industry);
+    const pieColors = ['#245365','#DB7A4D','#87CDE9', '#FEAF66', '#314669', '#CAAC8F', '#DA5F63', '#EAD6C5', '#a87b5a'];
 
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: { family: 'Inter', size: 12 },
-                        color: '#374151'
-                    }
-                }
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: true, // Keep aspect ratio for better sizing
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { font: { family: 'Inter', size: 12 }, color: '#374151' }
             }
-        };
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    };
 
-        const createChart = (id, chartData, chartLabels) => {
-            const ctx = document.getElementById(id);
-            if (!ctx) return;
-            new Chart(ctx.getContext('2d'), {
-                type: 'doughnut',
-                data: {
-                    labels: chartLabels,
-                    datasets: [{
-                        label: 'Count',
-                        data: chartData,
-                        backgroundColor: pieColors,
-                        borderColor: '#ffffff',
-                        borderWidth: 2,
-                    }]
-                },
-                options: chartOptions
-            });
-        };
+    // --- Animation Functions ---
+
+    // Function to animate the counting numbers
+    function countUp(statValue) {
+        if (statValue.classList.contains('counted')) return;
+        statValue.classList.add('counted');
+
+        const target = +statValue.getAttribute('data-count');
+        let count = 0;
+        const duration = 1500;
+        const stepTime = Math.abs(Math.floor(duration / target)) || 1;
+
+        const timer = setInterval(() => {
+            count++;
+            if (count >= target) {
+                count = target;
+                clearInterval(timer);
+            }
+            statValue.innerText = count.toLocaleString();
+        }, stepTime);
+    }
+
+    // Function to initialize a chart
+    function initChart(canvasId, data, labels) {
+        const ctx = document.getElementById(canvasId);
+        if (!ctx || ctx.classList.contains('rendered')) return;
         
-        // --- CORRECTED SCRIPT LOGIC ---
-        const observer = new IntersectionObserver((entries, observerInstance) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const targetElement = entry.target;
-                    targetElement.classList.add('in-view');
+        ctx.classList.add('rendered');
+        const chartData = (canvasId === 'employerChart') ? data.map(d => d.Employers) : data.map(d => d.Positions);
 
-                    // Check for a stat counter inside the element
-                    const statValue = targetElement.querySelector('.stat-value');
-                    if (statValue && !statValue.classList.contains('counted')) {
-                        statValue.classList.add('counted');
-                        const targetCount = +statValue.getAttribute('data-count');
-                        let currentCount = 0;
-                        const updateInterval = 20; // Run every 20ms
-                        const totalDuration = 1500; // 1.5 seconds total
-                        const increment = Math.max(1, Math.ceil(targetCount / (totalDuration / updateInterval)));
-
-                        const timer = setInterval(() => {
-                            currentCount += increment;
-                            if (currentCount >= targetCount) {
-                                currentCount = targetCount;
-                                clearInterval(timer);
-                            }
-                            statValue.innerText = currentCount.toLocaleString();
-                        }, updateInterval);
-                    }
-
-                    // Check for a chart canvas inside the element
-                    const employerChartCanvas = targetElement.querySelector('#employerChart');
-                    if (employerChartCanvas && !employerChartCanvas.classList.contains('rendered')) {
-                        employerChartCanvas.classList.add('rendered');
-                        createChart('employerChart', data.map(d => d.Employers), labels);
-                    }
-                    
-                    const positionsChartCanvas = targetElement.querySelector('#positionsChart');
-                    if (positionsChartCanvas && !positionsChartCanvas.classList.contains('rendered')) {
-                        positionsChartCanvas.classList.add('rendered');
-                        createChart('positionsChart', data.map(d => d.Positions), labels);
-                    }
-
-                    // Stop observing the element once it has been animated
-                    observerInstance.unobserve(targetElement);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        // Observe only the wrapper elements
-        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
-            if (el) observer.observe(el);
+        new Chart(ctx.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Count',
+                    data: chartData,
+                    backgroundColor: pieColors,
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                }]
+            },
+            options: chartOptions
         });
+    }
+
+    // --- IntersectionObserver Setup ---
+
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+
+                // Trigger fade-in animation
+                el.classList.add('in-view');
+
+                // If it's a stat card, trigger the count-up
+                const statValue = el.querySelector('.stat-value');
+                if (statValue) {
+                    countUp(statValue);
+                }
+
+                // If it contains a chart, initialize it
+                const chartCanvas = el.querySelector('canvas');
+                if (chartCanvas) {
+                    initChart(chartCanvas.id, data, labels);
+                }
+
+                // We're done with this element, no need to watch it anymore
+                observerInstance.unobserve(el);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    // Observe all elements that need to be animated
+    document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+        observer.observe(el);
     });
-    </script>
+});
+</script>
 </body>
 </html>
