@@ -7,11 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        html, body {
+        html {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            min-height: 100%;
-            height: 100%;
         }
         body {
             background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
@@ -22,6 +20,15 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+        #hero, #about, #experience, #projects, #skills, #contact {
+            position: relative;
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+        #hero {
+            padding-top: 0;
+            padding-bottom: 0;
         }
         .main-content {
             flex: 1 0 auto;
@@ -45,25 +52,22 @@
         .sidebar-signature:hover { opacity: 1;}
         .hero-overlay { background: rgba(36,83,101,0.40); position: absolute; inset: 0; z-index: 0; pointer-events: none;}
         .hero-fade-bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #FFF 100%); z-index: 1; pointer-events: none;}
-        /* Experience card rotator styles */
-        .experience-card-rotator { position: relative; min-height: 380px;}
+        .content-card { background-color: rgba(255,255,255,0.97); border-radius: 1rem; box-shadow: 0 4px 15px rgba(36,83,101,0.09); padding: 2.15rem; border: 1px solid #EFEFEF; position: relative;}
+        .experience-card-title { color: #245365; }
+        .experience-card-dates { color: #DB7A4D; }
+        .experience-bullet-icon { color: #DB7A4D; }
+        .experience-card-rotator { position: relative; min-height: 380px; }
         .experience-card-rotator .content-card {
             position: absolute;
             width: 100%;
             opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.5,1,0.89,1), visibility 0.3s;
+            transition: opacity 0.5s ease-in-out;
             visibility: hidden;
         }
         .experience-card-rotator .content-card.is-active {
             opacity: 1;
             visibility: visible;
-            z-index: 1;
         }
-        .content-card { background-color: rgba(255,255,255,0.97); border-radius: 1rem; box-shadow: 0 4px 15px rgba(36,83,101,0.09); padding: 2.15rem; border: 1px solid #EFEFEF; position: relative;}
-        .experience-card-title { color: #245365; }
-        .experience-card-dates { color: #DB7A4D; }
-        .experience-bullet-icon { color: #DB7A4D; }
-        /* Fade-in on scroll animation */
         .section-header, .fade-in-on-scroll {
             opacity: 0;
             transform: translateY(20px);
@@ -73,18 +77,16 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Skills chips */
         .skill-chip { display:inline-block; margin: .25rem; padding: 0.6rem 1.25rem; font-size: 1rem; font-weight: 500; border-radius: 1.5rem; background: #fff; color: #245365; border: 1.5px solid #DB7A4D; box-shadow: 0 1px 4px rgba(36,83,101,0.08); cursor: default;}
         .skill-chip.cat-technical{ background: #245365; color:#fff; border-color:#245365;}
         .skill-chip.cat-professional{ background:#e4eef8; color:#245365; border-color:#245365;}
         .skill-chip.cat-leadership{ background: #ffd9cc; color:#a15a2d; border-color:#DB7A4D;}
         .skill-filter-btn { background: #fff4ef; color: #245365; padding: 0.6rem 1.5rem; font-size: 1.08rem; margin: .15rem .35rem .6rem .35rem; font-weight: 700; border: 2px solid #DB7A4D; border-radius: 1rem; cursor: pointer; transition: background 0.16s, color 0.17s, transform 0.18s;}
         .skill-filter-btn.active, .skill-filter-btn:focus { background: #DB7A4D; color: #fff; border-color: #245365; transform: scale(1.05);}
-        html, body, main { height: 100%; }
-        .site-footer-adjust { flex-shrink: 0; }
-        @media (max-width:600px) {
-            .main-content{ margin-right:0;}
-            .sidebar-footer{padding-top:1.4rem;}
+        
+        /* ADDED: Smooth transition for the skills container height */
+        #skills-chips-container {
+            transition: min-height 0.3s ease-out;
         }
     </style>
 </head>
@@ -101,8 +103,7 @@
             </ul>
         </nav>
         <div class="sidebar-contact-icons">
-            <a href="mailto:markrickey01@gmail.com" class="contact-icon-link" aria-label="Email">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+            <a href="mailto:markrickey01@gmail.com" class="contact-icon-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
             <a href="https://www.linkedin.com/in/markrickey01" target="_blank" rel="noopener" class="contact-icon-link" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
         </div>
         <div class="sidebar-footer">
@@ -112,7 +113,8 @@
             </a>
         </div>
     </aside>
-    <main class="main-content flex-1 flex flex-col">
+
+    <main class="main-content">
         <section id="hero" class="min-h-screen flex flex-col">
             <div class="absolute inset-0 z-0">
                 <video autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -131,27 +133,22 @@
                 <a href="mailto:markrickey01@gmail.com" class="hero-button inline-block bg-[#DB7A4D] hover:bg-[#c26636] text-white px-8 py-3 rounded-xl font-semibold shadow transition transform hover:scale-105">Connect with Me</a>
             </div>
         </section>
+
         <section id="about" class="bg-white">
             <div class="max-w-5xl mx-auto px-6 relative z-10">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header text-center mb-6">About Me</h2>
                 <p class="text-lg text-gray-700 leading-relaxed fade-in-on-scroll text-center max-w-4xl mx-auto">With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.</p>
             </div>
         </section>
+
         <section id="experience" class="bg-[#F9FAFB]">
             <div class="max-w-4xl mx-auto px-6 relative z-10">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] text-center section-header mb-12">Experience</h2>
-                <div class="experience-card-rotator fade-in-on-scroll">
-                    <!-- Each content-card is one slide of the rotator -->
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Congressional Staffer</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">U.S. House of Representatives | May 2025 – Present</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Primary account manager for DoD, VA, Military Academies.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Refined & executed advanced data management systems.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Authored briefing memos on critical policy areas.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided direct case management support for vulnerable populations.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">U.S. Army, Project Manager/NCO</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">United States Army | Global Operations</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Directed multi-billion dollar global operations and strategic initiatives.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Orchestrated inter-agency and inter-service collaboration.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed $10M+ government contracts, boosting efficiency by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Served as Principal Spokesperson at international conferences.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Optimization Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">McDonald's | Jun 2018 - Nov 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Spearheaded content management (20% accuracy/efficiency gain).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Drove consumer engagement (15% interaction, 10% retention uplift).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Developed reporting tools/KPIs, achieving 25% sales increase.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Digital Marketing Manager</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Association Forum | Nov 2017 - Jun 2018</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Increased visibility by 25% & member engagement by 20%.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Optimized websites for 30% content visibility improvement.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Delivered detailed analytics for strategic decision-making.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed social media and coordinated marketing campaigns.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Undergraduate Creative Director Intern</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Dec 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Designed visual/digital content for student success, solidifying branding.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Managed cross-functional teams and conducted market research.</li></ul></div>
-                    <div class="content-card"><h3 class="text-xl font-semibold experience-card-title mb-3">Student Orientation Supervisor</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">Purdue University | Apr 2016 - Aug 2016</p><ul class="list-none text-gray-700 space-y-2 text-base"><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Supervised software solutions for course enrollment & new student management.</li><li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Provided guidance/support to new students, fostering a welcoming environment.</li></ul></div>
-                </div>
+                <div class="experience-card-rotator">
+                    </div>
             </div>
         </section>
+
         <section id="projects" class="bg-white">
             <div class="max-w-6xl mx-auto px-6 relative z-10">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header text-center mb-12">Work Studies</h2>
@@ -163,6 +160,7 @@
                 </div>
             </div>
         </section>
+
         <section id="skills" class="bg-[#F9FAFB]">
             <div class="max-w-5xl mx-auto px-6 relative z-10">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header text-center mb-8">Skills</h2>
@@ -174,41 +172,13 @@
                 </div>
                 <div id="skills-chips-container" class="relative fade-in-on-scroll">
                     <div class="flex flex-wrap justify-center max-w-3xl mx-auto" id="skills-chips">
-                        <span class="skill-chip cat-technical" data-cat="technical">HTML/CSS</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">JavaScript</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Tailwind CSS</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Python</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">SQL</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Google Sheets</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Google Forms</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Data Analysis</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Data Visualization</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">UI/UX Design</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Canva</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">AI/ML Concepts</span>
-                        <span class="skill-chip cat-technical" data-cat="technical">Cybersecurity Concepts</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Strategic Planning</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Process Optimization</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Constituent Relations</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Stakeholder Management</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Project Management</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Policy Research</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Public Speaking</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Cross-functional Collaboration</span>
-                        <span class="skill-chip cat-professional" data-cat="professional">Strategic Communication</span>
-                        <span class="skill-chip cat-leadership" data-cat="leadership">Leadership</span>
-                        <span class="skill-chip cat-leadership" data-cat="leadership">Adaptability</span>
-                        <span class="skill-chip cat-leadership" data-cat="leadership">Resilience</span>
-                        <span class="skill-chip cat-leadership" data-cat="leadership">Mentorship</span>
-                        <span class="skill-chip cat-leadership" data-cat="leadership">Problem-Solving</span>
-                        <span class="skill-chip cat-leadership" data-cat="leadership">Innovation</span>
-                    </div>
+                        </div>
                 </div>
             </div>
         </section>
-        <!-- BOTTOM CORRECTED: footer now has id 'contact' and always fits at site bottom -->
+
         <footer id="contact" class="flex-shrink-0 relative py-12 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16 overflow-x-hidden">
-            <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-14">
+             <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-end gap-10 md:gap-14">
                 <div class="flex-shrink-0 md:w-1/2 flex justify-center md:justify-start mb-10 md:mb-0">
                     <div class="bg-white/80 rounded-2xl shadow-lg p-4 pb-1 flex flex-col items-center border-2 border-[#FFD9CC]">
                         <img src="MarkRickeySignature.png" alt="Mark Rickey Signature" class="h-44 sm:h-52 md:h-56 w-auto drop-shadow-md rounded-md mt-1 mb-2" style="max-width:100%;">
@@ -239,6 +209,48 @@
     </main>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+    // --- Dynamic Content Definitions ---
+    const experienceData = [
+        { title: 'Congressional Staffer', company: 'U.S. House of Representatives', dates: 'May 2025 – Present', points: ['Primary account manager for DoD, VA, Military Academies.', 'Refined & executed advanced data management systems.', 'Authored briefing memos on critical policy areas.', 'Provided direct case management support for vulnerable populations.'] },
+        { title: 'U.S. Army, Project Manager/NCO', company: 'United States Army', dates: 'Global Operations', points: ['Directed multi-billion dollar global operations and strategic initiatives.', 'Orchestrated inter-agency and inter-service collaboration.', 'Managed $10M+ government contracts, boosting efficiency by 20%.', 'Served as Principal Spokesperson at international conferences.'] },
+        { title: 'Digital Optimization Supervisor', company: 'McDonald\'s', dates: 'Jun 2018 - Nov 2018', points: ['Spearheaded content management (20% accuracy/efficiency gain).', 'Drove consumer engagement (15% interaction, 10% retention uplift).', 'Developed reporting tools/KPIs, achieving 25% sales increase.'] },
+        { title: 'Digital Marketing Manager', company: 'Association Forum', dates: 'Nov 2017 - Jun 2018', points: ['Increased visibility by 25% & member engagement by 20%.', 'Optimized websites for 30% content visibility improvement.', 'Delivered detailed analytics for strategic decision-making.'] }
+    ];
+
+    const skillsData = [
+        { name: 'HTML/CSS', category: 'technical' }, { name: 'JavaScript', category: 'technical' }, { name: 'Tailwind CSS', category: 'technical' },
+        { name: 'Python', category: 'technical' }, { name: 'SQL', category: 'technical' }, { name: 'Google Sheets', category: 'technical' },
+        { name: 'Google Forms', category: 'technical' }, { name: 'Data Analysis', category: 'technical' }, { name: 'Data Visualization', category: 'technical' },
+        { name: 'UI/UX Design', category: 'technical' }, { name: 'Canva', category: 'technical' }, { name: 'AI/ML Concepts', category: 'technical' },
+        { name: 'Cybersecurity Concepts', category: 'technical' }, { name: 'Strategic Planning', category: 'professional' }, { name: 'Process Optimization', category: 'professional' },
+        { name: 'Constituent Relations', category: 'professional' }, { name: 'Stakeholder Management', category: 'professional' }, { name: 'Project Management', category: 'professional' },
+        { name: 'Policy Research', category: 'professional' }, { name: 'Public Speaking', category: 'professional' }, { name: 'Cross-functional Collaboration', category: 'professional' },
+        { name: 'Strategic Communication', category: 'professional' }, { name: 'Leadership', category: 'leadership' }, { name: 'Adaptability', category: 'leadership' },
+        { name: 'Resilience', category: 'leadership' }, { name: 'Mentorship', category: 'leadership' }, { name: 'Problem-Solving', category: 'leadership' }, { name: 'Innovation', category: 'leadership' }
+    ];
+
+    // --- Dynamic Content Population ---
+    const experienceContainer = document.querySelector('.experience-card-rotator');
+    experienceData.forEach(job => {
+        const card = document.createElement('div');
+        card.className = 'content-card';
+        card.innerHTML = `<h3 class="text-xl font-semibold experience-card-title mb-3">${job.title}</h3><p class="text-gray-600 mb-5 text-sm experience-card-dates">${job.company} | ${job.dates}</p><ul class="list-none text-gray-700 space-y-2 text-base">${job.points.map(p => `<li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>${p}</li>`).join('')}</ul>`;
+        experienceContainer.appendChild(card);
+    });
+
+    const skillsChipsContainer = document.getElementById('skills-chips');
+    skillsData.forEach(skill => {
+        const chip = document.createElement('span');
+        chip.className = `skill-chip cat-${skill.category}`;
+        chip.setAttribute('data-cat', skill.category);
+        chip.textContent = skill.name;
+        skillsChipsContainer.appendChild(chip);
+    });
+
+
+    // --- Core Functionality ---
+
     // Typing effect for roles
     const typingElement = document.getElementById('typing-effect');
     if (typingElement) {
@@ -247,44 +259,62 @@ document.addEventListener('DOMContentLoaded', function() {
         function type() {
             const currentRole = roles[roleIndex];
             let typeSpeed = 120;
-            if (isDeleting) {
-                typeSpeed = 50;
-                typingElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            if (!isDeleting && charIndex === currentRole.length) {
-                isDeleting = true;
-                typeSpeed = 2000;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500;
-            }
+            if (isDeleting) { typeSpeed = 50; typingElement.textContent = currentRole.substring(0, charIndex - 1); charIndex--; }
+            else { typingElement.textContent = currentRole.substring(0, charIndex + 1); charIndex++; }
+            if (!isDeleting && charIndex === currentRole.length) { isDeleting = true; typeSpeed = 2000; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
             setTimeout(type, typeSpeed);
         }
         type();
     }
+
+    // --- MODIFICATION START: Functions to prevent layout shift in Skills section ---
+    const skillsContainer = document.getElementById('skills-chips-container');
+    const skillsChips = document.getElementById('skills-chips');
+    let resizeTimer;
+
+    // This function measures the container and sets a min-height to prevent it from collapsing
+    const setSkillsContainerHeight = () => {
+        // Temporarily reset min-height to accurately measure the natural height
+        skillsContainer.style.minHeight = '0px';
+        const containerHeight = skillsChips.offsetHeight;
+        skillsContainer.style.minHeight = `${containerHeight}px`;
+    };
+    
+    // Debounce function to limit how often the resize function is called
+    const debounce = (func, delay) => {
+        return function(...args) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    };
+
+    // Set the height on initial load
+    setSkillsContainerHeight();
+    // Re-calculate and set the height on window resize (debounced for performance)
+    window.addEventListener('resize', debounce(setSkillsContainerHeight, 250));
+    // --- MODIFICATION END ---
+
+
     // Skills filter
     const filterBtns = document.querySelectorAll('.skill-filter-btn');
-    const skillChips = document.querySelectorAll('#skills-chips .skill-chip');
+    const allSkillChips = document.querySelectorAll('#skills-chips .skill-chip');
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', function () {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 const filter = this.getAttribute('data-filter');
-                skillChips.forEach(chip => {
-                    const chipCategory = chip.getAttribute('data-cat');
-                    chip.style.display = (filter === 'all' || chipCategory === filter) ? '' : 'none';
+                allSkillChips.forEach(chip => {
+                    chip.style.display = (filter === 'all' || chip.getAttribute('data-cat') === filter) ? '' : 'none';
                 });
             });
         });
-        // Initial filter trigger
         document.querySelector('.skill-filter-btn[data-filter="all"]').click();
     }
+
     // Fade-in on scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -293,19 +323,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { rootMargin: '0px', threshold: 0.1 });
-    document.querySelectorAll('.section-header, .fade-in-on-scroll').forEach(el => {
-        if(el) observer.observe(el);
-    });
+    document.querySelectorAll('.section-header, .fade-in-on-scroll').forEach(el => observer.observe(el));
+
     // Update scrollspy (highlight nav on scroll)
     const sections = document.querySelectorAll('main > section, main > footer');
     const navLinks = document.querySelectorAll('.sidebar-nav a');
     window.addEventListener('scroll', () => {
         let currentId = '';
-        const scrollY = window.pageYOffset;
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            if (scrollY >= sectionTop - (sectionHeight / 3)) {
+            if (window.pageYOffset >= section.offsetTop - 300) {
                 currentId = section.getAttribute('id');
             }
         });
@@ -316,10 +342,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
     // Experience card "rotator"
-    const rotatorContainer = document.querySelector('.experience-card-rotator');
-    if (rotatorContainer) {
-        const cards = rotatorContainer.querySelectorAll('.content-card');
+    const rotator = document.querySelector('.experience-card-rotator');
+    if (rotator) {
+        const cards = rotator.querySelectorAll('.content-card');
         let cardIndex = 0;
         function showNextCard() {
             if (cards.length === 0) return;
