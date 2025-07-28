@@ -25,7 +25,6 @@
         .shape {
             position: absolute;
             will-change: transform;
-            transition: transform 0.2s linear;
         }
         .shape svg {
             width: 100%;
@@ -114,10 +113,10 @@
 <body class="antialiased">
 
     <div class="animated-bg-shapes">
-        <div class="shape blob-1" data-speed="0.3">
+        <div class="shape blob-1">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
         </div>
-        <div class="shape blob-2" data-speed="0.2">
+        <div class="shape blob-2">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
         </div>
     </div>
@@ -171,7 +170,7 @@
 
         <footer class="text-center py-8">
              <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                &larr; Back to Main Portfolio
+                 &larr; Back to Main Portfolio
              </a>
         </footer>
     </main>
@@ -229,44 +228,54 @@
             });
         };
         
-        const observerOptions = { threshold: 0.1 };
-
-        const observer = new IntersectionObserver((entries) => {
+        // --- CORRECTED SCRIPT LOGIC ---
+        const observer = new IntersectionObserver((entries, observerInstance) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                    
-                    const statValue = entry.target.querySelector('.stat-value');
+                    const targetElement = entry.target;
+                    targetElement.classList.add('in-view');
+
+                    // Check for a stat counter inside the element
+                    const statValue = targetElement.querySelector('.stat-value');
                     if (statValue && !statValue.classList.contains('counted')) {
-                        const target = +statValue.getAttribute('data-count');
-                        let count = 0;
-                        const duration = 1500;
-                        const stepTime = Math.max(1, Math.floor(duration / target));
+                        statValue.classList.add('counted');
+                        const targetCount = +statValue.getAttribute('data-count');
+                        let currentCount = 0;
+                        const updateInterval = 20; // Run every 20ms
+                        const totalDuration = 1500; // 1.5 seconds total
+                        const increment = Math.max(1, Math.ceil(targetCount / (totalDuration / updateInterval)));
 
                         const timer = setInterval(() => {
-                            count++;
-                            if (count >= target) {
-                                count = target;
+                            currentCount += increment;
+                            if (currentCount >= targetCount) {
+                                currentCount = targetCount;
                                 clearInterval(timer);
                             }
-                            statValue.innerText = count.toLocaleString();
-                        }, stepTime);
-                        statValue.classList.add('counted');
+                            statValue.innerText = currentCount.toLocaleString();
+                        }, updateInterval);
                     }
 
-                    if (entry.target.id === 'employerChart' && !entry.target.classList.contains('rendered')) {
+                    // Check for a chart canvas inside the element
+                    const employerChartCanvas = targetElement.querySelector('#employerChart');
+                    if (employerChartCanvas && !employerChartCanvas.classList.contains('rendered')) {
+                        employerChartCanvas.classList.add('rendered');
                         createChart('employerChart', data.map(d => d.Employers), labels);
-                        entry.target.classList.add('rendered');
                     }
-                    if (entry.target.id === 'positionsChart' && !entry.target.classList.contains('rendered')) {
+                    
+                    const positionsChartCanvas = targetElement.querySelector('#positionsChart');
+                    if (positionsChartCanvas && !positionsChartCanvas.classList.contains('rendered')) {
+                        positionsChartCanvas.classList.add('rendered');
                         createChart('positionsChart', data.map(d => d.Positions), labels);
-                        entry.target.classList.add('rendered');
                     }
+
+                    // Stop observing the element once it has been animated
+                    observerInstance.unobserve(targetElement);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.fade-in-on-scroll, .stat-card, #employerChart, #positionsChart').forEach(el => {
+        // Observe only the wrapper elements
+        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
             if (el) observer.observe(el);
         });
     });
