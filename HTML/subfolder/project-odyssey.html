@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Odyssey | AI Trip Planner</title>
-    <!-- Tailwind and Google Fonts via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -14,13 +13,11 @@
             background-attachment: fixed;
             color: #22303a;
             min-height: 100vh;
-            display: flex;
+            display: flex; /* Establishes a flex container for sticky footer */
             flex-direction: column;
         }
         main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            flex-grow: 1; /* Allows main content to expand and push footer down */
         }
         .loader {
             border: 4px solid #f3f3f3;
@@ -57,7 +54,7 @@
             border-radius: 1.5rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in.in-view { opacity: 1; transform: translateY(0); }
     </style>
 </head>
@@ -66,8 +63,8 @@
         <div class="shape blob-1"><svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg></div>
         <div class="shape blob-2"><svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg></div>
     </div>
-<main>
-    <div id="app" class="max-w-5xl mx-auto p-4 relative z-10 flex-1 flex flex-col">
+<main class="relative z-10">
+    <div id="app" class="max-w-5xl mx-auto p-4">
         <section class="text-center py-16 text-white fade-in">
             <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-lg">Project: Odyssey</h1>
             <p class="text-lg text-white/90 mt-2">An AI-Powered Collaborative Travel Hub</p>
@@ -148,23 +145,267 @@
                 </div>
             </div>
         </div>
-        <footer class="text-center py-10 fade-in" style="transition-delay: 400ms;">
-            <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                &larr; Back to Main Portfolio
-            </a>
-        </footer>
+        
     </div>
 </main>
+<footer class="text-center py-10 fade-in" style="transition-delay: 400ms;">
+    <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        &larr; Back to Main Portfolio
+    </a>
+</footer>
 
 <script type="module">
-/* See previous replies for the JS; only one correction is needed for assets:
-   - If you add custom images, use /Mark-Rickey/... not relative paths.
-   Rest of your JS is fully functional.
- */
- // === [Your Original JavaScript – Unchanged] ===
-// ... (No change needed to your code logic)
-/// Place your full original JavaScript here (as in your latest version) ...
+    // --- Firebase and Gemini Imports ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, onSnapshot, collection, query, where, updateDoc, arrayUnion, arrayRemove, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // --- ⚠️ ACTION REQUIRED: Add your keys here ---
+    const firebaseConfig = {
+      // Paste your Firebase config object here
+      apiKey: "AIza...",
+      authDomain: "...",
+      projectId: "...",
+      // ...etc
+    };
+    const geminiApiKey = "AIza..."; // Paste your Gemini API Key here
+
+    // --- Firebase Initialization ---
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // --- Global State & UI Elements ---
+    let currentUser = null;
+    let currentTripId = null;
+    let unsubscribeTripListener = null;
+    const modal = document.getElementById('trip-details-modal');
+    const modalLoader = document.getElementById('modal-loader');
+    
+    // --- IntersectionObserver for Animations ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+
+    // --- Authentication ---
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        const userInfoDisplay = document.getElementById('user-info-display');
+        const authButton = document.getElementById('auth-button');
+
+        if (user) {
+            userInfoDisplay.innerHTML = `UserID: <span class="font-bold text-[#245365]">${user.uid.substring(0,8)}</span>`;
+            authButton.textContent = 'Logout';
+            authButton.onclick = () => signOut(auth);
+            loadUserTrips();
+        } else {
+            userInfoDisplay.innerHTML = `<span class="text-gray-600">Not logged in</span>`;
+            authButton.textContent = 'Login';
+            authButton.onclick = () => signInAnonymously(auth);
+            document.getElementById('trips-container').innerHTML = `<div class="main-card p-6 text-center text-gray-500 col-span-full">Please log in to see your trips.</div>`;
+        }
+    });
+    signInAnonymously(auth).catch(err => console.error("Anonymous sign-in failed:", err));
+
+
+    // --- Gemini API Call ---
+    async function callGemini(prompt, isJson = false) {
+        modalLoader.style.display = 'flex';
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
+        const payload = { contents: [{ parts: [{ text: prompt }] }] };
+        if (isJson) {
+            payload.generationConfig = { response_mime_type: "application/json" };
+        }
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`API Error: ${response.status}`);
+            const result = await response.json();
+            return result.candidates[0].content.parts[0].text;
+        } catch (error) {
+            console.error("Gemini API Error:", error);
+            alert("An error occurred with the AI suggestion. Please check the API key and try again.");
+            return null;
+        } finally {
+            modalLoader.style.display = 'none';
+        }
+    }
+
+    // --- Core Trip Logic ---
+    document.getElementById('create-trip-btn').addEventListener('click', async () => {
+        const tripNameInput = document.getElementById('trip-name');
+        if (!currentUser || !tripNameInput.value.trim()) return;
+        const tripData = {
+            name: tripNameInput.value.trim(),
+            ownerId: currentUser.uid,
+            collaborators: [currentUser.uid],
+            itinerary: [],
+            expenses: []
+        };
+        await addDoc(collection(db, "trips"), tripData);
+        tripNameInput.value = '';
+    });
+
+    function loadUserTrips() {
+        if (!currentUser) return;
+        const tripsQuery = query(collection(db, "trips"), where("collaborators", "array-contains", currentUser.uid));
+        onSnapshot(tripsQuery, (snapshot) => {
+            const container = document.getElementById('trips-container');
+            container.innerHTML = '';
+            if (snapshot.empty) {
+                container.innerHTML = `<div class="main-card p-6 text-center text-gray-500 col-span-full">No trips yet. Create one to get started!</div>`;
+                return;
+            }
+            snapshot.forEach((doc, index) => {
+                const trip = doc.data();
+                const card = document.createElement('div');
+                card.className = 'trip-card p-5 cursor-pointer transition-all duration-300 transform hover:-translate-y-1 fade-in';
+                card.style.transitionDelay = `${index * 50}ms`;
+                card.innerHTML = `<h3 class="text-xl font-bold text-[#245365] mb-2 truncate">${trip.name}</h3><p class="text-sm text-gray-500">${trip.collaborators.length} Collaborator(s)</p>`;
+                card.onclick = () => openTripModal(doc.id, trip.name);
+                container.appendChild(card);
+                observer.observe(card);
+            });
+        });
+    }
+    
+    function openTripModal(tripId, tripName) {
+        currentTripId = tripId;
+        document.getElementById('modal-trip-name').textContent = tripName;
+        modal.classList.remove('hidden');
+        if (unsubscribeTripListener) unsubscribeTripListener();
+        const tripRef = doc(db, "trips", tripId);
+        unsubscribeTripListener = onSnapshot(tripRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const trip = docSnap.data();
+                renderItinerary(trip.itinerary || []);
+                renderExpenses(trip.expenses || []);
+                renderCollaborators(trip.collaborators || []);
+            }
+        });
+    }
+    document.getElementById('close-modal-btn').addEventListener('click', () => {
+         modal.classList.add('hidden');
+         currentTripId = null;
+         if (unsubscribeTripListener) unsubscribeTripListener();
+    });
+
+    // --- Itinerary ---
+    function renderItinerary(items) {
+        document.getElementById('itinerary-list').innerHTML = items.sort((a,b) => a.date.localeCompare(b.date)).map((item, i) => `
+            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg shadow-sm">
+                <div><p class="font-medium">${item.activity}</p><p class="text-sm text-gray-500">${item.date}</p></div>
+                <button data-index="${i}" class="remove-itinerary-btn text-red-400 hover:text-red-600 font-bold text-lg">&times;</button>
+            </div>`).join('');
+    }
+    document.getElementById('suggest-itinerary-btn').addEventListener('click', async () => {
+        const tripName = document.getElementById('modal-trip-name').textContent;
+        const prompt = `For a trip named "${tripName}", suggest a 5-day itinerary. Provide an "activity" and "date" (e.g., "Day 1"). Return as a JSON array of objects: [{"activity": "Explore...", "date": "Day 1"}, ...].`;
+        const result = await callGemini(prompt, true);
+        if (result) {
+            try {
+                const suggestions = JSON.parse(result);
+                if (Array.isArray(suggestions)) {
+                    await updateDoc(doc(db, "trips", currentTripId), { itinerary: arrayUnion(...suggestions) });
+                }
+            } catch (e) { console.error("Itinerary suggestion parse error", e); }
+        }
+    });
+    document.getElementById('add-itinerary-btn').addEventListener('click', async () => {
+        const activity = document.getElementById('itinerary-item');
+        const date = document.getElementById('itinerary-date');
+        if (!activity.value.trim() || !date.value) return;
+        await updateDoc(doc(db, "trips", currentTripId), { itinerary: arrayUnion({ activity: activity.value, date: date.value }) });
+        activity.value = ''; date.value = '';
+    });
+
+    // --- Expenses ---
+    function renderExpenses(items) {
+        let total = 0;
+        document.getElementById('expense-list').innerHTML = items.map((item, i) => {
+            total += Number(item.amount) || 0;
+            return `
+            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg shadow-sm">
+                <div>
+                    <p class="font-medium">${item.description}</p>
+                    <p class="text-xs text-[#245365] bg-teal-100 rounded-full px-2 py-0.5 inline-block font-semibold">${item.category || 'Uncategorized'}</p>
+                </div>
+                <div class="flex items-center">
+                    <span class="font-bold text-gray-800 mr-4">$${Number(item.amount).toFixed(2)}</span>
+                    <button data-index="${i}" class="remove-expense-btn text-red-400 hover:text-red-600 font-bold text-lg">&times;</button>
+                </div>
+            </div>`;
+        }).join('');
+        document.getElementById('total-expenses').textContent = total.toFixed(2);
+    }
+    document.getElementById('categorize-expense-btn').addEventListener('click', async () => {
+        const desc = document.getElementById('expense-description').value;
+        if (!desc.trim()) return;
+        const prompt = `Categorize this expense: "${desc}". Use one word: Food, Lodging, Transport, Activity, Shopping, Other.`;
+        const category = await callGemini(prompt);
+        if (category) document.getElementById('expense-category').value = category.trim().replace('.', '');
+    });
+    document.getElementById('add-expense-btn').addEventListener('click', async () => {
+        const desc = document.getElementById('expense-description');
+        const amount = document.getElementById('expense-amount');
+        const cat = document.getElementById('expense-category');
+        if (!desc.value.trim() || !amount.value) return;
+        await updateDoc(doc(db, "trips", currentTripId), { expenses: arrayUnion({ description: desc.value, amount: Number(amount.value), category: cat.value || 'Uncategorized' }) });
+        desc.value = ''; amount.value = ''; cat.value = '';
+    });
+
+    // --- Collaborators ---
+    const colors = ['bg-red-400', 'bg-green-400', 'bg-blue-400', 'bg-yellow-400', 'bg-purple-400', 'bg-pink-400'];
+    function renderCollaborators(items) {
+        document.getElementById('collaborators-list').innerHTML = items.map(id => {
+            const initial = id ? id.charAt(0).toUpperCase() : '?';
+            const color = colors[initial.charCodeAt(0) % colors.length];
+            return `
+            <div class="group flex items-center" title="${id}">
+                <div class="w-8 h-8 rounded-full ${color} text-white flex items-center justify-center font-bold text-sm shadow-inner">${initial}</div>
+                <button data-id="${id}" class="remove-collaborator-btn ml-[-10px] mt-[-20px] text-red-500 bg-white rounded-full w-5 h-5 flex items-center justify-center shadow opacity-0 group-hover:opacity-100 transition-opacity">&times;</button>
+            </div>`;
+        }).join('');
+    }
+    document.getElementById('add-collaborator-btn').addEventListener('click', async () => {
+        const idInput = document.getElementById('collaborator-id');
+        if (!idInput.value.trim()) return;
+        await updateDoc(doc(db, "trips", currentTripId), { collaborators: arrayUnion(idInput.value.trim()) });
+        idInput.value = '';
+    });
+    
+    // --- Event Delegation for Remove Buttons ---
+    document.getElementById('app').addEventListener('click', async (e) => {
+        if (!currentTripId || !e.target.closest('button[data-index], button[data-id]')) return;
+        
+        const tripRef = doc(db, "trips", currentTripId);
+        const tripSnap = await getDoc(tripRef);
+        if (!tripSnap.exists()) return;
+        const tripData = tripSnap.data();
+
+        if (e.target.matches('.remove-itinerary-btn')) {
+            const items = tripData.itinerary || [];
+            items.splice(e.target.dataset.index, 1);
+            await updateDoc(tripRef, { itinerary: items });
+        }
+        if (e.target.matches('.remove-expense-btn')) {
+            const items = tripData.expenses || [];
+            items.splice(e.target.dataset.index, 1);
+            await updateDoc(tripRef, { expenses: items });
+        }
+        if (e.target.matches('.remove-collaborator-btn')) {
+            await updateDoc(tripRef, { collaborators: arrayRemove(e.target.dataset.id) });
+        }
+    });
 </script>
-<!-- If you need to add custom images/scripts for this page: use /Mark-Rickey/... -->
 </body>
 </html>
