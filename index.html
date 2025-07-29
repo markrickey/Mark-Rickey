@@ -38,23 +38,21 @@
             align-items: center;
             justify-content: flex-end; /* Push content to the far right */
             gap: 1rem; /* Space between signature and hamburger */
-            /* Gradient background for the header banner */
-            background: linear-gradient(to bottom, #245365 0%, rgba(36,83,101,0.0) 100%); /* Fades from solid top to transparent bottom */
+            background: transparent; /* Make header transparent so hero video shows through */
         }
         .fixed-header-container img {
-            /* Inherits h-56 sm:h-64 md:h-72 from HTML, ensuring large size */
             margin-bottom: 0 !important; /* Override any mb-1 from previous attempts */
-            height: 56px; /* Base height for mobile */
+            height: 40px; /* Base height for mobile (h-10) */
             width: auto;
         }
         @media (min-width: 640px) { /* sm breakpoint */
             .fixed-header-container img {
-                height: 64px;
+                height: 48px; /* sm:h-12 */
             }
         }
         @media (min-width: 768px) { /* md breakpoint */
             .fixed-header-container img {
-                height: 72px;
+                height: 56px; /* md:h-14 */
             }
         }
 
@@ -377,7 +375,7 @@
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="content-card" tabindex="0">
-                    <h3 class="text-xl font-semibold experience-card-title mb-3">Intern, Digital Content Strategist</h3>
+                    <h3 class="experience-card-title mb-3">Intern, Digital Content Strategist</h3>
                     <p class="text-gray-600 mb-5 text-sm experience-card-dates">Evolve & Elevate | Jun 2017 - Oct 2017</p>
                     <ul class="list-none text-gray-700 space-y-2 text-base">
                         <li class="flex items-start"><span class="experience-bullet-icon mr-2">&#10003;</span>Executed content strategy for digital channels (social media, website, email).</li>
@@ -550,7 +548,7 @@
     <!-- Contact Banner -->
     <footer id="contact" class="flex-shrink-0 relative py-12 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-16 overflow-x-hidden">
         <div class="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] mb-3">Let’s Collaborate</h2>
+            <h2 class="text-3xl font-extrabold text-[#245365] mb-3">Let’s Collaborate</h2>
             <p class="mb-5 text-lg text-[#245365]/90 font-medium">
                 Want to create something impactful together? Just reach out.
             </p>
