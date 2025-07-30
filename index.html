@@ -21,7 +21,7 @@
             display: flex;
             flex-direction: column;
         }
-        #hero, #about, #experience, #projects, #skills, #contact {
+        #hero, #about, #experience, #projects, #articles, #input, #skills, #contact {
             position: relative;
             padding-top: 6rem;
             padding-bottom: 6rem;
@@ -96,6 +96,8 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Work Studies</a></li>
+                <li><a href="#articles" class="nav-link">Articles</a></li>
+                <li><a href="#input" class="nav-link">Thoughts</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -170,8 +172,56 @@
                         <a href="HTML/subfolder/casework.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">View Full Study &rarr;</a>
                     </div>
 
+                    <div class="content-card work-study-card fade-in-on-scroll">
+                        <h3 class="text-xl font-semibold text-[#245365] mb-2">AI Leadership Research (2025)</h3>
+                        <p class="text-gray-700 text-sm mb-4">A dynamic, interactive application summarizing key research on becoming the "golden standard" in AI strategy.</p>
+                        <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/b6415374b84504d00a0b662b2fab3f56/dcb5c56c-9a0f-4984-84e9-d542764cd42f/index.html"
+                           class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md" target="_blank" rel="noopener">
+                           View Application &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <!-- New Articles Section -->
+        <section id="articles" class="bg-[#F9FAFB]">
+          <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header text-center mb-12">Articles & Insights</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="content-card fade-in-on-scroll">
+                <h3 class="text-xl font-semibold text-[#245365] mb-2">AI Governance: Leading Through Change</h3>
+                <p class="text-gray-700 text-sm mb-4">An exploration of ethics, compliance, and leadership in AI-driven organizations.</p>
+                <a href="HTML/subfolder/golden-standard-ai-leadership.html.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">Read Article &rarr;</a>
+              </div>
+              <div class="content-card fade-in-on-scroll">
+                <h3 class="text-xl font-semibold text-[#245365] mb-2">Strategic Project Leadership in the Age of AI</h3>
+                <p class="text-gray-700 text-sm mb-4">A practical guide for project managers seeking to blend AI strategy with human skills.</p>
+                <a href="HTML/articles/strategicprojectai.html" class="text-[#DB7A4D] hover:underline text-sm font-medium rounded-md">Read Article &rarr;</a>
+              </div>
+              <!-- Add more articles here as needed -->
+            </div>
+          </div>
+        </section>
+
+        <!-- New Thoughts & Opinions Section -->
+        <section id="input" class="bg-white">
+          <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#245365] section-header text-center mb-8">Thoughts & Opinions</h2>
+            <div class="space-y-6">
+              <div class="content-card fade-in-on-scroll">
+                <h4 class="text-lg font-semibold text-[#245365] mb-1">Why Human Judgment Will Always Matter</h4>
+                <p class="text-gray-700 text-sm">Even as AI becomes ubiquitous, the nuance of human judgment, especially in ethical gray zones, keeps leaders indispensable.</p>
+                <span class="text-xs text-gray-400">Posted July 2025</span>
+              </div>
+              <div class="content-card fade-in-on-scroll">
+                <h4 class="text-lg font-semibold text-[#245365] mb-1">Quick Take: Prompt Engineering as a Leadership Skill</h4>
+                <p class="text-gray-700 text-sm">The difference between average and golden-standard leaders in an AI world lies in their ability to consistently ask better questions.</p>
+                <span class="text-xs text-gray-400">Posted July 2025</span>
+              </div>
+              <!-- Add more thought/opinion cards here -->
+            </div>
+          </div>
         </section>
 
         <section id="skills" class="bg-[#F9FAFB]">
