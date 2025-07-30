@@ -395,3 +395,22 @@ function loadPosts() {
 }
 // On page load:
 loadPosts();
+document.getElementById('revealAdminBtn').onclick = function() {
+  if (prompt("Admin access: what is the code?") === "Manila92!") {
+    document.getElementById('adminPostForm').style.display = 'block';
+    this.style.display = 'none';
+  }
+};
+function doPost(e) {
+  var params = JSON.parse(e.postData.contents);
+  if (params.type === "contact") {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ContactMessages");
+    var row = [
+      new Date(), params.name, params.email, params.organization || "", params.subject || "", params.message
+    ];
+    sheet.appendRow(row);
+    return ContentService.createTextOutput(JSON.stringify({success:true, type:"contact"}));
+  }
+  // ... handle other types (like 'blog') ...
+}
+
