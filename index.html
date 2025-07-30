@@ -550,6 +550,21 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </section>
+                            <section id="blog" class="content-section bg-alt fade-in-on-scroll">
+  <h2 class="section-header">Thoughts & Micro-Insights</h2>
+  
+  <!-- Admin-only blog form (hidden by default) -->
+  <div id="adminPostForm" style="display:none;">
+    <form id="blogPostForm" onsubmit="submitBlogPost(); return false;">
+      <textarea id="blogPost" placeholder="Type your thought here..." rows="3" cols="40"></textarea>
+      <button type="submit">Post Now</button>
+    </form>
+  </div>
+
+  <!-- Blog posts show here for everyone -->
+  <div id="blogFeed"></div>
+</section>
+
         <!-- Skills Section -->
         <section id="skills" class="content-section bg-alt fade-in-on-scroll">
             <div class="section-container">
