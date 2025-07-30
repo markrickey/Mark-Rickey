@@ -1,187 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Job Fair Data Analysis | Mark R.</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        html, body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, #245365 0%, #DB7A4D 54%, #FFD9CC 100%);
-            background-attachment: fixed;
-            color: #22303a;
-            scroll-behavior: smooth;
-        }
-        
-        .animated-bg-shapes {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            overflow: hidden;
-            z-index: 0;
-        }
-        .shape {
-            position: absolute;
-            will-change: transform;
-            animation-duration: 45s;
-            animation-timing-function: ease-in-out;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
-        }
-        .shape svg {
-            width: 100%;
-            height: 100%;
-        }
-        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation-name: subtle-drift-1; }
-        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation-name: subtle-drift-2; }
-
-        @keyframes subtle-drift-1 {
-            from { transform: rotate(0deg) translateX(-20px); }
-            to { transform: rotate(360deg) translateX(20px); }
-        }
-        @keyframes subtle-drift-2 {
-            from { transform: rotate(0deg) translateY(30px); }
-            to { transform: rotate(-360deg) translateY(-30px); }
-        }
-        
-        .main-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        .section-heading {
-            color: #245365;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 80px;
-            height: 4px;
-            background-color: #DB7A4D;
-            border-radius: 2px;
-        }
-        .stat-card {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(36,83,101,0.07);
-            border: 1px solid #fff;
-        }
-        .stat-title {
-            color: #245365;
-            font-weight: 600;
-        }
-        .stat-value {
-            color: #DB7A4D;
-            font-weight: 800;
-            line-height: 1;
-        }
-        .fade-in-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-on-scroll.in-view {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- MOBILE OPTIMIZATIONS --- */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .main-card {
-                padding: 1.5rem;
-            }
-            .section-heading {
-                font-size: 1.875rem;
-            }
-            .stat-value {
-                font-size: 2.25rem;
-            }
-            .chart-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Job Fair Data Analysis | Mark R.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #245365 0%, #DB7A4D 54%, #FFD9CC 100%);
+      background-attachment: fixed;
+      color: #22303a;
+      scroll-behavior: smooth;
+    }
+    #progressContainer {
+      position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 9999;
+      background: rgba(220,150,118,0.12);
+    }
+    #progressBar {
+      height: 100%; background: linear-gradient(90deg,#245365,#DB7A4D); width: 0%; transition: width 0.3s;
+    }
+    .animated-bg-shapes {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .shape { position: absolute; will-change: transform; animation-duration: 45s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-direction: alternate;}
+    .shape svg { width: 100%; height: 100%;}
+    .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation-name: subtle-drift-1;}
+    .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation-name: subtle-drift-2;}
+    @keyframes subtle-drift-1 { from { transform: rotate(0deg) translateX(-20px); } to { transform: rotate(360deg) translateX(20px); } }
+    @keyframes subtle-drift-2 { from { transform: rotate(0deg) translateY(30px); } to { transform: rotate(-360deg) translateY(-30px); } }
+    .main-card {
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+    .section-heading {
+      color: #245365;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0; width: 80px; height: 4px;
+      background-color: #DB7A4D;
+      border-radius: 2px;
+    }
+    .stat-card {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(36,83,101,0.07);
+      border: 1px solid #fff;
+      transition: box-shadow 0.17s, background 0.15s, transform 0.16s;
+    }
+    .stat-card:hover { box-shadow: 0 8px 30px rgba(36,83,101,0.19); transform: scale(1.017);}
+    .stat-title { color: #245365; font-weight: 600;}
+    .stat-value { color: #DB7A4D; font-weight: 800; line-height: 1;}
+    /* Animations */
+    .fade-in-on-scroll, .fade-section, .fade-header, .main-card, .stat-card {
+      opacity: 0; transform: translateY(38px); transition: opacity 0.7s, transform 0.7s;
+    }
+    .fade-section.visible, .fade-in-on-scroll.in-view, .fade-header.visible, .main-card.visible, .stat-card.visible {
+      opacity: 1; transform: translateY(0px);
+    }
+    /* Responsive fix for cards and heading on mobile */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem;}
+      .main-card { padding: 1.5rem;}
+      .section-heading { font-size: 1.875rem;}
+      .stat-value { font-size: 2.25rem;}
+      .chart-container { grid-template-columns: 1fr;}
+    }
+  </style>
 </head>
 <body class="antialiased">
-
-    <div class="animated-bg-shapes">
-        <div class="shape blob-1">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
-        </div>
-        <div class="shape blob-2">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
-        </div>
+  <div id="progressContainer"><div id="progressBar"></div></div>
+  <div class="animated-bg-shapes">
+    <div class="shape blob-1">
+      <svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
     </div>
-    
-    <main class="relative z-10">
-        <section class="py-20 px-4 text-center text-white">
-            <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-xl mb-3 hero-title">Job Fair Data Analysis</h1>
-            <p class="text-lg text-white/90 mb-5 mx-auto max-w-2xl">Dynamic insights & interactive visualization of employer and opportunity data from a public job fair event.</p>
-            <p class="text-sm text-white/70">Data Analysis by Mark R. | Updated July 2025</p>
-        </section>
+    <div class="shape blob-2">
+      <svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
+    </div>
+  </div>
+  <main class="relative z-10">
+    <section class="py-20 px-4 text-center text-white fade-section">
+      <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-xl mb-3 hero-title fade-header">Job Fair Data Analysis</h1>
+      <p class="text-lg text-white/90 mb-5 mx-auto max-w-2xl">Dynamic insights & interactive visualization of employer and opportunity data from a public job fair event.</p>
+      <p class="text-sm text-white/70">Data Analysis by Mark R. | Updated July 2025</p>
+    </section>
 
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-            <div class="main-card p-6 sm:p-8 lg:p-10">
-                <div class="border-l-4 border-[#DB7A4D] bg-orange-50 text-orange-800 p-4 rounded-r-lg mb-8 fade-in-on-scroll">
-                    <b>Note:</b> Some industry and opportunity fields were unstructured; trend interpretations are simplified for clarity.
-                </div>
-                
-                <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Key Takeaways</h2>
-                <ul class="mb-10 space-y-3 text-gray-700 text-lg fade-in-on-scroll">
-                    <li><span class="font-bold text-[#DB7A4D]">Manufacturing Leads Demand:</span> Highest employer participation and number of open positions.</li>
-                    <li><span class="font-bold text-[#245365]">Opportunity Diversity:</span> Strong presence of full-time, part-time, internship, and seasonal roles.</li>
-                    <li><span class="font-bold text-[#DB7A4D]">Data Quality Gap:</span> A significant number of "Unspecified" entries highlights a need for better structured data collection in future events.</li>
-                </ul>
-                
-                <hr class="my-10 border-gray-200">
-                
-                <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">At a Glance</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center mb-12">
-                    <div class="stat-card fade-in-on-scroll">
-                        <span class="stat-title text-lg">Total Employers</span>
-                        <span class="stat-value text-5xl" data-count="43">0</span>
-                    </div>
-                    <div class="stat-card fade-in-on-scroll">
-                        <span class="stat-title text-lg">Total Open Positions</span>
-                        <span class="stat-value text-5xl" data-count="1473">0</span>
-                    </div>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-10 chart-container">
-                    <div class="fade-in-on-scroll">
-                        <h3 class="font-semibold text-lg mb-2 text-center text-[#245365]">Employers by Industry</h3>
-                        <canvas id="employerChart"></canvas>
-                    </div>
-                    <div class="fade-in-on-scroll">
-                        <h3 class="font-semibold text-lg mb-2 text-center text-[#245365]">Open Positions by Industry</h3>
-                        <canvas id="positionsChart"></canvas>
-                    </div>
-                </div>
-            </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="main-card p-6 sm:p-8 lg:p-10 fade-section">
+        <div class="border-l-4 border-[#DB7A4D] bg-orange-50 text-orange-800 p-4 rounded-r-lg mb-8 fade-in-on-scroll">
+          <b>Note:</b> Some industry and opportunity fields were unstructured; trend interpretations are simplified for clarity.
         </div>
+        <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Key Takeaways</h2>
+        <ul class="mb-10 space-y-3 text-gray-700 text-lg fade-in-on-scroll">
+          <li><span class="font-bold text-[#DB7A4D]">Manufacturing Leads Demand:</span> Highest employer participation and number of open positions.</li>
+          <li><span class="font-bold text-[#245365]">Opportunity Diversity:</span> Strong presence of full-time, part-time, internship, and seasonal roles.</li>
+          <li><span class="font-bold text-[#DB7A4D]">Data Quality Gap:</span> A significant number of "Unspecified" entries highlights a need for better structured data collection in future events.</li>
+        </ul>
+        <hr class="my-10 border-gray-200">
+        <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">At a Glance</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center mb-12">
+          <div class="stat-card fade-in-on-scroll">
+            <span class="stat-title text-lg">Total Employers</span>
+            <span class="stat-value text-5xl" data-count="43">0</span>
+          </div>
+          <div class="stat-card fade-in-on-scroll">
+            <span class="stat-title text-lg">Total Open Positions</span>
+            <span class="stat-value text-5xl" data-count="1473">0</span>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10 chart-container">
+          <div class="fade-in-on-scroll">
+            <h3 class="font-semibold text-lg mb-2 text-center text-[#245365]">Employers by Industry</h3>
+            <canvas id="employerChart"></canvas>
+          </div>
+          <div class="fade-in-on-scroll">
+            <h3 class="font-semibold text-lg mb-2 text-center text-[#245365]">Open Positions by Industry</h3>
+            <canvas id="positionsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center py-8 fade-section">
+      <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        &larr; Back to Main Portfolio
+      </a>
+    </footer>
+  </main>
+  <script>
+    // Progress bar on scroll
+    (function(){
+      const pb = document.getElementById('progressBar');
+      window.addEventListener('scroll', function(){
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        pb.style.width = `${Math.min(100, (scrollTop/docHeight)*100)}%`;
+      }, {passive:true});
+    })();
+    // Fade-in animation for everything
+    document.addEventListener('DOMContentLoaded', function () {
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {threshold:0.20});
+      document.querySelectorAll('.fade-section,.fade-in-on-scroll,.fade-header,.main-card,.stat-card').forEach(el=>io.observe(el));
 
-        <footer class="text-center py-8">
-             <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                 &larr; Back to Main Portfolio
-             </a>
-        </footer>
-    </main>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // --- Data and Chart Configuration ---
-    const data = [
+      // --- Data and Chart Configuration ---
+      const data = [
         {"Industry": "Manufacturing", "Positions": 97, "Employers": 15},
         {"Industry": "Unspecified", "Positions": 1167, "Employers": 22},
         {"Industry": "Healthcare", "Positions": 0, "Employers": 2},
@@ -191,105 +172,73 @@ document.addEventListener('DOMContentLoaded', function () {
         {"Industry": "Retail", "Positions": 20, "Employers": 1},
         {"Industry": "Recruiter", "Positions": 20, "Employers": 1},
         {"Industry": "Other", "Positions": 3, "Employers": 1}
-    ];
-
-    const labels = data.map(d => d.Industry);
-    const pieColors = ['#245365','#DB7A4D','#87CDE9', '#FEAF66', '#314669', '#CAAC8F', '#DA5F63', '#EAD6C5', '#a87b5a'];
-
-    const chartOptions = {
+      ];
+      const labels = data.map(d => d.Industry);
+      const pieColors = ['#245365','#DB7A4D','#87CDE9', '#FEAF66', '#314669', '#CAAC8F', '#DA5F63', '#EAD6C5', '#a87b5a'];
+      const chartOptions = {
         responsive: true,
-        maintainAspectRatio: true, // Keep aspect ratio for better sizing
+        maintainAspectRatio: true, 
         plugins: {
-            legend: {
-                position: 'bottom',
-                labels: { font: { family: 'Inter', size: 12 }, color: '#374151' }
-            }
+          legend: {
+            position: 'bottom',
+            labels: { font: { family: 'Inter', size: 12 }, color: '#374151' }
+          }
         },
-        animation: {
-            animateScale: true,
-            animateRotate: true
-        }
-    };
-
-    // --- Animation Functions ---
-
-    // Function to animate the counting numbers
-    function countUp(statValue) {
+        animation: { animateScale: true, animateRotate: true }
+      };
+      // Animate numbers on scroll
+      function countUp(statValue) {
         if (statValue.classList.contains('counted')) return;
         statValue.classList.add('counted');
-
         const target = +statValue.getAttribute('data-count');
         let count = 0;
-        const duration = 1500;
+        const duration = 1350;
         const stepTime = Math.abs(Math.floor(duration / target)) || 1;
-
         const timer = setInterval(() => {
-            count++;
-            if (count >= target) {
-                count = target;
-                clearInterval(timer);
-            }
-            statValue.innerText = count.toLocaleString();
+          count++;
+          if (count >= target) { count = target; clearInterval(timer); }
+          statValue.innerText = count.toLocaleString();
         }, stepTime);
-    }
-
-    // Function to initialize a chart
-    function initChart(canvasId, data, labels) {
+      }
+      // Chart initialize
+      function initChart(canvasId, data, labels) {
         const ctx = document.getElementById(canvasId);
         if (!ctx || ctx.classList.contains('rendered')) return;
-        
         ctx.classList.add('rendered');
         const chartData = (canvasId === 'employerChart') ? data.map(d => d.Employers) : data.map(d => d.Positions);
-
         new Chart(ctx.getContext('2d'), {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Count',
-                    data: chartData,
-                    backgroundColor: pieColors,
-                    borderColor: '#ffffff',
-                    borderWidth: 2,
-                }]
-            },
-            options: chartOptions
+          type: 'doughnut',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Count',
+              data: chartData,
+              backgroundColor: pieColors,
+              borderColor: '#ffffff',
+              borderWidth: 2,
+            }]
+          },
+          options: chartOptions
         });
-    }
-
-    // --- IntersectionObserver Setup ---
-
-    const observer = new IntersectionObserver((entries, observerInstance) => {
+      }
+      // Use IntersectionObserver for animation, chart, stats
+      const fadeObs = new IntersectionObserver((entries, observerInstance) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-
-                // Trigger fade-in animation
-                el.classList.add('in-view');
-
-                // If it's a stat card, trigger the count-up
-                const statValue = el.querySelector('.stat-value');
-                if (statValue) {
-                    countUp(statValue);
-                }
-
-                // If it contains a chart, initialize it
-                const chartCanvas = el.querySelector('canvas');
-                if (chartCanvas) {
-                    initChart(chartCanvas.id, data, labels);
-                }
-
-                // We're done with this element, no need to watch it anymore
-                observerInstance.unobserve(el);
-            }
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            el.classList.add('in-view');
+            // Number count-up
+            const statValue = el.querySelector('.stat-value');
+            if (statValue) countUp(statValue);
+            // Chart init
+            const chartCanvas = el.querySelector('canvas');
+            if (chartCanvas) initChart(chartCanvas.id, data, labels);
+            observerInstance.unobserve(el);
+          }
         });
-    }, { threshold: 0.2 });
-
-    // Observe all elements that need to be animated
-    document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
-        observer.observe(el);
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.fade-in-on-scroll, .stat-card, .main-card, .fade-section').forEach(el => fadeObs.observe(el));
     });
-});
-</script>
+  </script>
 </body>
 </html>
