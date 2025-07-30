@@ -1,176 +1,231 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technology Writing & Content Strategy | Mark R.</title>
-    <meta name="description" content="Expert technology writing and content strategy for high-stakes industries like government, defense, and data analytics.">
-    
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
-            background-attachment: fixed;
-        }
-        .animated-bg-shapes {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            overflow: hidden;
-            z-index: -1;
-        }
-        .shape {
-            position: absolute;
-            will-change: transform;
-        }
-        .shape svg {
-            width: 100%;
-            height: 100%;
-        }
-        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
-        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Technology Writing & Content Strategy | Mark R.</title>
+  <meta name="description" content="Expert technology writing and content strategy for high-stakes industries like government, defense, and data analytics.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
+      background-attachment: fixed;
+      color: #e5e7eb;
+    }
+    .animated-bg-shapes {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1;
+    }
+    .shape { position: absolute; will-change: transform; }
+    .shape svg { width: 100%; height: 100%; }
+    .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
+    .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
+    @keyframes subtle-drift-1 { from { transform: rotate(0deg) translateX(-20px); } to { transform: rotate(360deg) translateX(20px); } }
+    @keyframes subtle-drift-2 { from { transform: rotate(0deg) translateY(30px); } to { transform: rotate(-360deg) translateY(-30px); } }
 
-        @keyframes subtle-drift-1 {
-            from { transform: rotate(0deg) translateX(-20px); }
-            to { transform: rotate(360deg) translateX(20px); }
-        }
-        @keyframes subtle-drift-2 {
-            from { transform: rotate(0deg) translateY(30px); }
-            to { transform: rotate(-360deg) translateY(-30px); }
-        }
-    </style>
+    /* Progress Bar */
+    #progressContainer {
+      position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 9999;
+      background: rgba(220,150,118,0.12);
+    }
+    #progressBar {
+      height: 100%; background: linear-gradient(90deg,#245365,#DB7A4D); width:0%; transition: width 0.3s;
+    }
+    /* Fade-in Animation */
+    .fade-section, .fade-card, .fade-header {
+      opacity: 0; transform: translateY(34px); transition: opacity 0.65s, transform 0.65s;
+    }
+    .fade-section.visible, .fade-card.visible, .fade-header.visible { opacity: 1; transform: translateY(0);}
+    /* Content Card Styling (modern, glassy) */
+    .content-card, .blur-card {
+      background-color: rgba(31,41,55,0.6); border-radius: 1.1rem;
+      border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 8px 32px rgba(36,83,101,0.13);
+      position: relative; padding: 2.15rem; margin-bottom: 1.5rem;
+      transition: box-shadow 0.15s, background 0.2s, transform 0.18s;
+    }
+    .content-card:hover, .blur-card:hover {
+      box-shadow: 0 14px 42px rgba(36,83,101,0.21); transform: scale(1.014);
+      background: rgba(31,41,55,0.85);
+    }
+    /* Card gradient fadeout for overflow (case studies) */
+    .gradient-bottom { position: absolute; bottom:0; left:0; right:0; height:4rem; z-index:2;
+      background: linear-gradient(to top, #1a232b 80%, rgba(31,41,55,0.0)); pointer-events: none;}
+    /* Section Title */
+    .section-title { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.04em; }
+    /* Responsive grid/tailwind mimic for cards */
+    .three-col { display: grid; grid-template-columns: repeat(1,1fr); gap: 1.5rem;}
+    .two-col { display: grid; grid-template-columns: 1fr; gap: 2rem;}
+    @media (min-width:768px) {
+      .three-col { grid-template-columns: repeat(3,1fr);}
+      .two-col { grid-template-columns: repeat(2,1fr);}
+    }
+    /* Misc (for existing classes) */
+    .mb-8 { margin-bottom:2rem;} .mb-12 { margin-bottom:3.2rem;} .mb-4 { margin-bottom:0.75rem;}
+    .mb-6 { margin-bottom:1.2rem;} .mb-10 { margin-bottom:2.5rem;}
+    .mt-4 { margin-top: 1rem;} .mt-8 { margin-top:2rem;}
+    .text-center { text-align:center; }
+    .text-white { color: #fff;}
+    .text-orange { color: #DB7A4D; }
+    .text-sky { color: #22d3ee;}
+    .btn-main {
+      background: #DB7A4D; color:#fff; padding:14px 34px; border-radius: 0.6rem; font-weight: 700; font-size: 1.15rem;
+      box-shadow: 0 2px 10px #db7a4d49; transition: background .2s,transform .15s;
+      display: inline-block; text-decoration:none; margin: 0 auto;
+    }
+    .btn-main:hover { background: #c26636; transform: scale(1.03);}
+    .border-dash { border-top:1.5px dashed #fff3; margin-top:2.2rem; margin-bottom:2.2rem;}
+    /* For cards with "COMING SOON" blurs */
+    .blur-over { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:5;}
+    .blur-sm { filter: blur(3px); pointer-events: none;}
+    /* Misc utility */
+    .rounded-lg { border-radius: 0.9rem;} .rounded-2xl { border-radius: 1.3rem;}
+    .shadow-lg { box-shadow: 0 8px 40px rgba(49,59,79,0.21);}
+    .hover\:shadow-xl:hover { box-shadow:0 16px 54px rgba(49,59,79,0.25);}
+    .overflow-hidden { overflow:hidden;}
+    .prose { max-width: 92%; margin:0 auto;}
+    .text-lg { font-size:1.19rem;}
+    .text-sm { font-size:0.98rem;}
+    .font-extrabold { font-weight:800;}
+    .font-bold { font-weight:700;}
+    .font-semibold { font-weight:600;}
+    .mx-auto { margin-left:auto; margin-right:auto;}
+    .max-w-2xl { max-width: 36rem;}
+    .max-w-4xl { max-width: 64rem;}
+    .px-6 { padding-left:1.75rem;padding-right:1.75rem;}
+    .px-8 { padding-left:2.5rem;padding-right:2.5rem;}
+    .py-10 { padding-top:2.7rem;padding-bottom:2.7rem;}
+    .py-6 { padding-top:1.5rem;padding-bottom:1.5rem;}
+    .my-8 { margin-top:2rem;margin-bottom:2rem;}
+    .my-10 { margin-top:2.65rem;margin-bottom:2.65rem;}
+    /* Custom scrollbar color for dark bg */
+    ::-webkit-scrollbar { width: 10px; background:#245365;}
+    ::-webkit-scrollbar-thumb { background:#DB7A4D; border-radius:8px; }
+  </style>
 </head>
 <body class="text-gray-200 antialiased">
-
-    <div class="animated-bg-shapes">
-        <div class="shape blob-1">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
-        </div>
-         <div class="shape blob-2">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
-        </div>
+  <div id="progressContainer"><div id="progressBar"></div></div>
+  <div class="animated-bg-shapes">
+    <div class="shape blob-1">
+      <svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
     </div>
-
-    <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-gray-900/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg">
-        
-        <section class="text-center mb-10">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">Clear, Authoritative Technology Content for High-Stakes Industries</h1>
-            <p class="text-lg sm:text-xl text-orange-200 max-w-2xl mx-auto">Your technology is groundbreaking, but communicating its value is a different challenge. You need more than just a writer; you need a strategist who understands your world.</p>
-        </section>
-
-        <section class="mb-10">
-            <p class="text-gray-300 text-center">I specialize in translating complex technical subjects into clear, compelling narratives. With over a decade of experience in **global military operations** and **strategic government relations**, I bring a level of precision and real-world context that generalist writers cannot match.</p>
-        </section>
-        
-        <hr class="my-10 border-white/20">
-
-        <section>
-            <h2 class="text-3xl font-bold text-white text-center mb-8">My Areas of Expertise</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
-                    <h3 class="font-bold text-lg text-[#DB7A4D] mb-2">Government & Public Sector</h3>
-                    <p class="text-gray-400 text-sm">Articulating how AI, data, and cybersecurity solutions impact policy, streamline operations, and enhance public services.</p>
-                </div>
-                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
-                    <h3 class="font-bold text-lg text-[#DB7A4D] mb-2">Military & Defense Tech</h3>
-                    <p class="text-gray-400 text-sm">Explaining complex operational systems, defense technology, and logistical innovations with clarity and authority.</p>
-                </div>
-                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
-                    <h3 class="font-bold text-lg text-[#DB7A4D] mb-2">Data & Analytics</h3>
-                    <p class="text-gray-400 text-sm">Breaking down data management, AI/ML concepts, and process optimization for technical and executive audiences.</p>
-                </div>
+    <div class="shape blob-2">
+      <svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
+    </div>
+  </div>
+  <main class="max-w-4xl mx-auto my-8 sm:my-12 px-6 sm:px-8 py-10 bg-gray-900/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg">
+    <section class="text-center mb-10 fade-section">
+      <h1 class="section-title text-white mb-4 fade-header">Clear, Authoritative Technology Content for High-Stakes Industries</h1>
+      <p class="text-lg sm:text-xl text-orange max-w-2xl mx-auto">Your technology is groundbreaking, but communicating its value is a different challenge. You need more than just a writer; you need a strategist who understands your world.</p>
+    </section>
+    <section class="mb-10 fade-section">
+      <p class="text-gray-300 text-center">I specialize in translating complex technical subjects into clear, compelling narratives. With over a decade of experience in <span class="text-white font-semibold">global military operations</span> and <span class="text-white font-semibold">strategic government relations</span>, I bring a level of precision and real-world context that generalist writers cannot match.</p>
+    </section>
+    <hr class="my-10 border-dash">
+    <section class="fade-section">
+      <h2 class="text-3xl font-bold text-white text-center mb-8 fade-header">My Areas of Expertise</h2>
+      <div class="three-col">
+        <div class="content-card fade-card">
+          <h3 class="font-bold text-lg text-orange mb-2">Government & Public Sector</h3>
+          <p class="text-gray-400 text-sm">Articulating how AI, data, and cybersecurity solutions impact policy, streamline operations, and enhance public services.</p>
+        </div>
+        <div class="content-card fade-card">
+          <h3 class="font-bold text-lg text-orange mb-2">Military & Defense Tech</h3>
+          <p class="text-gray-400 text-sm">Explaining complex operational systems, defense technology, and logistical innovations with clarity and authority.</p>
+        </div>
+        <div class="content-card fade-card">
+          <h3 class="font-bold text-lg text-orange mb-2">Data & Analytics</h3>
+          <p class="text-gray-400 text-sm">Breaking down data management, AI/ML concepts, and process optimization for technical and executive audiences.</p>
+        </div>
+      </div>
+    </section>
+    <hr class="my-10 border-dash">
+    <section class="fade-section">
+      <h2 class="text-3xl font-bold text-white text-center mb-8 fade-header">Writing Samples & Case Studies</h2>
+      <div class="two-col gap-8">
+        <div class="relative content-card fade-card max-h-96 overflow-hidden">
+          <h3 class="font-bold text-lg text-sky mb-2">Case Study: Modernizing Constituent Casework with Data</h3>
+          <div class="prose prose-sm prose-invert text-gray-400">
+            <p>A deep dive into how a simple, custom-built data management system using Google Sheets and Forms replaced an inefficient legacy process, resulting in a 40% reduction in response times.</p>
+            <p>The primary challenge was the unstructured nature of incoming requests. Emails, phone calls, and in-person visits created disparate data streams with no central source of truth. This led to duplicated efforts, missed follow-ups, and an inability to track trends in constituent needs. Our solution began with designing a standardized intake form...</p>
+            <p>By mapping the entire workflow, we identified key bottlenecks that could be automated. For instance, categorizing requests upon entry allowed for immediate routing to the correct staff member, eliminating a manual triage step that previously consumed hours each week. The implementation of conditional logic within the form ensured that all necessary information was captured upfront, reducing the back-and-forth communication required to resolve a case...</p>
+          </div>
+          <div class="gradient-bottom"></div>
+        </div>
+        <div class="relative content-card fade-card max-h-96 overflow-hidden">
+          <div class="blur-over"><div class="bg-gray-900/80 text-white font-bold text-lg py-2 px-6 rounded-md border-2 border-dashed border-gray-500 transform -rotate-6">COMING SOON</div></div>
+          <div class="blur-sm"> 
+            <h3 class="font-bold text-lg text-sky mb-2">AI in Public Sector Logistics: A Strategic Overview</h3>
+            <div class="prose prose-sm prose-invert text-gray-400">
+              <p>An analysis of how emerging AI and machine learning technologies are poised to revolutionize supply chain management for government and defense agencies, from predictive maintenance to autonomous routing.</p>
+              <p>The Department of Defense manages one of the most complex supply chains on the planet, where efficiency can have mission-critical consequences. Traditional logistics models rely on historical data and fixed routes, which are often slow to adapt to real-time disruptions. This paper explores the integration of predictive analytics, powered by machine learning, to anticipate demand surges and potential shortages before they occur...</p>
             </div>
-        </section>
-
-        <hr class="my-10 border-white/20">
-
-        <section>
-            <h2 class="text-3xl font-bold text-white text-center mb-8">Writing Samples & Case Studies</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                <div class="relative bg-gray-800/50 border border-white/10 rounded-lg p-6 max-h-96 overflow-hidden">
-                    <h3 class="font-bold text-lg text-sky-300 mb-2">Case Study: Modernizing Constituent Casework with Data</h3>
-                    <div class="prose prose-sm prose-invert text-gray-400">
-                        <p>A deep dive into how a simple, custom-built data management system using Google Sheets and Forms replaced an inefficient legacy process, resulting in a 40% reduction in response times.</p>
-                        <p>The primary challenge was the unstructured nature of incoming requests. Emails, phone calls, and in-person visits created disparate data streams with no central source of truth. This led to duplicated efforts, missed follow-ups, and an inability to track trends in constituent needs. Our solution began with designing a standardized intake form...</p>
-                        <p>By mapping the entire workflow, we identified key bottlenecks that could be automated. For instance, categorizing requests upon entry allowed for immediate routing to the correct staff member, eliminating a manual triage step that previously consumed hours each week. The implementation of conditional logic within the form ensured that all necessary information was captured upfront, reducing the back-and-forth communication required to resolve a case...</p>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-800 to-transparent"></div>
-                </div>
-
-                <div class="relative bg-gray-800/50 border border-white/10 rounded-lg p-6 max-h-96 overflow-hidden">
-                    <div class="absolute inset-0 flex items-center justify-center z-10">
-                        <div class="bg-gray-900/80 text-white font-bold text-lg py-2 px-6 rounded-md border-2 border-dashed border-gray-500 transform -rotate-6">
-                            COMING SOON
-                        </div>
-                    </div>
-                    <div class="blur-sm"> <h3 class="font-bold text-lg text-sky-300 mb-2">AI in Public Sector Logistics: A Strategic Overview</h3>
-                        <div class="prose prose-sm prose-invert text-gray-400">
-                            <p>An analysis of how emerging AI and machine learning technologies are poised to revolutionize supply chain management for government and defense agencies, from predictive maintenance to autonomous routing.</p>
-                            <p>The Department of Defense manages one of the most complex supply chains on the planet, where efficiency can have mission-critical consequences. Traditional logistics models rely on historical data and fixed routes, which are often slow to adapt to real-time disruptions. This paper explores the integration of predictive analytics, powered by machine learning, to anticipate demand surges and potential shortages before they occur...</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <hr class="my-10 border-white/20">
-
-        <section>
-            <h2 class="text-3xl font-bold text-white text-center mb-4">Live Project Demo: The Odyssey AI Hub</h2>
-            <p class="text-center text-gray-300 mb-8">Beyond writing, I build. This is a live demonstration of a full-stack, AI-powered application I developed. Interact with it below or open it in a new tab.</p>
-            
-            <div class="bg-gray-800/50 border border-white/10 rounded-2xl shadow-lg overflow-hidden">
-                <div class="p-4 bg-gray-900/80">
-                    <a href="/Mark-Rickey/HTML/subfolder/project-odyssey.html" target="_blank" class="text-center w-full block bg-[#DB7A4D]/80 hover:bg-[#DB7A4D] text-white font-bold py-2 px-4 rounded-md transition-colors">
-                        Open Full App in New Tab
-                    </a>
-                </div>
-                <iframe 
-                    src="/Mark-Rickey/HTML/subfolder/project-odyssey.html" 
-                    title="Project Odyssey - Live AI App Demo"
-                    class="w-full h-[600px] border-0"
-                ></iframe>
-            </div>
-        </section>
-
-        <hr class="my-10 border-white/20">
-
-        <section>
-            <h2 class="text-3xl font-bold text-white text-center mb-8">Content That Delivers Results</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
-                    <h3 class="font-semibold text-sky-300">In-Depth Articles & Blog Posts</h3>
-                    <p class="text-gray-400 text-sm">Engaging, well-researched content that builds credibility and establishes you as a thought leader.</p>
-                </div>
-                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
-                    <h3 class="font-semibold text-sky-300">Technical Guides & Whitepapers</h3>
-                    <p class="text-gray-400 text-sm">Clear, authoritative documents that explain your technology's value in accessible terms.</p>
-                </div>
-                <div class="bg-gray-800/50 border border-white/10 rounded-lg p-6">
-                    <h3 class="font-semibold text-sky-300">Strategic Communications & Policy Briefs</h3>
-                    <p class="text-gray-400 text-sm">Precise, high-impact content informed by years of experience authoring materials for government stakeholders.</p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="my-10 border-white/20">
-
-        <section class="text-center">
-             <p class="text-lg text-gray-300 mb-6">My background isn't just a talking point—it's the foundation of my work. I deliver content that is not only well-written but also strategically sound and deeply informed.</p>
-             <a href="https://markrickey.github.io/Mark-Rickey/#contact" class="inline-block bg-[#DB7A4D] hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
-                Let's Discuss Your Project
-             </a>
-        </section>
-
-    </main>
-    
-    <footer class="text-center py-6">
-        <a href="https://markrickey.github.io/Mark-Rickey/" class="text-sm text-orange-200/70 hover:text-white transition-colors">&larr; Back to Main Portfolio</a>
-    </footer>
-
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr class="my-10 border-dash">
+    <section class="fade-section">
+      <h2 class="text-3xl font-bold text-white text-center mb-4 fade-header">Live Project Demo: The Odyssey AI Hub</h2>
+      <p class="text-center text-gray-300 mb-8">Beyond writing, I build. This is a live demonstration of a full-stack, AI-powered application I developed. Interact with it below or open it in a new tab.</p>
+      <div class="content-card bg-gray-800/50 border border-white/10 rounded-2xl shadow-lg overflow-hidden">
+        <div class="p-4 bg-gray-900/80">
+          <a href="/Mark-Rickey/HTML/subfolder/project-odyssey.html" target="_blank" class="btn-main text-center">Open Full App in New Tab</a>
+        </div>
+        <iframe
+          src="/Mark-Rickey/HTML/subfolder/project-odyssey.html"
+          title="Project Odyssey - Live AI App Demo"
+          class="w-full" style="height:600px; border:0;">
+        </iframe>
+      </div>
+    </section>
+    <hr class="my-10 border-dash">
+    <section class="fade-section">
+      <h2 class="text-3xl font-bold text-white text-center mb-8 fade-header">Content That Delivers Results</h2>
+      <div class="space-y-4">
+        <div class="content-card fade-card">
+          <h3 class="font-semibold text-sky">In-Depth Articles & Blog Posts</h3>
+          <p class="text-gray-400 text-sm">Engaging, well-researched content that builds credibility and establishes you as a thought leader.</p>
+        </div>
+        <div class="content-card fade-card">
+          <h3 class="font-semibold text-sky">Technical Guides & Whitepapers</h3>
+          <p class="text-gray-400 text-sm">Clear, authoritative documents that explain your technology's value in accessible terms.</p>
+        </div>
+        <div class="content-card fade-card">
+          <h3 class="font-semibold text-sky">Strategic Communications & Policy Briefs</h3>
+          <p class="text-gray-400 text-sm">Precise, high-impact content informed by years of experience authoring materials for government stakeholders.</p>
+        </div>
+      </div>
+    </section>
+    <hr class="my-10 border-dash">
+    <section class="text-center fade-section">
+      <p class="text-lg text-gray-300 mb-6">My background isn't just a talking point—it's the foundation of my work. I deliver content that is not only well-written but also strategically sound and deeply informed.</p>
+      <a href="https://markrickey.github.io/Mark-Rickey/#contact" class="btn-main mt-2">Let's Discuss Your Project</a>
+    </section>
+  </main>
+  <footer class="text-center py-6 fade-section">
+    <a href="https://markrickey.github.io/Mark-Rickey/" class="text-sm text-orange/80 hover:text-white transition-colors">&larr; Back to Main Portfolio</a>
+  </footer>
+  <script>
+    // Progress bar on scroll
+    (function(){
+      const pb = document.getElementById('progressBar');
+      window.addEventListener('scroll', function(){
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        pb.style.width = `${Math.min(100, (scrollTop/docHeight)*100)}%`;
+      }, {passive:true});
+    })();
+    // Fade-in all .fade-section, .fade-card, .fade-header on entering viewport
+    document.addEventListener('DOMContentLoaded', function() {
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {threshold:0.18});
+      document.querySelectorAll('.fade-section,.fade-card,.fade-header').forEach(el=>io.observe(el));
+    });
+  </script>
 </body>
 </html>
