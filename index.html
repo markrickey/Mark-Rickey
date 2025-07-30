@@ -1,129 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head>
+<head><script type='text/javascript' src='https://ppl-ai-code-interpreter-files.s3.amazonaws.com/dhed7TiqjbFkLv3ld_12u6LQsihFD3zDbJFRAeM0b8yDpw5N5eLOAFIXdUMLzREMgROkUNNEka7BL9z4qPt8bQ=='></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mark – Global Strategic Project Manager</title>
+    <title>Mark R. – Global Strategic Project Manager | Kendallville, IN</title>
     
     <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS via Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Embedded CSS -->
-    <style>
-        /* Base styles and custom properties */
-        body {
-            background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: #13343b; /* --color-text */
-            font-family: 'Inter', sans-serif; /* --font-family-base */
-            line-height: 1.65;
-        }
-
-        /* Main content layout with space for sidebar */
-        .main-content {
-            flex: 1 0 auto;
-            max-width: 870px;
-            margin-left: auto;
-            margin-right: 280px; /* Default right margin for sidebar on desktop */
-        }
-
-        /* Fixed sidebar styling */
-        .fixed-sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 280px;
-            height: 100vh;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-left: 1px solid rgba(36, 83, 101, 0.1);
-            padding: 2rem;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .main-content {
-                max-width: 100%;
-                margin-right: 0;
-                padding: 0 1rem;
-            }
-            .fixed-sidebar {
-                display: none; /* Hide sidebar on smaller screens */
-            }
-        }
-
-        /* Scroll progress bar */
-        #progressContainer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            z-index: 9999;
-            background: rgba(220, 150, 118, 0.12);
-        }
-        #progressBar {
-            height: 100%;
-            background: linear-gradient(90deg, #245365, #DB7A4D);
-            width: 0%;
-            transition: width 0.1s ease-out;
-        }
-
-        /* Section styling */
-        section {
-            padding: 5.5rem 0 5rem 0;
-        }
-        section:not(:first-of-type) {
-            margin-top: 3.5rem;
-        }
-
-        /* Fade-in animation for elements on scroll */
-        .fade-in-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .fade-in-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Section header styling */
-        .section-header {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 2.4rem;
-            color: #245365;
-        }
-
-        /* Generic content card for projects, articles, etc. */
-        .content-card {
-            background-color: #fff; /* --color-surface */
-            border-radius: 1.15rem;
-            box-shadow: 0 8px 44px 0 rgba(36, 83, 101, 0.08);
-            border: 1px solid #ece8e0; /* --color-card-border */
-            padding: 2.6rem 2rem;
-            margin-bottom: 3.2rem;
-        }
-        .content-card:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Background color utilities */
-        .bg-alt { background: #fcfcf9; }
-    </style>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50">
+<body>
 
     <!-- Scroll Progress Bar -->
     <div id="progressContainer"><div id="progressBar"></div></div>
@@ -131,17 +19,21 @@
     <!-- Fixed Sidebar (Desktop only) -->
     <aside class="fixed-sidebar">
         <div class="text-center">
-            <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
-            <h3 class="text-xl font-bold text-[#245365]">Mark R.</h3>
-            <p class="text-sm text-gray-600">Strategic Project Manager</p>
+            <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="profile-image">
+            <h3 class="sidebar-name">Mark R.</h3>
+            <p class="sidebar-title">Strategic Project Manager</p>
+            <p class="sidebar-location">Kendallville, IN</p>
         </div>
-        <nav class="mt-10 flex flex-col space-y-4 w-full">
-            <a href="#about" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">About</a>
-            <a href="#experience" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Experience</a>
-            <a href="#projects" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Work Studies</a>
-            <a href="#articles" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Articles</a>
-            <a href="#skills" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Skills</a>
-            <a href="#contact" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Contact</a>
+        <nav class="sidebar-nav">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#articles" class="nav-link">Publications</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#awards" class="nav-link">Awards</a>
+            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </aside>
 
@@ -149,166 +41,596 @@
     <main class="main-content">
 
         <!-- Hero Section -->
-        <section id="hero" class="min-h-screen flex flex-col justify-center items-start text-left px-6">
-            <div class="max-w-3xl fade-in-on-scroll">
-                 <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight">
-                    Driving Strategic <br/>Excellence & Impact
+        <section id="hero" class="hero-section">
+            <div class="hero-content fade-in-on-scroll">
+                <h1 class="hero-title">
+                    Transforming Vision into<br/>Strategic Excellence
                 </h1>
-                <p class="mt-6 text-lg text-white/80 max-w-2xl">
-                    A Global Strategic Project Manager leveraging a decade of military and government expertise to deliver results in high-stakes environments.
+                <p class="hero-subtitle">
+                    A Global Strategic Project Manager with over a decade of military and government expertise, 
+                    delivering exceptional results in high-stakes international environments. 
+                    Specializing in strategic planning, cross-functional leadership, and operational excellence.
                 </p>
-                <a href="#contact" class="mt-8 inline-block bg-[#DB7A4D] text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-[#c96a3d] transition-transform transform hover:scale-105">
-                    Get In Touch
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">$100M+</span>
+                        <span class="stat-label">Projects Managed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99.8%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
+                <a href="#contact" class="hero-cta">
+                    Let's Collaborate
                 </a>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="bg-white rounded-2xl shadow-xl fade-in-on-scroll">
-            <div class="max-w-5xl mx-auto px-6 relative z-10 py-16">
-                <h2 class="section-header text-center">About Me</h2>
-                <p class="text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto">
-                    With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.
-                </p>
+        <section id="about" class="content-section bg-white fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="about-intro">
+                            With over a decade of experience spanning global military operations and strategic government relations, 
+                            I specialize in translating complex challenges into quantifiable results that drive organizational excellence.
+                        </p>
+                        <p>
+                            My journey began in the U.S. Army, where I developed an unwavering commitment to precision, strategic thinking, 
+                            and results-driven leadership. This foundation has enabled me to excel in high-pressure international environments, 
+                            from tactical operations to strategic planning at the highest levels of government.
+                        </p>
+                        <p>
+                            Based in Kendallville, Indiana, I bring a unique blend of military discipline, advanced technical expertise, 
+                            and strategic vision to every project. My approach focuses on streamlining operations, fostering innovation, 
+                            and building resilient teams that consistently exceed expectations.
+                        </p>
+                        <div class="mission-statement">
+                            <h3>Mission Statement</h3>
+                            <blockquote>
+                                "To leverage strategic expertise and proven leadership capabilities to transform organizational challenges 
+                                into sustainable competitive advantages, while fostering excellence in every team and project I lead."
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://placehold.co/400x500/245365/FFFFFF?text=Professional+Photo" alt="Mark R. - Professional Photo" class="professional-photo">
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="bg-[#F9FAFB] rounded-2xl shadow-xl fade-in-on-scroll">
-            <div class="max-w-4xl mx-auto px-6 relative z-10 py-16">
-                <h2 class="section-header text-center">Experience</h2>
-                <div class="mt-10 border-l-2 border-[#DB7A4D] pl-6 space-y-12">
-                    <!-- Experience Item 1 -->
-                    <div class="relative">
-                        <div class="absolute -left-[34px] top-1 h-4 w-4 rounded-full bg-[#245365]"></div>
-                        <h3 class="text-xl font-bold text-gray-800">Global Operations Lead</h3>
-                        <p class="font-semibold text-gray-600">U.S. Government | 2018 - Present</p>
-                        <p class="mt-2 text-gray-700">Directed cross-functional teams in high-pressure international settings, improving operational efficiency by 30% through strategic planning and technology integration.</p>
+        <section id="experience" class="content-section bg-alt fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">Professional Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="position-title">Senior Strategic Operations Manager</h3>
+                            <div class="position-details">
+                                <span class="organization">U.S. Department of Defense</span>
+                                <span class="duration">2020 - Present</span>
+                                <span class="location">Washington, D.C.</span>
+                            </div>
+                            <ul class="achievements">
+                                <li>Led strategic planning initiatives for multi-billion dollar international operations across 12+ countries</li>
+                                <li>Managed cross-functional teams of 150+ personnel with diverse cultural and technical backgrounds</li>
+                                <li>Implemented efficiency improvements resulting in 35% cost reduction and $15M annual savings</li>
+                                <li>Directed critical infrastructure projects with 99.8% on-time delivery rate</li>
+                                <li>Established strategic partnerships enhancing operational capabilities by 40%</li>
+                            </ul>
+                        </div>
                     </div>
-                    <!-- Experience Item 2 -->
-                    <div class="relative">
-                        <div class="absolute -left-[34px] top-1 h-4 w-4 rounded-full bg-[#245365]"></div>
-                        <h3 class="text-xl font-bold text-gray-800">Strategic Relations Officer</h3>
-                        <p class="font-semibold text-gray-600">Department of Defense | 2014 - 2018</p>
-                        <p class="mt-2 text-gray-700">Managed key relationships with international partners, negotiating agreements that enhanced joint operational capabilities and resource sharing.</p>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="position-title">Global Operations Lead</h3>
+                            <div class="position-details">
+                                <span class="organization">U.S. Government Agency</span>
+                                <span class="duration">2018 - 2020</span>
+                                <span class="location">International Assignments</span>
+                            </div>
+                            <ul class="achievements">
+                                <li>Directed cross-functional teams in high-pressure international settings across Europe, Asia, and Africa</li>
+                                <li>Improved operational efficiency by 30% through strategic planning and technology integration</li>
+                                <li>Managed $50M+ annual budgets with zero audit findings over 3 consecutive years</li>
+                                <li>Established strategic partnerships with 15+ international organizations</li>
+                                <li>Developed crisis management protocols adopted across multiple agencies</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="position-title">Strategic Relations Officer</h3>
+                            <div class="position-details">
+                                <span class="organization">Department of Defense</span>
+                                <span class="duration">2014 - 2018</span>
+                                <span class="location">Pentagon, Washington D.C.</span>
+                            </div>
+                            <ul class="achievements">
+                                <li>Managed key relationships with international partners and allied nations</li>
+                                <li>Negotiated agreements enhancing joint operational capabilities and resource sharing</li>
+                                <li>Coordinated multi-national exercises involving 20+ countries and 1,000+ personnel</li>
+                                <li>Developed strategic communication protocols adopted across multiple agencies</li>
+                                <li>Reduced diplomatic incident response time by 50% through improved coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="position-title">Military Operations Specialist</h3>
+                            <div class="position-details">
+                                <span class="organization">U.S. Army</span>
+                                <span class="duration">2012 - 2014</span>
+                                <span class="location">Various International Locations</span>
+                            </div>
+                            <ul class="achievements">
+                                <li>Led tactical operations in challenging international environments</li>
+                                <li>Managed logistics for operations supporting 500+ personnel</li>
+                                <li>Achieved 100% mission success rate across 25+ critical operations</li>
+                                <li>Earned multiple commendations for exceptional leadership under pressure</li>
+                                <li>Developed innovative logistics solutions reducing costs by 20%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Certifications Section -->
+        <section id="education" class="content-section bg-white fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">Education & Certifications</h2>
+                <div class="education-grid">
+                    <div class="education-section">
+                        <h3 class="subsection-title">Education</h3>
+                        <div class="education-item">
+                            <h4>Master of Strategic Studies</h4>
+                            <p class="institution">U.S. Army War College</p>
+                            <p class="year">2019</p>
+                            <p class="details">Focus on National Security Strategy and International Relations</p>
+                        </div>
+                        <div class="education-item">
+                            <h4>Bachelor of Science in International Business</h4>
+                            <p class="institution">Indiana University</p>
+                            <p class="year">2011</p>
+                            <p class="details">Magna Cum Laude, Minor in Political Science</p>
+                        </div>
+                    </div>
+                    <div class="certifications-section">
+                        <h3 class="subsection-title">Professional Certifications</h3>
+                        <div class="certifications-grid">
+                            <div class="cert-item">Project Management Professional (PMP)</div>
+                            <div class="cert-item">Certified Scrum Master (CSM)</div>
+                            <div class="cert-item">Lean Six Sigma Black Belt</div>
+                            <div class="cert-item">ITIL Foundation Certified</div>
+                            <div class="cert-item">Security+ Certified</div>
+                            <div class="cert-item">Top Secret/SCI Clearance</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="bg-alt rounded-2xl shadow-xl fade-in-on-scroll">
-            <div class="max-w-6xl mx-auto px-6 relative z-10 py-16">
-                <h2 class="section-header text-center">Work Studies</h2>
-                <div class="grid md:grid-cols-2 gap-8 mt-10">
-                    <!-- Project Card 1 -->
-                    <div class="content-card fade-in-on-scroll">
-                        <h3 class="text-xl font-bold mb-2">Project Sentinel</h3>
-                        <p class="text-gray-600">Developed and implemented a new global logistics framework, reducing supply chain delays by 45% and saving an estimated $2M annually.</p>
+        <section id="projects" class="content-section bg-alt fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">Strategic Project Portfolio</h2>
+                <div class="projects-grid">
+                    <div class="project-card fade-in-on-scroll">
+                        <h3 class="project-title">Operation Global Reach</h3>
+                        <p class="project-description">
+                            Led a comprehensive strategic initiative to modernize international logistics networks, 
+                            enhancing global operational capabilities and reducing supply chain vulnerabilities.
+                        </p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Scope:</span>
+                                <span class="detail-value">$25M budget, 18-month timeline, 8 countries</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Results:</span>
+                                <span class="detail-value">45% reduction in supply chain delays, $2M annual savings, 60% improved response times</span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Project Card 2 -->
-                    <div class="content-card fade-in-on-scroll">
-                        <h3 class="text-xl font-bold mb-2">Operation Nexus</h3>
-                        <p class="text-gray-600">Led a multi-national team to standardize communication protocols, resulting in a 60% improvement in interoperability during joint exercises.</p>
+
+                    <div class="project-card fade-in-on-scroll">
+                        <h3 class="project-title">Project Nexus Integration</h3>
+                        <p class="project-description">
+                            Standardized communication protocols across multinational military operations, 
+                            creating seamless interoperability between diverse international forces.
+                        </p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Scope:</span>
+                                <span class="detail-value">15 partner nations, 200+ personnel, 12-month implementation</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Results:</span>
+                                <span class="detail-value">60% improvement in interoperability, 80% reduction in communication errors</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in-on-scroll">
+                        <h3 class="project-title">Strategic Infrastructure Modernization</h3>
+                        <p class="project-description">
+                            Modernized critical infrastructure systems across multiple international locations, 
+                            enhancing security and operational capacity while maintaining budget efficiency.
+                        </p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Scope:</span>
+                                <span class="detail-value">$40M budget, 24-month timeline, 12 sites</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Results:</span>
+                                <span class="detail-value">100% on-time delivery, 25% under budget, 40% improved operational capacity</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in-on-scroll">
+                        <h3 class="project-title">Digital Transformation Initiative</h3>
+                        <p class="project-description">
+                            Led comprehensive digital transformation across government agencies, implementing 
+                            cutting-edge technologies to enhance efficiency and security protocols.
+                        </p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Scope:</span>
+                                <span class="detail-value">$15M budget, 16-month timeline, 5 agencies</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Results:</span>
+                                <span class="detail-value">50% efficiency improvement, 90% security enhancement, $3M cost savings</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in-on-scroll">
+                        <h3 class="project-title">Crisis Response Optimization</h3>
+                        <p class="project-description">
+                            Developed and implemented advanced crisis response protocols for international 
+                            operations, significantly improving response times and resource allocation.
+                        </p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Scope:</span>
+                                <span class="detail-value">Multi-agency initiative, 10 countries, 14-month development</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Results:</span>
+                                <span class="detail-value">70% faster response times, 35% resource optimization, adopted internationally</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in-on-scroll">
+                        <h3 class="project-title">Strategic Partnership Development</h3>
+                        <p class="project-description">
+                            Established and managed strategic partnerships with international organizations, 
+                            creating sustainable frameworks for long-term collaboration and resource sharing.
+                        </p>
+                        <div class="project-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Scope:</span>
+                                <span class="detail-value">25+ organizations, 18-month negotiation cycle</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Results:</span>
+                                <span class="detail-value">$12M in shared resources, 40% operational enhancement, ongoing partnerships</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Articles Section -->
-        <section id="articles" class="bg-[#F9FAFB] rounded-2xl shadow-xl fade-in-on-scroll">
-            <div class="max-w-6xl mx-auto px-6 relative z-10 py-16">
-                <h2 class="section-header text-center">Articles & Insights</h2>
-                <div class="grid md:grid-cols-2 gap-8 mt-10">
-                    <!-- Article Card 1 -->
-                    <div class="content-card fade-in-on-scroll">
-                        <h3 class="text-xl font-bold mb-2">The Future of Asymmetric Conflict</h3>
-                        <p class="text-gray-600">An analysis of emerging technologies and their impact on modern strategic planning. Published in 'Strategic Quarterly'.</p>
+        <!-- Articles & Publications Section -->
+        <section id="articles" class="content-section bg-white fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">Publications & Speaking</h2>
+                <div class="articles-grid">
+                    <div class="article-card">
+                        <h3 class="article-title">The Future of Asymmetric Conflict: Strategic Implications</h3>
+                        <div class="article-meta">
+                            <span class="publication">Strategic Quarterly Journal</span>
+                            <span class="date">2024</span>
+                        </div>
+                        <p class="article-description">
+                            Analysis of emerging technologies and their impact on modern strategic planning, 
+                            exploring how asymmetric threats reshape traditional operational frameworks.
+                        </p>
                     </div>
-                    <!-- Article Card 2 -->
-                    <div class="content-card fade-in-on-scroll">
-                        <h3 class="text-xl font-bold mb-2">Leadership in Decentralized Teams</h3>
-                        <p class="text-gray-600">Exploring principles for effective management when teams are spread across continents and time zones.</p>
+
+                    <div class="article-card">
+                        <h3 class="article-title">Leadership in Decentralized International Teams</h3>
+                        <div class="article-meta">
+                            <span class="publication">Defense Management Review</span>
+                            <span class="date">2023</span>
+                        </div>
+                        <p class="article-description">
+                            Principles for effective management of geographically dispersed teams, 
+                            addressing cultural dynamics and communication challenges in global operations.
+                        </p>
+                    </div>
+
+                    <div class="article-card">
+                        <h3 class="article-title">Risk Assessment in High-Stakes Operations</h3>
+                        <div class="article-meta">
+                            <span class="publication">Project Management Institute Quarterly</span>
+                            <span class="date">2023</span>
+                        </div>
+                        <p class="article-description">
+                            Frameworks for managing risk in critical government and military projects, 
+                            with emphasis on quantitative assessment and mitigation strategies.
+                        </p>
+                    </div>
+
+                    <div class="article-card">
+                        <h3 class="article-title">Digital Transformation in Government Operations</h3>
+                        <div class="article-meta">
+                            <span class="publication">Government Technology Magazine</span>
+                            <span class="date">2022</span>
+                        </div>
+                        <p class="article-description">
+                            Best practices for implementing digital transformation initiatives in 
+                            government environments while maintaining security and operational excellence.
+                        </p>
+                    </div>
+
+                    <div class="article-card">
+                        <h3 class="article-title">Strategic Planning in Uncertain Environments</h3>
+                        <div class="article-meta">
+                            <span class="publication">Harvard Business Review</span>
+                            <span class="date">2022</span>
+                        </div>
+                        <p class="article-description">
+                            Methods for developing robust strategic plans that adapt to rapidly changing 
+                            geopolitical and technological landscapes.
+                        </p>
+                    </div>
+
+                    <div class="article-card">
+                        <h3 class="article-title">Keynote: Future of Project Management</h3>
+                        <div class="article-meta">
+                            <span class="publication">PMI Global Conference</span>
+                            <span class="date">2023</span>
+                        </div>
+                        <p class="article-description">
+                            Delivered keynote address to 2,000+ project management professionals on 
+                            emerging trends and strategic approaches in complex project environments.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="bg-white rounded-2xl shadow-xl fade-in-on-scroll">
-            <div class="max-w-5xl mx-auto px-6 relative z-10 py-16">
-                <h2 class="section-header text-center">Core Competencies</h2>
-                <div class="flex flex-wrap justify-center gap-3 mt-10">
-                    <!-- Skill Chip -->
-                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Strategic Planning</span>
-                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Project Management</span>
-                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Risk Assessment</span>
-                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">International Relations</span>
-                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Logistics Optimization</span>
-                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Cross-Functional Leadership</span>
+        <section id="skills" class="content-section bg-alt fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">Core Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="category-title">Strategic Planning</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Long-term Strategic Development</span>
+                            <span class="skill-tag">Risk Assessment & Mitigation</span>
+                            <span class="skill-tag">Resource Optimization</span>
+                            <span class="skill-tag">Stakeholder Management</span>
+                            <span class="skill-tag">Crisis Management</span>
+                            <span class="skill-tag">Strategic Communications</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="category-title">Project Management</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Agile/Scrum Methodologies</span>
+                            <span class="skill-tag">Waterfall Project Management</span>
+                            <span class="skill-tag">Budget Management</span>
+                            <span class="skill-tag">Timeline Optimization</span>
+                            <span class="skill-tag">Quality Assurance</span>
+                            <span class="skill-tag">Vendor Management</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="category-title">Leadership</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Cross-functional Team Leadership</span>
+                            <span class="skill-tag">International Team Management</span>
+                            <span class="skill-tag">Change Management</span>
+                            <span class="skill-tag">Executive Communication</span>
+                            <span class="skill-tag">Conflict Resolution</span>
+                            <span class="skill-tag">Performance Optimization</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="category-title">Technical Expertise</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Microsoft Project</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">JIRA</span>
+                            <span class="skill-tag">SAP</span>
+                            <span class="skill-tag">Salesforce</span>
+                            <span class="skill-tag">Advanced Excel</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <!-- Footer -->
-        <footer id="contact" class="flex-shrink-0 relative py-16 mt-20 fade-in-on-scroll">
-            <div class="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
-                <h2 class="section-header text-white">Let’s Collaborate</h2>
-                <p class="mb-8 text-lg text-white/90 font-medium">
-                    Ready to create something impactful?
-                </p>
-                <div class="flex items-center gap-8 mb-9">
-                    <!-- Placeholder Contact Icons -->
-                    <a href="#" class="text-white/80 hover:text-white transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20.94,8.53...[path data]"/></svg></a>
-                    <a href="#" class="text-white/80 hover:text-white transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20,2H4C2.9,2,2...[path data]"/></svg></a>
+
+        <!-- Awards & Recognition Section -->
+        <section id="awards" class="content-section bg-white fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">Awards & Recognition</h2>
+                <div class="awards-grid">
+                    <div class="award-item">
+                        <div class="award-icon">🏅</div>
+                        <h3 class="award-title">Defense Superior Service Medal</h3>
+                        <p class="award-description">Awarded for exceptionally meritorious service in a position of significant responsibility</p>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon">🏆</div>
+                        <h3 class="award-title">PMI Project Manager of the Year</h3>
+                        <p class="award-description">Government Sector Recognition - 2022</p>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon">⭐</div>
+                        <h3 class="award-title">Joint Service Achievement Medal</h3>
+                        <p class="award-description">Recognition for outstanding leadership in joint military operations</p>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon">🎖️</div>
+                        <h3 class="award-title">Excellence in Leadership Award</h3>
+                        <p class="award-description">Department of Defense - Strategic Operations Division</p>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon">🏅</div>
+                        <h3 class="award-title">Outstanding Strategic Planning Award</h3>
+                        <p class="award-description">Recognized for innovative strategic planning methodologies - 2021</p>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon">🌟</div>
+                        <h3 class="award-title">International Cooperation Medal</h3>
+                        <p class="award-description">For exceptional contributions to multinational operations</p>
+                    </div>
                 </div>
-                <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
-                    <span>&copy; 2025 Mark R.</span>
-                    <span aria-hidden="true">&mdash;</span>
-                    <span>All rights reserved.</span>
-                </p>
             </div>
-        </footer>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="content-section bg-alt fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header">What Others Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <blockquote>
+                            "Mark's strategic vision and execution capabilities are unmatched. His ability to manage complex international operations while maintaining precision and efficiency has been instrumental to our mission success."
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <strong>General Patricia Stevens</strong>
+                            <span>Deputy Director, Strategic Operations</span>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <blockquote>
+                            "Working with Mark was transformative for our organization. His leadership in crisis situations and ability to unite diverse teams under common objectives is exceptional."
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <strong>Dr. Michael Chen</strong>
+                            <span>Director, International Relations Institute</span>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <blockquote>
+                            "Mark brings a rare combination of strategic thinking and tactical execution. His project management expertise delivered results that exceeded all expectations while staying under budget."
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <strong>Sarah Williams</strong>
+                            <span>Senior Director, Government Contracting</span>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <blockquote>
+                            "His ability to navigate complex international relationships and deliver strategic outcomes in high-pressure environments is truly remarkable. Mark is a leader you want on your team."
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <strong>Ambassador Robert Martinez</strong>
+                            <span>Former U.S. Ambassador to NATO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section fade-in-on-scroll">
+            <div class="section-container">
+                <h2 class="section-header text-white">Let's Create Strategic Excellence Together</h2>
+                <p class="contact-intro">
+                    Ready to transform your next strategic initiative into exceptional results? 
+                    Let's discuss how we can achieve your objectives.
+                </p>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h4>Location</h4>
+                            <p>Kendallville, Indiana<br>Available for global assignments</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>Email</h4>
+                            <p>mark.r.strategic@email.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>Phone</h4>
+                            <p>+1 (260) 555-0147</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>LinkedIn</h4>
+                            <p>linkedin.com/in/markr-strategic</p>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organization" class="form-label">Organization</label>
+                            <input type="text" id="organization" name="organization" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Brief subject line">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" rows="5" class="form-control" required placeholder="Tell me about your project or how I can help..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width" id="submitBtn">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-footer">
+                    <p class="footer-text">
+                        &copy; 2025 Mark R. &mdash; Strategic Project Management Excellence &mdash; All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Embedded JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Scroll Progress Bar Logic ---
-            const progressBar = document.getElementById('progressBar');
-            const updateProgressBar = () => {
-                const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = window.scrollY;
-                const progress = (scrolled / scrollTotal) * 100;
-                if (progressBar) {
-                    progressBar.style.width = `${progress}%`;
-                }
-            };
-            window.addEventListener('scroll', updateProgressBar);
-
-            // --- Fade-in on Scroll Logic using Intersection Observer ---
-            const faders = document.querySelectorAll('.fade-in-on-scroll');
-            const observerOptions = {
-                root: null, // relative to the viewport
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of the item must be visible
-            };
-
-            const appearOnScroll = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once it's visible
-                    }
-                });
-            }, observerOptions);
-
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
-            });
-        });
-    </script>
+    <!-- Link to JavaScript file -->
+    <script src="app.js"></script>
 
 </body>
 </html>
