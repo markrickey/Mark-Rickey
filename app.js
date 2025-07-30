@@ -377,3 +377,21 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 });
+function loadPosts() {
+  fetch('YOUR_WEB_APP_URL')
+    .then(r=>r.json())
+    .then(posts=>{
+      let html = '';
+      posts.reverse().forEach(post=>{
+        html += `<div class="blogpost">
+          <p>${post.post}</p>
+          <small>${post.timestamp} by ${post.author}</small>
+          <br>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(post.url)}" target="_blank">Share on LinkedIn</a>
+        </div>`;
+      });
+      document.getElementById('blogFeed').innerHTML = html;
+    });
+}
+// On page load:
+loadPosts();
