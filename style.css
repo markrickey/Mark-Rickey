@@ -1574,3 +1574,38 @@ body {
         gap: var(--space-4);
     }
 }
+/* Enhanced video styling to behave like an image */
+.professional-photo {
+    width: 400px;
+    height: 500px;
+    object-fit: cover; /* Maintains aspect ratio, crops if needed */
+    border-radius: 8px; /* If you want rounded corners */
+    pointer-events: none; /* Prevents any clicking/interaction */
+}
+
+/* Hide all video controls across different browsers */
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+video::-webkit-media-controls-play-button {
+    display: none !important;
+}
+
+video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
+
+/* Firefox controls hiding */
+video::-moz-media-controls {
+    display: none !important;
+}
+
+/* Ensure no outline when focused */
+video:focus {
+    outline: none;
+}
