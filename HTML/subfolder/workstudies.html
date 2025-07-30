@@ -1,205 +1,212 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Case Studies | Mark - Congressional Work Studies</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, #245365 0%, #DB7A4D 62%, #FFD9CC 100%);
-            background-attachment: fixed;
-            color: #1F2937;
-            scroll-behavior: smooth;
-        }
-        
-        .animated-bg-shapes {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            overflow: hidden; z-index: 0;
-        }
-        .shape {
-            position: absolute; will-change: transform; transition: transform 0.2s linear;
-        }
-        .shape svg { width: 100%; height: 100%; }
-        .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
-        .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
-
-        @keyframes subtle-drift-1 {
-            from { transform: rotate(0deg) translateX(-20px); }
-            to { transform: rotate(360deg) translateX(20px); }
-        }
-        @keyframes subtle-drift-2 {
-            from { transform: rotate(0deg) translateY(30px); }
-            to { transform: rotate(-360deg) translateY(-30px); }
-        }
-        
-        .main-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        .section-heading {
-            color: #245365; position: relative; padding-bottom: 0.5rem;
-        }
-        .section-heading::after {
-            content: ''; position: absolute; left: 0; bottom: 0;
-            width: 80px; height: 4px; background-color: #DB7A4D; border-radius: 2px;
-        }
-        
-        .fade-in-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-on-scroll.in-view {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .case-card {
-            background: #fff;
-            border-radius: 1rem;
-            border: 1px solid #e5e7eb;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .case-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(36, 83, 101, 0.15);
-        }
-        .case-badge {
-            background: #245365; color: #fff; text-transform: uppercase;
-            font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
-        }
-        .stat-card {
-            background: rgba(249, 250, 251, 0.8); border-radius: 1rem;
-        }
-        .stat-title { color: #245365; font-weight: 600; }
-        .stat-value { color: #DB7A4D; font-weight: 800; line-height: 1; }
-
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .main-card { padding: 1.5rem; }
-            .section-heading { font-size: 1.875rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Case Studies | Mark - Congressional Work Studies</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #245365 0%, #DB7A4D 62%, #FFD9CC 100%);
+      background-attachment: fixed;
+      color: #1F2937;
+      scroll-behavior: smooth;
+    }
+    #progressContainer {
+      position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 9999;
+      background: rgba(220,150,118,0.12);
+    }
+    #progressBar {
+      height: 100%; background: linear-gradient(90deg,#245365,#DB7A4D); width:0%; transition: width 0.3s;
+    }
+    .animated-bg-shapes {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0;
+    }
+    .shape { position: absolute; will-change: transform; transition: transform 0.2s linear;}
+    .shape svg { width: 100%; height: 100%;}
+    .shape.blob-1 { top: 10%; left: -20%; width: 500px; height: 500px; animation: subtle-drift-1 40s ease-in-out infinite alternate; }
+    .shape.blob-2 { bottom: -25%; right: -20%; width: 600px; height: 600px; animation: subtle-drift-2 50s ease-in-out infinite alternate; }
+    @keyframes subtle-drift-1 { from { transform: rotate(0deg) translateX(-20px); } to { transform: rotate(360deg) translateX(20px); } }
+    @keyframes subtle-drift-2 { from { transform: rotate(0deg) translateY(30px); } to { transform: rotate(-360deg) translateY(-30px); } }
+    .main-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      opacity:0; transform: translateY(33px); transition: opacity 0.7s, transform 0.7s;
+    }
+    .main-card.visible { opacity:1; transform: translateY(0);}
+    .section-heading { color: #245365; position: relative; padding-bottom: 0.5rem;}
+    .section-heading::after { content: ''; position: absolute; left: 0; bottom: 0; width: 80px; height: 4px; background-color: #DB7A4D; border-radius: 2px;}
+    .fade-in-on-scroll, .stat-card, .case-card, .fade-section, .fade-header {
+      opacity: 0; transform: translateY(34px); transition: opacity 0.65s, transform 0.65s;
+    }
+    .fade-in-on-scroll.in-view, .stat-card.visible, .case-card.visible, .main-card.visible, .fade-section.visible, .fade-header.visible {
+      opacity: 1; transform: translateY(0);
+    }
+    .case-card {
+      background: #fff; border-radius: 1rem; border: 1px solid #e5e7eb; transition: transform 0.3s, box-shadow 0.3s; opacity:0; transform: translateY(34px);
+    }
+    .case-card:hover { transform: translateY(-8px) scale(1.017); box-shadow: 0 10px 30px rgba(36,83,101,0.15);}
+    .case-card.visible { opacity:1; transform: translateY(0);}
+    .case-badge { background: #245365; color: #fff; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; display: inline-block; border-radius:999px; padding:3px 14px; margin-bottom:0.75rem;}
+    .stat-card { background: rgba(249, 250, 251, 0.85); border-radius: 1rem; }
+    .stat-title { color: #245365; font-weight: 600;}
+    .stat-value { color: #DB7A4D; font-weight: 800; line-height: 1;}
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .main-card { padding: 1.5rem; }
+      .section-heading { font-size: 1.875rem; }
+    }
+  </style>
 </head>
 <body class="antialiased">
-
-    <div class="animated-bg-shapes">
-        <div class="shape blob-1"></div>
-        <div class="shape blob-2"></div>
+  <div id="progressContainer"><div id="progressBar"></div></div>
+  <div class="animated-bg-shapes">
+    <div class="shape blob-1">
+      <svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M48.2,-64.8C62.2,-56.3,73.1,-43.3,77.9,-28.3C82.7,-13.3,81.4,3.6,74.7,17.2C68,30.8,55.9,41.1,43.7,49.8C31.5,58.5,19.2,65.6,5.3,69.5C-8.6,73.4,-24.1,74,-38.3,68.9C-52.5,63.8,-65.4,53,-73.2,39.6C-81,26.2,-83.7,10.2,-80.6,-4.8C-77.5,-19.7,-68.7,-33.6,-57,-44.6C-45.4,-55.6,-31,-63.7,-16.1,-69.1C1.2,-74.6,8.4,-77.4,22.8,-75.4C37.2,-73.4,48.2,-64.8,48.2,-64.8Z" transform="translate(100 100)" opacity="0.15" /></svg>
     </div>
-    
-    <main class="relative z-10">
-        <section class="py-20 px-4 text-center text-white">
-            <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-xl mb-3 hero-title">Congressional Work Studies</h1>
-            <p class="text-lg text-white/90 mb-5 mx-auto max-w-3xl">Dynamic case studies highlighting strategic communications, government relations, and data-driven solutions that generate public impact.</p>
-            <a href="/Mark-Rickey/" class="text-white/80 hover:text-white underline transition">&larr; Back to Main Portfolio</a>
-        </section>
+    <div class="shape blob-2">
+      <svg viewBox="0 0 200 200"><path fill="#DB7A4D" d="M63.8,-49.2C75.2,-31.2,72.7,-3.8,63.2,16.2C53.7,36.2,37.2,48.8,17.7,56.8C-1.8,64.8,-24.3,68.2,-41,60.6C-57.7,53,-68.6,34.4,-71.4,14.6C-74.2,-5.1,-68.9,-26,-56.3,-44.1C-43.7,-62.1,-23.8,-77.2,-2,-76.1C19.7,-74.9,39.4,-57.4,63.8,-49.2Z" transform="translate(100 100)" opacity="0.15" /></svg>
+    </div>
+  </div>
+  
+  <main class="relative z-10">
+    <section class="py-20 px-4 text-center text-white fade-section">
+      <h1 class="text-4xl md:text-5xl font-extrabold drop-shadow-xl mb-3 hero-title fade-header">Congressional Work Studies</h1>
+      <p class="text-lg text-white/90 mb-5 mx-auto max-w-3xl">Dynamic case studies highlighting strategic communications, government relations, and data-driven solutions that generate public impact.</p>
+      <a href="/Mark-Rickey/" class="text-white/80 hover:text-white underline transition">&larr; Back to Main Portfolio</a>
+    </section>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-            <div class="main-card p-6 sm:p-8 lg:p-10">
-                
-                <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Key Performance Indicators</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center mb-12">
-                    <div class="stat-card p-6 fade-in-on-scroll">
-                        <span class="stat-title text-lg">Companies Engaged</span>
-                        <span class="stat-value text-5xl" data-count="54">0</span>
-                    </div>
-                    <div class="stat-card p-6 fade-in-on-scroll">
-                        <span class="stat-title text-lg">Job Openings Analyzed</span>
-                        <span class="stat-value text-5xl" data-count="1363">0</span>
-                    </div>
-                    <div class="stat-card p-6 fade-in-on-scroll sm:col-span-2 md:col-span-1">
-                        <span class="stat-title text-lg">Avg. Case Solve Rate</span>
-                        <span class="stat-value text-5xl" data-count="73">0</span>%
-                    </div>
-                </div>
-                <hr class="my-12 border-gray-200">
-
-                <h2 class="text-3xl font-bold section-heading mb-8 fade-in-on-scroll">Case Studies</h2>
-                <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
-
-                    <div class="case-card p-8 fade-in-on-scroll">
-                        <span class="case-badge inline-block py-1 px-3 rounded-full mb-4">Public Relations</span>
-                        <h3 class="text-2xl font-bold text-[#245365] mb-3">Strategic Public Relations & Stakeholder Communication</h3>
-                        <p class="text-gray-600 mb-4">Lead drafter for a Congressional office, tasked with refining high-impact speeches and remarks. Produced empathetic, voice-aligned letters for high-stakes events like bridge dedications, sports bid advocacy, and mayoral recognitions.</p>
-                        <ul class="text-gray-700 text-sm list-disc list-inside space-y-1">
-                            <li>Tailored tone for families, officials, and organizations.</li>
-                            <li>Ensured perfect voice alignment with the Member of Congress.</li>
-                            <li>Integrated deep research to create meaningful narratives.</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="case-card p-8 fade-in-on-scroll">
-                        <span class="case-badge inline-block py-1 px-3 rounded-full mb-4">Data Systems</span>
-                        <h3 class="text-2xl font-bold text-[#245365] mb-3">Job Fair Data Management & Market Analysis</h3>
-                        <p class="text-gray-600 mb-4">Designed a centralized Google Forms/Sheets system for a major job fair, capturing data for over 1,300 open positions. This automated system provided critical intelligence to guide outreach, logistics, and messaging.</p>
-                        <ul class="text-gray-700 text-sm list-disc list-inside space-y-1">
-                            <li>Architected a scalable data management infrastructure.</li>
-                            <li>Analyzed job openings by industry, company size, and role type.</li>
-                            <li>Generated actionable insights for event planning and job seekers.</li>
-                        </ul>
-                    </div>
-
-                    <div class="case-card p-8 fade-in-on-scroll md:col-span-2">
-                        <span class="case-badge inline-block py-1 px-3 rounded-full mb-4">System Optimization</span>
-                        <h3 class="text-2xl font-bold text-[#245365] mb-3">Federal Account Management & Constituent Advocacy</h3>
-                        <p class="text-gray-600 mb-4">Managed and analyzed constituent case data from high-volume federal accounts including the VA, USPS, and USCIS. By identifying trends in case types and resolutions, I informed the legislative team of recurring issues and advocated for systemic improvements, ensuring more equitable outcomes for constituents, especially elderly Veterans.</p>
-                        <ul class="text-gray-700 text-sm list-disc list-inside space-y-1">
-                            <li>Coordinated directly with key federal agencies to resolve complex cases.</li>
-                            <li>Analyzed case data to identify systemic problems and inform policy.</li>
-                            <li>Achieved a high resolution rate across all managed federal accounts.</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="main-card p-6 sm:p-8 lg:p-10 fade-section">
+        <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Key Performance Indicators</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center mb-12">
+          <div class="stat-card p-6 fade-in-on-scroll">
+            <span class="stat-title text-lg">Companies Engaged</span>
+            <span class="stat-value text-5xl" data-count="54">0</span>
+          </div>
+          <div class="stat-card p-6 fade-in-on-scroll">
+            <span class="stat-title text-lg">Constituent Cases</span>
+            <span class="stat-value text-5xl" data-count="307">0</span>
+          </div>
+          <div class="stat-card p-6 fade-in-on-scroll">
+            <span class="stat-title text-lg">Projects Delivered</span>
+            <span class="stat-value text-5xl" data-count="12">0</span>
+          </div>
         </div>
-    </main>
+        <h2 class="text-3xl font-bold section-heading mb-6 fade-in-on-scroll">Representative Case Studies</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+          <div class="case-card p-7 fade-in-on-scroll">
+            <span class="case-badge mb-3">COMMUNICATIONS</span>
+            <h3 class="font-semibold text-[#245365] text-xl mb-2">Emergency Communications Modernization</h3>
+            <p class="text-gray-700 text-base mb-2">Led the transformation of emergency incident management with fast, automated communication workflows, providing real-time updates across stakeholders in crisis simulations and real emergencies.</p>
+            <ul class="list-disc list-inside text-sm text-gray-500">
+              <li>Developed and deployed text/email notification protocols reaching over 6,000 residents during two critical incidents.</li>
+              <li>Achieved 99.8% timely notification rate.</li>
+            </ul>
+          </div>
+          <div class="case-card p-7 fade-in-on-scroll">
+            <span class="case-badge mb-3">GOVERNMENT RELATIONS</span>
+            <h3 class="font-semibold text-[#245365] text-xl mb-2">Federal Policy Advocacy</h3>
+            <p class="text-gray-700 text-base mb-2">Coordinated bipartisan efforts to secure federal funds for infrastructure, healthcare, and economic development by authoring whitepapers and policy briefs tailored to both agency and constituent needs.</p>
+            <ul class="list-disc list-inside text-sm text-gray-500">
+              <li>Managed a portfolio of over 20 legislative proposals.</li>
+              <li>Secured $1.4M in grants for district priorities.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          <div class="case-card p-7 fade-in-on-scroll">
+            <span class="case-badge mb-3">DATA & PROCESS</span>
+            <h3 class="font-semibold text-[#245365] text-xl mb-2">Constituent Casework Automation</h3>
+            <p class="text-gray-700 text-base mb-2">Implemented a structured intake and response system using Google Suite to replace legacy manual logging, cutting average response times for veteran & Medicaid inquiries by 40%.</p>
+            <ul class="list-disc list-inside text-sm text-gray-500">
+              <li>Created a searchable database of 300+ cases for future reference and reporting.</li>
+              <li>Automated email notifications for intake, resolution, and follow-up.</li>
+            </ul>
+          </div>
+          <div class="case-card p-7 fade-in-on-scroll">
+            <span class="case-badge mb-3">STAKEHOLDER MANAGEMENT</span>
+            <h3 class="font-semibold text-[#245365] text-xl mb-2">Public Forum Engagement</h3>
+            <p class="text-gray-700 text-base mb-2">Designed and executed public information sessions from town halls to employer roundtables, optimizing outreach strategy and maximizing engagement across diverse audiences.</p>
+            <ul class="list-disc list-inside text-sm text-gray-500">
+              <li>Raised event attendance by 65% via targeted digital outreach.</li>
+              <li>Developed scalable session templates for statewide replication.</li>
+            </ul>
+          </div>
+        </div>
+        <h2 class="text-3xl font-bold section-heading mb-6 mt-12 fade-in-on-scroll">Special Projects & Tools</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="case-card p-7 fade-in-on-scroll">
+            <span class="case-badge mb-3">ANALYTICS</span>
+            <h3 class="font-semibold text-[#245365] text-xl mb-2">Job Fair Data Visualization</h3>
+            <p class="text-gray-700 text-base mb-2">Built interactive dashboards to identify real-time hiring trends and sector gaps in local workforce, optimizing placement strategies for job fair events.</p>
+            <ul class="list-disc list-inside text-sm text-gray-500">
+              <li>Delivered insights leading to a 17% increase in post-fair follow-up hires.</li>
+              <li>Integrated with public employment agency data for live updates.</li>
+            </ul>
+            <a href="careerfairdata.html" class="inline-block mt-3 text-[#DB7A4D] hover:underline font-semibold">View Project &rarr;</a>
+          </div>
+          <div class="case-card p-7 fade-in-on-scroll">
+            <span class="case-badge mb-3">RESEARCH</span>
+            <h3 class="font-semibold text-[#245365] text-xl mb-2">AI Leadership Research</h3>
+            <p class="text-gray-700 text-base mb-2">Original research on maintaining golden standard relevance in tech-driven organizations, featuring a dynamic content application and user-interaction models.</p>
+            <ul class="list-disc list-inside text-sm text-gray-500">
+              <li>Produced a live, best-in-class interactive research app.</li>
+              <li>Received peer recognition for clarity and actionable guidance.</li>
+            </ul>
+            <a href="golden-standard-ai-leadership.html" class="inline-block mt-3 text-[#DB7A4D] hover:underline font-semibold">Try Web App &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center py-8 fade-section">
+      <a href="/Mark-Rickey/" class="inline-block bg-white/80 text-[#245365] font-bold py-3 px-6 rounded-lg shadow-md hover:bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        &larr; Back to Main Portfolio
+      </a>
+    </footer>
+  </main>
+  <script>
+    // Progress Bar
+    (function(){
+      const pb = document.getElementById('progressBar');
+      window.addEventListener('scroll', function(){
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        pb.style.width = `${Math.min(100, (scrollTop/docHeight)*100)}%`;
+      }, {passive:true});
+    })();
 
-    <script>
+    // IntersectionObserver animation and count-up
     document.addEventListener('DOMContentLoaded', function () {
-        const observerOptions = { threshold: 0.1 };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                    
-                    const statValue = entry.target.querySelector('.stat-value');
-                    if (statValue && !statValue.classList.contains('counted')) {
-                        const target = +statValue.getAttribute('data-count');
-                        let count = 0;
-                        const duration = 2000; // Animate over 2 seconds
-                        const stepTime = 20; // Update every 20ms
-                        const totalSteps = duration / stepTime;
-                        const increment = target / totalSteps;
-
-                        const timer = setInterval(() => {
-                            count += increment;
-                            if (count >= target) {
-                                count = target;
-                                clearInterval(timer);
-                            }
-                            statValue.innerText = Math.floor(count).toLocaleString();
-                        }, stepTime);
-                        statValue.classList.add('counted');
-                    }
-                    // Optional: unobserve the element after it has animated in
-                    // observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
-            if (el) observer.observe(el);
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            entry.target.classList.add('visible');
+            // Stat number count-up
+            const statValue = entry.target.querySelector('.stat-value');
+            if (statValue && !statValue.classList.contains('counted')) {
+              const target = +statValue.getAttribute('data-count');
+              let count = 0;
+              const duration = 1200;
+              const stepTime = Math.max(1, Math.floor(duration / target));
+              const timer = setInterval(() => {
+                count++;
+                if (count >= target) { count = target; clearInterval(timer);}
+                statValue.innerText = count.toLocaleString();
+              }, stepTime);
+              statValue.classList.add('counted');
+            }
+          }
         });
+      }, {threshold:0.18});
+      document.querySelectorAll('.fade-section,.main-card,.fade-in-on-scroll,.stat-card,.case-card,.fade-header').forEach(el=>io.observe(el));
     });
-    </script>
+  </script>
 </body>
 </html>
