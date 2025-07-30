@@ -22,7 +22,7 @@
             <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="profile-image">
             <h3 class="sidebar-name">Mark</h3>
             <p class="sidebar-title">Strategic Project Manager</p>
-            <p class="sidebar-location">Data-Driven Excillence</p>
+            <p class="sidebar-location">Data-Driven Excellence</p>
         </div>
         <nav class="sidebar-nav">
             <a href="#about" class="nav-link">About</a>
@@ -32,7 +32,7 @@
             <a href="#articles" class="nav-link">Publications</a>
             <a href="#skills" class="nav-link">Skills</a>
             <a href="#awards" class="nav-link">Awards</a>
-            <a href="#testimonials" class="nav-link">Testimonials</a>
+            <a href="#blog" class="nav-link">Blog</a>
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </aside>
@@ -44,7 +44,8 @@
 <section id="hero" class="hero-section">
     <div class="hero-content fade-in-on-scroll">
         <h1 class="hero-title">
-            <span class="typewriter-text">Transforming Vision into Strategic Excellence</span>
+            <span class="cycling-text" id="cyclingText" aria-label="Professional tagline"></span>
+            <span class="typing-cursor">|</span>
         </h1>
         <p class="hero-subtitle">
             A Global Strategic Project Manager with over a decade of military and government expertise, 
@@ -72,49 +73,140 @@
 </section>
 
 <style>
-/* CSS-Only Typing Animation */
+/* Cycling Hero Animation Styles */
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 2rem;
     color: #1a202c;
+    min-height: 4.2rem; /* Prevents layout shift */
 }
 
-.typewriter-text {
+.cycling-text {
     display: inline-block;
-    overflow: hidden;
-    border-right: 3px solid #3182ce;
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: 0.05em;
-    animation: 
-        typing 4s steps(45, end),
-        blink-caret 0.75s step-end infinite;
+    font-family: inherit;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-in-out;
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+.cycling-text.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: #3182ce; }
+.typing-cursor {
+    display: inline-block;
+    background-color: #3182ce;
+    margin-left: 3px;
+    width: 3px;
+    height: 1.2em;
+    animation: cursor-blink 1.2s infinite;
 }
 
+@keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.5rem;
+        min-height: 3rem;
     }
 }
 
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
+        min-height: 2.4rem;
+    }
+}
+
+/* Accessibility - respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .cycling-text {
+        transition: none;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .typing-cursor {
+        animation: none;
+        opacity: 1;
     }
 }
 </style>
+
+<script>
+// Cycling Text Animation JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const cyclingTextElement = document.getElementById('cyclingText');
+    const cursorElement = document.querySelector('.typing-cursor');
+    
+    // Professional titles based on your portfolio content
+    const titles = [
+        "Transforming Vision into Strategic Excellence",
+        "Delivering Data-Driven Government Solutions", 
+        "Leading Crisis Management & Emergency Response",
+        "Building AI-Powered Strategic Systems",
+        "Optimizing Global Military Operations",
+        "Creating Innovative Project Management Solutions",
+        "Driving Congressional Relations & Policy Impact"
+    ];
+    
+    let currentIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isWaiting = false;
+    
+    function typeWriter() {
+        const currentTitle = titles[currentIndex];
+        
+        if (isWaiting) {
+            setTimeout(typeWriter, 2000); // Wait 2 seconds before starting to delete
+            isWaiting = false;
+            isDeleting = true;
+            return;
+        }
+        
+        if (isDeleting) {
+            // Delete characters
+            cyclingTextElement.textContent = currentTitle.substring(0, charIndex - 1);
+            charIndex--;
+            
+            if (charIndex === 0) {
+                isDeleting = false;
+                currentIndex = (currentIndex + 1) % titles.length;
+                setTimeout(typeWriter, 500); // Short pause before typing next title
+                return;
+            }
+        } else {
+            // Type characters
+            cyclingTextElement.textContent = currentTitle.substring(0, charIndex + 1);
+            charIndex++;
+            
+            if (charIndex === currentTitle.length) {
+                isWaiting = true;
+                setTimeout(typeWriter, 3000); // Display complete title for 3 seconds
+                return;
+            }
+        }
+        
+        // Variable typing speed for natural feel
+        const speed = isDeleting ? 50 : 80 + Math.random() * 50;
+        setTimeout(typeWriter, speed);
+    }
+    
+    // Start the animation after a short delay
+    setTimeout(() => {
+        cyclingTextElement.classList.add('active');
+        typeWriter();
+    }, 1000);
+});
+</script>
 
         <!-- About Section -->
         <section id="about" class="content-section bg-white fade-in-on-scroll">
@@ -267,7 +359,7 @@
                             <h4>Master's of Public Administration</h4>
                             <p class="institution">Purdue University, Global</p>
                             <p class="year">2025</p>
-                            <p class="details">Polic and Legislative analysis/drafting.</p>
+                            <p class="details">Policy and Legislative analysis/drafting.</p>
                             <p class="details">S.A.L.U.T.E National Honours Student</p>
                         </div>
                         <div class="education-item">
@@ -281,7 +373,7 @@
                     <div class="certifications-section">
                         <h3 class="subsection-title">Professional Certifications</h3>
                         <div class="certifications-grid">
-                            <div class="cert-item">IBM Data Fundimentals</div>
+                            <div class="cert-item">IBM Data Fundamentals</div>
                             <div class="cert-item">IBM Agile Manager</div>
                             <div class="cert-item">Certified Change Management</div>
                             <div class="cert-item">Secret Clearance</div>
