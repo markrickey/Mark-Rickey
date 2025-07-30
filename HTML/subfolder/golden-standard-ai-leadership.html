@@ -3,13 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Maintaining Golden Standard Relevance – Research by Mark</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Golden Standard AI Leadership Research</title>
+  <style>
+    /* ===== style.css INLINED ===== */
+    :root {
+      --color-white: #fff;
+      --color-black: #000;
+      --color-cream-50: #fcfcf9;
+      --color-cream-100: #fffffd;
+      --color-gray-200: #f5f5f5;
+      --color-gray-300: #a7a9a9;
+      --color-gray-400: #777c7c;
+      --color-slate-500: #626c71;
+      --color-brown-600: #5e5240;
+      --color-charcoal-700: #1f2121;
+      --color-charcoal-800: #262828;
+      --color-slate-900: #13343b;
+      --color-teal-300: #32b8c6;
+      --color-teal-400: #2da6b2;
+      --color-teal-500: #21808d;
+      --color-teal-600: #1d7480;
+      --color-teal-700: #1a6873;
+      --color-teal-800: #2996a1;
+      --color-red-400: #ff5459;
+      --color-red-500: #c0152f;
+      --color-orange-400: #e68161;
+      --color-orange-500: #a84b2f;
+      --font-family-base: "Inter", "FKGroteskNeue", Arial, sans-serif;
+      --font-family-mono: "Berkeley Mono", monospace;
+      --font-size-base: 14px;
+      --font-size-lg: 16px;
+      --font-size-xl: 18px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 24px;
+      --font-size-4xl: 30px;
+      --font-weight-bold: 600;
+      --color-background: #fcfcf9;
+      --color-surface: #fffffd;
+      --color-text: #13343b;
+      --color-text-secondary: #626c71;
+      --color-primary: #21808d;
+      --color-primary-hover: #1d7480;
+      --color-primary-active: #1a6873;
+      --color-secondary: rgba(94,82,64, 0.12);
+      --color-secondary-hover: rgba(94,82,64, 0.20);
+      --color-secondary-active: rgba(94,82,64, 0.25);
+      --color-border: rgba(94,82,64,0.2);
+      --color-card-border: rgba(94,82,64,0.12);
+      --color-btn-primary-text: #fcfcf9;
+      --color-error: #c0152f;
+      --color-success: #21808d;
+      --color-warning: #a84b2f;
+      --color-info: #626c71;
+      --color-focus-ring: rgba(33,128,141,0.4);
+      --radius-base: 8px;
+      --radius-md: 10px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.04),0 2px 4px -1px rgba(0,0,0,0.02);
+      --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+      --space-20: 20px; --space-24: 24px; --space-32: 32px;
+      /* Containers */
+      --container-md: 768px;
+      --container-lg: 1024px;
+      --container-xl: 1280px;
+    }
+    html {
+      font-size: var(--font-size-base);
+      font-family: var(--font-family-base);
+      background-color: var(--color-background);
+      color: var(--color-text);
+      scroll-behavior: smooth;
+    }
+    body { margin: 0; padding: 0; }
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { color: var(--color-primary-hover); }
+    h1 { font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold);}
+    h2 { font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold);}
+    h3 { font-size: var(--font-size-2xl);}
+    h4 { font-size: var(--font-size-xl);}
+    .container {
+      max-width: var(--container-lg);
+      margin-left: auto; margin-right: auto;
+      padding: 0 var(--space-16);
+      width: 100%;
+    }
+    /* Progress Bar */
+    #progressContainer { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--color-border); z-index:1200; }
+    #progressBar { height: 100%; background: linear-gradient(90deg,#21808d,#2da6b2); width:0%; transition: width 0.3s;}
+    /* Nav */
+    .site-nav {
+      position: fixed; top:0; left:0; right:0;
+      background: rgba(19,52,59,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      z-index:999; padding: var(--space-12) 0; margin-top: 3px;
+    }
+    .site-nav .container.nav-content {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-weight: 700; font-size: 18px; color: var(--color-primary);}
+    .nav-links {
+      list-style:none; display: flex; gap: var(--space-24); margin:0; padding:0;
+    }
+    .nav-link {
+      color: var(--color-text-secondary); font-size: 14px; font-weight: 500; transition: color 0.2s;
+      text-decoration: none;
+    }
+    .nav-link.active, .nav-link:hover { color: var(--color-primary); }
+    /* Hero section */
+    .hero-section {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-1,#f5fffa);
+      padding: var(--space-32) 0;
+      margin-top: 60px;
+    }
+    .hero-section h1 {
+      font-size: clamp(2rem, 5vw, 2.7rem);
+      margin-bottom: var(--space-16);
+      max-width: 900px;
+    }
+    .subtitle { font-size: var(--font-size-xl); color: var(--color-text-secondary); font-weight: 500; margin-bottom: var(--space-8);}
+    .author { font-size: 16px; color: var(--color-primary); font-weight:600; margin-bottom: var(--space-24);}
+    .executive-summary {
+      font-size: 16px; line-height: 1.6; max-width: 800px; margin-bottom: var(--space-24); color: var(--color-text);
+    }
+    .btn {
+      display: inline-flex; align-items:center; justify-content:center;
+      padding: var(--space-8) var(--space-16); border-radius: var(--radius-base);
+      font-size: 14px; font-weight: 500; cursor: pointer; border:none; text-decoration:none; position: relative;
+      transition: all 0.2s;
+    }
+    .btn--primary {
+      background: var(--color-primary); color: var(--color-btn-primary-text);
+    }
+    .btn--primary:hover { background: var(--color-primary-hover);}
+    .btn--secondary {
+      background: var(--color-secondary); color: var(--color-text);
+    }
+    .btn--secondary:hover { background: var(--color-secondary-hover);}
+    .btn--outline {
+      background: transparent; border: 1px solid var(--color-border); color: var(--color-text);
+    }
+    .btn--outline.active {
+      background-color: var(--color-primary); color: var(--color-btn-primary-text); border-color: var(--color-primary);
+    }
+    .btn--lg { padding: var(--space-10) var(--space-20); font-size: var(--font-size-lg); border-radius: var(--radius-md);}
+    .section { padding: var(--space-32) 0; opacity: 0; transform: translateY(30px); transition: all 0.6s;}
+    .section.visible { opacity: 1; transform: translateY(0);}
+    .section:nth-child(even) { background-color: var(--color-bg-2,#fffbe9);}
+    .section h2 { margin-bottom: var(--space-16); }
+    .timeline { display: flex; gap: var(--space-8); margin-bottom: var(--space-24); position: relative;}
+    .timeline::before {content:""; position:absolute; top:50%; left:0; right:0; height:2px; background:var(--color-border); z-index:1;}
+    .timeline__item { flex:1; padding: var(--space-12) var(--space-16); background: var(--color-surface); border:2px solid var(--color-border);
+      border-radius: var(--radius-base); font-weight: 500; cursor:pointer; transition: all 0.2s; position:relative; z-index:2; font-size:14px;
+      text-align:center;
+    }
+    .timeline__item.active {background: var(--color-primary); border-color: var(--color-primary); color: var(--color-btn-primary-text);}
+    .phase-details {
+      background: var(--color-surface); padding: var(--space-24); border-radius: var(--radius-lg); border:1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+    .phase-details h3 { margin-bottom: var(--space-8);}
+    .phase-details .duration { color: var(--color-text-secondary); font-size: 13px; font-weight: 500; margin-bottom: var(--space-12);}
+    .phase-details .focus { margin-bottom: var(--space-16); font-style: italic;}
+    .phase-details ul {padding: 0; list-style: none;}
+    .phase-details li { padding: var(--space-8) 0 var(--space-8) var(--space-20); position: relative;}
+    .phase-details li:before { content: "✓"; position: absolute; left: 0; color: var(--color-success);}
+    .toggle-button { margin-bottom: var(--space-8);}
+    .toggle-content { overflow: hidden; max-height: 0; transition: max-height 0.3s, opacity 0.3s; opacity: 0;}
+    .toggle-content.visible { max-height: 1000px; opacity: 1;}
+    .skills-grid {display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: var(--space-12); list-style:none; padding:0;}
+    .skills-grid li { padding: var(--space-12); background: var(--color-surface); border-radius: var(--radius-base); border:1px solid var(--color-card-border); font-weight:500;}
+    .salary-controls { margin-bottom: var(--space-16); display: flex; gap: var(--space-8); align-items: center;}
+    .salary-table {width:100%; border-collapse:collapse; background:var(--color-surface); border-radius: var(--radius-base); overflow: hidden; box-shadow: var(--shadow-sm);}
+    .salary-table th, .salary-table td { padding: var(--space-12) var(--space-16); text-align:left; border-bottom:1px solid var(--color-card-border);}
+    .salary-table th {background: var(--color-bg-3,#f6fdfb); font-weight:600; color: var(--color-text);}
+    .salary-table td {font-weight:500;}
+    .branding-list { list-style:none; padding:0;}
+    .branding-list li { padding: var(--space-8) 0; border-bottom: 1px solid var(--color-card-border); position: relative; padding-left: var(--space-20);}
+    .branding-list li:before { content: "→"; position:absolute; left:0; color: var(--color-primary);}
+    .capabilities {display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-16);}
+    .card {background: var(--color-surface); border-radius: var(--radius-lg); border: 1px solid var(--color-card-border); box-shadow: var(--shadow-sm);}
+    .card__body { padding: var(--space-16);}
+    .next-steps { list-style:none; padding:0;}
+    .next-steps li { padding: var(--space-16); margin-bottom:var(--space-12); background:var(--color-surface); border-radius: var(--radius-base); border-left:4px solid var(--color-primary); box-shadow: var(--shadow-sm);}
+    .site-footer { background: var(--color-bg-8); color: var(--color-text-secondary); border-top: 1px solid var(--color-border);}
+    .site-footer .container { text-align: center;}
+    /* Fade-in effect for sections */
+    .fade-section {opacity:0;transform:translateY(30px);transition:all 0.6s;}
+    .fade-section.visible {opacity:1;transform:translateY(0);}
+    @media (max-width: 900px) {
+      .container { max-width: var(--container-md);}
+      .capabilities { grid-template-columns: 1fr;}
+    }
+    @media (max-width: 700px) {
+      .container { max-width: 100%; }
+      .hero-section { min-height: auto; padding: var(--space-20) 0;}
+      .timeline {flex-direction:column;}
+      .timeline::before {display: none;}
+      .salary-controls {flex-direction:column; align-items: flex-start;}
+    }
+  </style>
 </head>
 <body>
   <!-- Progress Indicator -->
   <div id="progressContainer"><div id="progressBar"></div></div>
-  
   <!-- Fixed Navigation -->
   <nav class="site-nav">
     <div class="container nav-content">
@@ -30,11 +231,11 @@
   <!-- HERO SECTION -->
   <section id="hero" class="hero-section fade-section">
     <div class="container flex flex-col items-center text-center gap-16">
-      <h1>Maintaining Golden Standard Relevance in the Age of AI &amp; Tech Dependency</h1>
+      <h1>Maintaining Golden Standard Relevance<br>in the Age of AI & Tech Dependency</h1>
       <h2 class="subtitle">A Strategic Framework for Future-Proof Leadership</h2>
-      <p class="author">Research by Mark – Strategic Project Manager</p>
+      <p class="author">Research by Mark &mdash; Strategic Project Manager</p>
       <p class="executive-summary">
-        As artificial intelligence reshapes the management landscape, how do you not merely survive, but become a "golden standard" leader? This framework guides you through mastering AI collaboration, amplifying irreplaceable skills, and building authentic leadership.
+        As artificial intelligence reshapes management, how do you not just survive but become a "golden standard" leader? This framework walks you step-by-step through mastering AI collaboration, amplifying irreplaceable skills, and building authentic leadership.
       </p>
       <a href="#introduction" class="btn btn--primary btn--lg">Explore the Framework</a>
     </div>
@@ -45,7 +246,7 @@
     <div class="container">
       <h2>Introduction</h2>
       <p>
-        Artificial Intelligence is rapidly redefining strategic management roles. Up to 50% of traditional job functions may be displaced by 2040, yet AI-empowered strategy leaders are creating exceptional value and commanding premium positions.
+        Artificial intelligence is rapidly redefining strategic management. Up to 50% of job functions may be displaced by 2040. Yet AI-empowered strategy leaders are producing exceptional value and are in highest demand.
       </p>
       <p>
         <strong>By integrating human expertise with AI amplification, you can achieve “golden standard” status in any evolving field.</strong>
@@ -58,14 +259,14 @@
     <div class="container">
       <h2>AI as Strategic Amplifier</h2>
       <p>
-        Best-in-class organizations position AI as an amplifier—not a replacement. As a researcher, interpreter, thought partner, simulator, and communicator, AI boosts every stage of the strategy process. “Golden standard” leaders orchestrate this power, focusing on integration, ethics, and context only humans provide.
+        Best-in-class organizations position AI as an amplifier, not a replacement. Researcher, interpreter, thought partner, simulator, communicator: these five roles boost every part of strategy. “Golden standard” leaders orchestrate this, focusing on integration, ethics, and context only humans provide.
       </p>
       <button class="btn btn--secondary toggle-button" aria-expanded="false" data-target="ai-keypoints">Show Key Points</button>
       <ul id="ai-keypoints" class="toggle-content hidden mt-8">
         <li>Five key AI roles: researcher, interpreter, thought partner, simulator, communicator</li>
-        <li>Greatest benefit is realized during the design phase of strategy</li>
-        <li>Orchestrator leadership model maximizes AI utility</li>
-        <li>Competencies: prompt engineering, AI literacy, human-AI collaboration</li>
+        <li>Greatest value during the design phase of strategy</li>
+        <li>Orchestrator leadership model for maximum impact</li>
+        <li>Critical skills: prompt engineering, AI literacy, human-AI collaboration</li>
       </ul>
     </div>
   </section>
@@ -75,12 +276,12 @@
     <div class="container">
       <h2>Irreplaceable Human Skills</h2>
       <p>
-        Emotional intelligence, strategic ambiguity navigation, stakeholder influence, and ethical judgment constitute the core of indispensable leadership. As dependency on AI rises, demand for authentic connection, trust, and adaptive reasoning only increases.
+        Emotional intelligence, ambiguity navigation, stakeholder influence, and ethical judgment define indispensable leadership. As dependency on AI rises, demand for authentic connection and adaptive reasoning rises too.
       </p>
       <button class="btn btn--secondary toggle-button" aria-expanded="false" data-target="skills-list">Show Skills List</button>
       <ul id="skills-list" class="toggle-content hidden mt-8 skills-grid">
         <li>Emotional Intelligence</li>
-        <li>Complex Stakeholder Management</li>
+        <li>Stakeholder Management</li>
         <li>Strategic Problem Structuring</li>
         <li>Ethical Decision-Making</li>
         <li>Ambiguity Navigation</li>
@@ -94,9 +295,9 @@
     <div class="container">
       <h2>Strategic Personal Branding</h2>
       <p>
-        Professionals fusing AI literacy with consistent thought leadership and genuine human perspective command top-tier market positions. Show your expertise via consistent public insights and an authentic, ethical, and specialized voice.
+        AI literacy, paired with authentic, consistent thought leadership, is the new competitive moat. Demonstrate your expertise via insights and an ethical, specialized voice.
       </p>
-      <div class="salary-controls flex gap-8 mt-8 items-center">
+      <div class="salary-controls">
         <span>Show salary:</span>
         <button class="btn btn--outline salary-toggle active" data-type="average">Average</button>
         <button class="btn btn--outline salary-toggle" data-type="top">Top</button>
@@ -128,7 +329,7 @@
     </div>
   </section>
 
-  <!-- ROADMAP -->
+  <!-- IMPLEMENTATION ROADMAP -->
   <section id="implementation" class="section fade-section">
     <div class="container">
       <h2>24-Month Implementation Roadmap</h2>
@@ -146,14 +347,14 @@
     <div class="container">
       <h2>AI Governance Frameworks</h2>
       <p>
-        Establish AI ethics officers, cross-functional committees, and rigorous documentation practices. Align oversight with regulations while iterating for innovative advantage. 
+        Establish AI ethics officers, cross-functional committees, and rigorous documentation practices. Align oversight with evolving regulations while iterating for innovation.
       </p>
       <button class="btn btn--secondary toggle-button" aria-expanded="false" data-target="gov-framework">Show Framework Elements</button>
       <ul id="gov-framework" class="toggle-content hidden mt-8">
         <li>Appoint AI ethics officers and governance committees</li>
-        <li>Use NIST AI Risk Management Framework for scale</li>
-        <li>Enforce model cards, data lineage, regular audit cycles</li>
-        <li>Customize for industry risk and compliance requirements</li>
+        <li>Align with NIST AI Risk Management Framework</li>
+        <li>Enforce model cards, data lineage, regular audits</li>
+        <li>Customize for sector risk and compliance</li>
       </ul>
     </div>
   </section>
@@ -191,7 +392,7 @@
     <div class="container">
       <h2>Conclusion & Next Steps</h2>
       <p>
-        AI’s rise is an urgent call for leaders to orchestrate, not just execute. Start integrating these principles today to define your “golden standard” legacy—because tomorrow’s leaders are being chosen by the decisions they make now.
+        AI’s rise is an urgent call for leaders to orchestrate, not just execute. Start integrating these principles today to define your “golden standard” legacy—tomorrow’s leaders are defined by the choices they make now.
       </p>
       <ul class="next-steps mt-8">
         <li><strong>Master AI-Augmented Leadership:</strong> Complete prompt engineering certification & implement AI tools within 30 days.</li>
@@ -210,6 +411,137 @@
       <p>© <span id="year"></span> Mark – Strategic Project Manager. All rights reserved.</p>
     </div>
   </footer>
-  <script src="app.js"></script>
+  <script>
+    /* ===== app.js INLINED ===== */
+(function () {
+  const sectionEls = document.querySelectorAll('.fade-section, .hero-section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const progressBar = document.getElementById('progressBar');
+  // IntersectionObserver to fade sections into view
+  const fadeObserver = new window.IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Highlight nav link
+          const id = entry.target.getAttribute('id');
+          if (id) {
+            navLinks.forEach((link) => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  sectionEls.forEach((sec) => fadeObserver.observe(sec));
+  // Progress bar
+  const updateProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (scrollTop / docHeight) * 100;
+    progressBar.style.width = `${scrolled}%`;
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+  // Toggle buttons
+  document.querySelectorAll('.toggle-button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const contentEl = document.getElementById(targetId);
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !isExpanded);
+      if (isExpanded) {
+        btn.textContent = btn.textContent.replace('Hide', 'Show');
+        contentEl.classList.remove('visible');
+        contentEl.classList.add('hidden');
+      } else {
+        btn.textContent = btn.textContent.replace('Show', 'Hide');
+        contentEl.classList.remove('hidden');
+        contentEl.classList.add('visible');
+      }
+    });
+  });
+  // Salary toggler
+  const salaryButtons = document.querySelectorAll('.salary-toggle');
+  const salaryColumnLabel = document.getElementById('salaryColumnLabel');
+  salaryButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-type');
+      salaryButtons.forEach((b) => b.classList.toggle('active', b === btn));
+      salaryColumnLabel.textContent = type === 'top' ? 'Top Performers' : 'Average';
+      document.querySelectorAll('.salary-table td[data-average]').forEach((cell) => {
+        cell.textContent = cell.getAttribute(type === 'top' ? 'data-top' : 'data-average');
+      });
+    });
+  });
+  // Roadmap Timeline
+  const phases = [
+    {
+      name: 'Foundation Building',
+      duration: 'Months 1–6',
+      focus: 'Developing comprehensive AI literacy, conducting capability assessments, establishing ethical frameworks',
+      activities: [
+        'Invest in prompt engineering training',
+        'Hands-on experience with leading AI tools',
+        'Benchmark current strategic leadership effectiveness',
+        'Develop personal ethical frameworks'
+      ]
+    },
+    {
+      name: 'Strategic Integration',
+      duration: 'Months 6–12',
+      focus: 'Implementing human-AI collaboration in low-risk applications before expanding to complex strategic functions',
+      activities: [
+        'Start with research and data analysis applications',
+        'Enhance emotional intelligence and negotiation skills',
+        'Launch thought leadership platforms',
+        'Demonstrate AI-augmented strategic leadership expertise'
+      ]
+    },
+    {
+      name: 'Optimization',
+      duration: 'Months 12–24',
+      focus: 'Scaling AI integration across all strategic functions while maintaining human oversight',
+      activities: [
+        'Scale AI integration across strategic functions',
+        'Mentor colleagues in best practices',
+        'Lead organizational transformation initiatives',
+        'Demonstrate tangible business value'
+      ]
+    }
+  ];
+  const timelineButtons = document.querySelectorAll('.timeline__item');
+  const phaseDetailsEl = document.getElementById('phaseDetails');
+  function renderPhase(idx) {
+    const phase = phases[idx];
+    if (!phase) return;
+    timelineButtons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === idx);
+    });
+    phaseDetailsEl.style.opacity = '0'; phaseDetailsEl.style.transform = 'translateY(10px)';
+    setTimeout(() => {
+      phaseDetailsEl.innerHTML = `
+        <h3>${phase.name}</h3>
+        <div class="duration">${phase.duration}</div>
+        <div class="focus">${phase.focus}</div>
+        <ul>
+          ${phase.activities.map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+      `;
+      phaseDetailsEl.style.opacity = '1'; phaseDetailsEl.style.transform = 'translateY(0)';
+    }, 280);
+  }
+  if (timelineButtons.length) {
+    timelineButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => renderPhase(idx));
+    });
+    renderPhase(0);
+  }
+  // Dynamic year in footer
+  const yr = document.getElementById('year'); if(yr) yr.textContent = new Date().getFullYear();
+})();
+  </script>
 </body>
 </html>
