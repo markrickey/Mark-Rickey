@@ -1,142 +1,314 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Mark – Global Strategic Project Manager</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
-      background-attachment: fixed;
-      min-height: 100vh; display: flex; flex-direction: column;
-      color: var(--color-text, #13343b);
-      font-family: var(--font-family-base, 'Inter', sans-serif);
-      line-height: 1.65;
-    }
-    .main-content {
-      flex: 1 0 auto;
-      max-width: 870px;
-      margin-left: auto; margin-right: 280px;
-      /* right margin for sidebar, default on desktop */
-    }
-    @media (max-width: 1024px) { .main-content, .max-w-5xl, .max-w-6xl { max-width: 98vw; margin-right: 0;} .fixed-sidebar { display: none; } }
-    #progressContainer { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 9999; background: rgba(220,150,118,0.12); }
-    #progressBar { height: 100%; background: linear-gradient(90deg,#245365,#DB7A4D); width: 0%; transition: width 0.3s;}
-    section { padding: 5.5rem 0 5rem 0; }
-    section:not(:first-child) { margin-top: 3.5rem;}
-    .fade-section, .content-card, .section-header, .fade-in-on-scroll {
-      opacity: 0; transform: translateY(36px); transition: opacity 0.7s, transform 0.7s;
-    }
-    .fade-section.visible, .content-card.visible, .section-header.in-view, .fade-in-on-scroll.in-view { opacity: 1; transform: translateY(0);}
-    .section-header { font-size: 2.2rem; font-weight: 800; margin-bottom: 2.4rem; }
-    .content-card {
-      background-color: var(--color-surface, #fff);
-      border-radius: 1.15rem;
-      box-shadow: 0 8px 44px 0 rgba(36,83,101,0.08);
-      border: 1px solid var(--color-card-border, #ece8e0);
-      padding: 2.6rem 2rem;
-      margin-bottom: 3.2rem;
-    }
-    .content-card:last-child { margin-bottom:0; }
-    .bg-white { background: #fff; }
-    .bg-alt   { background: #fcfcf9; } /* Cream from your color tokens */
-    .bg-[#F9FAFB]{ background: #f9fafb; }
-    .grid { display: grid;}
-    /* Responsive grids with fewer columns until xl */
-    @media (min-width:900px){ .md\:grid-cols-2 { grid-template-columns: repeat(2,1fr);} }
-    @media (max-width:900px){ .md\:grid-cols-2 { grid-template-columns: 1fr; }}
-    .gap-lg { gap:3.8rem;}
-    .gap-8  { gap:2.2rem;}
-    /* Extra breathing room between sections/cards/skills */
-    .mb-section { margin-bottom: 4.5rem; }
-    .py-section { padding-top: 5.5rem; padding-bottom: 5rem;}
-    /* For footer air */
-    .footer-spacer { margin-top: 5rem; }
-    .max-w-6xl, .max-w-5xl { max-width: 870px; margin-left:auto; margin-right:auto;}
-    .space-y-10 > * + * { margin-top: 3.4rem;}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mark – Global Strategic Project Manager</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS via Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Embedded CSS -->
+    <style>
+        /* Base styles and custom properties */
+        body {
+            background: linear-gradient(180deg, #245365 0%, #DB7A4D 48%, #FFD9CC 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #13343b; /* --color-text */
+            font-family: 'Inter', sans-serif; /* --font-family-base */
+            line-height: 1.65;
+        }
+
+        /* Main content layout with space for sidebar */
+        .main-content {
+            flex: 1 0 auto;
+            max-width: 870px;
+            margin-left: auto;
+            margin-right: 280px; /* Default right margin for sidebar on desktop */
+        }
+
+        /* Fixed sidebar styling */
+        .fixed-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(36, 83, 101, 0.1);
+            padding: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .main-content {
+                max-width: 100%;
+                margin-right: 0;
+                padding: 0 1rem;
+            }
+            .fixed-sidebar {
+                display: none; /* Hide sidebar on smaller screens */
+            }
+        }
+
+        /* Scroll progress bar */
+        #progressContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 9999;
+            background: rgba(220, 150, 118, 0.12);
+        }
+        #progressBar {
+            height: 100%;
+            background: linear-gradient(90deg, #245365, #DB7A4D);
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Section styling */
+        section {
+            padding: 5.5rem 0 5rem 0;
+        }
+        section:not(:first-of-type) {
+            margin-top: 3.5rem;
+        }
+
+        /* Fade-in animation for elements on scroll */
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .fade-in-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section header styling */
+        .section-header {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 2.4rem;
+            color: #245365;
+        }
+
+        /* Generic content card for projects, articles, etc. */
+        .content-card {
+            background-color: #fff; /* --color-surface */
+            border-radius: 1.15rem;
+            box-shadow: 0 8px 44px 0 rgba(36, 83, 101, 0.08);
+            border: 1px solid #ece8e0; /* --color-card-border */
+            padding: 2.6rem 2rem;
+            margin-bottom: 3.2rem;
+        }
+        .content-card:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Background color utilities */
+        .bg-alt { background: #fcfcf9; }
+    </style>
 </head>
-<body>
-  <div id="progressContainer"><div id="progressBar"></div></div>
-  <aside class="fixed-sidebar">
-    <!-- ...sidebar content unchanged... -->
-    <!-- ... -->
-  </aside>
-  <main class="main-content">
-    <section id="hero" class="min-h-screen flex flex-col">
-      <!-- ...unchanged hero content... -->
-    </section>
-    <section id="about" class="bg-white fade-section">
-      <div class="max-w-5xl mx-auto px-6 relative z-10 py-section">
-        <h2 class="section-header text-[#245365] text-center">About Me</h2>
-        <p class="text-lg text-gray-700 leading-relaxed fade-in-on-scroll text-center max-w-4xl mx-auto">
-          With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.
-        </p>
-      </div>
-    </section>
-    <section id="experience" class="bg-[#F9FAFB] fade-section">
-      <div class="max-w-4xl mx-auto px-6 relative z-10 py-section">
-        <h2 class="section-header text-[#245365] text-center">Experience</h2>
-        <div class="experience-card-rotator" style="margin-top:2.8rem"></div>
-      </div>
-    </section>
-    <section id="projects" class="bg-alt fade-section">
-      <div class="max-w-6xl mx-auto px-6 relative z-10 py-section">
-        <h2 class="section-header text-[#245365] text-center">Work Studies</h2>
-        <div class="grid md:grid-cols-2 gap-lg">
-          <!-- each .content-card fade-in-on-scroll -->
+<body class="bg-gray-50">
+
+    <!-- Scroll Progress Bar -->
+    <div id="progressContainer"><div id="progressBar"></div></div>
+
+    <!-- Fixed Sidebar (Desktop only) -->
+    <aside class="fixed-sidebar">
+        <div class="text-center">
+            <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
+            <h3 class="text-xl font-bold text-[#245365]">Mark R.</h3>
+            <p class="text-sm text-gray-600">Strategic Project Manager</p>
         </div>
-      </div>
-    </section>
-    <section id="articles" class="bg-[#F9FAFB] fade-section mb-section">
-      <div class="max-w-6xl mx-auto px-6 relative z-10 py-section">
-        <h2 class="section-header text-[#245365] text-center">Articles & Insights</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- ...each .content-card ... -->
-        </div>
-      </div>
-    </section>
-    <section id="input" class="bg-white fade-section mb-section">
-      <div class="max-w-4xl mx-auto px-6 relative z-10 py-section">
-        <h2 class="section-header text-[#245365] text-center">Thoughts & Opinions</h2>
-        <div class="space-y-10">
-          <!-- ...each .content-card ... -->
-        </div>
-      </div>
-    </section>
-    <section id="skills" class="bg-[#F9FAFB] fade-section mb-section">
-      <div class="max-w-5xl mx-auto px-6 relative z-10 py-section">
-        <h2 class="section-header text-[#245365] text-center">Skills</h2>
-        <div class="flex flex-wrap justify-center mb-10 gap-3 fade-in-on-scroll">
-          <!-- ...skill filter btns... -->
-        </div>
-        <div id="skills-chips-container" class="relative fade-in-on-scroll">
-          <div class="flex flex-wrap justify-center max-w-3xl mx-auto" id="skills-chips"></div>
-        </div>
-      </div>
-    </section>
-    <footer id="contact" class="flex-shrink-0 relative py-16 bg-gradient-to-br from-[#FFD9CC] via-[#DB7A4D] to-[#245365] border-t-4 border-[#DB7A4D] mt-20 overflow-x-hidden fade-section footer-spacer">
-      <div class="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
-        <h2 class="section-header text-[#245365]">Let’s Collaborate</h2>
-        <p class="mb-8 text-lg text-[#245365]/90 font-medium">
-          Ready to create something impactful?
-        </p>
-        <div class="flex items-center gap-8 mb-9">
-          <!-- ...contact icons... -->
-        </div>
-        <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
-          <span>&copy; 2025 Mark R.</span>
-          <span aria-hidden="true">&mdash;</span>
-          <span>All rights reserved.</span>
-        </p>
-      </div>
-    </footer>
-  </main>
-  <script src="app.js"></script>
-  <script>
-    // (existing fade-in and progress bar code, unchanged)
-  </script>
+        <nav class="mt-10 flex flex-col space-y-4 w-full">
+            <a href="#about" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">About</a>
+            <a href="#experience" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Experience</a>
+            <a href="#projects" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Work Studies</a>
+            <a href="#articles" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Articles</a>
+            <a href="#skills" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Skills</a>
+            <a href="#contact" class="text-gray-700 hover:text-[#DB7A4D] font-medium transition-colors duration-300">Contact</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center items-start text-left px-6">
+            <div class="max-w-3xl fade-in-on-scroll">
+                 <h1 class="text-5xl md:text-6xl font-extrabold text-white leading-tight">
+                    Driving Strategic <br/>Excellence & Impact
+                </h1>
+                <p class="mt-6 text-lg text-white/80 max-w-2xl">
+                    A Global Strategic Project Manager leveraging a decade of military and government expertise to deliver results in high-stakes environments.
+                </p>
+                <a href="#contact" class="mt-8 inline-block bg-[#DB7A4D] text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-[#c96a3d] transition-transform transform hover:scale-105">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="bg-white rounded-2xl shadow-xl fade-in-on-scroll">
+            <div class="max-w-5xl mx-auto px-6 relative z-10 py-16">
+                <h2 class="section-header text-center">About Me</h2>
+                <p class="text-lg text-gray-700 leading-relaxed text-center max-w-4xl mx-auto">
+                    With over a decade of experience spanning global military operations and strategic government relations, I translate complex challenges into quantifiable results. My background blends unwavering discipline with advanced technical skill, enabling me to streamline operations, drive impactful change, and elevate organizational performance in high-stakes environments.
+                </p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="bg-[#F9FAFB] rounded-2xl shadow-xl fade-in-on-scroll">
+            <div class="max-w-4xl mx-auto px-6 relative z-10 py-16">
+                <h2 class="section-header text-center">Experience</h2>
+                <div class="mt-10 border-l-2 border-[#DB7A4D] pl-6 space-y-12">
+                    <!-- Experience Item 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-[34px] top-1 h-4 w-4 rounded-full bg-[#245365]"></div>
+                        <h3 class="text-xl font-bold text-gray-800">Global Operations Lead</h3>
+                        <p class="font-semibold text-gray-600">U.S. Government | 2018 - Present</p>
+                        <p class="mt-2 text-gray-700">Directed cross-functional teams in high-pressure international settings, improving operational efficiency by 30% through strategic planning and technology integration.</p>
+                    </div>
+                    <!-- Experience Item 2 -->
+                    <div class="relative">
+                        <div class="absolute -left-[34px] top-1 h-4 w-4 rounded-full bg-[#245365]"></div>
+                        <h3 class="text-xl font-bold text-gray-800">Strategic Relations Officer</h3>
+                        <p class="font-semibold text-gray-600">Department of Defense | 2014 - 2018</p>
+                        <p class="mt-2 text-gray-700">Managed key relationships with international partners, negotiating agreements that enhanced joint operational capabilities and resource sharing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="bg-alt rounded-2xl shadow-xl fade-in-on-scroll">
+            <div class="max-w-6xl mx-auto px-6 relative z-10 py-16">
+                <h2 class="section-header text-center">Work Studies</h2>
+                <div class="grid md:grid-cols-2 gap-8 mt-10">
+                    <!-- Project Card 1 -->
+                    <div class="content-card fade-in-on-scroll">
+                        <h3 class="text-xl font-bold mb-2">Project Sentinel</h3>
+                        <p class="text-gray-600">Developed and implemented a new global logistics framework, reducing supply chain delays by 45% and saving an estimated $2M annually.</p>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="content-card fade-in-on-scroll">
+                        <h3 class="text-xl font-bold mb-2">Operation Nexus</h3>
+                        <p class="text-gray-600">Led a multi-national team to standardize communication protocols, resulting in a 60% improvement in interoperability during joint exercises.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articles" class="bg-[#F9FAFB] rounded-2xl shadow-xl fade-in-on-scroll">
+            <div class="max-w-6xl mx-auto px-6 relative z-10 py-16">
+                <h2 class="section-header text-center">Articles & Insights</h2>
+                <div class="grid md:grid-cols-2 gap-8 mt-10">
+                    <!-- Article Card 1 -->
+                    <div class="content-card fade-in-on-scroll">
+                        <h3 class="text-xl font-bold mb-2">The Future of Asymmetric Conflict</h3>
+                        <p class="text-gray-600">An analysis of emerging technologies and their impact on modern strategic planning. Published in 'Strategic Quarterly'.</p>
+                    </div>
+                    <!-- Article Card 2 -->
+                    <div class="content-card fade-in-on-scroll">
+                        <h3 class="text-xl font-bold mb-2">Leadership in Decentralized Teams</h3>
+                        <p class="text-gray-600">Exploring principles for effective management when teams are spread across continents and time zones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="bg-white rounded-2xl shadow-xl fade-in-on-scroll">
+            <div class="max-w-5xl mx-auto px-6 relative z-10 py-16">
+                <h2 class="section-header text-center">Core Competencies</h2>
+                <div class="flex flex-wrap justify-center gap-3 mt-10">
+                    <!-- Skill Chip -->
+                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Strategic Planning</span>
+                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Project Management</span>
+                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Risk Assessment</span>
+                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">International Relations</span>
+                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Logistics Optimization</span>
+                    <span class="bg-blue-100 text-[#245365] text-sm font-semibold px-4 py-2 rounded-full">Cross-Functional Leadership</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer id="contact" class="flex-shrink-0 relative py-16 mt-20 fade-in-on-scroll">
+            <div class="max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
+                <h2 class="section-header text-white">Let’s Collaborate</h2>
+                <p class="mb-8 text-lg text-white/90 font-medium">
+                    Ready to create something impactful?
+                </p>
+                <div class="flex items-center gap-8 mb-9">
+                    <!-- Placeholder Contact Icons -->
+                    <a href="#" class="text-white/80 hover:text-white transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20.94,8.53...[path data]"/></svg></a>
+                    <a href="#" class="text-white/80 hover:text-white transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20,2H4C2.9,2,2...[path data]"/></svg></a>
+                </div>
+                <p class="text-sm text-gray-100/80 font-light flex items-center gap-1">
+                    <span>&copy; 2025 Mark R.</span>
+                    <span aria-hidden="true">&mdash;</span>
+                    <span>All rights reserved.</span>
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Embedded JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Scroll Progress Bar Logic ---
+            const progressBar = document.getElementById('progressBar');
+            const updateProgressBar = () => {
+                const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = window.scrollY;
+                const progress = (scrolled / scrollTotal) * 100;
+                if (progressBar) {
+                    progressBar.style.width = `${progress}%`;
+                }
+            };
+            window.addEventListener('scroll', updateProgressBar);
+
+            // --- Fade-in on Scroll Logic using Intersection Observer ---
+            const faders = document.querySelectorAll('.fade-in-on-scroll');
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the item must be visible
+            };
+
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+
 </body>
 </html>
