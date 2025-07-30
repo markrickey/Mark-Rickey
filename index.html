@@ -41,35 +41,80 @@
     <main class="main-content">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="hero-content fade-in-on-scroll">
-                <h1 class="hero-title">
-                    Transforming Vision into<br/>Strategic Excellence
-                </h1>
-                <p class="hero-subtitle">
-                    A Global Strategic Project Manager with over a decade of military and government expertise, 
-                    delivering exceptional results in high-stakes international environments. 
-                    Specializing in strategic planning, cross-functional leadership, and operational excellence.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">$100M+</span>
-                        <span class="stat-label">Projects Managed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label">Countries</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">99.8%</span>
-                        <span class="stat-label">Success Rate</span>
-                    </div>
-                </div>
-                <a href="#contact" class="hero-cta">
-                    Let's Collaborate
-                </a>
+<section id="hero" class="hero-section">
+    <div class="hero-content fade-in-on-scroll">
+        <h1 class="hero-title">
+            <span class="typewriter-text">Transforming Vision into Strategic Excellence</span>
+        </h1>
+        <p class="hero-subtitle">
+            A Global Strategic Project Manager with over a decade of military and government expertise, 
+            delivering exceptional results in high-stakes international environments. 
+            Specializing in strategic planning, cross-functional leadership, and operational excellence.
+        </p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">$100M+</span>
+                <span class="stat-label">Projects Managed</span>
             </div>
-        </section>
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Countries</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">99.8%</span>
+                <span class="stat-label">Success Rate</span>
+            </div>
+        </div>
+        <a href="#contact" class="hero-cta">
+            Let's Collaborate
+        </a>
+    </div>
+</section>
+
+<style>
+/* CSS-Only Typing Animation */
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: #1a202c;
+}
+
+.typewriter-text {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 3px solid #3182ce;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.05em;
+    animation: 
+        typing 4s steps(45, end),
+        blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #3182ce; }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+}
+</style>
 
         <!-- About Section -->
         <section id="about" class="content-section bg-white fade-in-on-scroll">
