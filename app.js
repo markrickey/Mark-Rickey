@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 });
 function loadPosts() {
-  fetch('YOUR_WEB_APP_URL')
+  fetch("https://script.google.com/macros/s/AKfycbzeHzVAswHUPbO0AjGNvSnIxVuaaiyECQUPUmrfV1IuLE5n5wfmD4-vLyoVJxhPltMw/exec")
     .then(r=>r.json())
     .then(posts=>{
       let html = '';
