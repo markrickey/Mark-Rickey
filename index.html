@@ -747,69 +747,109 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section fade-in-on-scroll">
-            <div class="section-container">
-                <h2 class="section-header text-white">Let's Create Strategic Excellence Together</h2>
-                <p class="contact-intro">
-                    Ready to transform your next strategic initiative into exceptional results? 
-                    Let's discuss how we can achieve your objectives.
-                </p>
-                
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <h4>Location</h4>
-                            <p>Indiana<br>Available for global assignments</p>
-                        </div>
-                        <div class="contact-item">
-                            <h4>Email</h4>
-                            <p>markrickey01@gmail.com</p>
-                        </div>
-                        <div class="contact-item">
-                            <h4>Phone</h4>
-                            <p>+1 (260) 444-7307</p>
-                        </div>
-                        <div class="contact-item">
-                            <h4>LinkedIn</h4>
-                            <p>www.linkedin.com/in/markrickey01</p>
-                        </div>
-                    </div>
-                    
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="name" class="form-label">Name *</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label">Email *</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="organization" class="form-label">Organization</label>
-                            <input type="text" id="organization" name="organization" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Brief subject line">
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="form-label">Message *</label>
-                            <textarea id="message" name="message" rows="5" class="form-control" required placeholder="Tell me about your project or how I can help..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full-width" id="submitBtn">
-                            Send Message
-                        </button>
-                    </form>
+        <!-- Contact Section with FormSubmit -->
+<section id="contact" class="contact-section fade-in-on-scroll">
+    <div class="section-container">
+        <h2 class="section-header text-white">Let's Create Strategic Excellence Together</h2>
+        <p class="contact-intro">
+            Ready to transform your next strategic initiative into exceptional results? 
+            Let's discuss how we can achieve your objectives.
+        </p>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>Location</h4>
+                    <p>Indiana<br>Available for global assignments</p>
                 </div>
-                
-                <div class="contact-footer">
-                    <p class="footer-text">
-                        &copy; 2025 Mark R. &mdash; Strategic Project Management Excellence &mdash; All rights reserved.
-                    </p>
+                <div class="contact-item">
+                    <h4>Email</h4>
+                    <p>markrickey01@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Phone</h4>
+                    <p>+1 (260) 444-7307</p>
+                </div>
+                <div class="contact-item">
+                    <h4>LinkedIn</h4>
+                    <p>www.linkedin.com/in/markrickey01</p>
                 </div>
             </div>
-        </section>
+            
+            <!-- FORMSUBMIT FORM - CHANGE ONLY THE EMAIL ADDRESS -->
+            <form class="contact-form" action="https://formsubmit.co/markrickey01@gmail.com" method="POST">
+                <!-- FormSubmit Configuration (Hidden Fields) -->
+                <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="form-group">
+                    <label for="name" class="form-label">Name *</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="organization" class="form-label">Organization</label>
+                    <input type="text" name="organization" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" name="subject" class="form-control" placeholder="Brief subject line">
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Message *</label>
+                    <textarea name="message" rows="5" class="form-control" required placeholder="Tell me about your project or how I can help..."></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">
+                    Send Message
+                </button>
+            </form>
+        </div>
+        
+        <div class="contact-footer">
+            <p class="footer-text">
+                &copy; 2025 Mark R. &mdash; Strategic Project Management Excellence &mdash; All rights reserved.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Add this CSS to fix the text color issue -->
+<style>
+/* Fix contact form text visibility */
+.contact-form .form-control {
+    color: #000000 !important; /* Black text */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.contact-form .form-control:focus {
+    color: #000000 !important; /* Ensure black text on focus */
+    background-color: #ffffff;
+    border-color: #3182ce;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+}
+
+.contact-form textarea.form-control {
+    color: #000000 !important; /* Specifically for textarea */
+    background-color: #ffffff;
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form .form-control::placeholder {
+    color: #666666 !important; /* Gray placeholder text */
+    opacity: 1;
+}
+</style>
+
     </main>
 
     <!-- Link to JavaScript file -->
