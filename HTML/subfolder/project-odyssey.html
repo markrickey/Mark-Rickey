@@ -52,6 +52,10 @@
     @media (max-width: 480px) {
       .main-card, .modal-content { border-radius: 1rem; }
     }
+    /* Modal backdrop for mobile */
+    @media (max-width: 640px) {
+      #trip-details-modal .modal-content { border-radius: 0.9rem; }
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -159,24 +163,227 @@
     pb.style.width = `${Math.min(100, (scrollTop/docHeight)*100)}%`;
   }, {passive:true});
 })();
+
 // ---- IntersectionObserver Fade-in ----
 document.addEventListener('DOMContentLoaded', function() {
   const io = new window.IntersectionObserver(entries=>{
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('in-view');
-      }
-    });
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('in-view'); });
   }, {threshold:0.18});
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 });
-</script>
-<!-- Retain the rest of your business logic / AI / Firebase scripts here -->
-<script type="module">
-/* Keep all of your previous Firebase, Gemini, and app logic right here -- unchanged -- as in your current implementation */
-//
-// (see your code as in the prompt: ... import Firebase ... logic ...)
-//
+
+// ---- Main App Logic ----
+const trips = [];
+let user = null;
+
+// Util
+function renderTrips() {
+  const c = document.getElementById('trips-container');
+  c.innerHTML = '';
+  if (!trips.length) {
+    c.innerHTML = `<div class="p-8 text-gray-400 text-lg text-center">No trips yet. Create your first one!</div>`;
+    return;
+  }
+  trips.forEach((trip, i) => {
+    const el = document.createElement('div');
+    el.className = 'trip-card p-6 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 flex flex-col gap-3 cursor-pointer';
+    el.innerHTML = `
+      <h3 class="font-bold text-2xl text-[#245365] mb-1">${trip.name}</h3>
+      <div class="text-sm text-gray-500">${trip.itinerary.length} itinerary items &bull; $${trip.expenses.reduce((sum,e)=>sum+Number(e.amount||0),0).toFixed(2)} total</div>
+      <div class="flex-1"></div>
+      <button class="mt-4 bg-[#DB7A4D] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#c26636] transition">Open</button>
+    `;
+    el.querySelector('button').onclick = (ev) => {
+      ev.stopPropagation();
+      openTripModal(i);
+    };
+    el.onclick = (ev) => {
+      openTripModal(i);
+    }
+    c.appendChild(el);
+  });
+}
+
+function showUserInfo() {
+  document.getElementById('user-info-display').textContent = user
+    ? `👤 ${user.displayName || user.name || user.id || 'Traveler'}`
+    : '';
+  document.getElementById('auth-button').textContent = user ? 'Logout' : 'Login';
+}
+function fakeLogin() {
+  user = { id: 'markrickey01', displayName: 'Mark Rickey' };
+  showUserInfo();
+}
+function fakeLogout() {
+  user = null;
+  showUserInfo();
+}
+
+document.getElementById('auth-button').onclick = function() {
+  if (user) fakeLogout();
+  else fakeLogin();
+};
+
+// ---- Create Trip ----
+document.getElementById('create-trip-btn').onclick = function() {
+  const name = document.getElementById('trip-name').value.trim();
+  if (!user) { alert('Please log in first!'); return; }
+  if (!name) { alert('Trip name required!'); return; }
+  trips.push({
+    name,
+    itinerary: [],
+    expenses: [],
+    collaborators: [user.displayName || user.id]
+  });
+  document.getElementById('trip-name').value = '';
+  renderTrips();
+};
+
+// ---- Modal UI ----
+let currentTripIndex = null;
+function openTripModal(i) {
+  currentTripIndex = i;
+  const trip = trips[i];
+  document.getElementById('modal-trip-name').textContent = trip.name;
+  renderItinerary();
+  renderExpenses();
+  renderCollaborators();
+  document.getElementById('trip-details-modal').classList.remove('hidden');
+}
+document.getElementById('close-modal-btn').onclick = function() {
+  document.getElementById('trip-details-modal').classList.add('hidden');
+};
+
+// -- Itinerary --
+function renderItinerary() {
+  const trip = trips[currentTripIndex];
+  const list = document.getElementById('itinerary-list');
+  list.innerHTML = '';
+  if (!trip.itinerary.length) {
+    list.innerHTML = `<div class="text-gray-400">No itinerary items yet.</div>`;
+    return;
+  }
+  trip.itinerary.forEach((item, idx) => {
+    const entry = document.createElement('div');
+    entry.className = 'flex items-center gap-3 bg-white/70 p-2 rounded';
+    entry.innerHTML = `
+      <span class="flex-grow">${item.text}${item.date ? ` <span class="text-xs text-gray-400 ml-2">(${item.date})</span>`:''}</span>
+      <button title="Remove" class="text-[#DB7A4D] text-xl hover:text-red-500 px-2">&times;</button>
+    `;
+    entry.querySelector('button').onclick = function(ev) {
+      ev.stopPropagation();
+      trip.itinerary.splice(idx,1);
+      renderItinerary();
+    }
+    list.appendChild(entry);
+  });
+}
+
+document.getElementById('add-itinerary-btn').onclick = function() {
+  if (currentTripIndex === null) return;
+  const text = document.getElementById('itinerary-item').value.trim();
+  const date = document.getElementById('itinerary-date').value;
+  if (!text) return;
+  trips[currentTripIndex].itinerary.push({text, date});
+  document.getElementById('itinerary-item').value = '';
+  document.getElementById('itinerary-date').value = '';
+  renderItinerary();
+};
+document.getElementById('suggest-itinerary-btn').onclick = function() {
+  if (currentTripIndex === null) return;
+  // "AI suggestion" example (static for now)
+  trips[currentTripIndex].itinerary.push({text:"Sample AI-generated day: Explore the city center & sample local cuisine.", date:""});
+  renderItinerary();
+};
+
+// -- Expenses --
+function renderExpenses() {
+  const trip = trips[currentTripIndex];
+  const list = document.getElementById('expense-list');
+  list.innerHTML = '';
+  let total = 0;
+  if (!trip.expenses.length) {
+    list.innerHTML = `<div class="text-gray-400">No expenses yet.</div>`;
+  } else {
+    trip.expenses.forEach((exp, idx) => {
+      total += Number(exp.amount||0);
+      const entry = document.createElement('div');
+      entry.className = 'flex items-center gap-3 bg-white/75 p-2 rounded text-sm';
+      entry.innerHTML = `
+        <span class="flex-grow font-medium">${exp.desc}</span>
+        <span class="w-24 text-right">$${Number(exp.amount).toFixed(2)}</span>
+        <span class="bg-[#fdb92e] text-[#245365] text-xs font-bold rounded-full px-2 py-1">${exp.category||'Uncategorized'}</span>
+        <button title="Remove" class="text-[#DB7A4D] text-lg hover:text-red-500 px-2">&times;</button>
+      `;
+      entry.querySelector('button').onclick = function(ev){
+        ev.stopPropagation();
+        trip.expenses.splice(idx,1); renderExpenses();
+      }
+      list.appendChild(entry);
+    });
+  }
+  document.getElementById('total-expenses').textContent = total.toFixed(2);
+}
+
+// "Categorize" (AI) = just a demo for now
+document.getElementById('categorize-expense-btn').onclick = function() {
+  const desc = document.getElementById('expense-description').value.trim().toLowerCase();
+  let category = 'General';
+  if (/flight|air|ticket|plane/.test(desc)) category = 'Flights';
+  else if (/(hotel|inn|motel|bnb|stay)/.test(desc)) category = 'Lodging';
+  else if (/(food|restaurant|meal|cafe|bar|breakfast|lunch|dinner)/.test(desc)) category = 'Dining';
+  else if (/(car|uber|taxi|transport|bus|subway|train)/.test(desc)) category = 'Transportation';
+  else if (/museum|tour|ticket|admission|zoo|excursion|event/.test(desc)) category = 'Entertainment';
+  else if (/shopping|gift|souvenir/.test(desc)) category = 'Shopping';
+  document.getElementById('expense-category').value = category;
+};
+// Add expense
+document.getElementById('add-expense-btn').onclick = function() {
+  if (currentTripIndex === null) return;
+  const desc = document.getElementById('expense-description').value.trim();
+  const amount = document.getElementById('expense-amount').value;
+  const category = document.getElementById('expense-category').value || 'General';
+  if (!desc || !amount) return;
+  trips[currentTripIndex].expenses.push({desc, amount, category});
+  document.getElementById('expense-description').value = '';
+  document.getElementById('expense-amount').value = '';
+  document.getElementById('expense-category').value = '';
+  renderExpenses();
+};
+
+// -- Collaborators --
+function renderCollaborators() {
+  const colls = trips[currentTripIndex].collaborators || [];
+  const list = document.getElementById('collaborators-list');
+  list.innerHTML = '';
+  colls.forEach((c,i) => {
+    const d = document.createElement('span');
+    d.className='bg-[#3a668c] text-white text-xs px-3 py-1 rounded-full mr-1 flex items-center gap-1';
+    d.innerHTML = `<span>${c}</span>
+      ${i>0?'<button class="ml-1 text-xs hover:text-red-300" title="Remove">&times;</button>':''}`;
+    if(i>0) d.querySelector('button').onclick = ()=>{ colls.splice(i,1); renderCollaborators(); }
+    list.appendChild(d);
+  });
+}
+document.getElementById('add-collaborator-btn').onclick = function() {
+  const id = document.getElementById('collaborator-id').value.trim();
+  if (!id) return;
+  if (!trips[currentTripIndex].collaborators.includes(id)) {
+    trips[currentTripIndex].collaborators.push(id);
+  }
+  document.getElementById('collaborator-id').value = '';
+  renderCollaborators();
+};
+
+// --- ESC key closes modal ---
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape' && !document.getElementById('trip-details-modal').classList.contains('hidden')) {
+    document.getElementById('trip-details-modal').classList.add('hidden');
+  }
+});
+
+showUserInfo();
+renderTrips();
 </script>
 </body>
 </html>
