@@ -309,3 +309,40 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 });
+// Interactive Timeline - Expand/Collapse Achievements & Scroll Activation
+document.addEventListener('DOMContentLoaded', () => {
+  // Accordion interaction
+  document.querySelectorAll('.timeline-entry').forEach(entry => {
+    const summary = entry.querySelector('.timeline-summary');
+    const details = entry.querySelector('.timeline-details');
+    const toggle = entry.querySelector('.timeline-toggle');
+
+    summary.addEventListener('click', () => {
+      const openNow = entry.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+      details.setAttribute('aria-hidden', !openNow);
+    });
+
+    summary.addEventListener('keypress', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        summary.click();
+      }
+    });
+  });
+
+  // Scroll reveal: highlight active timeline entry
+  function updateActiveTimeline() {
+    let found = false;
+    document.querySelectorAll('.timeline-entry').forEach(entry => {
+      entry.classList.remove('active');
+      const rect = entry.getBoundingClientRect();
+      if (!found && rect.top + rect.height/2 > 80) {
+        entry.classList.add('active');
+        found = true;
+      }
+    });
+  }
+  window.addEventListener('scroll', updateActiveTimeline, { passive: true });
+  updateActiveTimeline();
+});
