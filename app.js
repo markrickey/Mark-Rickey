@@ -4,14 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Scroll Progress Bar Logic ---
     const progressBar = document.getElementById('progressBar');
-    const updateProgressBar = () => {
-        const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = window.scrollY;
-        const progress = (scrolled / scrollTotal) * 100;
-        if (progressBar) progressBar.style.width = `${progress}%`;
-    };
-    window.addEventListener('scroll', updateProgressBar);
-    updateProgressBar();
+    if (progressBar) {
+        const updateProgressBar = () => {
+            const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / scrollTotal) * 100;
+            progressBar.style.width = `${progress}%`;
+        };
+        window.addEventListener('scroll', updateProgressBar);
+        updateProgressBar(); // Initial run
+    }
 
     // --- Fade-in on Scroll Logic using Intersection Observer ---
     const faders = document.querySelectorAll('.fade-in-on-scroll');
@@ -49,62 +51,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Active Navigation Link Highlighting ---
     const sections = document.querySelectorAll('section[id]');
     const navigationLinks = document.querySelectorAll('.nav-link');
-    function highlightNavigation() {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
+    if (sections.length && navigationLinks.length) {
+        const highlightNavigation = () => {
+            let current = '';
             const scrollPosition = window.scrollY + 200;
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-        navigationLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href');
-            if (href === `#${current}`) link.classList.add('active');
-        });
+            sections.forEach(section => {
+                if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.clientHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navigationLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', highlightNavigation);
+        highlightNavigation(); // Initial run
     }
-    window.addEventListener('scroll', highlightNavigation);
-    highlightNavigation();
 
     // --- Blog Loader ---
+    const blogFeed = document.getElementById('blogFeed');
     function loadPosts() {
+        if (!blogFeed) return;
         fetch(API_URL)
             .then(r => r.json())
             .then(posts => {
                 let html = '';
                 posts.reverse().forEach(post => {
-                    html += `<div class="blogpost">
-                      <p>${post.post}</p>
-                      <small>${post.timestamp} by ${post.author}</small>
-                      
-                      <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(post.url)}" target="_blank">Share on LinkedIn</a>
-                    </div>`;
+                    // Using CSS for spacing is better than <br>, but this works
+                    html += `
+                        <div class="blog-post">
+                          <p>${post.post}</p>
+                          <small>${new Date(post.timestamp).toLocaleString()} by ${post.author}</small>
+                          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(post.url)}" target="_blank">Share on LinkedIn</a>
+                        </div>
+                    `;
                 });
-                const blogFeed = document.getElementById('blogFeed');
-                if (blogFeed) blogFeed.innerHTML = html;
-            });
+                blogFeed.innerHTML = html;
+            }).catch(error => console.error('Error loading blog posts:', error));
     }
     loadPosts();
 
-    // --- Admin Reveal ---
+    // --- Admin Reveal & Form ---
+    // See security warning below
     const revealAdminBtn = document.getElementById('revealAdminBtn');
-    if (revealAdminBtn) {
+    const adminPostForm = document.getElementById('adminPostForm');
+    if (revealAdminBtn && adminPostForm) {
         revealAdminBtn.onclick = function () {
+            // WARNING: This is not secure. Password is visible in the source code.
             if (prompt("Admin access: what is the code?") === "Manila92!") {
-                document.getElementById('adminPostForm').style.display = 'block';
+                adminPostForm.style.display = 'block';
                 this.style.display = 'none';
             }
         };
     }
 
-    // --- Admin Blog Post Form ---
     const blogPostForm = document.getElementById('blogPostForm');
     if (blogPostForm) {
         blogPostForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            const postContent = document.getElementById('blogPost').value;
+            const postContentInput = document.getElementById('blogPost');
+            const postContent = postContentInput.value;
             fetch(API_URL, {
                 method: "POST",
                 body: JSON.stringify({
@@ -113,26 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     url: window.location.href
                 })
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Blog post published!");
-                        document.getElementById('blogPost').value = '';
-                        loadPosts();
-                    } else {
-                        alert("There was a problem. Please try again.");
-                    }
-                });
-        });
-    }
-
-    // --- Contact Form Handling (Updated to match your HTML form) ---
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (e) {
-            // Don't prevent default since you're using FormSubmit
-            // But you can add additional handling here if needed
-            console.log("Contact form submitted");
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Blog post published!");
+                    postContentInput.value = '';
+                    loadPosts();
+                } else {
+                    alert("There was a problem. Please try again.");
+                }
+            }).catch(error => console.error('Error submitting post:', error));
         });
     }
 
@@ -145,184 +144,52 @@ document.addEventListener('DOMContentLoaded', () => {
         brownAccent: '#bd7f22'
     };
 
-    // Waste Composition Chart
-    const wasteCtx = document.getElementById('wasteCompositionChart');
-    if (wasteCtx) {
-        new Chart(wasteCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Food Waste', 'Yard Trimmings', 'Paper', 'Plastics', 'Other'],
-                datasets: [{
-                    data: [24, 13, 12, 18, 33],
-                    backgroundColor: [
-                        brandPalette.primaryOrange,
-                        brandPalette.goldenYellow,
-                        brandPalette.navyBlue,
-                        brandPalette.brownAccent,
-                        '#cccccc'
-                    ],
-                    borderColor: '#ffffff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#fef5da' }
-                    }
-                }
-            }
-        });
+    // Chart initialization logic
+    function createChart(elementId, config) {
+        const ctx = document.getElementById(elementId);
+        if (ctx) {
+            new Chart(ctx, config);
+        }
     }
 
-    // Job Creation Chart
-    const jobCtx = document.getElementById('jobCreationChart');
-    if (jobCtx) {
-        new Chart(jobCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Composting', 'Landfilling', 'Incineration'],
-                datasets: [{
-                    label: 'Jobs per 10,000 Tons/Year',
-                    data: [4.1, 2.1, 1.2],
-                    backgroundColor: [
-                        brandPalette.goldenYellow,
-                        brandPalette.navyBlue,
-                        brandPalette.brownAccent
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    }
-                }
-            }
-        });
-    }
-
-    // Market Growth Chart
-    const marketCtx = document.getElementById('marketGrowthChart');
-    if (marketCtx) {
-        new Chart(marketCtx, {
-            type: 'line',
-            data: {
-                labels: ['2024', '2026', '2028', '2030', '2032'],
-                datasets: [{
-                    label: 'Market Value ($B)',
-                    data: [1.4, 1.65, 1.9, 2.2, 2.5],
-                    borderColor: brandPalette.primaryOrange,
-                    backgroundColor: 'rgba(255, 114, 79, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    }
-                }
-            }
-        });
-    }
-
-    // Implementation Timeline Chart
-    const implementationCtx = document.getElementById('implementationChart');
-    if (implementationCtx) {
-        new Chart(implementationCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Year 1', 'Year 2-3', 'Year 4-5'],
-                datasets: [{
-                    label: 'Municipalities',
-                    data: [100, 1000, 2000],
-                    backgroundColor: [
-                        brandPalette.goldenYellow,
-                        brandPalette.primaryOrange,
-                        brandPalette.navyBlue
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    }
-                }
-            }
-        });
-    }
-
-    // --- Rest of your existing code for hover effects, etc. ---
-    // Project Cards
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mouseenter', () => { card.style.transform = 'translateY(-8px)'; });
-        card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; });
+    createChart('wasteCompositionChart', {
+        type: 'doughnut',
+        data: {
+            labels: ['Food Waste', 'Yard Trimmings', 'Paper', 'Plastics', 'Other'],
+            datasets: [{
+                data: [24, 13, 12, 18, 33],
+                backgroundColor: [brandPalette.primaryOrange, brandPalette.goldenYellow, brandPalette.navyBlue, brandPalette.brownAccent, '#cccccc'],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: brandPalette.creamLight } } } }
     });
 
-    // Article Cards
-    document.querySelectorAll('.article-card').forEach(card => {
-        card.addEventListener('mouseenter', () => { card.style.transform = 'translateY(-4px)'; });
-        card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; });
+    createChart('jobCreationChart', {
+        type: 'bar',
+        data: {
+            labels: ['Composting', 'Landfilling', 'Incineration'],
+            datasets: [{ label: 'Jobs per 10,000 Tons/Year', data: [4.1, 2.1, 1.2], backgroundColor: [brandPalette.goldenYellow, brandPalette.navyBlue, brandPalette.brownAccent] }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } }, x: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } } } }
     });
 
-    // Skill Tags
-    document.querySelectorAll('.skill-tag').forEach(tag => {
-        tag.addEventListener('mouseenter', () => {
-            tag.style.transform = 'scale(1.05)';
-            tag.style.boxShadow = '0 2px 8px rgba(36, 83, 101, 0.2)';
-        });
-        tag.addEventListener('mouseleave', () => {
-            tag.style.transform = 'scale(1)';
-            tag.style.boxShadow = 'none';
-        });
+    createChart('marketGrowthChart', {
+        type: 'line',
+        data: {
+            labels: ['2024', '2026', '2028', '2030', '2032'],
+            datasets: [{ label: 'Market Value ($B)', data: [1.4, 1.65, 1.9, 2.2, 2.5], borderColor: brandPalette.primaryOrange, backgroundColor: 'rgba(255, 114, 79, 0.1)', fill: true, tension: 0.4 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } }, x: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } } } }
     });
 
-    // Add dynamic styles
-    const style = document.createElement('style');
-    style.textContent = `
-        .nav-link.active { color: #DB7A4D !important; font-weight: 600; }
-        .nav-link { transition: all 0.3s ease; }
-        .skill-tag { transition: all 0.2s ease; cursor: pointer; }
-        .project-card, .article-card { transition: all 0.3s ease;}
-    `;
-    document.head.appendChild(style);
+    createChart('implementationChart', {
+        type: 'bar',
+        data: {
+            labels: ['Year 1', 'Year 2-3', 'Year 4-5'],
+            datasets: [{ label: 'Municipalities', data: [100, 1000, 2000], backgroundColor: [brandPalette.goldenYellow, brandPalette.primaryOrange, brandPalette.navyBlue] }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } }, x: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } } } }
+    });
 });
