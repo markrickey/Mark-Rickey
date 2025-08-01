@@ -4,324 +4,1275 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mark R. – Global Strategic Project Manager | Kendallville, IN</title>
-
-  <!-- Google Font & Chart.js CDN -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- =====  ALL CSS INLINED  ===== -->
+  
   <style>
-  /* ------------- CORE RESET ------------- */
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:"Inter",Arial,sans-serif;background:#fcfcf9;color:#13343b;line-height:1.55}
-  a{text-decoration:none;color:#21808d}a:hover{color:#1d7480}
+    /* ===== GOLDEN STANDARD DESIGN SYSTEM ===== */
+    :root {
+      --color-white: #fff;
+      --color-black: #000;
+      --color-cream-50: #fcfcf9;
+      --color-cream-100: #fffffd;
+      --color-gray-200: #f5f5f5;
+      --color-gray-300: #a7a9a9;
+      --color-gray-400: #777c7c;
+      --color-slate-500: #626c71;
+      --color-brown-600: #5e5240;
+      --color-charcoal-700: #1f2121;
+      --color-charcoal-800: #262828;
+      --color-slate-900: #13343b;
+      --color-teal-300: #32b8c6;
+      --color-teal-400: #2da6b2;
+      --color-teal-500: #21808d;
+      --color-teal-600: #1d7480;
+      --color-teal-700: #1a6873;
+      --color-teal-800: #2996a1;
+      --color-red-400: #ff5459;
+      --color-red-500: #c0152f;
+      --color-orange-400: #e68161;
+      --color-orange-500: #a84b2f;
+      --font-family-base: "Inter", "FKGroteskNeue", Arial, sans-serif;
+      --font-family-mono: "Berkeley Mono", monospace;
+      --font-size-base: 14px;
+      --font-size-lg: 16px;
+      --font-size-xl: 18px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 24px;
+      --font-size-4xl: 30px;
+      --font-weight-bold: 600;
+      --color-background: #fcfcf9;
+      --color-surface: #fffffd;
+      --color-text: #13343b;
+      --color-text-secondary: #626c71;
+      --color-primary: #21808d;
+      --color-primary-hover: #1d7480;
+      --color-primary-active: #1a6873;
+      --color-secondary: rgba(94,82,64, 0.12);
+      --color-secondary-hover: rgba(94,82,64, 0.20);
+      --color-secondary-active: rgba(94,82,64, 0.25);
+      --color-border: rgba(94,82,64,0.2);
+      --color-card-border: rgba(94,82,64,0.12);
+      --color-btn-primary-text: #fcfcf9;
+      --color-error: #c0152f;
+      --color-success: #21808d;
+      --color-warning: #a84b2f;
+      --color-info: #626c71;
+      --color-focus-ring: rgba(33,128,141,0.4);
+      --radius-base: 8px;
+      --radius-md: 10px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.04),0 2px 4px -1px rgba(0,0,0,0.02);
+      --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+      --space-20: 20px; --space-24: 24px; --space-32: 32px;
+      --container-md: 768px;
+      --container-lg: 1024px;
+      --container-xl: 1280px;
+    }
 
-  /* ------------- LAYOUT ------------- */
-  #progressContainer{position:fixed;top:0;left:0;width:100%;height:3px;background:#e5e5e5;z-index:1200}
-  #progressBar{height:100%;width:0;background:linear-gradient(90deg,#21808d,#2da6b2);transition:width .2s}
+    html {
+      font-size: var(--font-size-base);
+      font-family: var(--font-family-base);
+      background-color: var(--color-background);
+      color: var(--color-text);
+      scroll-behavior: smooth;
+    }
+    body { margin: 0; padding: 0; }
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { color: var(--color-primary-hover); }
+    h1 { font-size: var(--font-size-4xl); font-weight: var(--font-weight-bold);}
+    h2 { font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold);}
+    h3 { font-size: var(--font-size-2xl);}
+    h4 { font-size: var(--font-size-xl);}
 
-  .fixed-sidebar{position:fixed;top:0;left:0;width:250px;height:100vh;background:#fff;border-right:1px solid #e5e5e5;padding:2rem;overflow-y:auto;z-index:1000}
-  .sidebar-nav{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
-  .sidebar-nav .nav-link{font-weight:600;color:#626c71}
-  .sidebar-nav .nav-link:hover{color:#21808d}
-  .profile-image{border-radius:50%;width:120px;height:120px}
-  .sidebar-title,.sidebar-location{color:#626c71;font-size:.9rem}
+    .container {
+      max-width: var(--container-lg);
+      margin-left: auto; margin-right: auto;
+      padding: 0 var(--space-16);
+      width: 100%;
+    }
 
-  .main-content{margin-left:270px;padding:2.5rem 2rem 4rem 2rem}
+    /* Progress Bar */
+    #progressContainer { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 3px; 
+      background: var(--color-border); z-index:1200; 
+    }
+    #progressBar { 
+      height: 100%; background: linear-gradient(90deg,#21808d,#2da6b2); 
+      width:0%; transition: width 0.3s;
+    }
 
-  section{margin-bottom:5rem}
-  .section-header{font-size:2rem;font-weight:700;margin-bottom:1.25rem;color:#21808d}
-  .fade-in-on-scroll{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
-  .hero-section{text-align:center;padding:4rem 1rem}
-  .hero-title{font-size:3.5rem;font-weight:700;color:#1a202c;line-height:1.1;min-height:4.2rem;margin-bottom:1.5rem}
-  .typing-cursor{display:inline-block;width:3px;height:1.2em;background:#3182ce;margin-left:3px;animation:cursor-blink 1.2s infinite}
-  @keyframes cursor-blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+    /* Fixed Sidebar */
+    .fixed-sidebar {
+      position: fixed; top: 0; left: 0; width: 250px; height: 100vh;
+      background: var(--color-surface); border-right: 1px solid var(--color-border);
+      padding: var(--space-24); overflow-y: auto; z-index: 999;
+      box-shadow: var(--shadow-sm);
+    }
+    .fixed-sidebar .text-center { text-align: center; margin-bottom: var(--space-24); }
+    .profile-image { 
+      border-radius: var(--radius-full); width: 120px; height: 120px; 
+      margin-bottom: var(--space-12);
+    }
+    .sidebar-name { 
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+      color: var(--color-text); margin-bottom: var(--space-4);
+    }
+    .sidebar-title, .sidebar-location { 
+      color: var(--color-text-secondary); font-size: var(--font-size-base);
+      margin-bottom: var(--space-4);
+    }
+    .sidebar-nav { display: flex; flex-direction: column; gap: var(--space-12); }
+    .sidebar-nav .nav-link { 
+      color: var(--color-text-secondary); font-weight: 500; 
+      padding: var(--space-8); border-radius: var(--radius-base);
+      transition: all 0.2s;
+    }
+    .sidebar-nav .nav-link:hover, .sidebar-nav .nav-link.active { 
+      color: var(--color-primary); background: var(--color-secondary);
+    }
 
-  .hero-subtitle{max-width:680px;margin:0 auto 2rem;color:#626c71}
-  .hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
-  .stat-item{text-align:center}
-  .stat-number{font-size:2rem;font-weight:700;color:#21808d}
-  .hero-cta{display:inline-block;background:#21808d;color:#fff;padding:.8rem 1.6rem;border-radius:8px;font-weight:600}
-  .hero-cta:hover{background:#1d7480}
+    /* Main Content */
+    .main-content { margin-left: 270px; padding: var(--space-24); }
 
-  /* Generic grids/lists */
-  .skills-grid,.awards-grid,.education-grid,.projects-grid,.articles-grid,
-  .impact-metrics-grid,.grant-stats-grid{display:grid;gap:1.25rem}
-  .skills-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .projects-grid,.articles-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .education-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-  .impact-metrics-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-  .grant-stats-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    /* Hero Section */
+    .hero-section {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: var(--space-32) 0;
+    }
+    .hero-content { max-width: 900px; }
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; line-height: 1.2; margin-bottom: 2rem;
+      color: var(--color-text); min-height: 4.2rem;
+    }
+    .cycling-text {
+      display: inline-block; opacity: 0; transform: translateY(20px);
+      transition: all 0.5s ease-in-out;
+    }
+    .cycling-text.active { opacity: 1; transform: translateY(0); }
+    .typing-cursor {
+      display: inline-block; background: var(--color-primary);
+      margin-left: 3px; width: 3px; height: 1.2em;
+      animation: cursor-blink 1.2s infinite;
+    }
+    @keyframes cursor-blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
-  /* Cards & helpers */
-  .service-card,.project-card,.article-card,.metric-card,
-  .education-item,.skill-category,.award-item{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-  .project-card:hover,.article-card:hover{box-shadow:0 3px 8px rgba(0,0,0,.08)}
-  .project-title,.article-title{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#13343b}
+    .hero-subtitle {
+      font-size: var(--font-size-xl); color: var(--color-text-secondary);
+      margin-bottom: var(--space-24); max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+    .hero-stats {
+      display: flex; gap: var(--space-32); justify-content: center;
+      margin-bottom: var(--space-24); flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      display: block; font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+    }
+    .stat-label { color: var(--color-text-secondary); font-size: var(--font-size-base); }
+    .hero-cta {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: var(--space-12) var(--space-24); background: var(--color-primary);
+      color: var(--color-btn-primary-text); border-radius: var(--radius-md);
+      font-weight: var(--font-weight-bold); transition: all 0.2s;
+    }
+    .hero-cta:hover { background: var(--color-primary-hover); }
 
-  /* Contact */
-  .contact-section{background:#13343b;color:#fff;padding:3rem 2rem;border-radius:12px}
-  .contact-intro{max-width:640px;margin:.5rem auto 2rem;text-align:center}
-  .contact-content{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center}
-  .contact-info{flex:1 1 250px}
-  .contact-form{flex:1 1 300px}
-  .form-control{width:100%;padding:.65rem .8rem;border-radius:6px;border:1px solid #ccc;margin-bottom:1rem;font-family:inherit}
-  .btn--primary{background:#2da6b2;color:#fff;padding:.7rem 1rem;border:none;border-radius:6px;font-weight:600;cursor:pointer;width:100%}
-  .btn--primary:hover{background:#32b8c6}
+    /* Sections */
+    .section { padding: var(--space-32) 0; }
+    .section:nth-child(even) { background: rgba(255,251,233,0.3); }
+    .section-header {
+      font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold);
+      color: var(--color-primary); margin-bottom: var(--space-24);
+    }
+    .subsection-title {
+      font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold);
+      color: var(--color-text); margin-bottom: var(--space-16);
+    }
 
-  /* Timelines */
-  .timeline{position:relative;padding-left:1rem;border-left:3px solid #e5e5e5}
-  .timeline-item{margin-bottom:2rem;position:relative}
-  .timeline-marker{position:absolute;left:-12px;top:4px;width:10px;height:10px;background:#21808d;border-radius:50%}
+    /* About Section */
+    .about-content { display: grid; grid-template-columns: 1fr auto; gap: var(--space-32); align-items: start; }
+    .about-intro { font-size: var(--font-size-lg); font-weight: 500; margin-bottom: var(--space-16); }
+    .mission-statement {
+      background: var(--color-surface); padding: var(--space-20);
+      border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary);
+      margin-top: var(--space-24);
+    }
+    .mission-statement blockquote {
+      font-style: italic; color: var(--color-text-secondary);
+      margin: var(--space-8) 0 0; padding: 0;
+    }
+    .professional-photo-placeholder {
+      width: 300px; height: 300px; background: linear-gradient(135deg, var(--color-primary), var(--color-teal-400));
+      border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
+      color: var(--color-btn-primary-text); font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-lg);
+    }
 
-  /* Responsive */
-  @media (max-width:900px){.fixed-sidebar{display:none}.main-content{margin:0}}
+    /* Skills Grid */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-16); margin-top: var(--space-16);
+    }
+    .skill-category {
+      background: var(--color-surface); padding: var(--space-20);
+      border-radius: var(--radius-lg); border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .category-title {
+      color: var(--color-primary); margin-bottom: var(--space-12);
+      font-weight: var(--font-weight-bold);
+    }
+    .skills-list { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+    .skill-tag {
+      background: var(--color-secondary); color: var(--color-text);
+      padding: var(--space-4) var(--space-8); border-radius: var(--radius-base);
+      font-size: 13px; font-weight: 500;
+    }
+
+    /* Awards Grid */
+    .awards-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-16); margin-top: var(--space-16);
+    }
+    .award-item {
+      background: var(--color-surface); padding: var(--space-20);
+      border-radius: var(--radius-lg); border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm); text-align: center;
+    }
+    .award-icon { font-size: 2rem; margin-bottom: var(--space-8); }
+    .award-title {
+      color: var(--color-text); font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-8);
+    }
+    .award-description { color: var(--color-text-secondary); font-size: var(--font-size-base); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: var(--space-20); }
+    .timeline::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--color-border);
+    }
+    .timeline-item { position: relative; margin-bottom: var(--space-32); }
+    .timeline-marker {
+      position: absolute; left: -25px; top: var(--space-4);
+      width: 12px; height: 12px; background: var(--color-primary);
+      border-radius: var(--radius-full); border: 3px solid var(--color-surface);
+    }
+    .position-title {
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+      color: var(--color-text); margin-bottom: var(--space-8);
+    }
+    .position-details {
+      display: flex; gap: var(--space-16); flex-wrap: wrap;
+      color: var(--color-text-secondary); font-weight: 500;
+      margin-bottom: var(--space-12);
+    }
+    .achievements { list-style: none; padding: 0; }
+    .achievements li {
+      padding: var(--space-8) 0 var(--space-8) var(--space-20);
+      position: relative; line-height: 1.6;
+    }
+    .achievements li::before {
+      content: "→"; position: absolute; left: 0; top: var(--space-8);
+      color: var(--color-primary); font-weight: bold;
+    }
+
+    /* Services/Grant Writing */
+    .service-intro {
+      font-size: var(--font-size-lg); color: var(--color-text-secondary);
+      margin-bottom: var(--space-24); max-width: 800px;
+    }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-16); margin-top: var(--space-24);
+    }
+    .service-card, .project-card, .article-card, .metric-card {
+      background: var(--color-surface); padding: var(--space-20);
+      border-radius: var(--radius-lg); border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm); transition: all 0.2s;
+    }
+    .service-card:hover, .project-card:hover, .article-card:hover {
+      box-shadow: var(--shadow-md); transform: translateY(-2px);
+    }
+    .service-icon { font-size: 2rem; margin-bottom: var(--space-12); }
+
+    /* Case Study */
+    .case-study-showcase { margin-top: var(--space-32); }
+    .case-study-header { text-align: center; margin-bottom: var(--space-24); }
+    .case-study-subtitle {
+      color: var(--color-text-secondary); font-size: var(--font-size-lg);
+      font-weight: 500;
+    }
+    .grant-stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-16); margin: var(--space-24) 0;
+    }
+    .stat-item-grant {
+      text-align: center; background: var(--color-surface);
+      padding: var(--space-16); border-radius: var(--radius-lg);
+      border: 1px solid var(--color-card-border);
+    }
+    .problem-solution-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-24); margin: var(--space-24) 0;
+    }
+    .solution-components {
+      display: flex; flex-wrap: wrap; gap: var(--space-12);
+      margin-top: var(--space-16);
+    }
+    .component-item {
+      background: var(--color-secondary); padding: var(--space-8) var(--space-12);
+      border-radius: var(--radius-base); font-size: var(--font-size-base);
+      font-weight: 500;
+    }
+    .impact-metrics-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-16); margin: var(--space-24) 0;
+    }
+
+    /* Education */
+    .education-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-24);
+    }
+    .education-item {
+      background: var(--color-surface); padding: var(--space-20);
+      border-radius: var(--radius-lg); border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm); margin-bottom: var(--space-16);
+    }
+    .education-item h4 {
+      color: var(--color-primary); margin-bottom: var(--space-8);
+    }
+    .institution, .year, .details {
+      color: var(--color-text-secondary); margin-bottom: var(--space-4);
+    }
+    .certifications-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-12); margin-top: var(--space-16);
+    }
+    .cert-item {
+      background: var(--color-surface); padding: var(--space-12);
+      border-radius: var(--radius-base); border: 1px solid var(--color-card-border);
+      text-align: center; font-weight: 500; font-size: var(--font-size-base);
+    }
+
+    /* Projects */
+    .project-title, .article-title {
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+      color: var(--color-text); margin-bottom: var(--space-12);
+    }
+    .project-description, .article-description {
+      color: var(--color-text-secondary); line-height: 1.6;
+      margin-bottom: var(--space-16);
+    }
+    .project-details { margin-bottom: var(--space-16); }
+    .detail-item {
+      display: flex; gap: var(--space-8); margin-bottom: var(--space-8);
+      font-size: var(--font-size-base);
+    }
+    .detail-label { font-weight: var(--font-weight-bold); color: var(--color-text); }
+    .detail-value { color: var(--color-text-secondary); }
+    .project-link, .article-link {
+      color: var(--color-primary); font-weight: 500;
+      border-bottom: 1px solid transparent; transition: all 0.2s;
+    }
+    .project-link:hover, .article-link:hover {
+      border-bottom-color: var(--color-primary);
+    }
+
+    /* Articles */
+    .articles-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-20);
+    }
+    .article-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: var(--space-12); font-size: var(--font-size-base);
+    }
+    .publication { color: var(--color-primary); font-weight: 500; }
+    .date { color: var(--color-text-secondary); }
+
+    /* Contact */
+    .contact-section {
+      background: var(--color-slate-900); color: var(--color-btn-primary-text);
+      padding: var(--space-32); border-radius: var(--radius-lg);
+      margin: var(--space-32) 0;
+    }
+    .contact-intro {
+      text-align: center; max-width: 600px; margin: 0 auto var(--space-32);
+      font-size: var(--font-size-lg);
+    }
+    .contact-content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-32);
+      max-width: 800px; margin: 0 auto;
+    }
+    .contact-item { margin-bottom: var(--space-16); }
+    .contact-item h4 {
+      color: var(--color-teal-300); margin-bottom: var(--space-4);
+    }
+    .contact-item p { color: var(--color-btn-primary-text); }
+    .form-group { margin-bottom: var(--space-16); }
+    .form-label {
+      display: block; margin-bottom: var(--space-4);
+      color: var(--color-teal-300); font-weight: 500;
+    }
+    .form-control {
+      width: 100%; padding: var(--space-12); border-radius: var(--radius-base);
+      border: 1px solid var(--color-border); background: var(--color-surface);
+      color: var(--color-text); font-family: inherit;
+    }
+    .btn--primary {
+      background: var(--color-primary); color: var(--color-btn-primary-text);
+      padding: var(--space-12) var(--space-24); border: none;
+      border-radius: var(--radius-base); font-weight: var(--font-weight-bold);
+      cursor: pointer; transition: all 0.2s; width: 100%;
+    }
+    .btn--primary:hover { background: var(--color-primary-hover); }
+
+    /* Fade in animation */
+    .fade-in-on-scroll {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .fade-in-on-scroll.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .fixed-sidebar { display: none; }
+      .main-content { margin-left: 0; }
+      .about-content { grid-template-columns: 1fr; }
+      .professional-photo-placeholder { width: 100%; max-width: 300px; margin: 0 auto; }
+      .contact-content { grid-template-columns: 1fr; }
+      .hero-stats { gap: var(--space-16); }
+      .problem-solution-grid { grid-template-columns: 1fr; }
+      .grant-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-metrics-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2rem; }
+      .hero-stats { flex-direction: column; gap: var(--space-12); }
+      .grant-stats-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-<!-- Progress Indicator -->
-<div id="progressContainer"><div id="progressBar"></div></div>
+  <!-- Progress Indicator -->
+  <div id="progressContainer"><div id="progressBar"></div></div>
 
-<!-- Fixed Sidebar Navigation -->
-<aside class="fixed-sidebar">
-  <div class="text-center">
-    <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="profile-image">
-    <h3 class="sidebar-name">Mark</h3>
-    <p class="sidebar-title">Strategic Project Manager</p>
-    <p class="sidebar-location">Data-Driven Excellence</p>
-  </div>
-  <nav class="sidebar-nav">
-    <a href="#about"        class="nav-link">About</a>
-    <a href="#experience"   class="nav-link">Experience</a>
-    <a href="#services"     class="nav-link">Services</a>
-    <a href="#education"    class="nav-link">Education</a>
-    <a href="#projects"     class="nav-link">Projects</a>
-    <a href="#articles"     class="nav-link">Publications</a>
-    <a href="#blog"         class="nav-link">Blog</a>
-    <a href="#contact"      class="nav-link">Contact</a>
-  </nav>
-</aside>
-
-<!-- MAIN CONTENT -->
-<main class="main-content">
-
-  <!-- HERO -->
-  <section id="hero" class="hero-section fade-in-on-scroll">
-    <h1 class="hero-title">
-      <span id="cyclingText" class="cycling-text"></span>
-      <span class="typing-cursor">|</span>
-    </h1>
-    <p class="hero-subtitle">
-      A Global Strategic Project Manager with over a decade of military and government expertise,
-      delivering exceptional results in high-stakes international environments.
-    </p>
-
-    <div class="hero-stats">
-      <div class="stat-item"><span class="stat-number">$100M+</span><span class="stat-label">Projects Managed</span></div>
-      <div class="stat-item"><span class="stat-number">15+</span><span class="stat-label">Countries</span></div>
-      <div class="stat-item"><span class="stat-number">99.8%</span><span class="stat-label">Success Rate</span></div>
+  <!-- Fixed Sidebar -->
+  <aside class="fixed-sidebar">
+    <div class="text-center">
+      <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="profile-image">
+      <h3 class="sidebar-name">Mark</h3>
+      <p class="sidebar-title">Strategic Project Manager</p>
+      <p class="sidebar-location">Data-Driven Excellence</p>
     </div>
+    <nav class="sidebar-nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#articles" class="nav-link">Publications</a>
+      <a href="#blog" class="nav-link">Blog</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+  </aside>
 
-    <a href="#contact" class="hero-cta">Let’s Collaborate</a>
-  </section>
+  <!-- Main Content -->
+  <main class="main-content">
 
-  <!-- ABOUT -->
-  <section id="about" class="fade-in-on-scroll">
-    <h2 class="section-header">About Me</h2>
-    <p class="about-intro">
-      With over a decade of experience in corporate management, global military operations, and strategic government relations,
-      I turn complex challenges into tangible results that drive organizational excellence.
-    </p>
-    <p>
-      My journey started with an unwavering pursuit of new skills and innovative management techniques in Chicago, then service in the
-      U.S. Army forged my commitment to precision, strategic thinking, and results-driven leadership at the highest levels.
-    </p>
-    <div class="mission-statement">
-      <h3>Mission Statement</h3>
-      <blockquote>
-        “To leverage unparalleled strategic leadership and data-driven operational acumen to transform complex organizational challenges
-        into sustainable competitive advantages.”
-      </blockquote>
-    </div>
-
-    <!-- Core Competencies -->
-    <div class="competencies-showcase fade-in-on-scroll" style="margin-top:2.5rem">
-      <h3 class="subsection-title">Core Competencies</h3>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h4 class="category-title">Strategic Planning</h4>
-          <div class="skills-list">
-            <span class="skill-tag">Long-Term Development</span>
-            <span class="skill-tag">Risk Assessment</span>
-            <span class="skill-tag">Resource Optimization</span>
-            <span class="skill-tag">Stakeholder Management</span>
-            <span class="skill-tag">Crisis Management</span>
-            <span class="skill-tag">Strategic Communications</span>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section fade-in-on-scroll">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span id="cyclingText" class="cycling-text"></span>
+          <span class="typing-cursor">|</span>
+        </h1>
+        <p class="hero-subtitle">
+          A Global Strategic Project Manager with over a decade of military and government expertise, 
+          delivering exceptional results in high-stakes international environments. 
+          Specializing in strategic planning, cross-functional leadership, and operational excellence.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">$100M+</span>
+            <span class="stat-label">Projects Managed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Countries</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">99.8%</span>
+            <span class="stat-label">Success Rate</span>
           </div>
         </div>
-        <div class="skill-category">
-          <h4 class="category-title">Project Management</h4>
-          <div class="skills-list">
-            <span class="skill-tag">Agile/Scrum</span><span class="skill-tag">Waterfall</span>
-            <span class="skill-tag">Budget Control</span><span class="skill-tag">Timeline Optimization</span>
-            <span class="skill-tag">Quality Assurance</span><span class="skill-tag">Vendor Management</span>
+        <a href="#contact" class="hero-cta">Let's Collaborate</a>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p class="about-intro">
+              With over a decade of experience in corporate management, global military operations, and strategic government relations, 
+              I am adept at turning complex challenges into tangible results that drive organizational excellence to new heights.
+            </p>
+            <p>
+              My journey started with an unwavering pursuit of new skills, innovative management techniques, and advanced strategic optimization. 
+              After gaining diverse work experience in Chicago, I felt a profound call to serve in the U.S. Army. 
+              This experience ignited a steadfast commitment to precision, strategic thinking, and results-driven leadership. 
+              This strong foundation has empowered me to thrive in high-pressure international environments, excelling from tactical operations to strategic planning at the highest levels of government.
+            </p>
+            <p>
+              I bring a powerful combination of military discipline, advanced technical expertise, and strategic vision to every project. 
+              I focus on streamlining operations, driving innovation, and building resilient teams that consistently exceed expectations. 
+              Together, we achieve remarkable results.
+            </p>
+            <div class="mission-statement">
+              <h3>Mission Statement</h3>
+              <blockquote>
+                "To leverage unparalleled strategic leadership and data-driven operational acumen to transform complex organizational challenges into sustainable competitive advantages, consistently delivering mission-critical results and fostering excellence across global operations, strategic programs, and digital transformation initiatives."
+              </blockquote>
+            </div>
+          </div>
+          <div class="professional-photo-placeholder">
+            Professional Photo/Video
           </div>
         </div>
-        <div class="skill-category">
-          <h4 class="category-title">Leadership</h4>
-          <div class="skills-list">
-            <span class="skill-tag">Cross-Functional Teams</span>
-            <span class="skill-tag">International Management</span>
-            <span class="skill-tag">Change Management</span>
-            <span class="skill-tag">Executive Communication</span>
-            <span class="skill-tag">Conflict Resolution</span>
-            <span class="skill-tag">Performance Optimization</span>
+
+        <!-- Core Competencies -->
+        <div class="competencies-showcase fade-in-on-scroll" style="margin-top: 3rem;">
+          <h3 class="subsection-title">Core Competencies</h3>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h4 class="category-title">Strategic Planning</h4>
+              <div class="skills-list">
+                <span class="skill-tag">Long-term Strategic Development</span>
+                <span class="skill-tag">Risk Assessment & Mitigation</span>
+                <span class="skill-tag">Resource Optimization</span>
+                <span class="skill-tag">Stakeholder Management</span>
+                <span class="skill-tag">Crisis Management</span>
+                <span class="skill-tag">Strategic Communications</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4 class="category-title">Project Management</h4>
+              <div class="skills-list">
+                <span class="skill-tag">Agile/Scrum Methodologies</span>
+                <span class="skill-tag">Waterfall Project Management</span>
+                <span class="skill-tag">Budget Management</span>
+                <span class="skill-tag">Timeline Optimization</span>
+                <span class="skill-tag">Quality Assurance</span>
+                <span class="skill-tag">Vendor Management</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4 class="category-title">Leadership</h4>
+              <div class="skills-list">
+                <span class="skill-tag">Cross-functional Team Leadership</span>
+                <span class="skill-tag">International Team Management</span>
+                <span class="skill-tag">Change Management</span>
+                <span class="skill-tag">Executive Communication</span>
+                <span class="skill-tag">Conflict Resolution</span>
+                <span class="skill-tag">Performance Optimization</span>
+              </div>
+            </div>
+            <div class="skill-category">
+              <h4 class="category-title">Technical Expertise</h4>
+              <div class="skills-list">
+                <span class="skill-tag">Microsoft Project</span>
+                <span class="skill-tag">Tableau</span>
+                <span class="skill-tag">JIRA</span>
+                <span class="skill-tag">SAP</span>
+                <span class="skill-tag">Salesforce</span>
+                <span class="skill-tag">Advanced Excel</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="skill-category">
-          <h4 class="category-title">Technical Expertise</h4>
-          <div class="skills-list">
-            <span class="skill-tag">Microsoft Project</span><span class="skill-tag">Tableau</span>
-            <span class="skill-tag">JIRA</span><span class="skill-tag">SAP</span>
-            <span class="skill-tag">Salesforce</span><span class="skill-tag">Advanced Excel</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Recognition -->
-    <div class="recognition-highlights fade-in-on-scroll" style="margin-top:2.5rem">
-      <h3 class="subsection-title">Recognition & Awards</h3>
-      <div class="awards-grid">
-        <div class="award-item"><div class="award-icon">🏅</div><h4>Army Commendation Medal</h4><p>Meritorious service in positions of responsibility.</p></div>
-        <div class="award-item"><div class="award-icon">🏆</div><h4>Hero of the Battle</h4><p>Joint task-force NCOIC Recognition – 2022.</p></div>
-        <div class="award-item"><div class="award-icon">⭐</div><h4>Joint Service Achievement Medal</h4><p>Outstanding leadership in joint operations.</p></div>
-        <div class="award-item"><div class="award-icon">🎖️</div><h4>S.A.L.U.T.E Honors Student</h4><p>Excellence in service and scholarship.</p></div>
-        <div class="award-item"><div class="award-icon">🌟</div><h4>International Cooperation Medal</h4><p>Contributions to multinational operations.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience" class="fade-in-on-scroll">
-    <h2 class="section-header">Professional Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h3 class="position-title">Project Manager | Global Operations & Strategic Execution</h3>
-          <div class="position-details">U.S. Army &nbsp;•&nbsp; 2019 – Present &nbsp;•&nbsp; Global</div>
-          <ul class="achievements">
-            <li>Directed multi-billion-dollar operations across the South Pacific and CONUS.</li>
-            <li>Led cross-functional teams in crisis scenarios—including COVID-19 response.</li>
-            <li>Managed contracts >$10 M; improved efficiency 20 % and cut costs 15 %.</li>
-            <li>Principal spokesperson at international conferences, strengthening alliances.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-marker"></div>
-        <div class="timeline-content">
-          <h3 class="position-title">Intern, Congressional Staffer | Federal Account Executive</h3>
-          <div class="position-details">U.S. House of Representatives &nbsp;•&nbsp; 2025</div>
-          <ul class="achievements">
-            <li>Spearheaded constituent casework across seven federal agencies.</li>
-            <li>Drafted speeches and briefing memos for Member of Congress.</li>
-            <li>Built data systems that cut response times 40 %.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- additional timeline items could be added here -->
-    </div>
-  </section>
-
-  <!-- SERVICES / GRANT WRITING -->
-  <section id="services" class="fade-in-on-scroll">
-    <h2 class="section-header">Grant Writing & Policy Development</h2>
-    <p class="service-intro">
-      Transforming complex policy challenges into compelling funding proposals. Secured millions in federal dollars
-      through strategic storytelling, data-driven impact analysis, and stakeholder alignment.
-    </p>
-
-    <div class="projects-grid">
-      <div class="service-card"><div class="service-icon">📊</div><h3>Data-Driven Proposals</h3><p>Research, statistics, and impact modelling build irresistible cases for funding.</p></div>
-      <div class="service-card"><div class="service-icon">🏛️</div><h3>Federal Grant Strategy</h3><p>Deep knowledge of agency priorities, compliance, and evaluation criteria.</p></div>
-      <div class="service-card"><div class="service-icon">🤝</div><h3>Stakeholder Alignment</h3><p>Coalitions and partnerships that sustain long-term implementation.</p></div>
-    </div>
-
-    <!-- Case Study -->
-    <div class="case-study-showcase fade-in-on-scroll" style="margin-top:3rem">
-      <h3>Featured Case Study: National Household Composting Initiative</h3>
-      <p class="case-study-subtitle">$9.5 Billion Federal Investment Proposal</p>
-
-      <div class="grant-stats-grid">
-        <div class="stat-item-grant"><span class="stat-number">$9.5B</span><span class="stat-label">Investment</span></div>
-        <div class="stat-item-grant"><span class="stat-number">27,000</span><span class="stat-label">Jobs</span></div>
-        <div class="stat-item-grant"><span class="stat-number">20 M</span><span class="stat-label">Tons Diverted</span></div>
-        <div class="stat-item-grant"><span class="stat-number">16 M</span><span class="stat-label">Tons CO₂ Cut</span></div>
-      </div>
-
-      <div class="problem-solution-grid" style="display:grid;gap:2rem;margin-top:2rem">
-        <div class="problem-card service-card">
-          <h4>The Challenge</h4>
-          <p>Organic waste = 30 % of MSW; methane emissions 80× CO₂. Landfills squander economic value and accelerate climate change.</p>
-          <div class="chart-container"><canvas id="wasteCompositionChart"></canvas></div>
-        </div>
-        <div class="solution-card service-card">
-          <h4>Strategic Solution</h4>
-          <p>Three-pronged federal investment: home composting subsidies, municipal collection grants, community processing sites.</p>
-          <div class="solution-components" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
-            <div class="component-item">🏠 Home Subsidies</div>
-            <div class="component-item">♻️ Municipal Grants</div>
-            <div class="component-item">🏢 Community Sites</div>
+        <!-- Recognition & Awards -->
+        <div class="recognition-highlights fade-in-on-scroll" style="margin-top: 3rem;">
+          <h3 class="subsection-title">Recognition & Awards</h3>
+          <div class="awards-grid">
+            <div class="award-item">
+              <div class="award-icon">🏅</div>
+              <h4 class="award-title">Army Commendation Medal</h4>
+              <p class="award-description">Awarded for exceptionally meritorious service in a position of significant responsibility</p>
+            </div>
+            <div class="award-item">
+              <div class="award-icon">🏆</div>
+              <h4 class="award-title">Hero of the Battle</h4>
+              <p class="award-description">Joint task force NCOIC Recognition - 2022</p>
+            </div>
+            <div class="award-item">
+              <div class="award-icon">⭐</div>
+              <h4 class="award-title">Joint Service Achievement Medal</h4>
+              <p class="award-description">Recognition for outstanding leadership in joint military operations</p>
+            </div>
+            <div class="award-item">
+              <div class="award-icon">🎖️</div>
+              <h4 class="award-title">S.A.L.U.T.E Honors Student</h4>
+              <p class="award-description">Awarded for Student-Veterans and their commitment to excellence in service and scholarship.</p>
+            </div>
+            <div class="award-item">
+              <div class="award-icon">🏅</div>
+              <h4 class="award-title">Outstanding Strategic Planning Award</h4>
+              <p class="award-description">Recognized for innovative strategic planning methodologies - 2021</p>
+            </div>
+            <div class="award-item">
+              <div class="award-icon">🌟</div>
+              <h4 class="award-title">International Cooperation Medal</h4>
+              <p class="award-description">For exceptional contributions to multinational operations</p>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="impact-metrics-grid" style="margin-top:2rem">
-        <div class="metric-card"><canvas id="jobCreationChart"></canvas><h5>Job Creation Advantage</h5></div>
-        <div class="metric-card"><canvas id="marketGrowthChart"></canvas><h5>Market Growth Projection</h5></div>
-        <div class="metric-card"><canvas id="implementationChart"></canvas><h5>Implementation Timeline</h5></div>
-      </div>
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">Professional Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="position-title">Project Manager | Global Operations & Strategic Execution</h3>
+              <div class="position-details">
+                <span class="organization">U.S. Army</span>
+                <span class="duration">2019 - Present</span>
+                <span class="location">Global Operations</span>
+              </div>
+              <ul class="achievements">
+                <li>Directed multi-billion dollar global operations across the South Pacific and CONUS, executing complex logistical strategies for high-value equipment and collaborating with all branches of the U.S. Military and key federal agencies during national exercises.</li>
+                <li>Led cross-functional, multi-national teams in high-pressure scenarios, including COVID-19, providing strategic intelligence to enable effective decision-making.</li>
+                <li>Managed government contracts over $10M, enhancing operational efficiency by 20% and reducing costs by 15%.</li>
+                <li>As Principal Spokesperson at international conferences, fostered alliances while contributing critical operational intelligence that informed daily mission planning and improved air defense capabilities.</li>
+              </ul>
+            </div>
+          </div>
 
-      <div class="service-cta fade-in-on-scroll" style="margin-top:3rem;text-align:center">
-        <h3>Ready to Secure Strategic Funding?</h3>
-        <p>From concept to submission, I deliver comprehensive grant-writing services.</p>
-        <div style="display:flex;gap:1rem;justify-content:center;margin-top:1rem">
-          <a href="#contact" class="btn--primary" style="width:auto">Discuss Your Project</a>
-          <a href="#" class="btn--primary" style="background:#626c71">View Full Case Study</a>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="position-title">Intern, Congressional Staffer | Federal Account Executive</h3>
+              <div class="position-details">
+                <span class="organization">U.S. House of Representatives</span>
+                <span class="duration">April 2025 - August 2025</span>
+              </div>
+              <ul class="achievements">
+                <li>Spearheaded strategic federal account management and direct coordination with key federal agencies (e.g., DoD, VA, Military Academies, Federal Medicaid programs), ensuring equitable outcomes for complex constituent inquiries, particularly for elderly Veterans (60+) navigating benefits, healthcare, and housing resources.</li>
+                <li>Drafted and refined high-impact speeches and remarks for the Member of Congress, delivered at various outreach events with key donors and community leaders, aligning with strategic messaging and public relations objectives.</li>
+                <li>Designed and implemented advanced data management systems (Google Forms/Sheets/Analytics) to streamline employer/employee data capture, providing actionable intelligence and strategic insights that directly informed outreach efficacy.</li>
+                <li>Conducted in-depth policy research and data analysis on critical constituent concerns, including Medicaid eligibility and access to services, leveraging findings to author high-impact policy briefing memos and consult on legislative strategy.</li>
+                <li>Provided direct case management support for vulnerable populations, adeptly navigating complex federal and state program guidelines to resolve critical issues and secure vital services.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="position-title">Digital Optimization Supervisor | Global Digital</h3>
+              <div class="position-details">
+                <span class="organization">McDonald's HQ</span>
+                <span class="duration">June 2018 - Nov 2018</span>
+                <span class="location">Chicago, IL</span>
+              </div>
+              <ul class="achievements">
+                <li>Spearheaded daily content management and data entry processes across all promotional platforms, achieving a 20% enhancement in content accuracy and efficiency.</li>
+                <li>Partnered with diverse stakeholders in marketing and operations to drive innovative consumer engagement strategies, resulting in a 15% increase in interaction rates and a 10% uplift in customer retention.</li>
+                <li>Developed robust reporting tools, benchmarks, and KPIs to drive sales traffic, achieving an overall sales increase of 25% within six months.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="position-title">Digital Marketing Manager | Contract/Temp</h3>
+              <div class="position-details">
+                <span class="organization">Association Forum</span>
+                <span class="duration">Nov 2017 - June 2018</span>
+                <span class="location">Chicago, IL</span>
+              </div>
+              <ul class="achievements">
+                <li>I played a key role in developing and promoting departmental marketing campaigns while identifying targeted keywords for social media and website optimization.</li>
+                <li>I coordinated communication strategies for new branding initiatives that boosted brand visibility by 25% and increased membership engagement by 20%.</li>
+                <li>Additionally, I managed and optimized company websites, resulting in a 30% improvement in content visibility in search results and providing detailed analytics for strategic decision-making.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="position-title">Intern, Digital Content, SEO, & Social Media Strategist</h3>
+              <div class="position-details">
+                <span class="organization">Evolve & Elevate</span>
+                <span class="duration">June 2017 - Oct 2017</span>
+                <span class="location">Chicago, IL</span>
+              </div>
+              <ul class="achievements">
+                <li>Developed and executed comprehensive content strategies for digital channels (social media, website, email), crafting engaging content to promote gym memberships and fitness services.</li>
+                <li>Managed social media accounts and coordinated marketing campaigns, collaborating with cross-functional teams to align with organizational goals.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="position-title">Undergraduate Fellow | Intern, Marketing Associate</h3>
+              <div class="position-details">
+                <span class="organization">Purdue University</span>
+                <span class="duration">April 2016 - Dec 2016</span>
+              </div>
+              <ul class="achievements">
+                <li>Developed and designed impactful visual content to promote student success initiatives, solidifying branding identity and managing visual identity for the Student Success Center.</li>
+                <li>Managed cross-functional teams and conducted market research to inform design decisions, mentoring junior designers and interns.</li>
+                <li>Supervised the implementation of tailored software solutions to enhance course enrollment processes and improve new student management systems.</li>
+                <li>Provided personalized guidance and support to new students, fostering a welcoming environment and assisting with practical matters like class registration based on curriculum knowledge.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EDUCATION -->
-  <section id="education" class="fade-in-on-scroll">
-    <h2 class="section-header">Education & Certifications</h2>
-    <div class="education-grid">
-      <div class="education-section">
-        <h3 class="subsection-title">Education</h3>
-        <div class="education-item"><h4>Master’s of Public Administration</h4><p>Purdue University Global – 2025</p><p>Policy & Legislative Analysis. S.A.L.U.T.E Honors Student.</p></div>
-        <div class="education-item"><h4>Bachelor of Arts & Science</h4><p>Purdue University – 2015</p><p>Major – Rhetoric & Public Advocacy • Minor – Public Relations</p></div>
-      </div>
-      <div class="certifications-section">
-        <h3 class="subsection-title">Professional Certifications</h3>
-        <div class="certifications-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.8rem">
-          <div class="cert-item service-card">IBM Data Fundamentals</div>
-          <div class="cert-item service-card">IBM Agile Manager</div>
-          <div class="cert-item service-card">Certified Change Management</div>
-          <div class="cert-item service-card">Secret Clearance</div>
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">Grant Writing & Policy Development</h2>
+        <p class="service-intro">
+          Transforming complex policy challenges into compelling funding proposals. 
+          My grant writing expertise has secured millions in federal funding through strategic storytelling, data-driven impact analysis, and stakeholder alignment.
+        </p>
+
+        <div class="projects-grid">
+          <div class="service-card">
+            <div class="service-icon">📊</div>
+            <h3>Data-Driven Proposals</h3>
+            <p>Strategic use of research, statistics, and impact modeling to build compelling cases for funding.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🏛️</div>
+            <h3>Federal Grant Strategy</h3>
+            <p>Deep understanding of federal agency priorities, compliance requirements, and evaluation criteria.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🤝</div>
+            <h3>Stakeholder Alignment</h3>
+            <p>Building coalitions and partnerships that strengthen proposals and ensure sustainable implementation.</p>
+          </div>
+        </div>
+
+        <!-- Case Study -->
+        <div class="case-study-showcase fade-in-on-scroll" style="margin-top: 3rem;">
+          <div class="case-study-header">
+            <h3>Featured Case Study: The National Household Composting Initiative</h3>
+            <p class="case-study-subtitle">$9.5 Billion Federal Investment Proposal</p>
+          </div>
+
+          <div class="grant-stats-grid">
+            <div class="stat-item-grant">
+              <span class="stat-number">$9.5B</span>
+              <span class="stat-label">Federal Investment</span>
+            </div>
+            <div class="stat-item-grant">
+              <span class="stat-number">27,000</span>
+              <span class="stat-label">Jobs Created</span>
+            </div>
+            <div class="stat-item-grant">
+              <span class="stat-number">20M</span>
+              <span class="stat-label">Tons Waste Diverted</span>
+            </div>
+            <div class="stat-item-grant">
+              <span class="stat-number">16M</span>
+              <span class="stat-label">Tons CO₂ Mitigated</span>
+            </div>
+          </div>
+
+          <div class="problem-solution-grid">
+            <div class="service-card">
+              <h4>The Challenge</h4>
+              <p>Organic waste represents 30% of municipal solid waste, generating methane emissions 80x more potent than CO₂. Current landfill infrastructure wastes billions in economic value while accelerating climate change.</p>
+              <div class="chart-container">
+                <canvas id="wasteCompositionChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="service-card">
+              <h4>Strategic Solution</h4>
+              <p>A three-pronged federal investment strategy targeting home composting, municipal collection, and community processing facilities—transforming waste into economic opportunity.</p>
+              <div class="solution-components">
+                <div class="component-item">
+                  <span>🏠 Home Composting Subsidies</span>
+                </div>
+                <div class="component-item">
+                  <span>♻️ Municipal Collection Grants</span>
+                </div>
+                <div class="component-item">
+                  <span>🏢 Community Processing Sites</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="impact-metrics-grid">
+            <div class="metric-card">
+              <canvas id="jobCreationChart"></canvas>
+              <h5>Job Creation Advantage</h5>
+              <p>Composting creates 4.1 jobs per 10,000 tons processed—nearly double that of traditional disposal methods.</p>
+            </div>
+            <div class="metric-card">
+              <canvas id="marketGrowthChart"></canvas>
+              <h5>Market Growth Projection</h5>
+              <p>The U.S. compost market is projected to reach $2.5B by 2032, driven by regenerative agriculture demand.</p>
+            </div>
+            <div class="metric-card">
+              <canvas id="implementationChart"></canvas>
+              <h5>Implementation Timeline</h5>
+              <p>5-year phased rollout expanding from 100 pilot municipalities to 2,000+ nationwide participants.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="fade-in-on-scroll">
-    <h2 class="section-header">Strategic Project Portfolio</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <h3 class="project-title">Congressional Work Studies & Case
+    <!-- EDUCATION SECTION -->
+    <section id="education" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">Education & Certifications</h2>
+        <div class="education-grid">
+          <div class="education-section">
+            <h3 class="subsection-title">Education</h3>
+            <div class="education-item">
+              <h4>Master's of Public Administration</h4>
+              <p class="institution">Purdue University, Global</p>
+              <p class="year">2025</p>
+              <p class="details">Policy and Legislative analysis/drafting.</p>
+              <p class="details">S.A.L.U.T.E National Honours Student</p>
+            </div>
+            <div class="education-item">
+              <h4>Bachelor of Arts & Science</h4>
+              <p class="institution">Purdue University</p>
+              <p class="year">2015</p>
+              <p class="details">Major: Rhetoric & Public Advocacy</p>
+              <p class="details">Minor: Public Relations</p>
+            </div>
+          </div>
+          <div class="certifications-section">
+            <h3 class="subsection-title">Professional Certifications</h3>
+            <div class="certifications-grid">
+              <div class="cert-item">IBM Data Fundamentals</div>
+              <div class="cert-item">IBM Agile Manager</div>
+              <div class="cert-item">Certified Change Management</div>
+              <div class="cert-item">Secret Clearance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">Strategic Project Portfolio</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3 class="project-title">Congressional Work Studies & Case Management</h3>
+            <p class="project-description">
+              Comprehensive portfolio of strategic communications, government relations, and data-driven solutions 
+              that generated measurable public impact across federal agencies and constituent services.
+            </p>
+            <div class="project-details">
+              <div class="detail-item">
+                <span class="detail-label">Scope:</span>
+                <span class="detail-value">54 companies engaged, 307 constituent cases, 12 projects delivered</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Results:</span>
+                <span class="detail-value">40% faster response times, 99.8% notification rate, $1.4M in secured grants</span>
+              </div>
+            </div>
+            <a href="HTML/subfolder/workstudies.html" class="project-link">View Case Studies</a>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Federal Account Data Analysis & Reporting</h3>
+            <p class="project-description">
+              Strategic analysis of federal account management and data-driven advocacy used to streamline 
+              constituent inquiries for Veterans navigating complex benefits and Medicaid programs.
+            </p>
+            <div class="project-details">
+              <div class="detail-item">
+                <span class="detail-label">Scope:</span>
+                <span class="detail-value">307 total cases, 7 major federal agencies, multi-state coordination</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Results:</span>
+                <span class="detail-value">185 cases resolved (60.3% success rate), improved inter-agency coordination</span>
+              </div>
+            </div>
+            <a href="HTML/subfolder/casework.html" class="project-link">View Report</a>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Job Fair Data Visualization & Analytics</h3>
+            <p class="project-description">
+              Built interactive dashboards to identify real-time hiring trends and sector gaps in local workforce, 
+              optimizing placement strategies for job fair events with dynamic insights.
+            </p>
+            <div class="project-details">
+              <div class="detail-item">
+                <span class="detail-label">Scope:</span>
+                <span class="detail-value">43 employers, 1,473 open positions, multiple industry sectors</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Results:</span>
+                <span class="detail-value">17% increase in post-fair hires, real-time trend identification, improved matching</span>
+              </div>
+            </div>
+            <a href="HTML/subfolder/careerfairdata.html" class="project-link">View Analysis</a>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Project Odyssey - AI Trip Planner</h3>
+            <p class="project-description">
+              Full-stack, AI-powered collaborative travel hub demonstrating advanced web development skills, 
+              AI integration, and user experience design for complex travel planning scenarios.
+            </p>
+            <div class="project-details">
+              <div class="detail-item">
+                <span class="detail-label">Technology:</span>
+                <span class="detail-value">AI integration, Firebase backend, collaborative features, expense tracking</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Features:</span>
+                <span class="detail-value">AI itinerary suggestions, expense categorization, real-time collaboration</span>
+              </div>
+            </div>
+            <a href="HTML/subfolder/project-odyssey.html" class="project-link">Try Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLES SECTION -->
+    <section id="articles" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">Research & Strategic Analysis</h2>
+        <div class="articles-grid">
+          <div class="article-card">
+            <h3 class="article-title">Maintaining Golden Standard Relevance in the Age of AI & Tech Dependency</h3>
+            <div class="article-meta">
+              <span class="publication">Strategic Framework Research</span>
+              <span class="date">2025</span>
+            </div>
+            <p class="article-description">
+              A comprehensive strategic framework for future-proof leadership, exploring how leaders can master 
+              AI collaboration, amplify irreplaceable skills, and build authentic leadership in tech-driven organizations.
+            </p>
+            <a href="HTML/subfolder/golden-standard-ai-leadership.html" class="article-link">Read Research</a>
+          </div>
+
+          <div class="article-card">
+            <h3 class="article-title">Modernizing Constituent Casework with Data</h3>
+            <div class="article-meta">
+              <span class="publication">Government Operations Case Study</span>
+              <span class="date">2024</span>
+            </div>
+            <p class="article-description">
+              Deep dive into how a custom-built data management system using Google Sheets and Forms replaced 
+              inefficient legacy processes, resulting in 40% reduction in response times for veteran services.
+            </p>
+          </div>
+
+          <div class="article-card">
+            <h3 class="article-title">AI in Public Sector Logistics: A Strategic Overview</h3>
+            <div class="article-meta">
+              <span class="publication">Defense Technology Analysis</span>
+              <span class="date">2024</span>
+            </div>
+            <p class="article-description">
+              Analysis of how emerging AI and machine learning technologies are poised to revolutionize supply chain 
+              management for government and defense agencies, from predictive maintenance to autonomous routing.
+            </p>
+          </div>
+
+          <div class="article-card">
+            <h3 class="article-title">Federal Policy Advocacy & Bipartisan Coordination</h3>
+            <div class="article-meta">
+              <span class="publication">Government Relations Portfolio</span>
+              <span class="date">2023-2024</span>
+            </div>
+            <p class="article-description">
+              Documentation of coordinated bipartisan efforts to secure federal funds for infrastructure, healthcare, 
+              and economic development through strategic policy briefs and stakeholder management.
+            </p>
+          </div>
+
+          <div class="article-card">
+            <h3 class="article-title">Crisis Leadership in Predictive AI Era</h3>
+            <div class="article-meta">
+              <span class="publication">Leadership & Technology Research</span>
+              <span class="date">2024</span>
+            </div>
+            <p class="article-description">
+              Exploration of how predictive analytics transforms crisis leadership through anticipating disruptions, 
+              resource allocation, and nuanced communication strategies for modern emergency management.
+            </p>
+          </div>
+
+          <div class="article-card">
+            <h3 class="article-title">Keynote: Rhetoric and Public Advocacy</h3>
+            <div class="article-meta">
+              <span class="publication">Purdue School of Communication Symposium</span>
+              <span class="date">2015</span>
+            </div>
+            <p class="article-description">
+              Presented expertise on using language and argumentation to empower others to become better communicators, 
+              with subsequent work spanning nonprofits to Fortune 500 companies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section id="blog" class="section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header">Blog & Strategic Insights</h2>
+        <p>Strategic insights and thought leadership content coming soon. Stay tuned for regular updates on AI integration, strategic planning methodologies, and leadership best practices.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section fade-in-on-scroll">
+      <div class="container">
+        <h2 class="section-header" style="color: var(--color-teal-300); text-align: center;">Let's Create Strategic Excellence Together</h2>
+        <p class="contact-intro">
+          Ready to transform your next strategic initiative into exceptional results? 
+          Let's discuss how we can achieve your objectives.
+        </p>
+        
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <h4>Available for global assignments</h4>
+            </div>
+            <div class="contact-item">
+              <h4>Email</h4>
+              <p>markrickey01@gmail.com</p>
+            </div>
+            <div class="contact-item">
+              <h4>Phone</h4>
+              <p>+1 (260) 444-7307</p>
+            </div>
+            <div class="contact-item">
+              <h4>LinkedIn</h4>
+              <p>www.linkedin.com/in/markrickey01</p>
+            </div>
+          </div>
+          
+          <form class="contact-form" action="https://formsubmit.co/markrickey01@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            
+            <div class="form-group">
+              <label for="name" class="form-label">Name *</label>
+              <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="organization" class="form-label">Organization</label>
+              <input type="text" name="organization" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" name="subject" class="form-control" placeholder="Brief subject line">
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Message *</label>
+              <textarea name="message" rows="5" class="form-control" required placeholder="Tell me about your project or how I can help..."></textarea>
+            </div>
+            <button type="submit" class="btn--primary">
+              Send Message
+            </button>
+          </form>
+        </div>
+        
+        <div class="contact-footer" style="text-align: center; margin-top: 2rem;">
+          <p style="color: var(--color-teal-300);">
+            © 2025 Mark R. — Strategic Project Management Excellence — All rights reserved.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Progress Bar
+      const progressBar = document.getElementById('progressBar');
+      function updateProgress() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${scrolled}%`;
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      // Fade-in on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Update active nav link
+            const id = entry.target.getAttribute('id');
+            if (id) {
+              document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+              });
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Smooth sidebar navigation
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Cycling Text Animation
+      const cyclingTextElement = document.getElementById('cyclingText');
+      const titles = [
+        "Transforming Vision into Strategic Excellence",
+        "Delivering Data-Driven Government Solutions", 
+        "Leading Crisis Management & Emergency Response",
+        "Building AI-Powered Strategic Systems",
+        "Optimizing Global Military Operations",
+        "Creating Innovative Project Management Solutions",
+        "Driving Congressional Relations & Policy Impact"
+      ];
+      
+      let currentIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let isWaiting = false;
+      
+      function typeWriter() {
+        const currentTitle = titles[currentIndex];
+        
+        if (isWaiting) {
+          setTimeout(typeWriter, 2000);
+          isWaiting = false;
+          isDeleting = true;
+          return;
+        }
+        
+        if (isDeleting) {
+          cyclingTextElement.textContent = currentTitle.substring(0, charIndex - 1);
+          charIndex--;
+          
+          if (charIndex === 0) {
+            isDeleting = false;
+            currentIndex = (currentIndex + 1) % titles.length;
+            setTimeout(typeWriter, 500);
+            return;
+          }
+        } else {
+          cyclingTextElement.textContent = currentTitle.substring(0, charIndex + 1);
+          charIndex++;
+          
+          if (charIndex === currentTitle.length) {
+            isWaiting = true;
+            setTimeout(typeWriter, 3000);
+            return;
+          }
+        }
+        
+        const speed = isDeleting ? 50 : 80 + Math.random() * 50;
+        setTimeout(typeWriter, speed);
+      }
+      
+      setTimeout(() => {
+        cyclingTextElement.classList.add('active');
+        typeWriter();
+      }, 1000);
+
+      // Chart.js initialization
+      if (typeof Chart !== 'undefined') {
+        const chartConfigs = [
+          { id: 'wasteCompositionChart', type: 'doughnut' },
+          { id: 'jobCreationChart', type: 'bar' },
+          { id: 'marketGrowthChart', type: 'line' },
+          { id: 'implementationChart', type: 'line' }
+        ];
+        
+        chartConfigs.forEach(config => {
+          const canvas = document.getElementById(config.id);
+          if (canvas) {
+            try {
+              new Chart(canvas, {
+                type: config.type,
+                data: {
+                  labels: ['Sample Data'],
+                  datasets: [{
+                    label: 'Placeholder',
+                    data: [100],
+                    backgroundColor: ['#21808d', '#2da6b2', '#32b8c6'],
+                    borderColor: '#21808d',
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  plugins: {
+                    legend: { display: false }
+                  }
+                }
+              });
+            } catch (e) {
+              console.log('Chart initialization skipped for ' + config.id);
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
