@@ -1,21 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Google Sheets API URL - VERIFY THIS IS COMPLETE
-    const API_URL = "https://script.google.com/macros/s/AKfycbzeHzVAswHUPbO0AjGNvSnIxVuaaiyECQUPUmrfV1IuLE5n5wfmD4-vLyoVJxhPltMw/exec";
 
-    // --- Scroll Progress Bar Logic ---
+    // --- Scroll Progress Bar ---
     const progressBar = document.getElementById('progressBar');
     if (progressBar) {
         const updateProgressBar = () => {
             const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = window.scrollY;
-            const progress = (scrolled / scrollTotal) * 100;
-            progressBar.style.width = `${progress}%`;
+            progressBar.style.width = `${(scrolled / scrollTotal) * 100}%`;
         };
         window.addEventListener('scroll', updateProgressBar);
-        updateProgressBar(); // Initial run
+        updateProgressBar();
     }
 
-    // --- Fade-in on Scroll Logic using Intersection Observer ---
+    // --- Fade-in on Scroll ---
     const faders = document.querySelectorAll('.fade-in-on-scroll');
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -24,43 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        root: null,
-        rootMargin: '0px 0px -100px 0px',
-        threshold: 0.1
-    });
+    }, { rootMargin: '0px 0px -100px 0px', threshold: 0.1 });
     faders.forEach(fader => appearOnScroll.observe(fader));
 
-    // --- Smooth Scrolling for Navigation Links ---
-    const navLinks = document.querySelectorAll('.nav-link, .hero-cta');
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetId = href.substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    const offsetTop = targetElement.offsetTop - 20;
-                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-                }
+    // --- Smooth Scrolling for Anchor Links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 20; // 20px offset from top
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
             }
         });
     });
 
     // --- Active Navigation Link Highlighting ---
     const sections = document.querySelectorAll('section[id]');
-    const navigationLinks = document.querySelectorAll('.nav-link');
-    if (sections.length && navigationLinks.length) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (sections.length && navLinks.length) {
         const highlightNavigation = () => {
             let current = '';
-            const scrollPosition = window.scrollY + 200;
+            const scrollPosition = window.scrollY + 200; // Offset to trigger highlight sooner
             sections.forEach(section => {
                 if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.clientHeight) {
                     current = section.getAttribute('id');
                 }
             });
-            navigationLinks.forEach(link => {
+            navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active');
@@ -68,74 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
         window.addEventListener('scroll', highlightNavigation);
-        highlightNavigation(); // Initial run
+        highlightNavigation();
     }
 
-    // --- Blog Loader ---
-    const blogFeed = document.getElementById('blogFeed');
-    function loadPosts() {
-        if (!blogFeed) return;
-        fetch(API_URL)
-            .then(r => r.json())
-            .then(posts => {
-                let html = '';
-                posts.reverse().forEach(post => {
-                    // Using CSS for spacing is better than <br>, but this works
-                    html += `
-                        <div class="blog-post">
-                          <p>${post.post}</p>
-                          <small>${new Date(post.timestamp).toLocaleString()} by ${post.author}</small>
-                          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(post.url)}" target="_blank">Share on LinkedIn</a>
-                        </div>
-                    `;
-                });
-                blogFeed.innerHTML = html;
-            }).catch(error => console.error('Error loading blog posts:', error));
-    }
-    loadPosts();
-
-    // --- Admin Reveal & Form ---
-    // See security warning below
-    const revealAdminBtn = document.getElementById('revealAdminBtn');
-    const adminPostForm = document.getElementById('adminPostForm');
-    if (revealAdminBtn && adminPostForm) {
-        revealAdminBtn.onclick = function () {
-            // WARNING: This is not secure. Password is visible in the source code.
-            if (prompt("Admin access: what is the code?") === "Manila92!") {
-                adminPostForm.style.display = 'block';
-                this.style.display = 'none';
-            }
-        };
-    }
-
-    const blogPostForm = document.getElementById('blogPostForm');
-    if (blogPostForm) {
-        blogPostForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const postContentInput = document.getElementById('blogPost');
-            const postContent = postContentInput.value;
-            fetch(API_URL, {
-                method: "POST",
-                body: JSON.stringify({
-                    author: 'Mark',
-                    post: postContent,
-                    url: window.location.href
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Blog post published!");
-                    postContentInput.value = '';
-                    loadPosts();
-                } else {
-                    alert("There was a problem. Please try again.");
-                }
-            }).catch(error => console.error('Error submitting post:', error));
-        });
-    }
-
-    // --- Grant Writing Charts Script ---
+    // --- Grant Writing Charts ---
     const brandPalette = {
         primaryOrange: '#ff724f',
         creamLight: '#fef5da',
@@ -144,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         brownAccent: '#bd7f22'
     };
 
-    // Chart initialization logic
     function createChart(elementId, config) {
         const ctx = document.getElementById(elementId);
         if (ctx) {
@@ -152,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Waste Composition Chart
     createChart('wasteCompositionChart', {
         type: 'doughnut',
         data: {
@@ -166,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: brandPalette.creamLight } } } }
     });
 
+    // Job Creation Chart
     createChart('jobCreationChart', {
         type: 'bar',
         data: {
@@ -175,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } }, x: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } } } }
     });
 
+    // Market Growth Chart
     createChart('marketGrowthChart', {
         type: 'line',
         data: {
@@ -184,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } }, x: { ticks: { color: brandPalette.creamLight }, grid: { color: 'rgba(254, 245, 218, 0.1)' } } } }
     });
 
+    // Implementation Timeline Chart
     createChart('implementationChart', {
         type: 'bar',
         data: {
