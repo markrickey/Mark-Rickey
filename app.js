@@ -309,3 +309,165 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 });
+<!-- Grant Writing Charts Script -->
+    <script>
+// Grant Writing Charts - Brand Color Palette
+document.addEventListener('DOMContentLoaded', function() {
+    const brandPalette = {
+        primaryOrange: '#ff724f',
+        creamLight: '#fef5da',
+        navyBlue: '#3a668c',
+        goldenYellow: '#fdb92e',
+        brownAccent: '#bd7f22'
+    };
+
+    // Waste Composition Chart
+    const wasteCtx = document.getElementById('wasteCompositionChart');
+    if (wasteCtx) {
+        new Chart(wasteCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Food Waste', 'Yard Trimmings', 'Paper', 'Plastics', 'Other'],
+                datasets: [{
+                    data: [24, 13, 12, 18, 33],
+                    backgroundColor: [
+                        brandPalette.primaryOrange,
+                        brandPalette.goldenYellow,
+                        brandPalette.navyBlue,
+                        brandPalette.brownAccent,
+                        '#cccccc'
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#fef5da' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Job Creation Chart
+    const jobCtx = document.getElementById('jobCreationChart');
+    if (jobCtx) {
+        new Chart(jobCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Composting', 'Landfilling', 'Incineration'],
+                datasets: [{
+                    label: 'Jobs per 10,000 Tons/Year',
+                    data: [4.1, 2.1, 1.2],
+                    backgroundColor: [
+                        brandPalette.goldenYellow,
+                        brandPalette.navyBlue,
+                        brandPalette.brownAccent
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#fef5da' },
+                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: '#fef5da' },
+                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Market Growth Chart
+    const marketCtx = document.getElementById('marketGrowthChart');
+    if (marketCtx) {
+        new Chart(marketCtx, {
+            type: 'line',
+            data: {
+                labels: ['2024', '2026', '2028', '2030', '2032'],
+                datasets: [{
+                    label: 'Market Value ($B)',
+                    data: [1.4, 1.65, 1.9, 2.2, 2.5],
+                    borderColor: brandPalette.primaryOrange,
+                    backgroundColor: 'rgba(255, 114, 79, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { color: '#fef5da' },
+                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: '#fef5da' },
+                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
+                    }
+                }
+            }
+        });
+    }
+
+    // Implementation Timeline Chart
+    const implementationCtx = document.getElementById('implementationChart');
+    if (implementationCtx) {
+        new Chart(implementationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2-3', 'Year 4-5'],
+                datasets: [{
+                    label: 'Municipalities',
+                    data: [100, 1000, 2000],
+                    backgroundColor: [
+                        brandPalette.goldenYellow,
+                        brandPalette.primaryOrange,
+                        brandPalette.navyBlue
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#fef5da' },
+                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: '#fef5da' },
+                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+
+    <!-- Link to JavaScript file -->
+    <script src="app.js"></script>
