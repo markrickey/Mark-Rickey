@@ -1757,3 +1757,306 @@ video:focus {
     text-shadow: 0 2px 12px rgba(19,52,59,0.14);
   }
 }
+<!-- Grant Writing Section Styles -->
+<style>
+/* Grant Writing Section Styles */
+.service-card {
+    background: linear-gradient(135deg, #fef5da 0%, rgba(254, 245, 218, 0.8) 100%);
+    border: 2px solid #ff724f;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 114, 79, 0.1);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 114, 79, 0.2);
+    border-color: #3a668c;
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3a668c;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: #bd7f22;
+    line-height: 1.6;
+}
+
+.case-study-showcase {
+    background: linear-gradient(135deg, #3a668c 0%, #245365 100%);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.case-study-showcase::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 114, 79, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.case-study-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.case-study-header h3 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fef5da;
+    margin-bottom: 0.5rem;
+}
+
+.case-study-subtitle {
+    font-size: 1.25rem;
+    color: #fdb92e;
+    font-weight: 600;
+}
+
+.hero-stats-grant {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-item-grant {
+    text-align: center;
+    background: rgba(254, 245, 218, 0.1);
+    border: 1px solid rgba(255, 114, 79, 0.3);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.stat-item-grant .stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fdb92e;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item-grant .stat-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fef5da;
+}
+
+.problem-solution-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .problem-solution-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.problem-card, .solution-card {
+    background: rgba(254, 245, 218, 0.1);
+    border: 1px solid rgba(255, 114, 79, 0.3);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.problem-card h4, .solution-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fdb92e;
+    margin-bottom: 1rem;
+}
+
+.problem-card p, .solution-card p {
+    color: #fef5da;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.solution-components {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.component-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 114, 79, 0.1);
+    border-radius: 0.5rem;
+    color: #fef5da;
+    font-weight: 600;
+}
+
+.component-icon {
+    font-size: 1.5rem;
+}
+
+.impact-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.metric-card {
+    background: rgba(254, 245, 218, 0.1);
+    border: 1px solid rgba(255, 114, 79, 0.3);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.metric-card h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fdb92e;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.metric-card p {
+    color: #fef5da;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.service-cta {
+    text-align: center;
+    background: linear-gradient(135deg, #fef5da 0%, #fff 100%);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    border: 2px solid #ff724f;
+}
+
+.service-cta h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3a668c;
+    margin-bottom: 1rem;
+}
+
+.service-cta p {
+    font-size: 1.125rem;
+    color: #bd7f22;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn--primary {
+    background: #ff724f;
+    color: white;
+    border-color: #ff724f;
+}
+
+.btn--primary:hover {
+    background: #e55a37;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 114, 79, 0.3);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: #3a668c;
+    border-color: #3a668c;
+}
+
+.btn--secondary:hover {
+    background: #3a668c;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(58, 102, 140, 0.3);
+}
+
+/* Fix contact form text visibility */
+.contact-form .form-control {
+    color: #000000 !important; /* Black text */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.contact-form .form-control:focus {
+    color: #000000 !important; /* Ensure black text on focus */
+    background-color: #ffffff;
+    border-color: #3182ce;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+}
+
+.contact-form textarea.form-control {
+    color: #000000 !important; /* Specifically for textarea */
+    background-color: #ffffff;
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form .form-control::placeholder {
+    color: #666666 !important; /* Gray placeholder text */
+    opacity: 1;
+}
+</style>
+
+    </main>
