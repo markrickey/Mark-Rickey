@@ -372,6 +372,12 @@ video::-webkit-media-controls { display: none !important; }
   padding: 1.5rem;
   backdrop-filter: blur(10px);
 }
+.grant-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
 .stat-item-grant .stat-number { color: var(--color-yellow-brand); }
 .stat-item-grant .stat-label { color: var(--color-cream-brand); }
 .problem-solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
