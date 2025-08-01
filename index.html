@@ -1,261 +1,327 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mark R. – Global Strategic Project Manager | Kendallville, IN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark R. – Global Strategic Project Manager | Kendallville, IN</title>
 
-    <!-- Inline CSS (removed external style.css reference) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- External CSS removed—using inline styles below -->
-    <style>
-        /* Cycling Hero Animation Styles */
-        .hero-title {
-            font-size: 3.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 2rem;
-            color: #1a202c; min-height: 4.2rem;
-        }
-        .cycling-text {
-            display: inline-block; font-family: inherit; position: relative;
-            opacity: 0; transform: translateY(20px);
-            transition: all 0.5s ease-in-out;
-        }
-        .cycling-text.active { opacity: 1; transform: translateY(0); }
-        .typing-cursor {
-            display: inline-block; background-color: #3182ce; margin-left: 3px;
-            width: 3px; height: 1.2em; animation: cursor-blink 1.2s infinite;
-        }
-        @keyframes cursor-blink { 0%,50%{opacity:1}51%,100%{opacity:0} }
-        /* Responsive */
-        @media (max-width:768px){.hero-title{font-size:2.5rem;min-height:3rem}}
-        @media (max-width:480px){.hero-title{font-size:2rem;min-height:2.4rem}}
-        @media (prefers-reduced-motion:reduce){
-            .cycling-text{transition:none;opacity:1;transform:translateY(0)}
-            .typing-cursor{animation:none;opacity:1}
-        }
+  <!-- Google Font & Chart.js CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        /* Progress Bar */
-        #progressContainer{position:fixed;top:0;left:0;width:100%;height:3px;background:#ccc;z-index:1200}
-        #progressBar{height:100%;width:0%;background:linear-gradient(90deg,#245365,#2da6b2);transition:width 0.2s}
+  <!-- =====  ALL CSS INLINED  ===== -->
+  <style>
+  /* ------------- CORE RESET ------------- */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter",Arial,sans-serif;background:#fcfcf9;color:#13343b;line-height:1.55}
+  a{text-decoration:none;color:#21808d}a:hover{color:#1d7480}
 
-        /* Sidebar */
-        .fixed-sidebar {
-            position: fixed; top: 0; left: 0; width: 240px; height: 100vh;
-            background: #fff; border-right: 1px solid #ddd; padding: 2rem;
-            box-sizing: border-box; overflow-y: auto;
-        }
-        .fixed-sidebar .text-center { text-align: center; }
-        .profile-image { border-radius:50%; width:120px; height:120px; }
-        .sidebar-name{font-size:1.5rem;margin:.5rem 0}
-        .sidebar-title,.sidebar-location{margin:0; color:#555}
-        .sidebar-nav { margin-top:2rem; display:flex; flex-direction:column; gap:1rem; }
-        .sidebar-nav .nav-link { color:#333; text-decoration:none; font-weight:500; }
-        .sidebar-nav .nav-link:hover { color:#245365 }
+  /* ------------- LAYOUT ------------- */
+  #progressContainer{position:fixed;top:0;left:0;width:100%;height:3px;background:#e5e5e5;z-index:1200}
+  #progressBar{height:100%;width:0;background:linear-gradient(90deg,#21808d,#2da6b2);transition:width .2s}
 
-        /* Main content */
-        .main-content { margin-left:260px; padding:2rem; box-sizing:border-box; }
-        section { margin-bottom:4rem }
+  .fixed-sidebar{position:fixed;top:0;left:0;width:250px;height:100vh;background:#fff;border-right:1px solid #e5e5e5;padding:2rem;overflow-y:auto;z-index:1000}
+  .sidebar-nav{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+  .sidebar-nav .nav-link{font-weight:600;color:#626c71}
+  .sidebar-nav .nav-link:hover{color:#21808d}
+  .profile-image{border-radius:50%;width:120px;height:120px}
+  .sidebar-title,.sidebar-location{color:#626c71;font-size:.9rem}
 
-        /* Common fade-in */
-        .fade-in-on-scroll { opacity: 0; transform: translateY(30px); }
+  .main-content{margin-left:270px;padding:2.5rem 2rem 4rem 2rem}
 
-        /* Hero */
-        .hero-section { text-align:center; padding:4rem 0 }
-        .hero-subtitle { font-size:1.1rem; color:#555; max-width:600px; margin:1rem auto 2rem }
-        .hero-stats { display:flex; gap:2rem; justify-content:center; margin-bottom:2rem }
-        .stat-item { text-align:center }
-        .stat-number { font-size:2rem; font-weight:700; color:#245365 }
-        .stat-label { display:block; color:#555 }
-        .hero-cta { display:inline-block; background:#245365; color:#fff;
-            padding:.75rem 1.5rem; border-radius:8px; text-decoration:none;
-            font-weight:500; transition:background .2s;
-        }
-        .hero-cta:hover { background:#2da6b2 }
+  section{margin-bottom:5rem}
+  .section-header{font-size:2rem;font-weight:700;margin-bottom:1.25rem;color:#21808d}
+  .fade-in-on-scroll{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
+  .hero-section{text-align:center;padding:4rem 1rem}
+  .hero-title{font-size:3.5rem;font-weight:700;color:#1a202c;line-height:1.1;min-height:4.2rem;margin-bottom:1.5rem}
+  .typing-cursor{display:inline-block;width:3px;height:1.2em;background:#3182ce;margin-left:3px;animation:cursor-blink 1.2s infinite}
+  @keyframes cursor-blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 
-        /* Placeholder for missing video */
-        .professional-photo-placeholder {
-            width:100%; height:300px; background:linear-gradient(135deg,#245365,#2da6b2);
-            border-radius:12px; display:flex; align-items:center;
-            justify-content:center; color:#fff; font-size:1.25rem; font-weight:600;
-        }
+  .hero-subtitle{max-width:680px;margin:0 auto 2rem;color:#626c71}
+  .hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+  .stat-item{text-align:center}
+  .stat-number{font-size:2rem;font-weight:700;color:#21808d}
+  .hero-cta{display:inline-block;background:#21808d;color:#fff;padding:.8rem 1.6rem;border-radius:8px;font-weight:600}
+  .hero-cta:hover{background:#1d7480}
 
-        /* Section headers */
-        .section-header { font-size:2rem; margin-bottom:1rem; color:#245365 }
+  /* Generic grids/lists */
+  .skills-grid,.awards-grid,.education-grid,.projects-grid,.articles-grid,
+  .impact-metrics-grid,.grant-stats-grid{display:grid;gap:1.25rem}
+  .skills-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .projects-grid,.articles-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .education-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .impact-metrics-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .grant-stats-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 
-        /* Charts */
-        .chart-container { max-width:400px; margin:1rem auto }
+  /* Cards & helpers */
+  .service-card,.project-card,.article-card,.metric-card,
+  .education-item,.skill-category,.award-item{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:1.25rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .project-card:hover,.article-card:hover{box-shadow:0 3px 8px rgba(0,0,0,.08)}
+  .project-title,.article-title{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#13343b}
 
-        /* Contact */
-        .contact-section { background:#245365; color:#fff; padding:2rem; border-radius:12px }
-        .contact-section .form-control {
-            width:100%; padding:.5rem; margin-bottom:1rem; border-radius:4px; border:none
-        }
-        .btn--primary { background:#2da6b2; color:#fff; padding:.75rem 1rem; border:none;
-            border-radius:6px; text-decoration:none; font-weight:500; cursor:pointer;
-            transition:background .2s;
-        }
-        .btn--primary:hover { background:#32b8c6 }
-    </style>
+  /* Contact */
+  .contact-section{background:#13343b;color:#fff;padding:3rem 2rem;border-radius:12px}
+  .contact-intro{max-width:640px;margin:.5rem auto 2rem;text-align:center}
+  .contact-content{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center}
+  .contact-info{flex:1 1 250px}
+  .contact-form{flex:1 1 300px}
+  .form-control{width:100%;padding:.65rem .8rem;border-radius:6px;border:1px solid #ccc;margin-bottom:1rem;font-family:inherit}
+  .btn--primary{background:#2da6b2;color:#fff;padding:.7rem 1rem;border:none;border-radius:6px;font-weight:600;cursor:pointer;width:100%}
+  .btn--primary:hover{background:#32b8c6}
+
+  /* Timelines */
+  .timeline{position:relative;padding-left:1rem;border-left:3px solid #e5e5e5}
+  .timeline-item{margin-bottom:2rem;position:relative}
+  .timeline-marker{position:absolute;left:-12px;top:4px;width:10px;height:10px;background:#21808d;border-radius:50%}
+
+  /* Responsive */
+  @media (max-width:900px){.fixed-sidebar{display:none}.main-content{margin:0}}
+  </style>
 </head>
 <body>
 
-    <!-- Progress Bar -->
-    <div id="progressContainer"><div id="progressBar"></div></div>
+<!-- Progress Indicator -->
+<div id="progressContainer"><div id="progressBar"></div></div>
 
-    <!-- Sidebar -->
-    <aside class="fixed-sidebar">
-        <div class="text-center">
-            <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="profile-image">
-            <h3 class="sidebar-name">Mark</h3>
-            <p class="sidebar-title">Strategic Project Manager</p>
-            <p class="sidebar-location">Data-Driven Excellence</p>
+<!-- Fixed Sidebar Navigation -->
+<aside class="fixed-sidebar">
+  <div class="text-center">
+    <img src="https://placehold.co/120x120/245365/FFFFFF?text=Mark" alt="Mark R." class="profile-image">
+    <h3 class="sidebar-name">Mark</h3>
+    <p class="sidebar-title">Strategic Project Manager</p>
+    <p class="sidebar-location">Data-Driven Excellence</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#about"        class="nav-link">About</a>
+    <a href="#experience"   class="nav-link">Experience</a>
+    <a href="#services"     class="nav-link">Services</a>
+    <a href="#education"    class="nav-link">Education</a>
+    <a href="#projects"     class="nav-link">Projects</a>
+    <a href="#articles"     class="nav-link">Publications</a>
+    <a href="#blog"         class="nav-link">Blog</a>
+    <a href="#contact"      class="nav-link">Contact</a>
+  </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+  <!-- HERO -->
+  <section id="hero" class="hero-section fade-in-on-scroll">
+    <h1 class="hero-title">
+      <span id="cyclingText" class="cycling-text"></span>
+      <span class="typing-cursor">|</span>
+    </h1>
+    <p class="hero-subtitle">
+      A Global Strategic Project Manager with over a decade of military and government expertise,
+      delivering exceptional results in high-stakes international environments.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-number">$100M+</span><span class="stat-label">Projects Managed</span></div>
+      <div class="stat-item"><span class="stat-number">15+</span><span class="stat-label">Countries</span></div>
+      <div class="stat-item"><span class="stat-number">99.8%</span><span class="stat-label">Success Rate</span></div>
+    </div>
+
+    <a href="#contact" class="hero-cta">Let’s Collaborate</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="fade-in-on-scroll">
+    <h2 class="section-header">About Me</h2>
+    <p class="about-intro">
+      With over a decade of experience in corporate management, global military operations, and strategic government relations,
+      I turn complex challenges into tangible results that drive organizational excellence.
+    </p>
+    <p>
+      My journey started with an unwavering pursuit of new skills and innovative management techniques in Chicago, then service in the
+      U.S. Army forged my commitment to precision, strategic thinking, and results-driven leadership at the highest levels.
+    </p>
+    <div class="mission-statement">
+      <h3>Mission Statement</h3>
+      <blockquote>
+        “To leverage unparalleled strategic leadership and data-driven operational acumen to transform complex organizational challenges
+        into sustainable competitive advantages.”
+      </blockquote>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="competencies-showcase fade-in-on-scroll" style="margin-top:2.5rem">
+      <h3 class="subsection-title">Core Competencies</h3>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h4 class="category-title">Strategic Planning</h4>
+          <div class="skills-list">
+            <span class="skill-tag">Long-Term Development</span>
+            <span class="skill-tag">Risk Assessment</span>
+            <span class="skill-tag">Resource Optimization</span>
+            <span class="skill-tag">Stakeholder Management</span>
+            <span class="skill-tag">Crisis Management</span>
+            <span class="skill-tag">Strategic Communications</span>
+          </div>
         </div>
-        <nav class="sidebar-nav">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#experience" class="nav-link">Experience</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#education" class="nav-link">Education</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#articles" class="nav-link">Publications</a>
-            <a href="#blog" class="nav-link">Blog</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </nav>
-    </aside>
+        <div class="skill-category">
+          <h4 class="category-title">Project Management</h4>
+          <div class="skills-list">
+            <span class="skill-tag">Agile/Scrum</span><span class="skill-tag">Waterfall</span>
+            <span class="skill-tag">Budget Control</span><span class="skill-tag">Timeline Optimization</span>
+            <span class="skill-tag">Quality Assurance</span><span class="skill-tag">Vendor Management</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4 class="category-title">Leadership</h4>
+          <div class="skills-list">
+            <span class="skill-tag">Cross-Functional Teams</span>
+            <span class="skill-tag">International Management</span>
+            <span class="skill-tag">Change Management</span>
+            <span class="skill-tag">Executive Communication</span>
+            <span class="skill-tag">Conflict Resolution</span>
+            <span class="skill-tag">Performance Optimization</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4 class="category-title">Technical Expertise</h4>
+          <div class="skills-list">
+            <span class="skill-tag">Microsoft Project</span><span class="skill-tag">Tableau</span>
+            <span class="skill-tag">JIRA</span><span class="skill-tag">SAP</span>
+            <span class="skill-tag">Salesforce</span><span class="skill-tag">Advanced Excel</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Main -->
-    <main class="main-content">
-        <!-- Hero -->
-        <section id="hero" class="hero-section fade-in-on-scroll">
-            <h1 class="hero-title">
-                <span id="cyclingText" class="cycling-text"></span>
-                <span class="typing-cursor">|</span>
-            </h1>
-            <p class="hero-subtitle">
-                A Global Strategic Project Manager with over a decade of military and government expertise,
-                delivering exceptional results in high-stakes international environments.
-            </p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">$100M+</span>
-                    <span class="stat-label">Projects Managed</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">15+</span>
-                    <span class="stat-label">Countries</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">99.8%</span>
-                    <span class="stat-label">Success Rate</span>
-                </div>
-            </div>
-            <a href="#contact" class="hero-cta">Let's Collaborate</a>
-        </section>
+    <!-- Recognition -->
+    <div class="recognition-highlights fade-in-on-scroll" style="margin-top:2.5rem">
+      <h3 class="subsection-title">Recognition & Awards</h3>
+      <div class="awards-grid">
+        <div class="award-item"><div class="award-icon">🏅</div><h4>Army Commendation Medal</h4><p>Meritorious service in positions of responsibility.</p></div>
+        <div class="award-item"><div class="award-icon">🏆</div><h4>Hero of the Battle</h4><p>Joint task-force NCOIC Recognition – 2022.</p></div>
+        <div class="award-item"><div class="award-icon">⭐</div><h4>Joint Service Achievement Medal</h4><p>Outstanding leadership in joint operations.</p></div>
+        <div class="award-item"><div class="award-icon">🎖️</div><h4>S.A.L.U.T.E Honors Student</h4><p>Excellence in service and scholarship.</p></div>
+        <div class="award-item"><div class="award-icon">🌟</div><h4>International Cooperation Medal</h4><p>Contributions to multinational operations.</p></div>
+      </div>
+    </div>
+  </section>
 
-        <!-- About -->
-        <section id="about" class="fade-in-on-scroll">
-            <h2 class="section-header">About Me</h2>
-            <p>With over a decade of experience in corporate management, global military operations, and strategic government relations, I turn complex challenges into tangible results.</p>
-            <p>My journey started in Chicago, led me to serve in the U.S. Army, and forged my commitment to precision, strategic thinking, and leadership.</p>
-            <div class="professional-photo-placeholder">Professional Photo/Video</div>
-        </section>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="fade-in-on-scroll">
+    <h2 class="section-header">Professional Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3 class="position-title">Project Manager | Global Operations & Strategic Execution</h3>
+          <div class="position-details">U.S. Army &nbsp;•&nbsp; 2019 – Present &nbsp;•&nbsp; Global</div>
+          <ul class="achievements">
+            <li>Directed multi-billion-dollar operations across the South Pacific and CONUS.</li>
+            <li>Led cross-functional teams in crisis scenarios—including COVID-19 response.</li>
+            <li>Managed contracts >$10 M; improved efficiency 20 % and cut costs 15 %.</li>
+            <li>Principal spokesperson at international conferences, strengthening alliances.</li>
+          </ul>
+        </div>
+      </div>
 
-        <!-- Services -->
-        <section id="services" class="fade-in-on-scroll">
-            <h2 class="section-header">Grant Writing & Policy Development</h2>
-            <p>Transforming complex policy challenges into compelling funding proposals. Secured millions in federal funding through strategic storytelling and data-driven analysis.</p>
-        </section>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3 class="position-title">Intern, Congressional Staffer | Federal Account Executive</h3>
+          <div class="position-details">U.S. House of Representatives &nbsp;•&nbsp; 2025</div>
+          <ul class="achievements">
+            <li>Spearheaded constituent casework across seven federal agencies.</li>
+            <li>Drafted speeches and briefing memos for Member of Congress.</li>
+            <li>Built data systems that cut response times 40 %.</li>
+          </ul>
+        </div>
+      </div>
 
-        <!-- Spacer sections omitted for brevity... -->
+      <!-- additional timeline items could be added here -->
+    </div>
+  </section>
 
-        <!-- Charts Example -->
-        <section class="fade-in-on-scroll">
-            <h2 class="section-header">Waste Composition</h2>
-            <div class="chart-container">
-                <canvas id="wasteCompositionChart"></canvas>
-            </div>
-        </section>
+  <!-- SERVICES / GRANT WRITING -->
+  <section id="services" class="fade-in-on-scroll">
+    <h2 class="section-header">Grant Writing & Policy Development</h2>
+    <p class="service-intro">
+      Transforming complex policy challenges into compelling funding proposals. Secured millions in federal dollars
+      through strategic storytelling, data-driven impact analysis, and stakeholder alignment.
+    </p>
 
-        <!-- Contact -->
-        <section id="contact" class="contact-section fade-in-on-scroll">
-            <h2>Let's Create Strategic Excellence Together</h2>
-            <form action="https://formsubmit.co/markrickey01@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Name *" class="form-control" required>
-                <input type="email" name="email" placeholder="Email *" class="form-control" required>
-                <input type="text" name="organization" placeholder="Organization" class="form-control">
-                <textarea name="message" rows="5" placeholder="Tell me about your project..." class="form-control" required></textarea>
-                <button type="submit" class="btn--primary">Send Message</button>
-            </form>
-        </section>
-    </main>
+    <div class="projects-grid">
+      <div class="service-card"><div class="service-icon">📊</div><h3>Data-Driven Proposals</h3><p>Research, statistics, and impact modelling build irresistible cases for funding.</p></div>
+      <div class="service-card"><div class="service-icon">🏛️</div><h3>Federal Grant Strategy</h3><p>Deep knowledge of agency priorities, compliance, and evaluation criteria.</p></div>
+      <div class="service-card"><div class="service-icon">🤝</div><h3>Stakeholder Alignment</h3><p>Coalitions and partnerships that sustain long-term implementation.</p></div>
+    </div>
 
-    <!-- Inline JS -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Progress bar
-        const progressBar = document.getElementById('progressBar');
-        window.addEventListener('scroll', () => {
-            const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            progressBar.style.width = pct + '%';
-        });
+    <!-- Case Study -->
+    <div class="case-study-showcase fade-in-on-scroll" style="margin-top:3rem">
+      <h3>Featured Case Study: National Household Composting Initiative</h3>
+      <p class="case-study-subtitle">$9.5 Billion Federal Investment Proposal</p>
 
-        // Fade-in observer
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.style.opacity = '1';
-                    e.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: .1, rootMargin: '0px 0px -50px 0px' });
-        document.querySelectorAll('.fade-in-on-scroll').forEach(el => obs.observe(el));
+      <div class="grant-stats-grid">
+        <div class="stat-item-grant"><span class="stat-number">$9.5B</span><span class="stat-label">Investment</span></div>
+        <div class="stat-item-grant"><span class="stat-number">27,000</span><span class="stat-label">Jobs</span></div>
+        <div class="stat-item-grant"><span class="stat-number">20 M</span><span class="stat-label">Tons Diverted</span></div>
+        <div class="stat-item-grant"><span class="stat-number">16 M</span><span class="stat-label">Tons CO₂ Cut</span></div>
+      </div>
 
-        // Smooth sidebar nav
-        document.querySelectorAll('.nav-link').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-            });
-        });
+      <div class="problem-solution-grid" style="display:grid;gap:2rem;margin-top:2rem">
+        <div class="problem-card service-card">
+          <h4>The Challenge</h4>
+          <p>Organic waste = 30 % of MSW; methane emissions 80× CO₂. Landfills squander economic value and accelerate climate change.</p>
+          <div class="chart-container"><canvas id="wasteCompositionChart"></canvas></div>
+        </div>
+        <div class="solution-card service-card">
+          <h4>Strategic Solution</h4>
+          <p>Three-pronged federal investment: home composting subsidies, municipal collection grants, community processing sites.</p>
+          <div class="solution-components" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem">
+            <div class="component-item">🏠 Home Subsidies</div>
+            <div class="component-item">♻️ Municipal Grants</div>
+            <div class="component-item">🏢 Community Sites</div>
+          </div>
+        </div>
+      </div>
 
-        // Cycling text
-        const titles = [
-            "Transforming Vision into Strategic Excellence",
-            "Delivering Data-Driven Government Solutions",
-            "Leading Crisis Management & Emergency Response",
-            "Building AI-Powered Strategic Systems",
-            "Optimizing Global Military Operations",
-            "Creating Innovative Project Management Solutions",
-            "Driving Congressional Relations & Policy Impact"
-        ];
-        let idx=0, ch=0, del=false, wait=false;
-        const el = document.getElementById('cyclingText');
-        function type() {
-            const full = titles[idx];
-            if (wait) return setTimeout(() =>{ wait=false; del=true; type(); },2000);
-            if (del) {
-                el.textContent = full.substring(0, --ch);
-                if (!ch) { del=false; idx=(idx+1)%titles.length; return setTimeout(type,500); }
-            } else {
-                el.textContent = full.substring(0, ++ch);
-                if (ch===full.length){ wait=true; return setTimeout(type,3000); }
-            }
-            setTimeout(type, del?50:80+Math.random()*50);
-        }
-        setTimeout(()=>{ el.classList.add('active'); type(); },1000);
+      <div class="impact-metrics-grid" style="margin-top:2rem">
+        <div class="metric-card"><canvas id="jobCreationChart"></canvas><h5>Job Creation Advantage</h5></div>
+        <div class="metric-card"><canvas id="marketGrowthChart"></canvas><h5>Market Growth Projection</h5></div>
+        <div class="metric-card"><canvas id="implementationChart"></canvas><h5>Implementation Timeline</h5></div>
+      </div>
 
-        // Chart.js
-        if (typeof Chart!=='undefined') {
-            ['wasteCompositionChart'].forEach(id=>{
-                const c=document.getElementById(id);
-                if(!c)return;
-                new Chart(c, {
-                    type:'doughnut',
-                    data:{labels:['A','B','C'],datasets:[{data:[30,50,20],backgroundColor:['#245365','#2da6b2','#32b8c6']}]},
-                    options:{responsive:true}
-                });
-            });
-        }
-    });
-    </script>
-</body>
-</html>
+      <div class="service-cta fade-in-on-scroll" style="margin-top:3rem;text-align:center">
+        <h3>Ready to Secure Strategic Funding?</h3>
+        <p>From concept to submission, I deliver comprehensive grant-writing services.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;margin-top:1rem">
+          <a href="#contact" class="btn--primary" style="width:auto">Discuss Your Project</a>
+          <a href="#" class="btn--primary" style="background:#626c71">View Full Case Study</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="fade-in-on-scroll">
+    <h2 class="section-header">Education & Certifications</h2>
+    <div class="education-grid">
+      <div class="education-section">
+        <h3 class="subsection-title">Education</h3>
+        <div class="education-item"><h4>Master’s of Public Administration</h4><p>Purdue University Global – 2025</p><p>Policy & Legislative Analysis. S.A.L.U.T.E Honors Student.</p></div>
+        <div class="education-item"><h4>Bachelor of Arts & Science</h4><p>Purdue University – 2015</p><p>Major – Rhetoric & Public Advocacy • Minor – Public Relations</p></div>
+      </div>
+      <div class="certifications-section">
+        <h3 class="subsection-title">Professional Certifications</h3>
+        <div class="certifications-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.8rem">
+          <div class="cert-item service-card">IBM Data Fundamentals</div>
+          <div class="cert-item service-card">IBM Agile Manager</div>
+          <div class="cert-item service-card">Certified Change Management</div>
+          <div class="cert-item service-card">Secret Clearance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-in-on-scroll">
+    <h2 class="section-header">Strategic Project Portfolio</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3 class="project-title">Congressional Work Studies & Case
