@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Solutions for Industry Giants | A Visual Analysis by Mark Rickey</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== MAIN SITE DESIGN SYSTEM ===== */
+        :root {
+            --color-white: #fff;
+            --color-black: #000;
+            --color-cream-50: #fcfcf9;
+            --color-cream-100: #fffffd;
+            --color-gray-200: #f5f5f5;
+            --color-gray-300: #a7a9a9;
+            --color-gray-400: #777c7c;
+            --color-slate-500: #626c71;
+            --color-brown-600: #5e5240;
+            --color-charcoal-700: #1f2121;
+            --color-charcoal-800: #262828;
+            --color-slate-900: #13343b;
+            --color-teal-300: #32b8c6;
+            --color-teal-400: #2da6b2;
+            --color-teal-500: #21808d;
+            --color-teal-600: #1d7480;
+            --color-teal-700: #1a6873;
+            --color-teal-800: #2996a1;
+            --color-red-400: #ff5459;
+            --color-red-500: #c0152f;
+            --color-orange-400: #e68161;
+            --color-orange-500: #a84b2f;
+            --font-family-base: "Inter", "FKGroteskNeue", Arial, sans-serif;
+            --font-size-base: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-bold: 600;
+            --color-background: #fcfcf9;
+            --color-surface: #fffffd;
+            --color-text: #13343b;
+            --color-text-secondary: #626c71;
+            --color-primary: #21808d;
+            --color-primary-hover: #1d7480;
+            --color-border: rgba(94,82,64,0.2);
+            --color-card-border: rgba(94,82,64,0.12);
+            --radius-base: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.04),0 2px 4px -1px rgba(0,0,0,0.02);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+            --space-20: 20px; --space-24: 24px; --space-32: 32px; --space-48: 48px;
+            --container-lg: 1024px;
+        }
+
+        html {
+            font-size: var(--font-size-base);
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+        }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: var(--container-lg);
+            margin-left: auto; 
+            margin-right: auto;
+            padding: 0 var(--space-16);
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
+            background: var(--color-surface);
+            box-shadow: var(--shadow-md);
+            padding: var(--space-32) var(--space-16);
+            text-align: center;
+            margin-bottom: var(--space-48);
+        }
+        .header h1 {
+            font-size: clamp(1.875rem, 4vw, 2.25rem);
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: var(--space-8);
+        }
+        .header .subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+        }
+        .header .author-title {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: var(--space-48);
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-32);
+        }
+        .section-header h2 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--space-12);
+        }
+        .section-header p {
+            max-width: 48rem;
+            margin: 0 auto;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-lg);
+        }
+
+        /* Intro Section */
+        .intro-section {
+            text-align: center;
+            max-width: 64rem;
+            margin: 0 auto var(--space-48);
+        }
+        .intro-section h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--space-16);
+        }
+        .intro-section p {
+            color: var(--color-text);
+            line-height: 1.75;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            gap: var(--space-24);
+        }
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+            box-shadow: var(--shadow-xl);
+            padding: var(--space-24);
+            transition: all 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        .card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--space-16);
+        }
+        .card p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-16);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 320px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Stat Display */
+        .stat-display {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--space-24);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: var(--space-8);
+        }
+        .stat-label {
+            font-size: var(--font-size-lg);
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-16);
+        }
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-16);
+        }
+        .step-number {
+            background: var(--color-teal-400);
+            color: var(--color-white);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--font-weight-bold);
+            flex-shrink: 0;
+        }
+        .step-content strong {
+            display: block;
+            color: var(--color-text);
+            margin-bottom: var(--space-4);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-12);
+        }
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+        }
+        .check-icon {
+            color: var(--color-teal-400);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* AI Review Pyramid */
+        .pyramid-container {
+            position: relative;
+            width: 100%;
+            height: 256px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pyramid-level {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-weight: var(--font-weight-bold);
+            border-radius: var(--radius-base) var(--radius-base) 0 0;
+        }
+        .pyramid-level.level-1 {
+            bottom: 0;
+            width: 256px;
+            height: 64px;
+            background: var(--color-primary);
+        }
+        .pyramid-level.level-2 {
+            bottom: 64px;
+            width: 192px;
+            height: 64px;
+            background: var(--color-teal-400);
+        }
+        .pyramid-level.level-3 {
+            bottom: 128px;
+            width: 128px;
+            height: 64px;
+            background: var(--color-teal-300);
+            color: var(--color-text);
+        }
+        .pyramid-title {
+            position: absolute;
+            top: 0;
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* Sustainability Icon */
+        .sustainability-display {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--space-24);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-8);
+        }
+        .sustainability-icon {
+            font-size: 3rem;
+        }
+        .sustainability-text {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+        }
+
+        /* Conclusion Section */
+        .conclusion-section {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            padding: var(--space-32);
+            margin-bottom: var(--space-48);
+        }
+        .conclusion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-24);
+            text-align: center;
+            margin-top: var(--space-24);
+        }
+        .conclusion-item {
+            border-top: 4px solid var(--color-primary);
+            padding-top: var(--space-16);
+        }
+        .conclusion-item:nth-child(2) {
+            border-top-color: var(--color-teal-400);
+        }
+        .conclusion-item:nth-child(3) {
+            border-top-color: var(--color-teal-300);
+        }
+        .conclusion-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-8);
+        }
+        .conclusion-item h3 {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--space-8);
+        }
+        .conclusion-item p {
+            color: var(--color-text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--space-24);
+            background: var(--color-charcoal-800);
+            color: var(--color-white);
+        }
+        .footer p {
+            margin-bottom: var(--space-4);
+        }
+        .footer .disclaimer {
+            font-size: 0.875rem;
+            color: var(--color-gray-300);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .process-step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .step-number {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Strategic Solutions for Industry Giants</h1>
+        <p class="subtitle">A Visual Analysis by Mark Rickey, MPA</p>
+        <p class="author-title">Strategic Project & Data Management Leader</p>
+    </header>
+
+    <main class="container">
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <h2>The New Competitive Landscape</h2>
+            <p>
+                Today's industry leaders face a convergence of complex challenges. Success is no longer defined just by innovation, but by the ability to navigate intensifying regulations, strategically integrate artificial intelligence, and optimize global operations at an unprecedented scale. This analysis visualizes the core issues confronting Deloitte, Salesforce, and Google, and presents data-driven solutions tailored to their unique environments.
+            </p>
+        </section>
+
+        <!-- Deloitte Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Deloitte: Mastering Transformation</h2>
+                <p>Deloitte's challenge is to guide clients through a landscape of disruptive forces while simultaneously transforming its own service delivery model. This requires a mastery of compliance, technology, and talent management.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Challenge: The Regulatory Gauntlet</h3>
+                    <p>Global authorities now demand near real-time, granular data, a significant hurdle for clients with fragmented legacy systems. The risk isn't just financial; it's reputational.</p>
+                    <div class="stat-display">
+                        <span class="stat-number">75%</span>
+                        <span class="stat-label">Of Tax Leaders cite changing global laws as their #1 challenge.</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Solution: Proactive Compliance Framework</h3>
+                    <p>Leveraging government relations acumen and data management expertise to build robust, "tax-sanitized" data systems that turn compliance from a burden into a strategic asset.</p>
+                    <div class="chart-container">
+                        <canvas id="deloitteSolutionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Challenge: AI Integration & The Talent Gap</h3>
+                    <p>Firms are cautious about AI due to accuracy and security concerns, and face a critical shortage of talent with the right blend of technical and strategic skills.</p>
+                    <div class="chart-container">
+                        <canvas id="deloitteChallengeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Solution: Agile AI Implementation</h3>
+                    <p>Applying certified Agile and Change Management leadership to orchestrate the full lifecycle of AI initiatives, from strategy and data foundation to deployment and scaling, ensuring measurable ROI.</p>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <strong>Audit & Assess:</strong> Identify and map all existing fragmented data sources.
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <strong>Design & Unify:</strong> Architect a unified data model and ETL process for standardization.
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <strong>Implement & Monitor:</strong> Deploy real-time dashboards as a single source of truth for compliance.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Salesforce Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Salesforce: Driving Specialized Growth</h2>
+                <p>To maintain market dominance, Salesforce must penetrate highly regulated industries and prove the tangible ROI of its increasingly powerful—and complex—AI-driven platform.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Challenge: Penetrating Regulated Industries</h3>
+                    <p>Success in the public sector and healthcare requires deep domain expertise to navigate long procurement cycles, strict compliance (HIPAA, FedRAMP), and risk-averse decision-making.</p>
+                    <div class="chart-container">
+                        <canvas id="salesforceChallengeChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Solution: Authentic, Experience-Based Strategy</h3>
+                    <p>Applying direct congressional and federal agency experience to shape product development, build trust, and design solutions that mirror the real-world workflows of government and healthcare professionals.</p>
+                    <div class="chart-container">
+                        <canvas id="salesforceSolutionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Challenge: Complexity vs. AI Value</h3>
+                    <p>As the platform grows, so does its complexity. Clients need clear guidance to implement AI in a way that delivers measurable results, not just more features.</p>
+                    <div class="stat-display">
+                        <span class="stat-number">64%</span>
+                        <span class="stat-label">Of Salesforce Admins find the platform increasingly complex to manage.</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Solution: A Process-First, Data-Driven Approach</h3>
+                    <p>Leading engagements that re-engineer business processes first, then configuring technology to support them. This involves creating predictive dashboards to prove ROI and bridge the business-technical divide.</p>
+                    <ul class="checklist">
+                        <li><span class="check-icon">✓</span>Map Current State Workflows</li>
+                        <li><span class="check-icon">✓</span>Identify and Remediate Bottlenecks</li>
+                        <li><span class="check-icon">✓</span>Design Optimized Future State</li>
+                        <li><span class="check-icon">✓</span>Configure Technology to Support Vision</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Google Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Google: Balancing Innovation & Responsibility</h2>
+                <p>Google must continue to pioneer AI while navigating a minefield of global regulations and ethical considerations, all while optimizing its massive physical infrastructure.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Challenge: Navigating Global AI Governance</h3>
+                    <p>Facing a patchwork of global regulations, Google must demonstrate a proactive and ethical approach to AI, ensuring transparency, fairness, and privacy to maintain public trust.</p>
+                    <div class="chart-container">
+                        <canvas id="googleChallengeChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Solution: Embedding AI Risk Management</h3>
+                    <p>Implementing a multi-stage AI governance framework that embeds risk management into the innovation lifecycle, informed by an insider's view of the legislative process and honed by military crisis management.</p>
+                    <div class="pyramid-container">
+                        <div class="pyramid-title">AI Review Pyramid</div>
+                        <div class="pyramid-level level-1">Technical Audit</div>
+                        <div class="pyramid-level level-2">Legal Review</div>
+                        <div class="pyramid-level level-3">Ethical Committee</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Challenge: Optimizing Operations at Scale</h3>
+                    <p>The efficiency of Google's vast data center and supply chain network is paramount for reducing costs and meeting ambitious sustainability goals.</p>
+                    <div class="sustainability-display">
+                        <span class="sustainability-icon">♻️</span>
+                        <span class="sustainability-text">Optimize Global Infrastructure for Sustainability & Efficiency</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Solution: Military-Grade Operational Intelligence</h3>
+                    <p>Applying battle-tested logistical expertise to manage and optimize Google's global hardware supply chain. This involves creating KPI dashboards to turn raw operational data into actionable intelligence for efficiency gains.</p>
+                    <div class="chart-container">
+                        <canvas id="googleSolutionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Conclusion Section -->
+        <section class="conclusion-section">
+            <div class="section-header">
+                <h2>The Common Thread: A Unique, Cross-Functional Skillset</h2>
+                <p>The solutions to these diverse challenges are rooted in a unique combination of strategic leadership, data acumen, and operational excellence.</p>
+            </div>
+            <div class="conclusion-grid">
+                <div class="conclusion-item">
+                    <div class="conclusion-icon">🛡️</div>
+                    <h3>Strategic Leadership</h3>
+                    <p>Crisis Management, Government Relations, and Change Leadership to navigate complex stakeholder and regulatory environments.</p>
+                </div>
+                <div class="conclusion-item">
+                    <div class="conclusion-icon">📊</div>
+                    <h3>Data Acumen</h3>
+                    <p>Python, SQL, and AI/ML concepts to transform raw data into predictive insights and measurable business value.</p>
+                </div>
+                <div class="conclusion-item">
+                    <div class="conclusion-icon">⚙️</div>
+                    <h3>Operational Excellence</h3>
+                    <p>Military-grade logistical planning and project management to execute complex initiatives and drive efficiency at scale.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Analysis by Mark Rickey, MPA</p>
+        <p class="disclaimer">This infographic is a visual representation of strategic analysis based on publicly available information and professional expertise.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Updated color scheme to match main site
+            const primaryColor = '#21808d';
+            const secondaryColor = '#2da6b2';
+            const accentColor = '#32b8c6';
+            const errorColor = '#ff5459';
+            
+            const tooltipPlugin = {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            };
+
+            const wrapLabel = (str, maxWidth) => {
+                if (str.length <= maxWidth) {
+                    return str;
+                }
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+                for (let i = 1; i < words.length; i++) {
+                    if (currentLine.length + words[i].length + 1 < maxWidth) {
+                        currentLine += ' ' + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            };
+
+            // Deloitte Challenge Chart
+            const deloitteChallengeLabels = ['AI Specialist Skills', 'Data Analytics & Strategic Insights', 'Specialist Tax Technical Skills'].map(label => wrapLabel(label, 16));
+            new Chart(document.getElementById('deloitteChallengeChart'), {
+                type: 'bar',
+                data: {
+                    labels: deloitteChallengeLabels,
+                    datasets: [{
+                        label: 'Reported Talent Shortage',
+                        data: [45, 42, 36],
+                        backgroundColor: [primaryColor, secondaryColor, accentColor],
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        ...tooltipPlugin
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Shortage Percentage (%)' }
+                        }
+                    }
+                }
+            });
+            
+            // Deloitte Solution Chart
+            new Chart(document.getElementById('deloitteSolutionChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Strategy & Buy-In', 'Data Foundation', 'Agile Deployment', 'Scaling & ROI'],
+                    datasets: [{
+                        label: 'AI Project Lifecycle',
+                        data: [20, 30, 35, 15],
+                        backgroundColor: [primaryColor, secondaryColor, accentColor, '#a1d6f2'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'AI Project Lifecycle Management' },
+                        ...tooltipPlugin
+                    }
+                }
+            });
+
+            // Salesforce Challenge Chart
+            new Chart(document.getElementById('salesforceChallengeChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Public Sector', 'Healthcare', 'Other Regulated Industries'],
+                    datasets: [{
+                        label: 'Target Growth Sectors',
+                        data: [40, 35, 25],
+                        backgroundColor: [primaryColor, secondaryColor, accentColor],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Target Growth Sectors' },
+                        ...tooltipPlugin
+                    }
+                }
+            });
+
+            // Salesforce Solution Chart
+            new Chart(document.getElementById('salesforceSolutionChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1 Next'],
+                    datasets: [{
+                        label: 'Churn Risk',
+                        data: [25, 22, 18, 15, 12],
+                        borderColor: errorColor,
+                        backgroundColor: 'rgba(255, 84, 89, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Lead Conversion',
+                        data: [30, 35, 42, 48, 55],
+                        borderColor: secondaryColor,
+                        backgroundColor: 'rgba(45, 166, 178, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'From Reactive to Predictive Insights' },
+                        ...tooltipPlugin
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Percentage (%)' }
+                        }
+                    }
+                }
+            });
+
+            // Google Challenge Chart
+            new Chart(document.getElementById('googleChallengeChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Transparency', 'Bias Mitigation', 'Data Privacy', 'Accountability', 'Security'],
+                    datasets: [{
+                        label: 'Regulatory Focus Level',
+                        data: [8, 9, 10, 7, 8],
+                        fill: true,
+                        backgroundColor: 'rgba(45, 166, 178, 0.2)',
+                        borderColor: secondaryColor,
+                        pointBackgroundColor: secondaryColor,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: secondaryColor
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Key AI Regulatory Concerns' },
+                        ...tooltipPlugin
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+
+            // Google Solution Chart
+            new Chart(document.getElementById('googleSolutionChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025 (Proj.)'],
+                    datasets: [{
+                        label: 'Energy Consumption (PUE)',
+                        data: [1.10, 1.08, 1.06, 1.04],
+                        borderColor: errorColor,
+                        backgroundColor: 'rgba(255, 84, 89, 0.5)',
+                        yAxisID: 'y',
+                        fill: 'start',
+                    }, {
+                        label: 'Compute Power (Exaflops)',
+                        data: [1.5, 2.2, 3.5, 5.0],
+                        borderColor: secondaryColor,
+                        backgroundColor: 'rgba(45, 166, 178, 0.5)',
+                        yAxisID: 'y1',
+                        fill: 'start',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    stacked: false,
+                    plugins: {
+                        title: { display: true, text: 'Data Center Efficiency Gains' },
+                        ...tooltipPlugin
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'PUE (Lower is Better)' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Compute Power' },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        },
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
