@@ -1,546 +1,542 @@
-<!-- Grant Writing Services Section -->
-<section id="grant-writing" class="content-section bg-white fade-in-on-scroll">
-    <div class="section-container">
-        <h2 class="section-header">Grant Writing & Policy Development</h2>
-        <p class="section-intro text-center max-w-4xl mx-auto mb-12">
-            Transforming complex policy challenges into compelling funding proposals. 
-            My grant writing expertise has secured millions in federal funding through strategic storytelling, data-driven impact analysis, and stakeholder alignment.
-        </p>
-
-        <!-- Service Overview Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 fade-in-on-scroll" style="transition-delay: 200ms;">
-            <div class="service-card">
-                <div class="service-icon">📊</div>
-                <h3>Data-Driven Proposals</h3>
-                <p>Strategic use of research, statistics, and impact modeling to build compelling cases for funding.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🏛️</div>
-                <h3>Federal Grant Strategy</h3>
-                <p>Deep understanding of federal agency priorities, compliance requirements, and evaluation criteria.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🤝</div>
-                <h3>Stakeholder Alignment</h3>
-                <p>Building coalitions and partnerships that strengthen proposals and ensure sustainable implementation.</p>
-            </div>
-        </div>
-
-        <!-- Featured Case Study: NHCI -->
-        <div class="case-study-showcase fade-in-on-scroll" style="transition-delay: 400ms;">
-            <div class="case-study-header">
-                <h3>Featured Case Study: The National Household Composting Initiative</h3>
-                <p class="case-study-subtitle">$9.5 Billion Federal Investment Proposal</p>
-            </div>
-
-            <!-- Hero Stats -->
-            <div class="hero-stats-grant mb-12">
-                <div class="stat-item-grant">
-                    <span class="stat-number">$9.5B</span>
-                    <span class="stat-label">Federal Investment</span>
-                </div>
-                <div class="stat-item-grant">
-                    <span class="stat-number">27,000</span>
-                    <span class="stat-label">Jobs Created</span>
-                </div>
-                <div class="stat-item-grant">
-                    <span class="stat-number">20M</span>
-                    <span class="stat-label">Tons Waste Diverted</span>
-                </div>
-                <div class="stat-item-grant">
-                    <span class="stat-number">16M</span>
-                    <span class="stat-label">Tons CO₂ Mitigated</span>
-                </div>
-            </div>
-
-            <!-- Problem Statement -->
-            <div class="problem-solution-grid">
-                <div class="problem-card">
-                    <h4>The Challenge</h4>
-                    <p>Organic waste represents 30% of municipal solid waste, generating methane emissions 80x more potent than CO₂. Current landfill infrastructure wastes billions in economic value while accelerating climate change.</p>
-                    <div class="chart-container">
-                        <canvas id="wasteCompositionChart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="solution-card">
-                    <h4>Strategic Solution</h4>
-                    <p>A three-pronged federal investment strategy targeting home composting, municipal collection, and community processing facilities—transforming waste into economic opportunity.</p>
-                    <div class="solution-components">
-                        <div class="component-item">
-                            <span class="component-icon">🏠</span>
-                            <span>Home Composting Subsidies</span>
-                        </div>
-                        <div class="component-item">
-                            <span class="component-icon">♻️</span>
-                            <span>Municipal Collection Grants</span>
-                        </div>
-                        <div class="component-item">
-                            <span class="component-icon">🏢</span>
-                            <span>Community Processing Sites</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Impact Metrics -->
-            <div class="impact-metrics-grid">
-                <div class="metric-card">
-                    <canvas id="jobCreationChart"></canvas>
-                    <h5>Job Creation Advantage</h5>
-                    <p>Composting creates 4.1 jobs per 10,000 tons processed—nearly double that of traditional disposal methods.</p>
-                </div>
-                <div class="metric-card">
-                    <canvas id="marketGrowthChart"></canvas>
-                    <h5>Market Growth Projection</h5>
-                    <p>The U.S. compost market is projected to reach $2.5B by 2032, driven by regenerative agriculture demand.</p>
-                </div>
-                <div class="metric-card">
-                    <canvas id="implementationChart"></canvas>
-                    <h5>Implementation Timeline</h5>
-                    <p>5-year phased rollout expanding from 100 pilot municipalities to 2,000+ nationwide participants.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Service CTA -->
-        <div class="service-cta fade-in-on-scroll" style="transition-delay: 600ms;">
-            <h3>Ready to Secure Strategic Funding?</h3>
-            <p>From concept development to final submission, I provide comprehensive grant writing services that align policy innovation with funding opportunities.</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn--primary">Discuss Your Project</a>
-                <a href="#" class="btn btn--secondary">View Full Case Study</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-/* Grant Writing Section Styles */
-.service-card {
-    background: linear-gradient(135deg, #fef5da 0%, rgba(254, 245, 218, 0.8) 100%);
-    border: 2px solid #ff724f;
-    border-radius: 1rem;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 114, 79, 0.1);
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(255, 114, 79, 0.2);
-    border-color: #3a668c;
-}
-
-.service-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.service-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #3a668c;
-    margin-bottom: 1rem;
-}
-
-.service-card p {
-    color: #bd7f22;
-    line-height: 1.6;
-}
-
-.case-study-showcase {
-    background: linear-gradient(135deg, #3a668c 0%, #245365 100%);
-    border-radius: 1.5rem;
-    padding: 3rem 2rem;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.case-study-showcase::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255, 114, 79, 0.1) 0%, transparent 50%);
-    z-index: 1;
-}
-
-.case-study-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 2;
-}
-
-.case-study-header h3 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #fef5da;
-    margin-bottom: 0.5rem;
-}
-
-.case-study-subtitle {
-    font-size: 1.25rem;
-    color: #fdb92e;
-    font-weight: 600;
-}
-
-.hero-stats-grant {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 2;
-}
-
-.stat-item-grant {
-    text-align: center;
-    background: rgba(254, 245, 218, 0.1);
-    border: 1px solid rgba(255, 114, 79, 0.3);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-}
-
-.stat-item-grant .stat-number {
-    display: block;
-    font-size: 3rem;
-    font-weight: 900;
-    color: #fdb92e;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-}
-
-.stat-item-grant .stat-label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fef5da;
-}
-
-.problem-solution-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 2;
-}
-
-@media (max-width: 768px) {
-    .problem-solution-grid {
-        grid-template-columns: 1fr;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grant Writing & Policy Development | [Your Branch Name]</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- All critical styles included inline for branch site use -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      line-height: 1.5;
     }
-}
+    .content-section { padding: 2rem 0; }
+    .section-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .section-header { font-size: 2.5rem; font-weight: 800; color: #3a668c; margin-bottom: 1rem; }
+    .section-intro { font-size: 1.25rem; color: #3a668c; margin-bottom: 2rem; }
+    /* Service Cards */
+    .services-list { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; padding: 0; list-style: none;}
+    @media (min-width: 768px) { .services-list { grid-template-columns: repeat(3, 1fr); } }
+    .service-card {
+      background: linear-gradient(135deg, #fef5da 0%, rgba(254, 245, 218, 0.8) 100%);
+      border: 2px solid #ff724f;
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 114, 79, 0.1);
+      outline: none;
+    }
+    .service-card:focus,
+    .service-card:hover {
+      box-shadow: 0 8px 25px rgba(255, 114, 79, 0.2);
+      border-color: #3a668c;
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #3a668c;
+      margin-bottom: 1rem;
+    }
+    .service-card p {
+      color: #bd7f22;
+      line-height: 1.6;
+    }
 
-.problem-card, .solution-card {
-    background: rgba(254, 245, 218, 0.1);
-    border: 1px solid rgba(255, 114, 79, 0.3);
-    border-radius: 1rem;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
-}
+    /* Case Study Showcase */
+    .case-study-showcase {
+      background: linear-gradient(135deg, #3a668c 0%, #245365 100%);
+      border-radius: 1.5rem;
+      padding: 3rem 2rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-study-showcase::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 114, 79, 0.1) 0%, transparent 50%);
+      z-index: 1;
+    }
+    .case-study-header { text-align: center; margin-bottom: 2rem; position: relative; z-index: 2; }
+    .case-study-header h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fef5da;
+      margin-bottom: 0.5rem;
+    }
+    .case-study-subtitle {
+      font-size: 1.25rem;
+      color: #fdb92e;
+      font-weight: 600;
+    }
 
-.problem-card h4, .solution-card h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fdb92e;
-    margin-bottom: 1rem;
-}
+    /* Hero Stats */
+    .hero-stats-grant {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+      list-style: none; padding: 0;
+    }
+    .stat-item-grant {
+      text-align: center;
+      background: rgba(254, 245, 218, 0.1);
+      border: 1px solid rgba(255, 114, 79, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      outline: none;
+    }
+    .stat-item-grant .stat-number {
+      display: block;
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #fdb92e;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-item-grant .stat-label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fef5da;
+    }
 
-.problem-card p, .solution-card p {
-    color: #fef5da;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
+    /* Problem Solution Grid */
+    .problem-solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 768px) {
+      .problem-solution-grid { grid-template-columns: 1fr; }
+    }
+    .problem-card, .solution-card {
+      background: rgba(254, 245, 218, 0.1);
+      border: 1px solid rgba(255, 114, 79, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      outline: none;
+    }
+    .problem-card h4, .solution-card h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fdb92e;
+      margin-bottom: 1rem;
+    }
+    .problem-card p, .solution-card p {
+      color: #fef5da;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .chart-container {
+      position: relative;
+      height: 180px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .solution-components {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding: 0;
+      list-style: none;
+    }
+    .component-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: rgba(255, 114, 79, 0.1);
+      border-radius: 0.5rem;
+      color: #fef5da;
+      font-weight: 600;
+      outline: none;
+    }
+    .component-icon { font-size: 1.5rem; }
 
-.chart-container {
-    position: relative;
-    height: 250px;
-    width: 100%;
-}
+    /* Impact Metrics Grid */
+    .impact-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+      list-style: none; padding: 0;
+    }
+    .metric-card {
+      background: rgba(254, 245, 218, 0.1);
+      border: 1px solid rgba(255, 114, 79, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      outline: none;
+    }
+    .metric-card h5 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fdb92e;
+      margin: 1rem 0 0.5rem 0;
+    }
+    .metric-card p {
+      color: #fef5da;
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
 
-.solution-components {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+    /* CTA Styles */
+    .service-cta {
+      text-align: center;
+      background: linear-gradient(135deg, #fef5da 0%, #fff 100%);
+      border-radius: 1rem;
+      padding: 3rem 2rem;
+      border: 2px solid #ff724f;
+      margin-bottom: 2rem;
+    }
+    .service-cta h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3a668c;
+      margin-bottom: 1rem;
+    }
+    .service-cta p {
+      font-size: 1.125rem;
+      color: #bd7f22;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      list-style: none;
+      padding-left: 0;
+    }
+    .cta-buttons li { margin: 0; }
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      outline: none;
+    }
+    .btn--primary {
+      background: #ff724f;
+      color: white;
+      border-color: #ff724f;
+    }
+    .btn--primary:hover, .btn--primary:focus {
+      background: #e55a37;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 114, 79, 0.3);
+    }
+    .btn--secondary {
+      background: transparent;
+      color: #3a668c;
+      border-color: #3a668c;
+    }
+    .btn--secondary:hover, .btn--secondary:focus {
+      background: #3a668c;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(58, 102, 140, 0.3);
+    }
+    :focus { outline: 3px solid #fdb92e; outline-offset: 2px;}
+  </style>
+  <!-- Chart.js CDN; required for sample graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main>
+    <!-- Accessible Grant Writing Services Section -->
+    <section id="grant-writing" class="content-section bg-white fade-in-on-scroll" aria-labelledby="grant-writing-header">
+      <div class="section-container">
 
-.component-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem;
-    background: rgba(255, 114, 79, 0.1);
-    border-radius: 0.5rem;
-    color: #fef5da;
-    font-weight: 600;
-}
+        <!-- Section Header -->
+        <header>
+          <h2 id="grant-writing-header" class="section-header">Grant Writing &amp; Policy Development</h2>
+          <p class="section-intro text-center max-w-4xl mx-auto mb-12">
+            Transforming complex policy challenges into compelling funding proposals.<br>
+            My grant writing expertise has secured millions in federal funding through strategic storytelling, data-driven impact analysis, and stakeholder alignment.
+          </p>
+        </header>
 
-.component-icon {
-    font-size: 1.5rem;
-}
+        <!-- Services List (Accessible) -->
+        <ul class="services-list mb-16 fade-in-on-scroll" aria-label="Service Overview">
+          <li class="service-card" tabindex="0" aria-label="Data-Driven Proposals. Strategic use of research, statistics, and impact modeling to build compelling cases for funding.">
+            <span class="service-icon" aria-hidden="true" role="img">📊</span>
+            <h3>Data-Driven Proposals</h3>
+            <p>Strategic use of research, statistics, and impact modeling to build compelling cases for funding.</p>
+          </li>
+          <li class="service-card" tabindex="0" aria-label="Federal Grant Strategy. Deep understanding of federal agency priorities, compliance requirements, and evaluation criteria.">
+            <span class="service-icon" aria-hidden="true" role="img">🏛️</span>
+            <h3>Federal Grant Strategy</h3>
+            <p>Deep understanding of federal agency priorities, compliance requirements, and evaluation criteria.</p>
+          </li>
+          <li class="service-card" tabindex="0" aria-label="Stakeholder Alignment. Building coalitions and partnerships that strengthen proposals and ensure sustainable implementation.">
+            <span class="service-icon" aria-hidden="true" role="img">🤝</span>
+            <h3>Stakeholder Alignment</h3>
+            <p>Building coalitions and partnerships that strengthen proposals and ensure sustainable implementation.</p>
+          </li>
+        </ul>
 
-.impact-metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 2;
-}
+        <!-- Case Study (Accessible) -->
+        <article class="case-study-showcase fade-in-on-scroll" aria-labelledby="case-study-header">
+          <header class="case-study-header">
+            <h3 id="case-study-header">Featured Case Study: The National Household Composting Initiative</h3>
+            <p id="case-study-subtitle" class="case-study-subtitle"><strong>$9.5 Billion Federal Investment Proposal</strong></p>
+          </header>
+          <ul class="hero-stats-grant mb-12" aria-label="Case Study Key Statistics">
+            <li class="stat-item-grant" tabindex="0" aria-label="Federal Investment: 9.5 billion dollars"><span class="stat-number" aria-hidden="true">$9.5B</span> <span class="stat-label">Federal Investment</span></li>
+            <li class="stat-item-grant" tabindex="0" aria-label="Jobs Created: 27,000"><span class="stat-number" aria-hidden="true">27,000</span> <span class="stat-label">Jobs Created</span></li>
+            <li class="stat-item-grant" tabindex="0" aria-label="Tons Waste Diverted: 20 million"><span class="stat-number" aria-hidden="true">20M</span> <span class="stat-label">Tons Waste Diverted</span></li>
+            <li class="stat-item-grant" tabindex="0" aria-label="Tons CO₂ Mitigated: 16 million"><span class="stat-number" aria-hidden="true">16M</span> <span class="stat-label">Tons CO₂ Mitigated</span></li>
+          </ul>
+          <div class="problem-solution-grid" aria-label="Challenge and Solution">
+            <section class="problem-card" aria-labelledby="challenge-heading">
+              <h4 id="challenge-heading">The Challenge</h4>
+              <p>
+                Organic waste represents <strong>30%</strong> of municipal solid waste, generating methane emissions <strong>80 times more potent than CO₂</strong>. Current landfill infrastructure wastes billions in economic value while accelerating climate change.
+              </p>
+              <div class="chart-container" aria-hidden="true">
+                <canvas id="wasteCompositionChart"></canvas>
+              </div>
+            </section>
+            <section class="solution-card" aria-labelledby="solution-heading">
+              <h4 id="solution-heading">Strategic Solution</h4>
+              <p>
+                A <strong>three-pronged federal investment strategy</strong> targeting home composting, municipal collection, and community processing facilities—transforming waste into economic opportunity.
+              </p>
+              <ul class="solution-components" aria-label="Solution components">
+                <li class="component-item" tabindex="0"><span class="component-icon" aria-hidden="true">🏠</span> Home Composting Subsidies</li>
+                <li class="component-item" tabindex="0"><span class="component-icon" aria-hidden="true">♻️</span> Municipal Collection Grants</li>
+                <li class="component-item" tabindex="0"><span class="component-icon" aria-hidden="true">🏢</span> Community Processing Sites</li>
+              </ul>
+            </section>
+          </div>
+          <ul class="impact-metrics-grid" aria-label="Impact Metrics">
+            <li class="metric-card" tabindex="0" aria-label="Job Creation Advantage. Composting creates 4.1 jobs per 10,000 tons processed, nearly double that of traditional disposal methods.">
+              <div class="chart-container" aria-hidden="true">
+                <canvas id="jobCreationChart"></canvas>
+              </div>
+              <h5>Job Creation Advantage</h5>
+              <p>Composting creates <strong>4.1 jobs per 10,000 tons processed</strong>—nearly double that of traditional disposal methods.</p>
+            </li>
+            <li class="metric-card" tabindex="0" aria-label="Market Growth Projection. The U.S. compost market is projected to reach $2.5 billion by 2032.">
+              <div class="chart-container" aria-hidden="true">
+                <canvas id="marketGrowthChart"></canvas>
+              </div>
+              <h5>Market Growth Projection</h5>
+              <p>The U.S. compost market is projected to reach <strong>$2.5B by 2032</strong>, driven by regenerative agriculture demand.</p>
+            </li>
+            <li class="metric-card" tabindex="0" aria-label="Implementation Timeline. 5-year phased rollout from 100 pilot municipalities to more than 2,000.">
+              <div class="chart-container" aria-hidden="true">
+                <canvas id="implementationChart"></canvas>
+              </div>
+              <h5>Implementation Timeline</h5>
+              <p>5-year phased rollout expanding from <strong>100 pilot municipalities</strong> to <strong>2,000+ nationwide participants</strong>.</p>
+            </li>
+          </ul>
+        </article>
 
-.metric-card {
-    background: rgba(254, 245, 218, 0.1);
-    border: 1px solid rgba(255, 114, 79, 0.3);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    text-align: center;
-    backdrop-filter: blur(10px);
-}
-
-.metric-card h5 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fdb92e;
-    margin: 1rem 0 0.5rem 0;
-}
-
-.metric-card p {
-    color: #fef5da;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.service-cta {
-    text-align: center;
-    background: linear-gradient(135deg, #fef5da 0%, #fff 100%);
-    border-radius: 1rem;
-    padding: 3rem 2rem;
-    border: 2px solid #ff724f;
-}
-
-.service-cta h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #3a668c;
-    margin-bottom: 1rem;
-}
-
-.service-cta p {
-    font-size: 1.125rem;
-    color: #bd7f22;
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.btn--primary {
-    background: #ff724f;
-    color: white;
-    border-color: #ff724f;
-}
-
-.btn--primary:hover {
-    background: #e55a37;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 114, 79, 0.3);
-}
-
-.btn--secondary {
-    background: transparent;
-    color: #3a668c;
-    border-color: #3a668c;
-}
-
-.btn--secondary:hover {
-    background: #3a668c;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(58, 102, 140, 0.3);
-}
-</style>
-
-<script>
-// Grant Writing Charts - Brand Color Palette
-document.addEventListener('DOMContentLoaded', function() {
-    const brandPalette = {
+        <!-- Accessible Call to Action -->
+        <div class="service-cta fade-in-on-scroll" style="transition-delay: 600ms;">
+          <h3>Ready to Secure Strategic Funding?</h3>
+          <p>From concept development to final submission, I provide comprehensive grant writing services that align policy innovation with funding opportunities.</p>
+          <nav aria-label="Call to Action">
+            <ul class="cta-buttons">
+              <li><a href="#contact" class="btn btn--primary" role="button">Discuss Your Project</a></li>
+              <li><a href="#" class="btn btn--secondary" role="button">View Full Case Study</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Accessible Chart.js charts with brand color palette
+    document.addEventListener('DOMContentLoaded', function() {
+      const brandPalette = {
         primaryOrange: '#ff724f',
         creamLight: '#fef5da',
         navyBlue: '#3a668c',
         goldenYellow: '#fdb92e',
         brownAccent: '#bd7f22'
-    };
-
-    // Waste Composition Chart
-    const wasteCtx = document.getElementById('wasteCompositionChart');
-    if (wasteCtx) {
+      };
+      // Waste Composition Chart
+      const wasteCtx = document.getElementById('wasteCompositionChart');
+      if (wasteCtx) {
         new Chart(wasteCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Food Waste', 'Yard Trimmings', 'Paper', 'Plastics', 'Other'],
-                datasets: [{
-                    data: [24, 13, 12, 18, 33],
-                    backgroundColor: [
-                        brandPalette.primaryOrange,
-                        brandPalette.goldenYellow,
-                        brandPalette.navyBlue,
-                        brandPalette.brownAccent,
-                        '#cccccc'
-                    ],
-                    borderColor: '#ffffff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#fef5da' }
-                    }
-                }
+          type: 'doughnut',
+          data: {
+            labels: ['Food Waste', 'Yard Trimmings', 'Paper', 'Plastics', 'Other'],
+            datasets: [{
+              data: [24, 13, 12, 18, 33],
+              backgroundColor: [
+                brandPalette.primaryOrange,
+                brandPalette.goldenYellow,
+                brandPalette.navyBlue,
+                brandPalette.brownAccent,
+                '#cccccc'
+              ],
+              borderColor: '#ffffff',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { color: '#fef5da' }
+              }
             }
+          }
         });
-    }
-
-    // Job Creation Chart
-    const jobCtx = document.getElementById('jobCreationChart');
-    if (jobCtx) {
+      }
+      // Job Creation Chart
+      const jobCtx = document.getElementById('jobCreationChart');
+      if (jobCtx) {
         new Chart(jobCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Composting', 'Landfilling', 'Incineration'],
-                datasets: [{
-                    label: 'Jobs per 10,000 Tons/Year',
-                    data: [4.1, 2.1, 1.2],
-                    backgroundColor: [
-                        brandPalette.goldenYellow,
-                        brandPalette.navyBlue,
-                        brandPalette.brownAccent
-                    ]
-                }]
+          type: 'bar',
+          data: {
+            labels: ['Composting', 'Landfilling', 'Incineration'],
+            datasets: [{
+              label: 'Jobs per 10,000 Tons/Year',
+              data: [4.1, 2.1, 1.2],
+              backgroundColor: [
+                brandPalette.goldenYellow,
+                brandPalette.navyBlue,
+                brandPalette.brownAccent
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    }
-                }
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { color: '#fef5da' },
+                grid: { color: 'rgba(254, 245, 218, 0.1)' }
+              },
+              x: {
+                ticks: { color: '#fef5da' },
+                grid: { color: 'rgba(254, 245, 218, 0.1)' }
+              }
             }
+          }
         });
-    }
-
-    // Market Growth Chart
-    const marketCtx = document.getElementById('marketGrowthChart');
-    if (marketCtx) {
+      }
+      // Market Growth Chart
+      const marketCtx = document.getElementById('marketGrowthChart');
+      if (marketCtx) {
         new Chart(marketCtx, {
-            type: 'line',
-            data: {
-                labels: ['2024', '2026', '2028', '2030', '2032'],
-                datasets: [{
-                    label: 'Market Value ($B)',
-                    data: [1.4, 1.65, 1.9, 2.2, 2.5],
-                    borderColor: brandPalette.primaryOrange,
-                    backgroundColor: 'rgba(255, 114, 79, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
+          type: 'line',
+          data: {
+            labels: ['2024', '2026', '2028', '2030', '2032'],
+            datasets: [{
+              label: 'Market Value ($B)',
+              data: [1.4, 1.65, 1.9, 2.2, 2.5],
+              borderColor: brandPalette.primaryOrange,
+              backgroundColor: 'rgba(255, 114, 79, 0.08)',
+              fill: true,
+              tension: 0.4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    }
-                }
+            scales: {
+              y: {
+                beginAtZero: false,
+                ticks: { color: '#fef5da' },
+                grid: { color: 'rgba(254, 245, 218, 0.1)' }
+              },
+              x: {
+                ticks: { color: '#fef5da' },
+                grid: { color: 'rgba(254, 245, 218, 0.1)' }
+              }
             }
+          }
         });
-    }
-
-    // Implementation Timeline Chart
-    const implementationCtx = document.getElementById('implementationChart');
-    if (implementationCtx) {
+      }
+      // Implementation Timeline Chart
+      const implementationCtx = document.getElementById('implementationChart');
+      if (implementationCtx) {
         new Chart(implementationCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Year 1', 'Year 2-3', 'Year 4-5'],
-                datasets: [{
-                    label: 'Municipalities',
-                    data: [100, 1000, 2000],
-                    backgroundColor: [
-                        brandPalette.goldenYellow,
-                        brandPalette.primaryOrange,
-                        brandPalette.navyBlue
-                    ]
-                }]
+          type: 'bar',
+          data: {
+            labels: ['Year 1', 'Year 2-3', 'Year 4-5'],
+            datasets: [{
+              label: 'Municipalities',
+              data: [100, 1000, 2000],
+              backgroundColor: [
+                brandPalette.goldenYellow,
+                brandPalette.primaryOrange,
+                brandPalette.navyBlue
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    },
-                    x: {
-                        ticks: { color: '#fef5da' },
-                        grid: { color: 'rgba(254, 245, 218, 0.1)' }
-                    }
-                }
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { color: '#fef5da' },
+                grid: { color: 'rgba(254, 245, 218, 0.1)' }
+              },
+              x: {
+                ticks: { color: '#fef5da' },
+                grid: { color: 'rgba(254, 245, 218, 0.1)' }
+              }
             }
+          }
         });
-    }
-});
-</script>
+      }
+    });
+  </script>
+</body>
+</html>
